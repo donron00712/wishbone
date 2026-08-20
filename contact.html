@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get in touch | Wishbone</title>
+<meta name="description" content="We're choosing our first partners now. Tell us about your brand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'><path d='M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2' stroke='%23E8663A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/><circle cx='3.2' cy='4.1' r='1.9' fill='%23E8663A'/><circle cx='20.8' cy='4.1' r='1.9' fill='%23E8663A'/></svg>">
+</head>
+<body data-page="contact">
+<div class="underlay"></div><div class="grain"></div>
+<div id="site-header"></div>
+
+<main id="content">
+  <section class="page-hero" style="padding-bottom:40px">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">First partners</p>
+          <h1 class="h2" style="margin-top:20px">Go first.</h1>
+          <p>We’re choosing the brands for our first runs now. Tell us who you are and what you’d want the slip to say.</p>
+          <div style="margin-top:56px">
+            <h2 style="font-family:Manrope,sans-serif;font-weight:500;font-size:16px;margin-bottom:16px">Or just email us</h2>
+            <a class="footer-mail" id="contact-mail" href="#">&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <form class="form" id="contact-form" novalidate>
+            <div class="field" data-required>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+              <span class="error">Please enter your full name.</span>
+            </div>
+            <div class="field">
+              <label for="company">Brand or company</label>
+              <input id="company" name="company" type="text" autocomplete="organization">
+            </div>
+            <div class="field" data-required data-email>
+              <label for="email">Your email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+              <span class="error">Please enter your email so we can get back to you.</span>
+            </div>
+            <div class="field">
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="message">What would your slip say? (optional)</label>
+              <textarea id="message" name="message" rows="4" placeholder="Eleven words, give or take."></textarea>
+            </div>
+            <div class="honeypot" aria-hidden="true">
+              <label for="fax">Leave this field blank</label>
+              <input id="fax" name="fax" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <div>
+              <button class="btn btn--lg" type="submit">Send message
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </form>
+
+          <div class="form-success" id="form-success" role="status">
+            <h3 class="h4" style="font-size:26px">You got the bigger half.</h3>
+            <p>Thanks — your message is on its way. We’ll come back to you at the address you gave us.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+(function () {
+  const mail = document.getElementById('contact-mail');
+  mail.href = 'mailto:' + window.WB.email;
+  mail.textContent = window.WB.email;
+
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+
+  const validate = () => {
+    let ok = true;
+    form.querySelectorAll('.field').forEach(field => {
+      const input = field.querySelector('input, textarea');
+      if (!input) return;
+      let bad = false;
+      if (field.hasAttribute('data-required') && !input.value.trim()) bad = true;
+      if (field.hasAttribute('data-email') && input.value.trim() && !/^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(input.value)) bad = true;
+      field.classList.toggle('is-invalid', bad);
+      if (bad && ok) { input.focus(); ok = false; }
+    });
+    return ok;
+  };
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (form.fax.value) return;              /* honeypot caught a bot */
+    if (!validate()) return;
+    form.style.display = 'none';
+    success.classList.add('is-visible');
+  });
+
+  form.addEventListener('input', e => {
+    const field = e.target.closest('.field');
+    field && field.classList.remove('is-invalid');
+  });
+})();
+</script>
+</body>
+</html>

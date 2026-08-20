@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why it works | Wishbone</title>
+<meta name="description" content="The argument behind the format: it takes two people, it lands with the check, it has a winner, and the break is the shareable moment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'><path d='M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2' stroke='%23E8663A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/><circle cx='3.2' cy='4.1' r='1.9' fill='%23E8663A'/><circle cx='20.8' cy='4.1' r='1.9' fill='%23E8663A'/></svg>">
+</head>
+<body data-page="why-it-works">
+<div class="underlay"></div><div class="grain"></div>
+<div id="site-header"></div>
+<main id="content">
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow reveal">Why it works</p>
+      <h1 class="h2 reveal" style="margin-top:20px">The argument, before the evidence.</h1>
+      <p class="reveal">Wishbone has not launched, so this page is reasoning rather than results. When we have numbers, they will replace this.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:24px">
+    <div class="container">
+      <ul class="reasons" id="reasons"></ul>
+      <p class="honesty reveal">
+        <strong>What we are not claiming:</strong> no reach figures, no recall lift, no case studies.
+        Any brand that runs with us early gets the raw results, good or bad, and gets to keep them.
+      </p>
+    </div>
+  </section>
+
+  <section class="targets">
+    <div class="container"><div class="targets__grid" id="targets"></div></div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="unit">
+        <div class="reveal">
+          <h2 class="h4">The moment we are buying is the check.</h2>
+          <p class="text-muted" style="margin-top:20px;max-width:52ch;font-size:17px;line-height:1.6">
+            Plates cleared, the bill on the table, phones already out. It is the only stretch of a meal
+            where people are looking for something to do with their hands — and the one moment a brand
+            can arrive without interrupting anything.
+          </p>
+        </div>
+        <div class="reveal">
+          <figure class="slip-card">
+            <p class="slip">Two people just agreed on something.</p>
+            <figcaption class="brandline">Your brand here</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+(function () {
+  const { reasons, targets } = window.WB;
+  document.getElementById('reasons').innerHTML = reasons.map(r => `
+    <li class="reason"><span class="reason__n">${r.n}</span><h3>${r.title}</h3><p>${r.body}</p></li>`).join('');
+  document.getElementById('targets').innerHTML = targets.map(t => `
+    <div class="target"><div class="num">${t.num}</div><div class="label">${t.label}</div></div>`).join('');
+})();
+</script>
+</body>
+</html>
