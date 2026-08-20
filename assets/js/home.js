@@ -1,6 +1,6 @@
 /* Homepage: pinned hero sequence, why-it-works, formats */
 (function () {
-  const { wishes, reasons, formats, targets, icons } = window.WB;
+  const { wishes, brands, reasons, formats, targets, icons } = window.WB;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* No scroll animation available, either because the visitor asked for less
@@ -25,12 +25,13 @@
   ).join('');
   document.querySelector('.marquee__track').innerHTML = run + run;
 
-  /* ---------- 3. the drifting wall behind stage two ---------- */
+  /* ---------- 3. the drifting wall of brands behind stage two ---------- */
   const wrapper = document.querySelector('.grid-wrapper');
   const perRow = 8;
   wrapper.innerHTML = [0, 1, 2].map(r => {
-    const tiles = wishes.slice(r * perRow, r * perRow + perRow)
-      .map(w => `<div class="tile"><span class="slip">${w}</span></div>`).join('');
+    const tiles = brands.slice(r * perRow, r * perRow + perRow)
+      .map(b => `<div class="tile"><span class="wordmark" data-style="${b.style}">${b.name}</span></div>`)
+      .join('');
     return `<div class="grid-row" data-row="${r}">${tiles + tiles}</div>`;
   }).join('');
 

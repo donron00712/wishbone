@@ -39,6 +39,36 @@ window.WB = (function () {
     'You are allowed to want it.'
   ];
 
+  /* Brands shown in the hero wall. These are NOT clients — Wishbone has not
+     launched. They stand for the kind of brand the format is built for, and
+     the section is labelled as such. Swap for real logos once they are real. */
+  const brands = [
+    { name: 'Nykaa',     style: 'lower' },
+    { name: 'Uber',      style: 'upper' },
+    { name: 'OnePlus',   style: 'light' },
+    { name: 'CASIO',     style: 'upper' },
+    { name: 'Zomato',    style: 'light' },
+    { name: 'Swiggy',    style: 'lower' },
+    { name: 'Myntra',    style: 'light' },
+    { name: 'boAt',      style: 'light' },
+    { name: 'CRED',      style: 'wide' },
+    { name: 'Zepto',     style: 'lower' },
+    { name: 'Lenskart',  style: 'light' },
+    { name: 'Titan',     style: 'wide' },
+    { name: 'Paytm',     style: 'light' },
+    { name: 'Netflix',   style: 'upper' },
+    { name: 'Spotify',   style: 'lower' },
+    { name: 'Samsung',   style: 'upper' },
+    { name: 'Sony',      style: 'wide' },
+    { name: 'Nike',      style: 'upper' },
+    { name: 'Mamaearth', style: 'lower' },
+    { name: 'Flipkart',  style: 'light' },
+    { name: 'Duolingo',  style: 'lower' },
+    { name: 'Red Bull',  style: 'upper' },
+    { name: 'Sugar',     style: 'wide' },
+    { name: 'Amazon',    style: 'lower' }
+  ];
+
   const reasons = [
     { n: '01', title: 'It is the one ad people open on purpose',
       body: 'Nobody throws away a fortune cookie unopened. It gets cracked, the paper comes out, and the line gets read. There is no scroll past, no skip button, and no way to block it.' },
@@ -78,5 +108,5 @@ window.WB = (function () {
     { tag: 'Building',  title: 'What we are getting wrong so far',   dek: 'Notes from a brand that has not launched yet, written while it is still true.' }
   ];
 
-  return { email, nav, wishes, reasons, formats, targets, posts };
+  return { email, nav, wishes, brands, reasons, formats, targets, posts };
 })();
