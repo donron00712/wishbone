@@ -1,7 +1,8 @@
 # Wishbone
 
-Marketing site for Wishbone — a snap-apart wishbone that arrives with the check at
-restaurants. Two diners pull, it breaks, and the winner reads a printed slip out loud.
+Marketing site for Wishbone — advertising inside real fortune cookies at
+restaurants. Wishbone is the brand; the fortune cookie is the medium. The cookie
+arrives with the check, gets cracked open, and the line inside is read out loud.
 Static HTML/CSS/JS, no build step.
 
 ## Run
@@ -40,7 +41,7 @@ Almost everything is data-driven from `assets/js/data.js`:
 | --- | --- |
 | `email` | Footer, contact page, sticky bar — **placeholder, replace before launch** |
 | `nav` | Header, mobile menu, footer |
-| `wishes` | Hero marquee and the drifting wall in hero stage two |
+| `wishes` | Fortune lines — hero marquee and the drifting wall in stage two |
 | `reasons` | "Why it works" cards |
 | `formats` | "The formats" cards |
 | `targets` | The three-figure strip |
@@ -52,21 +53,20 @@ reveal-on-scroll), `assets/js/home.js` (hero split text, marquee, GSAP timeline)
 
 Third-party: GSAP + ScrollTrigger and Lenis from jsDelivr, Syne + Manrope from Google Fonts.
 
-## Palette — bone & ember
+## Palette — deep green
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--base` | `#0C0908` | Page floor behind the shading underlay |
-| `--bg` | `#14100E` | Body |
-| `--surface` | `#1C1714` | Raised panels |
-| `--text` | `#F5EFE6` | Bone white |
-| `--muted` | `#9A8F84` | Secondary copy |
-| `--line` | `#33291F` | Hairline borders |
-| `--accent` | `#E8663A` | Ember — mark, eyebrows, arrows, focus ring |
-| `--gradient-warm` | `#F5EFE6 → #E8A87C → #E8663A` | Slip cards and card hover |
+| `--base` | `#051F20` | Page floor behind the shading underlay |
+| `--bg` | `#0B2B26` | Body |
+| `--surface` | `#163832` | Raised panels |
+| `--line` | `#235347` | Hairline borders |
+| `--muted` | `#8EB69B` | Secondary copy, eyebrows, marquee |
+| `--text` | `#DAF1DE` | Primary copy |
+| `--gradient` | `#DAF1DE → #8EB69B → #235347` | Fortune cards and card hover |
 
 Type: Syne 400 for headings, Manrope 300 for body, Georgia italic for anything
-printed on a slip. Radii: 32px cards, 100px pills, 20px slip cards.
+printed on a fortune. Radii: 32px cards, 100px pills, 20px fortune cards.
 
 ## Hero sequence
 

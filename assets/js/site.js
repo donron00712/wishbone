@@ -108,7 +108,7 @@
         <div class="modal__actions">
           <button class="btn btn--ember" type="button" data-cookie="accept">Accept all</button>
           <button class="btn btn--dark" type="button" data-cookie="reject">Decline all</button>
-          <button class="btn btn--outline" style="color:var(--ink);border-color:#DDD3C4" type="button" data-cookie="save">Save my choices</button>
+          <button class="btn btn--outline" style="color:var(--ink);border-color:#B9D6C3" type="button" data-cookie="save">Save my choices</button>
         </div>
       </div>
     </div>`;

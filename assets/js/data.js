@@ -24,51 +24,51 @@ window.WB = (function () {
     'You are closer than the map suggests.',
     'Say yes to the small detour.',
     'Good news travels at dinner speed.',
-    'The better half is the one you pulled.',
+    'Dessert was the right call.',
     'Luck is mostly showing up hungry.',
     'Something you posted is aging well.',
     'Tomorrow starts earlier than you think.',
     'You will win the next one.',
-    'Keep the half you are holding.',
+    'Keep this one. You will want it later.',
     'The table remembers this.',
     'Ask for the corner booth.',
     'Your timing is not late. It is exact.',
-    'Two people just agreed on something.',
+    'Everyone at this table is on your side.',
     'A small bet pays out this month.',
     'The recipe was never the secret.',
     'You are allowed to want it.'
   ];
 
   const reasons = [
-    { n: '01', title: 'It takes two people to open it',
-      body: 'A cookie is a solo act. A wishbone is not — someone has to take the other end. The engagement is built into the object, not bolted onto it. Nobody has to be persuaded to participate.' },
+    { n: '01', title: 'It is the one ad people open on purpose',
+      body: 'Nobody throws away a fortune cookie unopened. It gets cracked, the paper comes out, and the line gets read. There is no scroll past, no skip button, and no way to block it.' },
     { n: '02', title: 'It lands at the best moment of the meal',
-      body: 'The wishbone arrives with the check: plates cleared, conversation loose, phones already out of pockets. It is the one moment at dinner where a brand is welcome rather than tolerated.' },
-    { n: '03', title: 'There is a winner, so an offer has somewhere to go',
-      body: 'Somebody gets the bigger half. That is a natural home for a code, a discount, a prize — a reason to act tonight instead of a message that hopes to be remembered.' },
-    { n: '04', title: 'The break is the shareable moment',
-      body: 'A snap, a reveal, a winner and a loser at the same table. That is a photograph and a story, not an impression. The unit keeps working after the meal ends.' }
+      body: 'The cookie arrives with the check: plates cleared, conversation loose, phones already out of pockets. It is the one moment at dinner where a brand is welcome rather than tolerated.' },
+    { n: '03', title: 'Fortunes get read out loud',
+      body: 'Somebody always reads theirs to the table, and then everyone opens theirs. Your line arrives with a narrator and an audience already sitting down.' },
+    { n: '04', title: 'It is small enough to keep',
+      body: 'Fortunes end up in wallets, on fridges and in photographs. A message someone chooses to keep is worth more than one they were merely served.' }
   ];
 
   const formats = [
-    { meta: 'The slip',     title: 'Eleven words, read out loud',
-      body: 'The line inside the bone. Written by us or by you, in your voice. It gets read aloud to the whole table — the only ad unit that comes with a narrator.' },
-    { meta: 'The shell',    title: 'A wishbone in your colours',
-      body: 'The bone itself is printable. Brand colours, a mark, a texture — the object in their hands is yours before it is even opened.' },
-    { meta: 'The code',     title: 'A prize on the winning half',
-      body: 'A QR or promo code printed on the break, so the winner has something to redeem and you have something to measure.' },
-    { meta: 'Targeting',    title: 'City, cuisine, daypart',
-      body: 'Choose where the bones land: a neighbourhood, a cuisine, a dinner rush, a single street. Placement is a media buy, not a mailing list.' },
-    { meta: 'The drop',     title: 'Limited runs for a moment',
-      body: 'Short, dated runs built around a launch, a holiday, a fixture, a Valentine\'s service. Scarcity the table can feel.' },
-    { meta: 'Partnerships', title: 'Two brands, two halves',
-      body: 'The unit has two ends. It can carry two brands — a natural format for a collaboration where both sides literally get a piece.' }
+    { meta: 'The fortune', title: 'Eleven words, read out loud',
+      body: 'The line inside the cookie. Written by us or by you, in your voice. It gets read aloud to the whole table \u2014 the only ad unit that comes with a narrator.' },
+    { meta: 'The wrapper', title: 'A cookie in your colours',
+      body: 'The sleeve every cookie arrives in is fully printable. Brand colours, a mark, a texture \u2014 the object in their hands is yours before it is even opened.' },
+    { meta: 'The code',    title: 'A prize on the back of the slip',
+      body: 'A QR or promo code printed on the reverse, so the fortune has something to redeem and you have something to measure.' },
+    { meta: 'Targeting',   title: 'City, cuisine, daypart',
+      body: 'Choose where the cookies land: a neighbourhood, a cuisine, a dinner rush, a single street. Placement is a media buy, not a mailing list.' },
+    { meta: 'The drop',    title: 'Limited runs for a moment',
+      body: 'Short, dated runs built around a launch, a holiday, a fixture, a Lunar New Year service. Scarcity the table can feel.' },
+    { meta: 'Co-branding', title: 'Two brands, one table',
+      body: 'A run can carry two marks \u2014 the wrapper and the fortune \u2014 which makes it a natural format for a collaboration where both sides get their own surface.' }
   ];
 
   const targets = [
-    { num: 'Two', label: 'People engaged per unit, by design rather than by luck' },
-    { num: '11', label: 'Words on the slip — the whole creative brief' },
-    { num: '0', label: 'Ad blockers at the dinner table' }
+    { num: '11', label: 'Words on the fortune \u2014 the whole creative brief' },
+    { num: '0',  label: 'Ad blockers at the dinner table' },
+    { num: '1',  label: 'Message, read aloud, to a table that is already listening' }
   ];
 
   const posts = [

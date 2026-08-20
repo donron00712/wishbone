@@ -3,11 +3,21 @@
   const { wishes, reasons, formats, targets, icons } = window.WB;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- 1. split the headline into animatable characters ---------- */
+  /* No scroll animation available, either because the visitor asked for less
+     motion or because GSAP did not load. The hero then lays its two stages out
+     down the page instead of stacking them in the same absolute space. */
+  const staticHero = reduced || !window.gsap;
+  if (staticHero) document.querySelector('.home-hero').classList.add('is-static');
+
+  /* ---------- 1. split the headline into animatable characters ----------
+     Only when it is going to be animated: leaving the plain text alone keeps
+     the headline readable if anything downstream fails. */
   const title = document.querySelector('.hero-title');
-  title.innerHTML = title.textContent.trim().split(/\s+/).map(w =>
-    `<span class="word">${[...w].map(c => `<span class="char">${c}</span>`).join('')}</span>`
-  ).join(' ');
+  if (!staticHero) {
+    title.innerHTML = title.textContent.trim().split(/\s+/).map(w =>
+      `<span class="word">${[...w].map(c => `<span class="char">${c}</span>`).join('')}</span>`
+    ).join(' ');
+  }
 
   /* ---------- 2. marquee of wishes ---------- */
   const run = wishes.map(w =>
@@ -63,14 +73,7 @@
   const frames = document.querySelectorAll('.hero-frame');
   const rows = document.querySelectorAll('.grid-row');
 
-  if (reduced || !window.gsap) {
-    chars.forEach(c => (c.style.opacity = 1));
-    heroGrid.style.opacity = 1;
-    heroGrid.style.visibility = 'visible';
-    document.querySelector('.home-hero').style.height = 'auto';
-    document.querySelector('.hero-pin').style.position = 'relative';
-    return;
-  }
+  if (staticHero) return;
 
   gsap.registerPlugin(ScrollTrigger);
 
