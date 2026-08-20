@@ -93,10 +93,14 @@
     scrollTrigger: { trigger: '.home-hero', start: 'top top', end: 'bottom bottom', scrub: 0.6 }
   });
 
+  /* immediateRender:false matters here. These tweens sit at position 0 of a
+     scrubbed timeline, so GSAP would otherwise capture their start values the
+     moment the timeline is built — mid-intro — and pin the frames and marquee
+     at whatever partial scale/opacity the intro happened to be at. */
   tl.to(titleWrap, { scale: 0.88, yPercent: -8, opacity: 0, ease: 'none', duration: 0.3 }, 0)
-    .to(marquee,   { opacity: 0, y: 40, ease: 'none', duration: 0.22 }, 0)
-    .to(frames[0], { scale: 1.5, opacity: 0, ease: 'none', duration: 0.35 }, 0)
-    .to(frames[1], { scale: 1.28, opacity: 0.35, ease: 'none', duration: 0.35 }, 0)
+    .to(marquee,   { opacity: 0, y: 40, ease: 'none', duration: 0.22, immediateRender: false }, 0)
+    .to(frames[0], { scale: 1.5, opacity: 0, ease: 'none', duration: 0.35, immediateRender: false }, 0)
+    .to(frames[1], { scale: 1.28, opacity: 0.35, ease: 'none', duration: 0.35, immediateRender: false }, 0)
 
     .set(heroGrid, { visibility: 'visible' }, 0.18)
     .fromTo(heroGrid, { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.18 }, 0.2)
