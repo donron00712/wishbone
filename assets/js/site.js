@@ -9,6 +9,77 @@
   window.WB.icons = { smallArrow };
 
 
+  /* ---------- the fortune moment ----------
+     Shown once per visitor, at the point the sticky CTA would otherwise fire.
+     Cracking the cookie is what turns the site warm; the palette is something
+     the visitor causes rather than something they arrive into. */
+  const THEME_KEY = 'wb-theme';
+  const SEEN_KEY  = 'wb-moment-seen';
+  const moment    = document.getElementById('moment');
+
+  const applyTheme = (name, animate) => {
+    if (animate) {
+      document.documentElement.classList.add('theme-shifting');
+      setTimeout(() => document.documentElement.classList.remove('theme-shifting'), 1000);
+    }
+    if (name === 'warm') document.documentElement.setAttribute('data-theme', 'warm');
+    else document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem(THEME_KEY, name); } catch (e) {}
+  };
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-theme-back]')) applyTheme('dark', true);
+  });
+
+  if (moment) {
+    const cookie = document.getElementById('moment-cookie');
+    let shown = false, opened = false;
+
+    const closeMoment = () => {
+      moment.classList.remove('is-in');
+      setTimeout(() => { moment.hidden = true; }, 500);
+      if (lenis) lenis.start();
+      onScroll();                                  // let the sticky CTA back in
+    };
+
+    const showMoment = () => {
+      if (shown) return;
+      shown = true;
+      try { localStorage.setItem(SEEN_KEY, '1'); } catch (e) {}
+      moment.hidden = false;
+      void moment.offsetHeight;          /* force a reflow so the transition runs */
+      moment.classList.add('is-in');
+      if (lenis) lenis.stop();
+      cookie.focus({ preventScroll: true });
+    };
+
+    const crack = () => {
+      if (opened) return;
+      opened = true;
+      moment.classList.add('is-open');
+      setTimeout(() => applyTheme('warm', true), 620);   // after the halves part
+      setTimeout(closeMoment, 4200);                     // then hand the page back
+    };
+
+    cookie.addEventListener('click', crack);
+    document.addEventListener('click', e => {
+      if (e.target.closest('[data-moment-close]')) closeMoment();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && moment.classList.contains('is-in')) closeMoment();
+    });
+
+    window.WB.showMoment = showMoment;               // so onScroll can fire it
+    let seen = true;
+    try { seen = localStorage.getItem(SEEN_KEY) === '1'; } catch (e) {}
+    window.WB.momentPending = !seen;
+  }
+
+  /* a returning visitor keeps whichever palette they left on */
+  try {
+    if (localStorage.getItem(THEME_KEY) === 'warm') applyTheme('warm', false);
+  } catch (e) {}
+
   /* ---------- smooth scroll ---------- */
   let lenis = null;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -37,7 +108,15 @@
       /* Both of these live at the bottom of the screen, so they stack on top
          of each other on a phone. Consent gets the space until it is answered. */
       const consentUp = document.getElementById('cookie').classList.contains('is-visible');
-      cta.classList.toggle('is-visible', past && !nearEnd && !consentUp);
+      const momentUp  = document.getElementById('moment')?.classList.contains('is-in');
+      cta.classList.toggle('is-visible', past && !nearEnd && !consentUp && !momentUp);
+
+      /* The moment takes the same cue the CTA does — but only once, and only
+         after consent has been dealt with, so the screen is never contested. */
+      if (past && !consentUp && window.WB.momentPending && window.WB.showMoment) {
+        window.WB.momentPending = false;
+        window.WB.showMoment();
+      }
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });

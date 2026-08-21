@@ -23,3 +23,32 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
   still arrive — but a real endpoint is better.
 - Footer has no Terms/Privacy links. Add them once the pages exist rather
   than linking to `#`.
+
+## Themes
+
+Two palettes live in `assets/css/style.css`:
+
+- **dark** (default) — the deep green, defined on `:root`
+- **warm** — the orange/yellow, defined in one block on `[data-theme="warm"]`
+
+A visitor gets warm by cracking the cookie in the "fortune moment" overlay,
+which appears once per visitor. Their choice is remembered in `localStorage`
+under `wb-theme`, and a "Back to dark" control sits in the footer while both
+palettes exist.
+
+### Making warm the only palette later
+
+The warm values are deliberately one self-contained token block, so this is a
+small edit rather than a hunt:
+
+1. In `style.css`, move the values inside `[data-theme="warm"] { … }` into
+   `:root`, replacing the green ones.
+2. Delete the remaining `[data-theme="warm"] …` element rules by folding each
+   into its base rule (there are four: body background, the cookie's edge and
+   shadow, the stuck header, and `.btn:hover`).
+3. Remove the moment overlay from `build.js`, and the theme block from
+   `site.js`.
+4. Drop `.theme-back` from `style.css` and the footer.
+
+Nothing else in the codebase reads a colour directly — every component goes
+through the tokens — so no component rules need touching.

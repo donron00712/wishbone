@@ -22,6 +22,51 @@ const arrow = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-
 const smallArrow = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg>`;
 const bone = (w = 23, h = 21) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
 
+
+/* The cookie, emitted wherever it is needed. `sfx` keeps the gradient and
+   clip ids unique so two of them on one page cannot collide.
+   Both halves share one break polyline, traversed in opposite directions,
+   so the jagged edges interlock instead of crossing. */
+const BREAK_L = "M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z";
+const BREAK_R = "M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z";
+
+const cookieHalves = (sfx) => `
+                <svg class="biscuit__half biscuit__half--l" viewBox="0 0 300 250" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="bakeL${sfx}" cx="0.32" cy="0.26" r="0.95">
+                      <stop offset="0" stop-color="#FCF2DA"/><stop offset="0.55" stop-color="#EFC886"/><stop offset="1" stop-color="#C68432"/>
+                    </radialGradient>
+                    <clipPath id="clipL${sfx}"><path d="${BREAK_L}"/></clipPath>
+                  </defs>
+                  <path fill="url(#bakeL${sfx})" d="${BREAK_L}"/>
+                  <g clip-path="url(#clipL${sfx})">
+                    <path fill="none" stroke="#A96D24" stroke-opacity=".38" stroke-width="2.3" stroke-linecap="round" d="M72 140 A82 70 0 0 0 150 198"/>
+                    <g stroke="#A96D24" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round">
+                      <path d="M70 146 l11 -2"/><path d="M74 162 l11 -3"/><path d="M82 176 l10 -5"/>
+                      <path d="M94 188 l8 -7"/><path d="M113 70 l-8 8"/><path d="M122 79 l-9 7"/>
+                      <path d="M130 90 l-10 6"/><path d="M137 102 l-11 5"/>
+                    </g>
+                  </g>
+                </svg>
+
+                <svg class="biscuit__half biscuit__half--r" viewBox="0 0 300 250" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="bakeR${sfx}" cx="0.7" cy="0.26" r="0.95">
+                      <stop offset="0" stop-color="#F7E6C2"/><stop offset="0.55" stop-color="#E8BC78"/><stop offset="1" stop-color="#B87927"/>
+                    </radialGradient>
+                    <clipPath id="clipR${sfx}"><path d="${BREAK_R}"/></clipPath>
+                  </defs>
+                  <path fill="url(#bakeR${sfx})" d="${BREAK_R}"/>
+                  <g clip-path="url(#clipR${sfx})">
+                    <path fill="none" stroke="#96631E" stroke-opacity=".38" stroke-width="2.3" stroke-linecap="round" d="M228 140 A82 70 0 0 1 150 198"/>
+                    <g stroke="#96631E" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round">
+                      <path d="M230 146 l-11 -2"/><path d="M226 162 l-11 -3"/><path d="M218 176 l-10 -5"/>
+                      <path d="M206 188 l-8 -7"/><path d="M187 70 l8 8"/><path d="M178 79 l9 7"/>
+                      <path d="M170 90 l10 6"/><path d="M163 102 l11 5"/>
+                    </g>
+                  </g>
+                </svg>`;
+
 const navLinks = (page) => D.nav.map(i =>
   `<li><a href="${i.href}"${page === i.href.replace('.html', '') ? ' aria-current="page"' : ''}>${i.label}</a></li>`
 ).join('\n            ');
@@ -72,7 +117,10 @@ const footer = (page) => `<section class="closing container reveal">
         </div>
         <div class="footer-bottom">
           <span>© ${new Date().getFullYear()} Wishbone</span>
-          <ul><li><a href="mailto:${D.email}">${D.email}</a></li></ul>
+          <ul>
+            <li><a href="mailto:${D.email}">${D.email}</a></li>
+            <li><button class="theme-back" type="button" data-theme-back>Back to dark</button></li>
+          </ul>
         </div>
       </div>
     </footer>
@@ -93,6 +141,29 @@ const footer = (page) => `<section class="closing container reveal">
         <button class="btn btn--ember" type="button" data-cookie="accept">Accept</button>
         <button class="btn btn--dark" type="button" data-cookie="reject">Reject</button>
         <button class="link" type="button" data-cookie="prefs">Preferences</button>
+      </div>
+    </div>
+
+
+    <!-- The fortune moment. Appears once per visitor at the point the sticky
+         CTA would fire, and hands them the palette switch: crack the cookie,
+         read the line, and the site turns warm. -->
+    <div class="moment" id="moment" hidden>
+      <div class="moment__scrim" data-moment-close></div>
+      <div class="moment__inner" role="dialog" aria-modal="true" aria-labelledby="moment-title">
+        <p class="moment__eyebrow" id="moment-title">One for you</p>
+        <button class="moment__cookie" type="button" id="moment-cookie"
+                aria-label="Crack open the fortune cookie">
+          <span class="biscuit">
+            ${cookieHalves('m')}
+            <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
+            <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
+            <span class="biscuit__crumb"></span>
+          </span>
+        </button>
+        <p class="moment__hint">Tap to crack it open</p>
+        <p class="moment__line" role="status">Your fortune holds within you.</p>
+        <button class="moment__close" type="button" data-moment-close>Close</button>
       </div>
     </div>
 
