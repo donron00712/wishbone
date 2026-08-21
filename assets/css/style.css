@@ -34,46 +34,41 @@
 /* --- Warm mode. Earned by cracking the cookie, not set by default. ---------
    Same tokens, warm values. Because everything downstream reads these, the
    whole site turns over without touching a single component rule.
-   Text goes dark because #F7971E and #FFD200 are far too light to carry white
-   (2.23:1 and 1.45:1); #2B1A06 gets 7.5:1 and 11.6:1 on the two ends.
-   The cookie is the one thing that cannot survive on its own here — golden on
-   golden is 1.09:1 — so in warm mode it gains an edge to hold its silhouette. */
+
+   The ground is a deep umber rather than the bright orange itself. Cream type
+   cannot live on #F7971E — it measures 2.08:1 — but on this it reaches 11:1,
+   and the palette's own orange and yellow do their best work here anyway, as
+   the glow and the accent rather than as the paper. It also means the golden
+   cookie reads on its own (7.5:1) with no outline propping it up, and every
+   component rule written for a dark ground keeps working unchanged. */
 [data-theme="warm"]{
-  --base:#F7971E;
-  --bg:#FBB018;
-  --surface:rgba(255,255,255,.30);
-  /* Near-black rather than a warm brown. Both clear contrast easily, but a
-     brown on orange separates only by lightness; a neutral separates by hue
-     as well, which is what actually makes it easy to read. */
-  --text:#14110D;
-  --muted:#332B22;
-  --line:rgba(74,44,10,.38);
-  --line-soft:rgba(255,255,255,.42);
-  --accent:#7A3B00;
-  --accent-soft:rgba(255,255,255,.55);
-  --ink:#FFF6E0;
-  --gradient:linear-gradient(36.97deg,#FFF7E4 10%,#FFE49B 82%,#F9C85C 140%);
-  --scrim:255,224,150;
-  --text-rgb:43,26,6;
-  --cookie-edge:#4A2A08;
-  --cookie-edge-w:2.4;
-  --btn-deep:#FFF6E0; --ink-on-deep:#14110D;
-  --on-gradient:#14110D; --on-gradient-rgb:20,17,13;
-  --glow-top-1:#FFE066; --glow-top-2:#FFD200;
-  --glow-bot-1:#FBA91C; --glow-bot-2:#F7971E;
+  --base:#3A1C06;
+  --bg:#4A2408;
+  --surface:#5E3210;
+  --text:#FFF6E0;
+  --muted:#E8CBA4;
+  --line:#A87540;
+  --line-soft:#5E3210;
+  --accent:#FFD200;
+  --accent-soft:#8A4008;
+  --ink:#3A1C06;
+  --gradient:linear-gradient(36.97deg,#FFF6E0 10%,#FFD200 82%,#F7971E 140%);
+  --scrim:58,28,6;
+  --text-rgb:255,246,224;
+  --cookie-edge:transparent;
+  --cookie-edge-w:0;
+  --btn-deep:#2A1404; --ink-on-deep:#FFF6E0;
+  --on-gradient:#3A1C06; --on-gradient-rgb:58,28,6;
+  --glow-top-1:#8A4008; --glow-top-2:#4A2408;
+  --glow-bot-1:#7A3B00; --glow-bot-2:#3A1C06;
 }
-/* 300 is too light to hold up on a busy gradient — the type needs more
-   substance here than it does on the dark green. */
+/* the palette's own colours, kept where they read best: as light */
 [data-theme="warm"] body{
-  font-weight:400;
   background:
-    radial-gradient(120% 80% at 50% 18%,#FFE066 0%,#FFD200 34%,#F7971E 100%) fixed,
-    #F7971E;
+    radial-gradient(128% 84% at 50% 6%,rgba(255,210,0,.30) 0%,rgba(247,151,30,.16) 38%,transparent 70%),
+    var(--bg);
 }
-[data-theme="warm"] .biscuit__half > path{stroke:var(--cookie-edge);stroke-width:var(--cookie-edge-w)}
-[data-theme="warm"] .biscuit__half{filter:drop-shadow(0 14px 22px rgba(120,60,8,.42))}
-[data-theme="warm"] .site-header.is-stuck{background:rgba(255,214,80,.72)}
-[data-theme="warm"] .btn:hover{background:#14110D;color:#FFF6E0}
+[data-theme="warm"] .site-header.is-stuck{background:rgba(58,28,6,.80)}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
@@ -90,8 +85,8 @@ html.lenis,html.lenis body{height:auto}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-weight:300;font-size:16px;line-height:1.4;letter-spacing:.01em;
+  font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:400;font-size:16px;line-height:1.4;letter-spacing:.01em;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 img,svg{display:block;max-width:100%}
@@ -103,7 +98,7 @@ button,input,textarea{font:inherit;color:inherit}
 .container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
 
 /* ---------- type ---------- */
-h1,h2,h3,h4,.title,.h1,.h2,.h4{font-family:Syne,sans-serif;font-weight:400}
+h1,h2,h3,h4,.title,.h1,.h2,.h4{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;letter-spacing:-.025em}
 .title,.h1{font-size:clamp(27px,6.2vw,50px);line-height:1;letter-spacing:-.02em}
 .h2{font-size:clamp(32px,7vw,80px);line-height:1;letter-spacing:-.02em}
 .h4{font-size:clamp(26px,5.4vw,45px);line-height:1.3;letter-spacing:-.02em}
@@ -155,7 +150,7 @@ h1,h2,h3,h4,.title,.h1,.h2,.h4{font-family:Syne,sans-serif;font-weight:400}
   transition:background .4s var(--ease),backdrop-filter .4s var(--ease)}
 .site-header.is-stuck{background:rgba(var(--scrim),.78);backdrop-filter:blur(14px)}
 .site-header .container{display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:10px;font-family:Syne,sans-serif;font-size:21px;
+.brand{display:flex;align-items:center;gap:10px;font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;letter-spacing:-.02em;font-size:21px;
   letter-spacing:-.02em;color:var(--text)}
 .brand svg{width:23px;height:21px;color:var(--text)}
 .nav{display:none}
@@ -185,7 +180,7 @@ body.menu-open .nav-toggle span:last-child{transform:translateY(-6.5px) rotate(-
   clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);pointer-events:none}
 body.menu-open .mobile-menu{clip-path:inset(0 0 0 0);pointer-events:auto}
 .mobile-menu ul{display:flex;flex-direction:column;gap:8px}
-.mobile-menu a{font-family:Syne,sans-serif;font-size:clamp(30px,9vw,46px);line-height:1.25;letter-spacing:-.02em;
+.mobile-menu a{font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(30px,9vw,46px);line-height:1.25;letter-spacing:-.02em;
   opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 body.menu-open .mobile-menu a{opacity:1;transform:none}
 body.menu-open .mobile-menu li:nth-child(1) a{transition-delay:.14s}
@@ -247,7 +242,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   box-shadow:0 6px 16px rgba(0,0,0,.34)}
 @media (min-width:768px){.paper{padding:13px 14px}}
 .paper--fortune{background:#F4F2ED;color:#15130F}
-.paper--fortune p{font-family:Manrope,sans-serif;font-weight:400;font-size:11.5px;line-height:1.35}
+.paper--fortune p{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:11.5px;line-height:1.35}
 .paper__nums{display:block;margin-top:6px;font-size:8.5px;letter-spacing:.06em;color:#5C5850}
 @media (min-width:768px){
   .paper--fortune p{font-size:13px}
@@ -256,10 +251,10 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .paper--ad{background:var(--ad-bg);color:var(--ad-fg);
   display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left}
 .paper--ad .qr{flex:none;opacity:.85;color:var(--ad-fg)}
-.paper__tag{font-family:Manrope,sans-serif;font-weight:400;font-size:11px;line-height:1.25;flex:1;min-width:0}
+.paper__tag{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:11px;line-height:1.25;flex:1;min-width:0}
 @media (min-width:768px){.paper__tag{font-size:12.5px}}
 .paper__id{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex:none;text-align:right}
-.paper__id b{font-family:Syne,sans-serif;font-weight:700;font-size:12px;letter-spacing:-.01em;line-height:1.1}
+.paper__id b{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:12px;letter-spacing:-.01em;line-height:1.1}
 .paper__id em{font-style:normal;font-size:7.5px;letter-spacing:.02em;opacity:.8;line-height:1.1}
 @media (min-width:768px){.paper__id b{font-size:14px}.paper__id em{font-size:8.5px}}
 
@@ -310,7 +305,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   transition:border-color .5s var(--ease),transform .5s var(--ease)}
 @media (min-width:768px){.reason{padding:40px}}
 .reason:hover{border-color:var(--text);transform:translateY(-3px)}
-.reason__n{font-family:Syne,sans-serif;font-size:14px;letter-spacing:.14em;color:var(--accent)}
+.reason__n{font-family:"Plus Jakarta Sans",sans-serif;font-size:14px;letter-spacing:.14em;color:var(--accent)}
 .reason h3{font-size:clamp(22px,2.4vw,30px);line-height:1.2;letter-spacing:-.01em}
 .reason p{color:var(--muted);font-size:16px;line-height:1.55;max-width:46ch}
 
@@ -327,7 +322,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .format > *:not(.format__bg){position:relative;z-index:1}
 .format .meta{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
   transition:color .5s var(--ease)}
-.format h3{font-family:Syne,sans-serif;font-size:26px;line-height:1.15;letter-spacing:-.01em;margin-top:14px;
+.format h3{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:25px;line-height:1.2;letter-spacing:-.025em;margin-top:12px;
   transition:color .5s var(--ease)}
 .format p{color:var(--muted);font-size:15px;line-height:1.55;transition:color .5s var(--ease)}
 .format .know{display:inline-flex;align-items:center;gap:6px;font-size:15px;margin-top:20px;
@@ -353,7 +348,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .slip-card:hover{transform:rotate(0deg) scale(1.02)}
 .slip-card .slip{font-size:clamp(19px,2.4vw,26px);color:var(--on-gradient)}
 .slip-card .brandline{margin-top:22px;padding-top:16px;border-top:1px solid rgba(var(--on-gradient-rgb),.24);
-  font-family:Syne,sans-serif;font-style:normal;font-weight:700;font-size:12px;letter-spacing:.15em;
+  font-family:"Plus Jakarta Sans",sans-serif;font-style:normal;font-weight:700;font-size:12px;letter-spacing:.15em;
   text-transform:uppercase;color:rgba(var(--on-gradient-rgb),.66)}
 .slip-card .nums{display:block;margin-top:8px;font-size:12px;letter-spacing:.16em;
   color:rgba(var(--on-gradient-rgb),.55)}
@@ -454,7 +449,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .targets{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0}
 .targets__grid{display:grid;gap:40px}
 @media (min-width:768px){.targets__grid{grid-template-columns:repeat(3,1fr)}}
-.target .num{font-family:Syne,sans-serif;font-size:clamp(34px,4.4vw,54px);line-height:1;letter-spacing:-.03em}
+.target .num{font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(34px,4.4vw,54px);line-height:1;letter-spacing:-.03em}
 .target .label{margin-top:12px;color:var(--muted);font-size:15px;max-width:260px}
 
 /* ---------- journal ---------- */
@@ -473,11 +468,11 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .site-footer{border-top:1px solid var(--line);padding:64px 0 40px}
 .footer-grid{display:grid;gap:48px}
 @media (min-width:768px){.footer-grid{grid-template-columns:1.4fr 1fr 1fr;gap:32px}}
-.site-footer h2{font-size:16px;font-family:Manrope,sans-serif;font-weight:500;margin-bottom:20px}
+.site-footer h2{font-size:16px;font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;margin-bottom:20px}
 .site-footer ul{display:flex;flex-direction:column;gap:12px}
 .site-footer a{font-size:15px;color:var(--muted);transition:color .3s}
 .site-footer a:hover{color:var(--text)}
-.footer-mail{font-family:Syne,sans-serif;font-size:clamp(22px,3vw,34px);letter-spacing:-.02em;
+.footer-mail{font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(22px,3vw,34px);letter-spacing:-.02em;
   color:var(--text) !important;display:inline-block}
 .footer-mail:hover{color:var(--accent) !important}
 .footer-bottom{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);
@@ -494,7 +489,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 @media (min-width:768px){.sticky-cta{padding:16px 20px;border-radius:20px;left:24px;right:24px}}
 .sticky-cta.is-visible{transform:none}
 .sticky-cta.is-dismissed{transform:translateY(160%) !important}
-.sticky-cta h3{font-family:Manrope,sans-serif;font-weight:300;font-size:clamp(17px,2.2vw,28px);
+.sticky-cta h3{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(17px,2.2vw,28px);
   color:var(--ink);line-height:1.3}
 .sticky-cta p{display:none;color:#4A6B5C;font-size:16px}
 @media (min-width:768px){.sticky-cta p{display:block}}
@@ -527,7 +522,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .modal__panel h2{font-size:24px;margin-bottom:8px}
 .modal__panel > p{font-size:14px;color:#3E5C4E;margin-bottom:24px}
 .pref{display:flex;gap:16px;padding:16px 0;border-top:1px solid #B9D6C3}
-.pref__body h3{font-family:Manrope,sans-serif;font-weight:500;font-size:15px;margin-bottom:4px}
+.pref__body h3{font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;font-size:15px;margin-bottom:4px}
 .pref__body p{font-size:13px;color:#4A6B5C;line-height:1.45}
 .switch{position:relative;flex:none;width:44px;height:26px;margin-left:auto}
 .switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
@@ -694,13 +689,13 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 /* backdrop-filter makes the scrim a stacking context, so the panel needs to
    say out loud that it sits above it. */
 .moment__inner{position:relative;z-index:1;text-align:center;padding:24px;
-  display:flex;flex-direction:column;align-items:center;gap:2px}
+  display:flex;flex-direction:column;align-items:center;gap:0}
 
-.moment__eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:10px}
+.moment__eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 -30px}
 
 .moment__cookie{background:none;border:0;padding:0;cursor:pointer;
-  width:min(74vw,300px);aspect-ratio:300/250;position:relative;
+  width:min(64vw,244px);aspect-ratio:300/250;position:relative;
   transition:transform .4s var(--ease)}
 /* No focus box around the cookie — a rectangle around a round object looks
    like a mistake. It glows instead, which reads on a pointer and a keyboard
@@ -728,11 +723,11 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment.is-open .moment__cookie{pointer-events:none}
 .moment.is-open .biscuit__crumb{animation:crumb 1.1s var(--ease) forwards}
 
-.moment__hint{font-size:14px;color:var(--muted);margin-top:14px;
+.moment__hint{font-size:14px;font-weight:500;color:var(--muted);margin-top:-26px;
   transition:opacity .3s}
 .moment.is-open .moment__hint{opacity:0}
 
-.moment__slip{width:min(86vw,330px);display:flex;flex-direction:column;gap:6px;margin-top:-4px;
+.moment__slip{width:min(86vw,330px);display:flex;flex-direction:column;gap:6px;margin-top:-14px;
   opacity:0;transform:translateY(14px) scale(.94);
   transition:opacity .7s var(--ease) .45s,transform .7s var(--ease) .45s}
 .moment.is-open .moment__slip{opacity:1;transform:none}
@@ -743,7 +738,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment__slip .paper__tag{font-size:clamp(8px,2.4vw,10px)}
 .moment__slip .paper__id b{font-size:clamp(9px,2.6vw,11px)}
 
-.moment__close{margin-top:26px;background:none;border:0;cursor:pointer;
+.moment__close{margin-top:20px;background:none;border:0;cursor:pointer;
   font-size:13px;letter-spacing:.06em;color:var(--muted);text-decoration:underline;
   text-underline-offset:4px;opacity:0;transition:opacity .5s var(--ease) 1.1s}
 .moment.is-open .moment__close{opacity:1}

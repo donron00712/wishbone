@@ -168,7 +168,7 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
             <span class="paper__nums">3, 9, 14, 22, 31, 45</span>
           </div>
           <div class="paper paper--ad" style="--ad-bg:#F7971E;--ad-fg:#14110D">
-            <span class="paper__tag">&hellip;and so does the next one.</span>
+            <span class="paper__tag">10% offer for you</span>
             <span class="paper__id"><b>Wishbone</b></span>
           </div>
         </figure>
