@@ -70,6 +70,20 @@ window.WB = (function () {
     { line: 'It is already out for delivery.',               brand: 'Amazon', qr: true,    offer: '\u20B9200 off' }
   ];
 
+  /* The case for out-of-home as a category. Deliberately no figures: any
+     recall or reach number here would need a real source (OAAA, WARC,
+     Nielsen), and an invented one is worse than none. */
+  const oohPoints = [
+    { n: '01', title: 'It cannot be closed, skipped or blocked',
+      body: 'Every digital format competes for a screen its audience is actively trying to get past. Out-of-home never asks for that permission. It occupies the same physical space as the person, and the only way around it is to look away.' },
+    { n: '02', title: 'It builds the memory that gets used later',
+      body: 'Brands are chosen from memory at the moment of purchase, not from the last impression served. Physical placement is unusually good at building that memory, because it is met in a real place, in a real mood, with no skip button in the corner.' },
+    { n: '03', title: 'Taking up space is itself the signal',
+      body: 'A brand that has put something physical in the world has visibly committed to being there. Audiences read that as substance without being told, and it is work that an impression bought at auction simply cannot do.' },
+    { n: '04', title: 'It reaches the room, not a segment',
+      body: 'Out-of-home speaks to everyone present rather than to a profile. At a dinner table that means it lands on a group at once, in front of each other — which is where recommendations actually get made.' }
+  ];
+
   const reasons = [
     { n: '01', title: 'It is the one ad people open on purpose',
       body: 'Nobody throws away a fortune cookie unopened. It gets cracked, the paper comes out, and the line gets read. There is no scroll past, no skip button, and no way to block it.' },
@@ -109,5 +123,5 @@ window.WB = (function () {
     { tag: 'Building',  title: 'What we are getting wrong so far',   dek: 'Notes from a brand that has not launched yet, written while it is still true.' }
   ];
 
-  return { email, nav, wishes, sampleFortunes, reasons, formats, targets, posts };
+  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, posts };
 })();

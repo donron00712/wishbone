@@ -245,10 +245,6 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .reason h3{font-size:clamp(22px,2.4vw,30px);line-height:1.2;letter-spacing:-.01em}
 .reason p{color:var(--muted);font-size:16px;line-height:1.55;max-width:46ch}
 
-.honesty{margin-top:40px;border-left:2px solid var(--accent);padding:4px 0 4px 20px;
-  color:var(--muted);font-size:15px;line-height:1.6;max-width:64ch}
-.honesty strong{color:var(--text);font-weight:500}
-
 /* ---------- formats ---------- */
 .formats{display:grid;gap:16px}
 @media (min-width:768px){.formats{grid-template-columns:repeat(2,1fr);gap:24px}}
@@ -435,7 +431,6 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .reason{padding:26px;gap:12px}
   .reason h3{font-size:22px}
   .slip-card{padding:32px 24px}
-  .honesty{margin-top:28px;padding-left:16px}
 
   /* Consent bar was eating a third of the screen. */
   .cookie{padding:14px;gap:12px;border-radius:14px}

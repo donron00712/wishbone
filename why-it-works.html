@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Why it works | Wishbone</title>
-<meta name="description" content="The argument behind the format: it is the one ad people open on purpose, it lands with the check, it gets read out loud, and it is small enough to keep.">
+<meta name="description" content="Out-of-home cannot be blocked, skipped or scrolled past. Why physical media builds brands, and why a fortune cookie is the sharpest version of it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -18,18 +18,30 @@
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow reveal">Why it works</p>
-      <h1 class="h2 reveal" style="margin-top:20px">The argument, before the evidence.</h1>
-      <p class="reveal">Wishbone has not launched, so this page is reasoning rather than results. When we have numbers, they will replace this.</p>
+      <h1 class="h2 reveal" style="margin-top:20px">Out-of-home is the last channel nobody can close.</h1>
+      <p class="reveal">Digital advertising competes for a screen its audience is actively trying to get past. Out-of-home works on different terms — it shares physical space with people. Wishbone takes that logic to the smallest placement in the category: the table.</p>
     </div>
   </section>
 
   <section class="section" style="padding-top:24px">
     <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">The category</p>
+        <h2 class="h4">What physical media does for a brand.</h2>
+        <p>Four things out-of-home does that a bought impression cannot.</p>
+      </div>
+      <ul class="reasons" id="ooh"></ul>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">The placement</p>
+        <h2 class="h4">Why the cookie is the sharpest version of it.</h2>
+        <p>A billboard is seen. A fortune is opened, read aloud, and kept.</p>
+      </div>
       <ul class="reasons" id="reasons"></ul>
-      <p class="honesty reveal">
-        <strong>What we are not claiming:</strong> no reach figures, no recall lift, no case studies.
-        Any brand that runs with us early gets the raw results, good or bad, and gets to keep them.
-      </p>
     </div>
   </section>
 
@@ -64,9 +76,10 @@
 <script src="assets/js/site.js"></script>
 <script>
 (function () {
-  const { reasons, targets } = window.WB;
-  document.getElementById('reasons').innerHTML = reasons.map(r => `
-    <li class="reason"><span class="reason__n">${r.n}</span><h3>${r.title}</h3><p>${r.body}</p></li>`).join('');
+  const { oohPoints, reasons, targets } = window.WB;
+  const card = r => `<li class="reason"><span class="reason__n">${r.n}</span><h3>${r.title}</h3><p>${r.body}</p></li>`;
+  document.getElementById('ooh').innerHTML = oohPoints.map(card).join('');
+  document.getElementById('reasons').innerHTML = reasons.map(card).join('');
   document.getElementById('targets').innerHTML = targets.map(t => `
     <div class="target"><div class="num">${t.num}</div><div class="label">${t.label}</div></div>`).join('');
 })();
