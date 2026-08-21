@@ -27,6 +27,7 @@
   --cookie-edge-w:0;
   --btn-deep:#020F10; --ink-on-deep:#DAF1DE;
   --on-gradient:#051F20; --on-gradient-rgb:5,31,32;
+  --veil:4,18,17; --aura:255,214,140;
   --glow-top-1:#1B4A42; --glow-top-2:#0B2B26;
   --glow-bot-1:#14403A; --glow-bot-2:#082220;
 }
@@ -57,6 +58,7 @@
   --cookie-edge-w:2.2;
   --btn-deep:#FFFFFF; --ink-on-deep:#8A4008;
   --on-gradient:#3A1C06; --on-gradient-rgb:58,28,6;
+  --veil:46,21,3; --aura:255,228,155;
   --glow-top-1:#FFE066; --glow-top-2:#FFD200;
   --glow-bot-1:#FBA91C; --glow-bot-2:#F7971E;
 }
@@ -717,8 +719,32 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment{position:fixed;inset:0;z-index:120;display:grid;place-items:center;
   opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
 .moment.is-in{opacity:1;pointer-events:auto}
-.moment__scrim{position:absolute;inset:0;z-index:0;background:rgba(var(--scrim),.86);
-  backdrop-filter:blur(6px)}
+/* The moment is lit from the middle: the page is veiled so the cookie becomes
+   the only light source, rather than sitting on a flat wash of the page colour. */
+.moment__scrim{position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(closest-side at 50% 44%,rgba(var(--aura),.22) 0%,rgba(var(--aura),.08) 46%,transparent 74%),
+    radial-gradient(132% 100% at 50% 44%,rgba(var(--veil),.70) 0%,rgba(var(--veil),.94) 58%,rgba(var(--veil),.985) 100%);
+  backdrop-filter:blur(8px) saturate(.92)}
+
+/* the bloom behind the cookie, which swells as it opens */
+.moment__aura{position:absolute;left:50%;top:44%;translate:-50% -50%;z-index:0;
+  width:min(124vw,720px);aspect-ratio:1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(var(--aura),.30) 0%,rgba(var(--aura),.11) 40%,transparent 70%);
+  opacity:.7;transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+.moment.is-open .moment__aura{opacity:1;transform:scale(1.3)}
+
+/* slow motes drifting up through it */
+.moment__motes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mote{position:absolute;left:var(--x);bottom:14%;width:var(--s);height:var(--s);border-radius:50%;
+  background:rgba(var(--aura),.9);filter:blur(.4px);opacity:0;
+  animation:mote-rise var(--t) linear var(--d) infinite}
+@keyframes mote-rise{
+  0%{transform:translateY(40px) scale(.5);opacity:0}
+  12%{opacity:.85}
+  70%{opacity:.5}
+  100%{transform:translateY(-46vh) scale(1);opacity:0}
+}
 /* backdrop-filter makes the scrim a stacking context, so the panel needs to
    say out loud that it sits above it. */
 .moment__inner{position:relative;z-index:1;text-align:center;padding:24px;
@@ -784,6 +810,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .theme-back:hover{color:var(--text)}
 
 @media (prefers-reduced-motion:reduce){
+  .mote{animation:none;opacity:.4}
+  .moment__aura{transition:none}
   .moment:not(.is-open) .biscuit{animation:none}
   .moment.is-open .biscuit__half--l{animation:none;transform:translate3d(-78px,-6px,0) rotate(-26deg)}
   .moment.is-open .biscuit__half--r{animation:none;transform:translate3d(78px,-6px,0) rotate(26deg)}

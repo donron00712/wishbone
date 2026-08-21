@@ -150,6 +150,16 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
          whichever palette the visitor left the landing page on. -->
     <div class="moment" id="moment" hidden>
       <div class="moment__scrim" data-moment-close></div>
+      <div class="moment__aura" aria-hidden="true"></div>
+      <div class="moment__motes" aria-hidden="true">
+        ${Array.from({ length: 12 }, (_, i) => {
+          const left  = [8, 19, 27, 36, 44, 52, 58, 66, 74, 81, 88, 94][i];
+          const delay = [0, 2.6, 5.1, 1.3, 3.9, 6.4, .7, 4.4, 2.1, 5.8, 3.2, 1.8][i];
+          const dur   = [11, 14, 12, 15, 13, 16, 12, 14, 15, 11, 13, 16][i];
+          const size  = [3, 5, 4, 3, 6, 4, 5, 3, 4, 6, 3, 5][i];
+          return `<span class="mote" style="--x:${left}%;--d:${delay}s;--t:${dur}s;--s:${size}px"></span>`;
+        }).join('')}
+      </div>
       <div class="moment__inner" role="dialog" aria-modal="true" aria-labelledby="moment-title">
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
