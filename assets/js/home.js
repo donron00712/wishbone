@@ -93,6 +93,17 @@
 
   document.querySelectorAll('.reveal').forEach(el => window.WB.observeReveal(el));
 
+  /* Hold the cookie animation until it is actually on screen, so it is not
+     looping unseen above the fold or burning cycles off-screen. */
+  const cracker = document.getElementById('cracker');
+  if (cracker) {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { cracker.classList.add('is-in'); obs.disconnect(); }
+      });
+    }, { threshold: 0.35 }).observe(cracker);
+  }
+
   /* ---------- 6. hero motion ---------- */
   const chars = title.querySelectorAll('.char');
   const titleWrap = document.querySelector('.hero-title-wrap');

@@ -273,14 +273,102 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 /* ---------- the unit: a slip you can look at ---------- */
 .unit{display:grid;gap:48px;align-items:center}
 @media (min-width:1024px){.unit{grid-template-columns:1fr minmax(0,520px);gap:80px}}
-.slip-card{position:relative;background:var(--gradient);color:var(--ink);border-radius:20px;
-  padding:44px 36px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.45);
+/* A single printed slip, shown flat (formats / why-it-works). */
+.slip-card{position:relative;background:var(--gradient);color:var(--ink);border-radius:18px;
+  padding:38px 30px 28px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.45);
   transform:rotate(-1.6deg);transition:transform .6s var(--ease)}
 .slip-card:hover{transform:rotate(0deg) scale(1.02)}
 .slip-card .slip{font-size:clamp(19px,2.4vw,26px);color:var(--ink)}
-.slip-card .brandline{margin-top:24px;padding-top:18px;border-top:1px solid rgba(5,31,32,.24);
-  font-family:Manrope,sans-serif;font-style:normal;font-size:13px;letter-spacing:.14em;
-  text-transform:uppercase;color:rgba(5,31,32,.66)}
+.slip-card .brandline{margin-top:22px;padding-top:16px;border-top:1px solid rgba(5,31,32,.24);
+  font-family:Syne,sans-serif;font-style:normal;font-weight:700;font-size:12px;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(5,31,32,.64)}
+.slip-card .nums{display:block;margin-top:8px;font-size:12px;letter-spacing:.16em;
+  color:rgba(5,31,32,.5)}
+
+/* ============================================================
+   THE CRACKER — a fortune cookie breaking open
+   One 8s loop: the cookie sits, splits, the slip rises and is read,
+   then it resets. Held still until scrolled into view, and skipped
+   entirely for anyone who asked for reduced motion.
+   ============================================================ */
+.cracker{--crack-x:98px;--crack-y:60px;
+  position:relative;width:100%;aspect-ratio:4/3;max-height:440px;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1000px;perspective-origin:50% 45%}
+.cracker__stage{position:relative;width:min(100%,420px);height:100%;
+  transform-style:preserve-3d;display:flex;align-items:center;justify-content:center}
+
+/* --- the biscuit (named to avoid colliding with .cookie, the consent bar) --- */
+.biscuit{position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:min(78%,290px);aspect-ratio:260/170;transform-style:preserve-3d;z-index:2}
+.biscuit__half{position:absolute;inset:0;width:100%;height:100%;
+  transform-origin:50% 32%;filter:drop-shadow(0 16px 24px rgba(0,0,0,.45))}
+.biscuit__half--l path{fill:#EADEBE}
+.biscuit__half--r path{fill:#DBCEA6}
+
+/* --- the slip --- */
+.fortune-slip{position:absolute;z-index:1;width:min(80%,290px);
+  background:var(--gradient);color:var(--ink);border-radius:14px;
+  padding:22px 20px 17px;text-align:center;
+  box-shadow:0 26px 60px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(6px) scale(.7) rotate(-2deg)}
+.fortune-slip .slip{font-size:clamp(15px,1.7vw,18px);color:var(--ink);line-height:1.35}
+.fortune-slip__brand{display:block;margin-top:16px;padding-top:13px;
+  border-top:1px solid rgba(5,31,32,.22);
+  font-family:Syne,sans-serif;font-weight:700;font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(5,31,32,.62)}
+.fortune-slip__nums{display:block;margin-top:7px;font-size:12px;letter-spacing:.16em;
+  color:rgba(5,31,32,.5)}
+
+/* --- crumbs --- */
+.biscuit__crumb{position:absolute;left:50%;top:54%;width:5px;height:5px;border-radius:2px;
+  background:#E4D9B8;opacity:0;z-index:3}
+
+/* --- the loop, only once in view --- */
+.cracker.is-in .biscuit__half--l{animation:crack-left 8s var(--ease) infinite}
+.cracker.is-in .biscuit__half--r{animation:crack-right 8s var(--ease) infinite}
+.cracker.is-in .fortune-slip{animation:slip-rise 8s var(--ease) infinite}
+.cracker.is-in .biscuit__crumb:nth-of-type(1){animation:crumb 8s var(--ease) infinite;--cx:-58px;--cy:44px}
+.cracker.is-in .biscuit__crumb:nth-of-type(2){animation:crumb 8s var(--ease) infinite;--cx:52px;--cy:52px}
+.cracker.is-in .biscuit__crumb:nth-of-type(3){animation:crumb 8s var(--ease) infinite;--cx:-30px;--cy:64px}
+.cracker.is-in .biscuit__crumb:nth-of-type(4){animation:crumb 8s var(--ease) infinite;--cx:28px;--cy:70px}
+
+@keyframes crack-left{
+  0%,14%   {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
+  17%      {transform:translate3d(-2px,0,0) rotate(-1.5deg) rotateY(0deg)}
+  20%      {transform:translate3d(2px,0,0) rotate(1deg) rotateY(0deg)}
+  34%,74%  {transform:translate3d(calc(var(--crack-x) * -1),var(--crack-y),-30px) rotate(-19deg) rotateY(22deg)}
+  92%,100% {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
+}
+@keyframes crack-right{
+  0%,14%   {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
+  17%      {transform:translate3d(2px,0,0) rotate(1.5deg) rotateY(0deg)}
+  20%      {transform:translate3d(-2px,0,0) rotate(-1deg) rotateY(0deg)}
+  34%,74%  {transform:translate3d(var(--crack-x),var(--crack-y),-30px) rotate(19deg) rotateY(-22deg)}
+  92%,100% {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
+}
+@keyframes slip-rise{
+  0%,18%   {opacity:0;transform:translateY(-4px) scale(.66) rotate(-2deg)}
+  38%      {opacity:1;transform:translateY(-58px) scale(1) rotate(-1.5deg)}
+  70%      {opacity:1;transform:translateY(-62px) scale(1) rotate(-1.5deg)}
+  84%,100% {opacity:0;transform:translateY(-6px) scale(.68) rotate(-2deg)}
+}
+@keyframes crumb{
+  0%,16%  {opacity:0;transform:translate(0,0) scale(.6)}
+  22%     {opacity:.85;transform:translate(calc(var(--cx) * .35),calc(var(--cy) * -.2)) scale(1)}
+  46%     {opacity:0;transform:translate(var(--cx),var(--cy)) scale(.7)}
+  100%    {opacity:0;transform:translate(var(--cx),var(--cy)) scale(.7)}
+}
+
+/* Static, already-open state when motion is unwelcome. */
+@media (prefers-reduced-motion:reduce){
+  .cracker .biscuit__half--l{transform:translate3d(calc(var(--crack-x) * -1),var(--crack-y),0) rotate(-19deg)}
+  .cracker .biscuit__half--r{transform:translate3d(var(--crack-x),var(--crack-y),0) rotate(19deg)}
+  .cracker .fortune-slip{opacity:1;transform:translateY(-58px) scale(1) rotate(-1.5deg)}
+  .cracker .biscuit__crumb{opacity:0}
+  .cracker.is-in .biscuit__half--l,.cracker.is-in .biscuit__half--r,
+  .cracker.is-in .fortune-slip,.cracker.is-in .biscuit__crumb{animation:none}
+}
 
 /* ---------- stat / target strip ---------- */
 .targets{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0}
@@ -431,6 +519,9 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .reason{padding:26px;gap:12px}
   .reason h3{font-size:22px}
   .slip-card{padding:32px 24px}
+  .cracker{--crack-x:64px;--crack-y:44px;aspect-ratio:1/1;max-height:330px}
+  .biscuit{width:min(66%,210px)}
+  .fortune-slip{width:min(88%,255px)}
 
   /* Consent bar was eating a third of the screen. */
   .cookie{padding:14px;gap:12px;border-radius:14px}

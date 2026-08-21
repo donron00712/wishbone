@@ -65,15 +65,34 @@
           <p class="eyebrow">The unit</p>
           <h2 class="h4">It arrives with the check, and nobody ever throws it away unopened.</h2>
           <p class="text-muted" style="margin-top:24px;max-width:52ch;font-size:17px;line-height:1.6">
-            A fortune cookie in a wrapper you designed, with your line printed inside. Someone
-            cracks it, reads it out loud, and the whole table hears your brand at once.
+            An ordinary fortune cookie until it breaks. Inside is your line, your brand and the
+            lucky numbers — read out loud, to a table that is already listening.
           </p>
         </div>
         <div class="reveal">
-          <figure class="slip-card">
-            <p class="slip">Dessert was the right call.</p>
-            <figcaption class="brandline">Your brand here</figcaption>
-          </figure>
+          <div class="cracker" id="cracker" role="img"
+               aria-label="A fortune cookie breaking open to reveal the paper slip inside, reading: Dessert was the right call. Your brand here. Lucky numbers 4, 9, 16, 23, 38, 41.">
+            <div class="cracker__stage">
+
+              <figure class="fortune-slip">
+                <p class="slip">Dessert was the right call.</p>
+                <span class="fortune-slip__brand">Your brand here</span>
+                <span class="fortune-slip__nums">4 &middot; 9 &middot; 16 &middot; 23 &middot; 38 &middot; 41</span>
+              </figure>
+
+              <div class="biscuit">
+                <svg class="biscuit__half biscuit__half--l" viewBox="0 0 260 170" aria-hidden="true">
+                  <path d="M130 26C86 26 34 62 30 118c-2 22 22 30 34 14 18-24 40-36 66-36l-8-12 10-10-8-14 8-14-4-12Z"/>
+                </svg>
+                <svg class="biscuit__half biscuit__half--r" viewBox="0 0 260 170" aria-hidden="true">
+                  <path d="M130 26l-2 8 4 12-8 14 8 14-10 10 8 12c26 0 48 12 66 36 12 16 36 8 34-14C226 62 174 26 130 26Z"/>
+                </svg>
+                <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
+                <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
