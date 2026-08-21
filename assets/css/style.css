@@ -52,7 +52,7 @@
   --accent:#7A3B00;
   --accent-soft:rgba(255,255,255,.55);
   --ink:#FFF6E0;
-  --gradient:linear-gradient(36.97deg,#FFD200 10%,#F7971E 82%,#D97706 140%);
+  --gradient:linear-gradient(36.97deg,#FFF7E4 10%,#FFE49B 82%,#F9C85C 140%);
   --scrim:255,224,150;
   --text-rgb:43,26,6;
   --cookie-edge:#4A2A08;
@@ -319,8 +319,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 @media (min-width:768px){.formats{grid-template-columns:repeat(2,1fr);gap:24px}}
 @media (min-width:1200px){.formats{grid-template-columns:repeat(3,1fr)}}
 .formats > li,.posts > li{display:flex}
-.format{flex:1;position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:40px;
-  border:1px solid var(--line);border-radius:32px;padding:28px;min-height:320px;overflow:hidden;
+.format{flex:1;position:relative;display:flex;flex-direction:column;justify-content:flex-start;gap:16px;
+  border:1px solid var(--line);border-radius:32px;padding:28px;min-height:248px;overflow:hidden;
   transition:border-color .5s var(--ease),transform .5s var(--ease)}
 .format__bg{position:absolute;inset:0;background-image:var(--gradient);opacity:0;
   transition:opacity .5s var(--ease)}
@@ -336,8 +336,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .format--static{cursor:default}
 .format--static:hover{border-color:var(--line);transform:none}
 .format--static:hover .format__bg{opacity:0}
-.format:hover{border-color:transparent;transform:translateY(-4px)}
-.format:focus-visible{border-color:transparent;transform:translateY(-4px)}
+.format:hover{border-color:rgba(var(--on-gradient-rgb),.22);transform:translateY(-4px)}
+.format:focus-visible{border-color:rgba(var(--on-gradient-rgb),.34);transform:translateY(-4px)}
 .format:hover .format__bg,.format:focus-visible .format__bg{opacity:1}
 .format:hover .meta,.format:hover h3,.format:hover p,.format:hover .know,.format:hover .know svg,
 .format:focus-visible .meta,.format:focus-visible h3,.format:focus-visible p,
@@ -356,7 +356,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   font-family:Syne,sans-serif;font-style:normal;font-weight:700;font-size:12px;letter-spacing:.15em;
   text-transform:uppercase;color:rgba(var(--on-gradient-rgb),.66)}
 .slip-card .nums{display:block;margin-top:8px;font-size:12px;letter-spacing:.16em;
-  color:rgba(var(--scrim),.5)}
+  color:rgba(var(--on-gradient-rgb),.55)}
 
 /* ============================================================
    THE CRACKER — a fortune cookie breaking open
