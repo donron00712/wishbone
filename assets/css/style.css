@@ -724,7 +724,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment__scrim{position:absolute;inset:0;z-index:0;
   background:
     radial-gradient(closest-side at 50% 44%,rgba(var(--aura),.22) 0%,rgba(var(--aura),.08) 46%,transparent 74%),
-    radial-gradient(132% 100% at 50% 44%,rgba(var(--veil),.70) 0%,rgba(var(--veil),.94) 58%,rgba(var(--veil),.985) 100%);
+    radial-gradient(132% 100% at 50% 44%,rgba(var(--veil),.74) 0%,rgba(var(--veil),.96) 56%,rgba(var(--veil),.995) 100%);
   backdrop-filter:blur(8px) saturate(.92)}
 
 /* the bloom behind the cookie, which swells as it opens */
@@ -751,15 +751,41 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   100%{opacity:0;transform:translate(-50%,-50%) scale(3.4)}
 }
 
-/* slow motes drifting up through it */
+/* --- night sky ------------------------------------------------------------
+   Stars sit above the veil so they read as light rather than as dust, each
+   twinkling on its own clock so the field never pulses together. */
+.moment__sky{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);
+  border-radius:50%;background:rgb(var(--aura));
+  box-shadow:0 0 5px rgba(var(--aura),.9),0 0 12px rgba(var(--aura),.45);
+  opacity:var(--o);animation:twinkle var(--t) ease-in-out var(--d) infinite}
+@keyframes twinkle{
+  0%,100%{opacity:calc(var(--o) * .3);transform:scale(.8)}
+  50%{opacity:var(--o);transform:scale(1)}
+}
+
+/* two wishes crossing, rarely */
+.shoot{position:absolute;width:120px;height:1.5px;border-radius:2px;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(var(--aura),.95),transparent);
+  filter:drop-shadow(0 0 5px rgba(var(--aura),.8))}
+.shoot--a{top:16%;left:-12%;animation:shoot 13s ease-in 3s infinite}
+.shoot--b{top:62%;left:-12%;animation:shoot 17s ease-in 9.5s infinite}
+@keyframes shoot{
+  0%{opacity:0;transform:translate(0,0) rotate(14deg)}
+  3%{opacity:1}
+  11%{opacity:0;transform:translate(128vw,30vh) rotate(14deg)}
+  100%{opacity:0;transform:translate(128vw,30vh) rotate(14deg)}
+}
+
+/* motes rising through the sky, brighter than before */
 .moment__motes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .mote{position:absolute;left:var(--x);bottom:14%;width:var(--s);height:var(--s);border-radius:50%;
-  background:rgba(var(--aura),.9);filter:blur(.4px);opacity:0;
+  background:rgb(var(--aura));box-shadow:0 0 7px rgba(var(--aura),.75);opacity:0;
   animation:mote-rise var(--t) linear var(--d) infinite}
 @keyframes mote-rise{
   0%{transform:translateY(40px) scale(.5);opacity:0}
-  12%{opacity:.85}
-  70%{opacity:.5}
+  12%{opacity:1}
+  70%{opacity:.7}
   100%{transform:translateY(-46vh) scale(1);opacity:0}
 }
 /* backdrop-filter makes the scrim a stacking context, so the panel needs to
@@ -829,6 +855,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 
 @media (prefers-reduced-motion:reduce){
   .mote{animation:none;opacity:.4}
+  .star{animation:none}
+  .shoot{display:none}
   .moment__aura{animation:none;transition:none}
   .moment.is-open .moment__cookie::after{animation:none;opacity:0}
   .moment:not(.is-open) .biscuit{animation:none}

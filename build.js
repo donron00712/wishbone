@@ -150,12 +150,34 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
          whichever palette the visitor left the landing page on. -->
     <div class="moment" id="moment" hidden>
       <div class="moment__scrim" data-moment-close></div>
+      <!-- Night sky. Positions are derived from the index rather than random,
+           so the same sky is served to everyone and to every rebuild. -->
+      <div class="moment__sky" aria-hidden="true">
+        ${(() => {
+          let h = 1103515245;
+          const rnd = () => (h = (h * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+          let out = '';
+          for (let i = 0; i < 46; i++) {
+            const x = (rnd() * 100).toFixed(2);
+            const y = (rnd() * 100).toFixed(2);
+            const size = (1.1 + rnd() * 2.4).toFixed(2);
+            const op = (0.45 + rnd() * 0.55).toFixed(2);
+            const dur = (2.6 + rnd() * 4.8).toFixed(2);
+            const del = (rnd() * 7).toFixed(2);
+            out += `<span class="star" style="--x:${x}%;--y:${y}%;--s:${size}px;--o:${op};--t:${dur}s;--d:${del}s"></span>`;
+          }
+          return out;
+        })()}
+        <span class="shoot shoot--a"></span>
+        <span class="shoot shoot--b"></span>
+      </div>
+
       <div class="moment__motes" aria-hidden="true">
-        ${Array.from({ length: 18 }, (_, i) => {
-          const left  = [6, 12, 19, 25, 31, 37, 43, 48, 54, 59, 65, 70, 76, 81, 86, 90, 94, 97][i];
-          const delay = [0, 2.6, 5.1, 1.3, 3.9, 6.4, .7, 4.4, 2.1, 5.8, 3.2, 1.8, 7.1, .4, 4.9, 2.9, 6.1, 3.5][i];
-          const dur   = [11, 14, 12, 15, 13, 16, 12, 14, 15, 11, 13, 16, 14, 12, 15, 13, 11, 16][i];
-          const size  = [3, 5, 4, 3, 6, 4, 5, 3, 4, 6, 3, 5, 4, 6, 3, 5, 4, 3][i];
+        ${Array.from({ length: 14 }, (_, i) => {
+          const left  = [7, 15, 23, 31, 39, 46, 54, 61, 69, 76, 83, 89, 94, 97][i];
+          const delay = [0, 2.6, 5.1, 1.3, 3.9, 6.4, .7, 4.4, 2.1, 5.8, 3.2, 1.8, 7.1, .4][i];
+          const dur   = [11, 14, 12, 15, 13, 16, 12, 14, 15, 11, 13, 16, 14, 12][i];
+          const size  = [3, 5, 4, 3, 6, 4, 5, 3, 4, 6, 3, 5, 4, 6][i];
           return `<span class="mote" style="--x:${left}%;--d:${delay}s;--t:${dur}s;--s:${size}px"></span>`;
         }).join('')}
       </div>
