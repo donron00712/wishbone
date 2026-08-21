@@ -52,14 +52,18 @@
   wrapper.innerHTML = [0, 1, 2].map(r => {
     const tiles = sampleFortunes.slice(r * perRow, r * perRow + perRow).map(f => `
       <div class="tile">
-        <span class="slip">${f.line}</span>
-        <span class="tile__foot">
-          ${f.qr ? qrSvg(f.brand, 30) : ''}
-          <span class="tile__id">
+        <div class="paper paper--fortune">
+          <p>${f.line}</p>
+          <span class="paper__nums">${f.nums}</span>
+        </div>
+        <div class="paper paper--ad" style="--ad-bg:${f.bg};--ad-fg:${f.fg}">
+          ${f.qr ? qrSvg(f.brand, 26) : ''}
+          <span class="paper__tag">${f.tag}</span>
+          <span class="paper__id">
             <b>${f.brand}</b>
-            <em>${f.offer}</em>
+            <em>${f.url}</em>
           </span>
-        </span>
+        </div>
       </div>`).join('');
     return `<div class="grid-row" data-row="${r}">${tiles + tiles}</div>`;
   }).join('');

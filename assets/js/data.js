@@ -39,43 +39,38 @@ window.WB = (function () {
     'You are allowed to want it.'
   ];
 
-  /* Sample fortunes: what a slip could read like for a given brand.
-     Illustrative only — the brands are real, the offers are invented, and none
-     of it represents an actual campaign. The page labels them as examples.
-     Replace wholesale once there is real work to show. */
+  /* Sample slips. Each is the two-piece unit: the fortune with its lucky
+     numbers, and the sponsor strip underneath that finishes the line.
+     Illustrative only — the brands are real, the taglines, offers and /luck
+     URLs are invented, and none of it represents an actual campaign. The page
+     labels them as examples. Replace wholesale once there is real work. */
   const sampleFortunes = [
-    { line: 'Unlock your beauty secret, below this line.',   brand: 'Nykaa', qr: true,     offer: '10% off' },
-    { line: 'Your ride home is closer than you think.',      brand: 'Uber', qr: true,      offer: '\u20B9100 off' },
-    { line: 'Never settle for the slower one.',              brand: 'OnePlus',   offer: '\u20B92,000 off' },
-    { line: 'Time is on your side tonight.',                 brand: 'Casio',     offer: '15% off' },
-    { line: "Tomorrow's craving is already decided.",        brand: 'Zomato', qr: true,    offer: 'Free delivery' },
-    { line: 'The next meal finds you faster.',               brand: 'Swiggy',    offer: '50% off' },
-    { line: 'You will be overdressed. Enjoy it.',            brand: 'Myntra',    offer: '20% off' },
-    { line: 'Turn it up on the way home.',                   brand: 'boAt',      offer: '30% off' },
-    { line: 'Good habits pay you back.',                     brand: 'CRED', qr: true,      offer: '500 coins' },
-    { line: 'It arrives before you finish reading this.',    brand: 'Zepto',     offer: '\u20B975 off' },
-    { line: 'You will see this year clearly.',               brand: 'Lenskart', qr: true,  offer: 'Buy 1 get 1' },
-    { line: 'The right moment is already on your wrist.',    brand: 'Titan',     offer: '25% off' },
-    { line: 'Your wallet is heavier than it looks.',         brand: 'Paytm',     offer: '\u20B950 cashback' },
-    { line: 'One more episode is the correct answer.',       brand: 'Netflix',   offer: '1 month free' },
-    { line: 'The song you needed is next.',                  brand: 'Spotify', qr: true,   offer: '3 months free' },
-    { line: 'The bigger picture is worth it.',               brand: 'Samsung',   offer: '\u20B95,000 off' },
-    { line: 'Hear what you have been missing.',              brand: 'Sony',      offer: '20% off' },
-    { line: 'The run you skipped is still waiting.',         brand: 'Nike', qr: true,      offer: '25% off' },
-    { line: 'Be kind to your skin this week.',               brand: 'Mamaearth', offer: '15% off' },
-    { line: 'What you wanted just went on sale.',            brand: 'Flipkart',  offer: '\u20B9300 off' },
-    { line: 'Your streak survives the weekend.',             brand: 'Duolingo', qr: true,  offer: '14 days free' },
-    { line: 'The second half of tonight is yours.',          brand: 'Red Bull',  offer: 'Buy 2 get 1' },
-    { line: 'Bold looks better on you.',                     brand: 'Sugar',     offer: '20% off' },
-    { line: 'It is already out for delivery.',               brand: 'Amazon', qr: true,    offer: '\u20B9200 off' }
+    { line: 'Unlock your beauty secret, below this line.', nums: '3, 8, 17, 24, 31, 45',    brand: 'Nykaa',      tag: '…starting with your skin.',     url: 'nykaa.com/luck',            bg: '#E80071', fg: '#fff', qr: true },
+    { line: 'Your ride home is closer than you think.',    nums: '5, 11, 19, 27, 38, 42',   brand: 'Uber',       tag: '…and it\'s two minutes away.',  url: 'uber.com/luck',             bg: '#0D0D0D', fg: '#fff', qr: true },
+    { line: 'Never settle for the slower one.',            nums: '2, 9, 14, 23, 36, 48',    brand: 'OnePlus',    tag: '…at 120 hertz.',                url: 'oneplus.in/luck',           bg: '#EB0028', fg: '#fff' },
+    { line: 'Time is on your side tonight.',               nums: '6, 13, 21, 29, 34, 41',   brand: 'Casio',      tag: '…right on time.',               url: 'casio.com/luck',            bg: '#001E62', fg: '#fff' },
+    { line: 'Tomorrow\'s craving is already decided.',     nums: '4, 15, 22, 30, 37, 44',   brand: 'Zomato',     tag: '…order it anyway.',             url: 'zomato.com/luck',           bg: '#E23744', fg: '#fff', qr: true },
+    { line: 'The next meal finds you faster.',             nums: '1, 10, 18, 26, 33, 47',   brand: 'Swiggy',     tag: '…in twenty minutes.',           url: 'swiggy.com/luck',           bg: '#FC8019', fg: '#fff' },
+    { line: 'You will be overdressed. Enjoy it.',          nums: '7, 12, 20, 28, 39, 46',   brand: 'Myntra',     tag: '…and it\'s on sale.',           url: 'myntra.com/luck',           bg: '#FF3F6C', fg: '#fff' },
+    { line: 'Turn it up on the way home.',                 nums: '3, 16, 25, 32, 40, 49',   brand: 'boAt',       tag: '…turn it up.',                  url: 'boat-lifestyle.com/luck',   bg: '#E52D27', fg: '#fff' },
+    { line: 'Good habits pay you back.',                   nums: '8, 14, 19, 27, 35, 43',   brand: 'CRED',       tag: '…pay the bill first.',          url: 'cred.club/luck',            bg: '#0B0B0B', fg: '#fff', qr: true },
+    { line: 'It arrives before you finish reading this.',  nums: '2, 11, 23, 31, 38, 50',   brand: 'Zepto',      tag: '…in ten minutes.',              url: 'zepto.com/luck',            bg: '#6C2BD9', fg: '#fff' },
+    { line: 'You will see this year clearly.',             nums: '5, 17, 24, 29, 36, 45',   brand: 'Lenskart',   tag: '…once you can see it.',         url: 'lenskart.com/luck',         bg: '#00A9E0', fg: '#fff', qr: true },
+    { line: 'The right moment is already on your wrist.',  nums: '6, 13, 22, 30, 41, 48',   brand: 'Titan',      tag: '…give it time.',                url: 'titan.co.in/luck',          bg: '#1B2A47', fg: '#fff' },
+    { line: 'Your wallet is heavier than it looks.',       nums: '1, 9, 18, 26, 34, 42',    brand: 'Paytm',      tag: '…scan to find out.',            url: 'paytm.com/luck',            bg: '#00BAF2', fg: '#04263A' },
+    { line: 'One more episode is the correct answer.',     nums: '4, 12, 21, 28, 37, 46',   brand: 'Netflix',    tag: '…after one more episode.',      url: 'netflix.com/luck',          bg: '#E50914', fg: '#fff' },
+    { line: 'The song you needed is next.',                nums: '7, 15, 20, 33, 39, 44',   brand: 'Spotify',    tag: '…press play.',                  url: 'spotify.com/luck',          bg: '#1DB954', fg: '#06301A', qr: true },
+    { line: 'The bigger picture is worth it.',             nums: '3, 10, 25, 32, 40, 47',   brand: 'Samsung',    tag: '…on a bigger screen.',          url: 'samsung.com/luck',          bg: '#1428A0', fg: '#fff' },
+    { line: 'Hear what you have been missing.',            nums: '2, 14, 19, 27, 35, 49',   brand: 'Sony',       tag: '…hear it properly.',            url: 'sony.com/luck',             bg: '#0A0A0A', fg: '#fff' },
+    { line: 'The run you skipped is still waiting.',       nums: '8, 16, 23, 31, 38, 43',   brand: 'Nike',       tag: '…so go for a run.',             url: 'nike.com/luck',             bg: '#111111', fg: '#fff', qr: true },
+    { line: 'Be kind to your skin this week.',             nums: '5, 11, 22, 29, 36, 45',   brand: 'Mamaearth',  tag: '…be gentle about it.',          url: 'mamaearth.in/luck',         bg: '#4CA83D', fg: '#fff' },
+    { line: 'What you wanted just went on sale.',          nums: '1, 13, 20, 28, 34, 48',   brand: 'Flipkart',   tag: '…it\'s already in your cart.',  url: 'flipkart.com/luck',         bg: '#2874F0', fg: '#fff' },
+    { line: 'Your streak survives the weekend.',           nums: '6, 12, 24, 30, 41, 46',   brand: 'Duolingo',   tag: '…don\'t break the streak.',     url: 'duolingo.com/luck',         bg: '#58CC02', fg: '#0C3D00', qr: true },
+    { line: 'The second half of tonight is yours.',        nums: '4, 17, 21, 33, 39, 42',   brand: 'Red Bull',   tag: '…the night is young.',          url: 'redbull.com/luck',          bg: '#001489', fg: '#fff' },
+    { line: 'Bold looks better on you.',                   nums: '7, 10, 26, 32, 37, 50',   brand: 'Sugar',      tag: '…wear the bold one.',           url: 'sugarcosmetics.com/luck',   bg: '#0B0B0B', fg: '#fff' },
+    { line: 'It is already out for delivery.',             nums: '2, 15, 18, 25, 40, 47',   brand: 'Amazon',     tag: '…it ships tonight.',            url: 'amazon.in/luck',            bg: '#232F3E', fg: '#fff', qr: true },
   ];
 
-  /* The case for out-of-home as a category. Deliberately no figures: any
-     recall or reach number here would need a real source (OAAA, WARC,
-     Nielsen), and an invented one is worse than none. */
-  /* The case for out-of-home as a category. Deliberately no figures: any
-     recall or reach number here would need a real source (OAAA, WARC,
-     Nielsen), and an invented one is worse than none. */
   const oohPoints = [
     { n: '01', title: 'It cannot be closed, skipped or blocked',
       body: 'Every digital format competes for a screen its audience is trying to get past. Out-of-home occupies physical space instead, so there is no ad blocker, no skip button and no auction for the attention.' },
