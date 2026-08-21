@@ -139,7 +139,10 @@
     if (cta && !cta.classList.contains('is-dismissed')) {
       const past = y > (page === 'home' ? window.innerHeight * 0.9 : 420);
       const nearEnd = y + window.innerHeight > document.body.scrollHeight - 260;
-      cta.classList.toggle('is-visible', past && !nearEnd);
+      /* Both of these live at the bottom of the screen, so they stack on top
+         of each other on a phone. Consent gets the space until it is answered. */
+      const consentUp = document.getElementById('cookie').classList.contains('is-visible');
+      cta.classList.toggle('is-visible', past && !nearEnd && !consentUp);
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -178,6 +181,7 @@
     localStorage.setItem(KEY, value);
     cookie.classList.remove('is-visible');
     modal.classList.remove('is-open');
+    onScroll();                 // the bottom is free again
   };
   document.addEventListener('click', e => {
     const action = e.target.closest('[data-cookie]');
