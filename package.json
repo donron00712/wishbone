@@ -2,11 +2,16 @@
   "name": "wishbone",
   "version": "0.1.0",
   "private": true,
-  "description": "Marketing site for Wishbone — advertising inside a real wishbone, at restaurants everywhere.",
+  "description": "Marketing site for Wishbone \u2014 advertising inside real fortune cookies at restaurants.",
   "scripts": {
-    "start": "python3 -m http.server 4321",
-    "dev": "python3 -m http.server 4321"
+    "build": "node build.js",
+    "start": "node build.js && python3 -m http.server 4321",
+    "dev": "node build.js && python3 -m http.server 4321"
   },
-  "keywords": ["wishbone", "advertising", "static-site"],
+  "keywords": [
+    "wishbone",
+    "advertising",
+    "static-site"
+  ],
   "license": "UNLICENSED"
 }

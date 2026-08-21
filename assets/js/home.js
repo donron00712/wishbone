@@ -1,6 +1,10 @@
 /* Homepage: pinned hero sequence, why-it-works, formats */
 (function () {
-  const { wishes, sampleFortunes, reasons, formats, targets, icons } = window.WB;
+  const { wishes, sampleFortunes, icons } = window.WB;
+
+  /* The wishbone mark, used as the separator between fortunes in the marquee.
+     Lives here because this is the only place that still draws one. */
+  const bone = (w, h) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* No scroll animation available, either because the visitor asked for less
@@ -10,24 +14,29 @@
   if (staticHero) document.querySelector('.home-hero').classList.add('is-static');
 
   /* A decorative QR block. Deterministic from the brand name so each slip keeps
-     the same pattern between renders. It is illustrative and does not scan. */
+     the same pattern between renders. It is illustrative and does not scan.
+
+     The modules are emitted as ONE path rather than ~120 <rect> elements. At
+     eighteen QRs on the page that is the difference between ~2,100 DOM nodes
+     and eighteen, and it is the single largest thing on this page. */
   const qrSvg = (seed, px) => {
     let h = 2166136261;
     for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
     const rnd = () => (h = (Math.imul(h, 1664525) + 1013904223) >>> 0) / 4294967296;
-    const N = 21, cells = [];
+    const N = 21;
     const inFinder = (x, y) => (x < 8 && y < 8) || (x > N - 9 && y < 8) || (x < 8 && y > N - 9);
+    let d = '';
     for (let y = 0; y < N; y++) {
       for (let x = 0; x < N; x++) {
         if (inFinder(x, y)) continue;
-        if (rnd() > 0.52) cells.push(`<rect x="${x}" y="${y}" width="1" height="1"/>`);
+        if (rnd() > 0.52) d += `M${x} ${y}h1v1h-1z`;
       }
     }
     const finder = (fx, fy) =>
       `<rect x="${fx + 0.5}" y="${fy + 0.5}" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1"/>` +
       `<rect x="${fx + 2}" y="${fy + 2}" width="3" height="3"/>`;
     return `<svg class="qr" width="${px}" height="${px}" viewBox="0 0 21 21" fill="currentColor" aria-hidden="true">` +
-      cells.join('') + finder(0, 0) + finder(14, 0) + finder(0, 14) + `</svg>`;
+      `<path d="${d}"/>` + finder(0, 0) + finder(14, 0) + finder(0, 14) + `</svg>`;
   };
 
   /* ---------- 1. split the headline into animatable characters ----------
@@ -42,7 +51,7 @@
 
   /* ---------- 2. marquee of wishes ---------- */
   const run = wishes.map(w =>
-    `<span class="slip">${w}</span><span class="sep">${icons.bone(15, 14)}</span>`
+    `<span class="slip">${w}</span><span class="sep">${bone(15, 14)}</span>`
   ).join('');
   document.querySelector('.marquee__track').innerHTML = run + run;
 
@@ -88,32 +97,7 @@
       </div>`;
   }
 
-  /* ---------- 4. why it works ---------- */
-  document.getElementById('reasons').innerHTML = reasons.map(r => `
-    <li class="reason reveal">
-      <span class="reason__n">${r.n}</span>
-      <h3>${r.title}</h3>
-      <p>${r.body}</p>
-    </li>`).join('');
-
-  document.getElementById('targets').innerHTML = targets.map(t => `
-    <div class="target"><div class="num">${t.num}</div><div class="label">${t.label}</div></div>`).join('');
-
-  /* ---------- 5. the formats ---------- */
-  document.getElementById('formats').innerHTML = formats.map(f => `
-    <li>
-      <a class="format" href="formats.html">
-        <span class="format__bg"></span>
-        <div>
-          <div class="meta">${f.meta}</div>
-          <h3>${f.title}</h3>
-        </div>
-        <div>
-          <p>${f.body}</p>
-          <span class="know">See the formats ${icons.smallArrow}</span>
-        </div>
-      </a>
-    </li>`).join('');
+  /* Reason, format and target cards are in the HTML — build.js writes them. */
 
   document.querySelectorAll('.reveal').forEach(el => window.WB.observeReveal(el));
 

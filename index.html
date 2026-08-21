@@ -13,7 +13,33 @@
 </head>
 <body data-page="home">
 <div class="underlay"></div><div class="grain"></div>
-<div id="site-header"></div>
+<!--#header--><a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header" id="site-header">
+      <div class="container">
+        <a class="brand" href="index.html" aria-label="Wishbone home"><svg width="23" height="21" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg><span>Wishbone</span></a>
+        <nav class="nav" aria-label="Primary">
+          <ul>
+            <li><a href="formats.html">The formats</a></li>
+            <li><a href="why-it-works.html">Why it works</a></li>
+            <li><a href="journal.html">Journal</a></li>
+          </ul>
+        </nav>
+        <a class="btn header-cta" href="contact.html">Get in touch <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="formats.html">The formats</a></li>
+            <li><a href="why-it-works.html">Why it works</a></li>
+            <li><a href="journal.html">Journal</a></li>
+          <li><a href="contact.html">Get in touch</a></li>
+        </ul>
+      </nav>
+    </div><!--/#header-->
 
 <main id="content">
 
@@ -129,12 +155,17 @@
         <h2 class="h4">Out-of-home, at the smallest possible scale.</h2>
         <p>Advertising that shares physical space with people cannot be blocked, skipped or scrolled past. This is that idea, shrunk to fit in a hand.</p>
       </div>
-      <ul class="reasons" id="reasons"></ul>
+      <ul class="reasons" tabindex="0" role="region" aria-label="Why the cookie works"><!--#reasons--><li class="reason"><span class="reason__n">01</span><h3>It arrives as part of the meal</h3><p>The cookie comes with the check the way it always has. Your message is inside something the restaurant is already handing over, rather than an interruption bought against someone’s attention.</p></li>
+        <li class="reason"><span class="reason__n">02</span><h3>It lands at the calmest point of the evening</h3><p>The end of a meal is unhurried in a way almost no other advertising moment is. Nothing else is bidding for the table at that point.</p></li>
+        <li class="reason"><span class="reason__n">03</span><h3>It reaches a table, not a screen</h3><p>A cookie goes to each person present, so a brand can arrive with a group in the same moment rather than one device at a time.</p></li>
+        <li class="reason"><span class="reason__n">04</span><h3>It is a physical thing, not an impression</h3><p>The slip is small enough to pocket and leaves the restaurant with whoever takes it. It does not disappear when a feed refreshes.</p></li><!--/#reasons--></ul>
     </div>
   </section>
 
   <section class="targets">
-    <div class="container"><div class="targets__grid" id="targets"></div></div>
+    <div class="container"><div class="targets__grid"><!--#targets--><div class="target"><div class="num">11</div><div class="label">Words on the fortune — the whole creative brief</div></div>
+          <div class="target"><div class="num">0</div><div class="label">Ad blockers at the dinner table</div></div>
+          <div class="target"><div class="num">1</div><div class="label">Slip inside every cookie, printed to your brief</div></div><!--/#targets--></div></div>
   </section>
 
   <!-- ============ FORMATS ============ -->
@@ -145,13 +176,128 @@
         <h2 class="h4">Six ways to put a brand inside a fortune cookie.</h2>
         <p>Mix them, or start with the fortune and nothing else.</p>
       </div>
-      <ul class="formats" id="formats"></ul>
+      <ul class="formats" tabindex="0" role="region" aria-label="The formats"><!--#formats--><li>
+          <a class="format" href="formats.html">
+            <span class="format__bg"></span>
+            <div><div class="meta">The fortune</div><h3>Eleven words on the slip</h3></div>
+            <div><p>The line inside the cookie, written with you or by you. Eleven words is the whole creative brief — short enough to take in at a glance, long enough to carry a voice.</p><span class="know">See the formats <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg></span></div>
+          </a>
+        </li>
+        <li>
+          <a class="format" href="formats.html">
+            <span class="format__bg"></span>
+            <div><div class="meta">The numbers</div><h3>Lucky numbers that actually do something</h3></div>
+            <div><p>Every fortune carries its six numbers. They can be a discount code, a draw entry or a store number instead of decoration.</p><span class="know">See the formats <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg></span></div>
+          </a>
+        </li>
+        <li>
+          <a class="format" href="formats.html">
+            <span class="format__bg"></span>
+            <div><div class="meta">The code</div><h3>A prize on the back of the slip</h3></div>
+            <div><p>A QR or promo code on the reverse, so the fortune has something to redeem and you have something to measure.</p><span class="know">See the formats <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg></span></div>
+          </a>
+        </li>
+        <li>
+          <a class="format" href="formats.html">
+            <span class="format__bg"></span>
+            <div><div class="meta">Targeting</div><h3>City, cuisine, daypart</h3></div>
+            <div><p>Choose where the cookies land: a neighbourhood, a cuisine, a dinner rush, a single street. Placement is a media buy, not a mailing list.</p><span class="know">See the formats <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg></span></div>
+          </a>
+        </li>
+        <li>
+          <a class="format" href="formats.html">
+            <span class="format__bg"></span>
+            <div><div class="meta">The drop</div><h3>Limited runs for a moment</h3></div>
+            <div><p>Short, dated runs built around a launch, a holiday, a fixture, a Lunar New Year service. Scarcity the table can feel.</p><span class="know">See the formats <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg></span></div>
+          </a>
+        </li>
+        <li>
+          <a class="format" href="formats.html">
+            <span class="format__bg"></span>
+            <div><div class="meta">Co-branding</div><h3>Two brands, two sides</h3></div>
+            <div><p>The slip has a front and a back. A line each, or a line and a code — a natural format for a collaboration where both sides get their own surface.</p><span class="know">See the formats <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg></span></div>
+          </a>
+        </li><!--/#formats--></ul>
     </div>
   </section>
 
 </main>
 
-<div id="site-footer"></div>
+<!--#footer--><section class="closing container reveal">
+      <h2 class="h2">Let’s talk about your run.</h2>
+      <p>Tell us about the brand and what you’d want on the slip.</p>
+      <a class="btn btn--lg" href="contact.html">Get in touch <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </section>
+    <footer class="site-footer" id="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h2>Get in touch</h2>
+            <a class="footer-mail" href="mailto:hello@wishbone.co">hello@wishbone.co</a>
+          </div>
+          <div><h2>The product</h2><ul>
+            <li><a href="formats.html">The formats</a></li>
+            <li><a href="why-it-works.html">Why it works</a></li>
+            <li><a href="journal.html">Journal</a></li>
+          </ul></div>
+          <div><h2>Pages</h2><ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="contact.html">Get in touch</a></li>
+          </ul></div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Wishbone</span>
+          <ul><li><a href="mailto:hello@wishbone.co">hello@wishbone.co</a></li></ul>
+        </div>
+      </div>
+    </footer>
+
+    <aside class="sticky-cta" id="sticky-cta" aria-live="polite">
+      <button class="sticky-close" type="button" aria-label="Dismiss">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-linecap="round"/></svg>
+      </button>
+      <h3>Curious how it works?</h3>
+      <p>Let’s talk it through.</p>
+      <span class="spacer"></span>
+      <a class="btn" href="contact.html">Get in touch <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </aside>
+
+    <div class="cookie" id="cookie">
+      <p>We use a small number of cookies to understand how this site is used. Nothing is sold on, and you can change your mind at any time.</p>
+      <div class="cookie__actions">
+        <button class="btn btn--ember" type="button" data-cookie="accept">Accept</button>
+        <button class="btn btn--dark" type="button" data-cookie="reject">Reject</button>
+        <button class="link" type="button" data-cookie="prefs">Preferences</button>
+      </div>
+    </div>
+
+    <div class="modal" id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+      <div class="modal__scrim" data-close></div>
+      <div class="modal__panel">
+        <button class="modal__close" type="button" data-close aria-label="Close preferences">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-linecap="round"/></svg>
+        </button>
+        <h2 id="cookie-modal-title">You control your data</h2>
+        <p>Choose which cookies this site is allowed to set.</p>
+        <div class="pref">
+            <div class="pref__body"><h3>Required</h3><p>Needed for the site to work at all — sending the contact form, remembering this choice.</p></div>
+            <label class="switch"><input type="checkbox" checked disabled aria-label="Required cookies"><i></i></label>
+          </div>
+        <div class="pref">
+            <div class="pref__body"><h3>Analytics</h3><p>Helps us see which pages people actually read, so we can fix the ones they do not.</p></div>
+            <label class="switch"><input type="checkbox"   aria-label="Analytics cookies"><i></i></label>
+          </div>
+        <div class="pref">
+            <div class="pref__body"><h3>Marketing</h3><p>Lets us measure whether an ad we ran brought you here.</p></div>
+            <label class="switch"><input type="checkbox"   aria-label="Marketing cookies"><i></i></label>
+          </div>
+        <div class="modal__actions">
+          <button class="btn btn--ember" type="button" data-cookie="accept">Accept all</button>
+          <button class="btn btn--dark" type="button" data-cookie="reject">Decline all</button>
+          <button class="btn btn--outline" style="color:var(--ink);border-color:#B9D6C3" type="button" data-cookie="save">Save my choices</button>
+        </div>
+      </div>
+    </div><!--/#footer-->
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

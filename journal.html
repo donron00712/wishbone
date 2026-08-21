@@ -13,7 +13,33 @@
 </head>
 <body data-page="journal">
 <div class="underlay"></div><div class="grain"></div>
-<div id="site-header"></div>
+<!--#header--><a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header" id="site-header">
+      <div class="container">
+        <a class="brand" href="index.html" aria-label="Wishbone home"><svg width="23" height="21" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg><span>Wishbone</span></a>
+        <nav class="nav" aria-label="Primary">
+          <ul>
+            <li><a href="formats.html">The formats</a></li>
+            <li><a href="why-it-works.html">Why it works</a></li>
+            <li><a href="journal.html" aria-current="page">Journal</a></li>
+          </ul>
+        </nav>
+        <a class="btn header-cta" href="contact.html">Get in touch <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="formats.html">The formats</a></li>
+            <li><a href="why-it-works.html">Why it works</a></li>
+            <li><a href="journal.html" aria-current="page">Journal</a></li>
+          <li><a href="contact.html">Get in touch</a></li>
+        </ul>
+      </nav>
+    </div><!--/#header-->
 <main id="content">
   <section class="page-hero">
     <div class="container">
@@ -24,25 +50,109 @@
   </section>
 
   <section class="section" style="padding-top:24px">
-    <div class="container"><ul class="posts" id="posts"></ul></div>
+    <div class="container"><ul class="posts"><!--#posts--><li>
+          <div class="format format--static">
+            <div><div class="meta">Craft</div><h3>Writing for eleven words or fewer</h3></div>
+            <div><p>The constraint is the format. What survives when there is no room to explain.</p></div>
+          </div>
+        </li>
+        <li>
+          <div class="format format--static">
+            <div><div class="meta">Ritual</div><h3>Why the good ad units are objects</h3></div>
+            <div><p>Things people hold outlast things people scroll past. A short argument for physical media.</p></div>
+          </div>
+        </li>
+        <li>
+          <div class="format format--static">
+            <div><div class="meta">Media</div><h3>Out of home, in the restaurant</h3></div>
+            <div><p>Rethinking the category from the table up, where attention is already pointed somewhere.</p></div>
+          </div>
+        </li>
+        <li>
+          <div class="format format--static">
+            <div><div class="meta">Building</div><h3>What a cookie run actually involves</h3></div>
+            <div><p>Brief, print, restaurants, logistics — the parts of the format nobody asks about.</p></div>
+          </div>
+        </li><!--/#posts--></ul></div>
   </section>
 </main>
-<div id="site-footer"></div>
+<!--#footer--><section class="closing container reveal">
+      <h2 class="h2">Let’s talk about your run.</h2>
+      <p>Tell us about the brand and what you’d want on the slip.</p>
+      <a class="btn btn--lg" href="contact.html">Get in touch <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </section>
+    <footer class="site-footer" id="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h2>Get in touch</h2>
+            <a class="footer-mail" href="mailto:hello@wishbone.co">hello@wishbone.co</a>
+          </div>
+          <div><h2>The product</h2><ul>
+            <li><a href="formats.html">The formats</a></li>
+            <li><a href="why-it-works.html">Why it works</a></li>
+            <li><a href="journal.html" aria-current="page">Journal</a></li>
+          </ul></div>
+          <div><h2>Pages</h2><ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="contact.html">Get in touch</a></li>
+          </ul></div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Wishbone</span>
+          <ul><li><a href="mailto:hello@wishbone.co">hello@wishbone.co</a></li></ul>
+        </div>
+      </div>
+    </footer>
+
+    <aside class="sticky-cta" id="sticky-cta" aria-live="polite">
+      <button class="sticky-close" type="button" aria-label="Dismiss">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-linecap="round"/></svg>
+      </button>
+      <h3>Curious how it works?</h3>
+      <p>Let’s talk it through.</p>
+      <span class="spacer"></span>
+      <a class="btn" href="contact.html">Get in touch <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </aside>
+
+    <div class="cookie" id="cookie">
+      <p>We use a small number of cookies to understand how this site is used. Nothing is sold on, and you can change your mind at any time.</p>
+      <div class="cookie__actions">
+        <button class="btn btn--ember" type="button" data-cookie="accept">Accept</button>
+        <button class="btn btn--dark" type="button" data-cookie="reject">Reject</button>
+        <button class="link" type="button" data-cookie="prefs">Preferences</button>
+      </div>
+    </div>
+
+    <div class="modal" id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+      <div class="modal__scrim" data-close></div>
+      <div class="modal__panel">
+        <button class="modal__close" type="button" data-close aria-label="Close preferences">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-linecap="round"/></svg>
+        </button>
+        <h2 id="cookie-modal-title">You control your data</h2>
+        <p>Choose which cookies this site is allowed to set.</p>
+        <div class="pref">
+            <div class="pref__body"><h3>Required</h3><p>Needed for the site to work at all — sending the contact form, remembering this choice.</p></div>
+            <label class="switch"><input type="checkbox" checked disabled aria-label="Required cookies"><i></i></label>
+          </div>
+        <div class="pref">
+            <div class="pref__body"><h3>Analytics</h3><p>Helps us see which pages people actually read, so we can fix the ones they do not.</p></div>
+            <label class="switch"><input type="checkbox"   aria-label="Analytics cookies"><i></i></label>
+          </div>
+        <div class="pref">
+            <div class="pref__body"><h3>Marketing</h3><p>Lets us measure whether an ad we ran brought you here.</p></div>
+            <label class="switch"><input type="checkbox"   aria-label="Marketing cookies"><i></i></label>
+          </div>
+        <div class="modal__actions">
+          <button class="btn btn--ember" type="button" data-cookie="accept">Accept all</button>
+          <button class="btn btn--dark" type="button" data-cookie="reject">Decline all</button>
+          <button class="btn btn--outline" style="color:var(--ink);border-color:#B9D6C3" type="button" data-cookie="save">Save my choices</button>
+        </div>
+      </div>
+    </div><!--/#footer-->
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/site.js"></script>
-<script>
-(function () {
-  const { posts, icons } = window.WB;
-  document.getElementById('posts').innerHTML = posts.map(p => `
-    <li>
-      <a class="format" href="contact.html">
-        <span class="format__bg"></span>
-        <div><div class="meta">${p.tag}</div><h3>${p.title}</h3></div>
-        <div><p>${p.dek}</p><span class="know">Read more ${icons.smallArrow}</span></div>
-      </a>
-    </li>`).join('');
-})();
-</script>
 </body>
 </html>
