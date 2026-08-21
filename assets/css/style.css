@@ -317,19 +317,17 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   transform-origin:50% 32%;filter:drop-shadow(0 16px 24px rgba(0,0,0,.45))}
 /* fills are SVG gradients — CSS only adds the drop shadow */
 
-/* --- the slip --- */
-.fortune-slip{position:absolute;z-index:4;width:min(80%,290px);
-  background:linear-gradient(168deg,#FFFDF8 0%,#F4F0E6 100%);color:#14110C;border-radius:3px;
-  padding:22px 20px 17px;text-align:center;
-  box-shadow:0 26px 60px rgba(0,0,0,.5);
-  opacity:0;transform:translateY(6px) scale(.7) rotate(-2deg)}
-.fortune-slip .slip{font-size:clamp(15px,1.7vw,18px);color:#14110C;line-height:1.35}
-.fortune-slip__brand{display:block;margin-top:16px;padding-top:13px;
-  border-top:1px solid rgba(20,17,12,.16);
-  font-family:Syne,sans-serif;font-weight:700;font-size:11px;letter-spacing:.15em;
-  text-transform:uppercase;color:rgba(20,17,12,.66)}
-.fortune-slip__nums{display:block;margin-top:7px;font-size:12px;letter-spacing:.16em;
-  color:rgba(20,17,12,.5)}
+/* --- the slip: the same two-piece unit that fills the hero wall --- */
+.fortune-slip{position:absolute;z-index:4;width:min(84%,300px);
+  display:flex;flex-direction:column;gap:7px;
+  opacity:0;transform:translateY(-4px) scale(.66) rotate(-2deg)}
+.fortune-slip .paper{box-shadow:0 14px 32px rgba(0,0,0,.5)}
+.fortune-slip .paper--fortune p{font-size:13px}
+.fortune-slip .paper__nums{font-size:9.5px}
+@media (min-width:768px){
+  .fortune-slip .paper--fortune p{font-size:14.5px}
+  .fortune-slip .paper__nums{font-size:10.5px}
+}
 
 /* --- crumbs --- */
 .biscuit__crumb{position:absolute;left:50%;top:56%;width:9px;height:7px;border-radius:2px 3px 2px 3px;
