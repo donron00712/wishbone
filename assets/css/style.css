@@ -175,20 +175,26 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .grid-wrapper{position:absolute;left:50%;top:50%;translate:-50% -50%;
   display:flex;flex-direction:column;gap:24px;width:auto}
 .grid-row{display:flex;gap:24px;will-change:transform}
-.tile{flex:none;width:180px;height:180px;border:1px solid var(--line);border-radius:28px;
+.tile{flex:none;width:196px;height:196px;border:1px solid var(--line);border-radius:28px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   padding:20px;background:rgba(218,241,222,.02);text-align:center}
-@media (min-width:768px){.tile{width:236px;height:236px;border-radius:32px;padding:28px;gap:16px}}
-.tile .slip{font-size:14px;color:var(--muted)}
-@media (min-width:768px){.tile .slip{font-size:16px}}
+@media (min-width:768px){.tile{width:250px;height:250px;border-radius:32px;padding:26px;gap:14px}}
+.tile .slip{font-size:13.5px;color:var(--muted)}
+@media (min-width:768px){.tile .slip{font-size:15.5px}}
 
-/* The brand and its offer, sitting under the fortune the way a printed
-   slip carries its sponsor. */
-.tile__brand{font-family:Syne,sans-serif;font-weight:700;font-size:10px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--text);opacity:.45;line-height:1.3;
-  padding-top:12px;border-top:1px solid var(--line);width:100%}
-@media (min-width:768px){.tile__brand{font-size:11px;padding-top:14px}}
-.tile__brand i{font-style:normal;opacity:.5;padding-inline:2px}
+/* The sponsor block under the fortune: an optional QR, then the brand name
+   on its own line with the offer beneath it, the way a printed slip reads. */
+.tile__foot{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  padding-top:11px;border-top:1px solid var(--line)}
+@media (min-width:768px){.tile__foot{gap:12px;padding-top:13px}}
+.tile__id{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.tile__id b{font-family:Syne,sans-serif;font-weight:700;font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--text);opacity:.62;line-height:1.2}
+.tile__id em{font-style:normal;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);opacity:.75;line-height:1.2}
+@media (min-width:768px){.tile__id b{font-size:12px}.tile__id em{font-size:11px}}
+.qr{flex:none;color:var(--text);opacity:.42;border-radius:2px}
+.tile:hover .qr{opacity:.7}
 
 .hero-grid__copy{position:absolute;z-index:10;left:50%;top:68%;translate:-50% -50%;width:100%;max-width:290px}
 @media (min-width:1024px){.hero-grid__copy{left:55%;top:50%;translate:0 -50%;max-width:380px}}

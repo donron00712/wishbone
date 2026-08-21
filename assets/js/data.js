@@ -44,30 +44,30 @@ window.WB = (function () {
      clients, and none of these offers exist. The hero says so on the page.
      Replace wholesale the moment a real campaign runs. */
   const sampleFortunes = [
-    { line: 'Unlock your beauty secret, below this line.',   brand: 'Nykaa',     offer: '10% off' },
-    { line: 'Your ride home is closer than you think.',      brand: 'Uber',      offer: '\u20B9100 off' },
+    { line: 'Unlock your beauty secret, below this line.',   brand: 'Nykaa', qr: true,     offer: '10% off' },
+    { line: 'Your ride home is closer than you think.',      brand: 'Uber', qr: true,      offer: '\u20B9100 off' },
     { line: 'Never settle for the slower one.',              brand: 'OnePlus',   offer: '\u20B92,000 off' },
     { line: 'Time is on your side tonight.',                 brand: 'Casio',     offer: '15% off' },
-    { line: "Tomorrow's craving is already decided.",        brand: 'Zomato',    offer: 'Free delivery' },
+    { line: "Tomorrow's craving is already decided.",        brand: 'Zomato', qr: true,    offer: 'Free delivery' },
     { line: 'The next meal finds you faster.',               brand: 'Swiggy',    offer: '50% off' },
     { line: 'You will be overdressed. Enjoy it.',            brand: 'Myntra',    offer: '20% off' },
     { line: 'Turn it up on the way home.',                   brand: 'boAt',      offer: '30% off' },
-    { line: 'Good habits pay you back.',                     brand: 'CRED',      offer: '500 coins' },
+    { line: 'Good habits pay you back.',                     brand: 'CRED', qr: true,      offer: '500 coins' },
     { line: 'It arrives before you finish reading this.',    brand: 'Zepto',     offer: '\u20B975 off' },
-    { line: 'You will see this year clearly.',               brand: 'Lenskart',  offer: 'Buy 1 get 1' },
+    { line: 'You will see this year clearly.',               brand: 'Lenskart', qr: true,  offer: 'Buy 1 get 1' },
     { line: 'The right moment is already on your wrist.',    brand: 'Titan',     offer: '25% off' },
     { line: 'Your wallet is heavier than it looks.',         brand: 'Paytm',     offer: '\u20B950 cashback' },
     { line: 'One more episode is the correct answer.',       brand: 'Netflix',   offer: '1 month free' },
-    { line: 'The song you needed is next.',                  brand: 'Spotify',   offer: '3 months free' },
+    { line: 'The song you needed is next.',                  brand: 'Spotify', qr: true,   offer: '3 months free' },
     { line: 'The bigger picture is worth it.',               brand: 'Samsung',   offer: '\u20B95,000 off' },
     { line: 'Hear what you have been missing.',              brand: 'Sony',      offer: '20% off' },
-    { line: 'The run you skipped is still waiting.',         brand: 'Nike',      offer: '25% off' },
+    { line: 'The run you skipped is still waiting.',         brand: 'Nike', qr: true,      offer: '25% off' },
     { line: 'Be kind to your skin this week.',               brand: 'Mamaearth', offer: '15% off' },
     { line: 'What you wanted just went on sale.',            brand: 'Flipkart',  offer: '\u20B9300 off' },
-    { line: 'Your streak survives the weekend.',             brand: 'Duolingo',  offer: '14 days free' },
+    { line: 'Your streak survives the weekend.',             brand: 'Duolingo', qr: true,  offer: '14 days free' },
     { line: 'The second half of tonight is yours.',          brand: 'Red Bull',  offer: 'Buy 2 get 1' },
     { line: 'Bold looks better on you.',                     brand: 'Sugar',     offer: '20% off' },
-    { line: 'It is already out for delivery.',               brand: 'Amazon',    offer: '\u20B9200 off' }
+    { line: 'It is already out for delivery.',               brand: 'Amazon', qr: true,    offer: '\u20B9200 off' }
   ];
 
   const reasons = [

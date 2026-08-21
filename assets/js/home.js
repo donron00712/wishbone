@@ -9,6 +9,27 @@
   const staticHero = reduced || !window.gsap;
   if (staticHero) document.querySelector('.home-hero').classList.add('is-static');
 
+  /* A decorative QR block. Deterministic from the brand name so each slip keeps
+     the same pattern between renders. It is a mock-up and does not scan. */
+  const qrSvg = (seed, px) => {
+    let h = 2166136261;
+    for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;
+    const rnd = () => (h = (Math.imul(h, 1664525) + 1013904223) >>> 0) / 4294967296;
+    const N = 21, cells = [];
+    const inFinder = (x, y) => (x < 8 && y < 8) || (x > N - 9 && y < 8) || (x < 8 && y > N - 9);
+    for (let y = 0; y < N; y++) {
+      for (let x = 0; x < N; x++) {
+        if (inFinder(x, y)) continue;
+        if (rnd() > 0.52) cells.push(`<rect x="${x}" y="${y}" width="1" height="1"/>`);
+      }
+    }
+    const finder = (fx, fy) =>
+      `<rect x="${fx + 0.5}" y="${fy + 0.5}" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1"/>` +
+      `<rect x="${fx + 2}" y="${fy + 2}" width="3" height="3"/>`;
+    return `<svg class="qr" width="${px}" height="${px}" viewBox="0 0 21 21" fill="currentColor" aria-hidden="true">` +
+      cells.join('') + finder(0, 0) + finder(14, 0) + finder(0, 14) + `</svg>`;
+  };
+
   /* ---------- 1. split the headline into animatable characters ----------
      Only when it is going to be animated: leaving the plain text alone keeps
      the headline readable if anything downstream fails. */
@@ -32,7 +53,13 @@
     const tiles = sampleFortunes.slice(r * perRow, r * perRow + perRow).map(f => `
       <div class="tile">
         <span class="slip">${f.line}</span>
-        <span class="tile__brand">${f.brand} <i>·</i> ${f.offer}</span>
+        <span class="tile__foot">
+          ${f.qr ? qrSvg(f.brand, 30) : ''}
+          <span class="tile__id">
+            <b>${f.brand}</b>
+            <em>${f.offer}</em>
+          </span>
+        </span>
       </div>`).join('');
     return `<div class="grid-row" data-row="${r}">${tiles + tiles}</div>`;
   }).join('');
