@@ -1,6 +1,6 @@
 /* Homepage: pinned hero sequence, why-it-works, formats */
 (function () {
-  const { wishes, brands, reasons, formats, targets, icons } = window.WB;
+  const { wishes, sampleFortunes, reasons, formats, targets, icons } = window.WB;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* No scroll animation available, either because the visitor asked for less
@@ -29,9 +29,11 @@
   const wrapper = document.querySelector('.grid-wrapper');
   const perRow = 8;
   wrapper.innerHTML = [0, 1, 2].map(r => {
-    const tiles = brands.slice(r * perRow, r * perRow + perRow)
-      .map(b => `<div class="tile"><span class="wordmark" data-style="${b.style}">${b.name}</span></div>`)
-      .join('');
+    const tiles = sampleFortunes.slice(r * perRow, r * perRow + perRow).map(f => `
+      <div class="tile">
+        <span class="slip">${f.line}</span>
+        <span class="tile__brand">${f.brand} <i>·</i> ${f.offer}</span>
+      </div>`).join('');
     return `<div class="grid-row" data-row="${r}">${tiles + tiles}</div>`;
   }).join('');
 

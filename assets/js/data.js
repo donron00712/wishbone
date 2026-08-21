@@ -39,34 +39,35 @@ window.WB = (function () {
     'You are allowed to want it.'
   ];
 
-  /* Brands shown in the hero wall. These are NOT clients — Wishbone has not
-     launched. They stand for the kind of brand the format is built for, and
-     the section is labelled as such. Swap for real logos once they are real. */
-  const brands = [
-    { name: 'Nykaa',     style: 'lower' },
-    { name: 'Uber',      style: 'upper' },
-    { name: 'OnePlus',   style: 'light' },
-    { name: 'CASIO',     style: 'upper' },
-    { name: 'Zomato',    style: 'light' },
-    { name: 'Swiggy',    style: 'lower' },
-    { name: 'Myntra',    style: 'light' },
-    { name: 'boAt',      style: 'light' },
-    { name: 'CRED',      style: 'wide' },
-    { name: 'Zepto',     style: 'lower' },
-    { name: 'Lenskart',  style: 'light' },
-    { name: 'Titan',     style: 'wide' },
-    { name: 'Paytm',     style: 'light' },
-    { name: 'Netflix',   style: 'upper' },
-    { name: 'Spotify',   style: 'lower' },
-    { name: 'Samsung',   style: 'upper' },
-    { name: 'Sony',      style: 'wide' },
-    { name: 'Nike',      style: 'upper' },
-    { name: 'Mamaearth', style: 'lower' },
-    { name: 'Flipkart',  style: 'light' },
-    { name: 'Duolingo',  style: 'lower' },
-    { name: 'Red Bull',  style: 'upper' },
-    { name: 'Sugar',     style: 'wide' },
-    { name: 'Amazon',    style: 'lower' }
+  /* Sample fortunes: what a real slip would read like for a given brand.
+     These are MOCK-UPS — Wishbone has not launched, none of these brands are
+     clients, and none of these offers exist. The hero says so on the page.
+     Replace wholesale the moment a real campaign runs. */
+  const sampleFortunes = [
+    { line: 'Unlock your beauty secret, below this line.',   brand: 'Nykaa',     offer: '10% off' },
+    { line: 'Your ride home is closer than you think.',      brand: 'Uber',      offer: '\u20B9100 off' },
+    { line: 'Never settle for the slower one.',              brand: 'OnePlus',   offer: '\u20B92,000 off' },
+    { line: 'Time is on your side tonight.',                 brand: 'Casio',     offer: '15% off' },
+    { line: "Tomorrow's craving is already decided.",        brand: 'Zomato',    offer: 'Free delivery' },
+    { line: 'The next meal finds you faster.',               brand: 'Swiggy',    offer: '50% off' },
+    { line: 'You will be overdressed. Enjoy it.',            brand: 'Myntra',    offer: '20% off' },
+    { line: 'Turn it up on the way home.',                   brand: 'boAt',      offer: '30% off' },
+    { line: 'Good habits pay you back.',                     brand: 'CRED',      offer: '500 coins' },
+    { line: 'It arrives before you finish reading this.',    brand: 'Zepto',     offer: '\u20B975 off' },
+    { line: 'You will see this year clearly.',               brand: 'Lenskart',  offer: 'Buy 1 get 1' },
+    { line: 'The right moment is already on your wrist.',    brand: 'Titan',     offer: '25% off' },
+    { line: 'Your wallet is heavier than it looks.',         brand: 'Paytm',     offer: '\u20B950 cashback' },
+    { line: 'One more episode is the correct answer.',       brand: 'Netflix',   offer: '1 month free' },
+    { line: 'The song you needed is next.',                  brand: 'Spotify',   offer: '3 months free' },
+    { line: 'The bigger picture is worth it.',               brand: 'Samsung',   offer: '\u20B95,000 off' },
+    { line: 'Hear what you have been missing.',              brand: 'Sony',      offer: '20% off' },
+    { line: 'The run you skipped is still waiting.',         brand: 'Nike',      offer: '25% off' },
+    { line: 'Be kind to your skin this week.',               brand: 'Mamaearth', offer: '15% off' },
+    { line: 'What you wanted just went on sale.',            brand: 'Flipkart',  offer: '\u20B9300 off' },
+    { line: 'Your streak survives the weekend.',             brand: 'Duolingo',  offer: '14 days free' },
+    { line: 'The second half of tonight is yours.',          brand: 'Red Bull',  offer: 'Buy 2 get 1' },
+    { line: 'Bold looks better on you.',                     brand: 'Sugar',     offer: '20% off' },
+    { line: 'It is already out for delivery.',               brand: 'Amazon',    offer: '\u20B9200 off' }
   ];
 
   const reasons = [
@@ -108,5 +109,5 @@ window.WB = (function () {
     { tag: 'Building',  title: 'What we are getting wrong so far',   dek: 'Notes from a brand that has not launched yet, written while it is still true.' }
   ];
 
-  return { email, nav, wishes, brands, reasons, formats, targets, posts };
+  return { email, nav, wishes, sampleFortunes, reasons, formats, targets, posts };
 })();
