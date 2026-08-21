@@ -10,7 +10,7 @@
   if (staticHero) document.querySelector('.home-hero').classList.add('is-static');
 
   /* A decorative QR block. Deterministic from the brand name so each slip keeps
-     the same pattern between renders. It is a mock-up and does not scan. */
+     the same pattern between renders. It is illustrative and does not scan. */
   const qrSvg = (seed, px) => {
     let h = 2166136261;
     for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;

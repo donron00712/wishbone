@@ -39,10 +39,10 @@ window.WB = (function () {
     'You are allowed to want it.'
   ];
 
-  /* Sample fortunes: what a real slip would read like for a given brand.
-     These are MOCK-UPS — Wishbone has not launched, none of these brands are
-     clients, and none of these offers exist. The hero says so on the page.
-     Replace wholesale the moment a real campaign runs. */
+  /* Sample fortunes: what a slip could read like for a given brand.
+     Illustrative only — the brands are real, the offers are invented, and none
+     of it represents an actual campaign. The page labels them as examples.
+     Replace wholesale once there is real work to show. */
   const sampleFortunes = [
     { line: 'Unlock your beauty secret, below this line.',   brand: 'Nykaa', qr: true,     offer: '10% off' },
     { line: 'Your ride home is closer than you think.',      brand: 'Uber', qr: true,      offer: '\u20B9100 off' },
@@ -73,33 +73,36 @@ window.WB = (function () {
   /* The case for out-of-home as a category. Deliberately no figures: any
      recall or reach number here would need a real source (OAAA, WARC,
      Nielsen), and an invented one is worse than none. */
+  /* The case for out-of-home as a category. Deliberately no figures: any
+     recall or reach number here would need a real source (OAAA, WARC,
+     Nielsen), and an invented one is worse than none. */
   const oohPoints = [
     { n: '01', title: 'It cannot be closed, skipped or blocked',
-      body: 'Every digital format competes for a screen its audience is actively trying to get past. Out-of-home never asks for that permission. It occupies the same physical space as the person, and the only way around it is to look away.' },
-    { n: '02', title: 'It builds the memory that gets used later',
-      body: 'Brands are chosen from memory at the moment of purchase, not from the last impression served. Physical placement is unusually good at building that memory, because it is met in a real place, in a real mood, with no skip button in the corner.' },
-    { n: '03', title: 'Taking up space is itself the signal',
-      body: 'A brand that has put something physical in the world has visibly committed to being there. Audiences read that as substance without being told, and it is work that an impression bought at auction simply cannot do.' },
-    { n: '04', title: 'It reaches the room, not a segment',
-      body: 'Out-of-home speaks to everyone present rather than to a profile. At a dinner table that means it lands on a group at once, in front of each other — which is where recommendations actually get made.' }
+      body: 'Every digital format competes for a screen its audience is trying to get past. Out-of-home occupies physical space instead, so there is no ad blocker, no skip button and no auction for the attention.' },
+    { n: '02', title: 'It works on memory rather than clicks',
+      body: 'Out-of-home is bought to shape how a brand is remembered, not to drive an action in the next ten seconds. That is a different job from performance media, and a different thing to measure.' },
+    { n: '03', title: 'Taking up space is a signal in itself',
+      body: 'Putting something physical into the world is a visible commitment. It is a quality an impression bought at auction does not carry, whatever the targeting.' },
+    { n: '04', title: 'It addresses a place, not a profile',
+      body: 'Out-of-home speaks to everyone present rather than to a segment. At a dinner table that means a brand can arrive with a group rather than an individual.' }
   ];
 
   const reasons = [
-    { n: '01', title: 'It is the one ad people open on purpose',
-      body: 'Nobody throws away a fortune cookie unopened. It gets cracked, the paper comes out, and the line gets read. There is no scroll past, no skip button, and no way to block it.' },
-    { n: '02', title: 'It lands at the best moment of the meal',
-      body: 'The cookie arrives with the check: plates cleared, conversation loose, phones already out of pockets. It is the one moment at dinner where a brand is welcome rather than tolerated.' },
-    { n: '03', title: 'Fortunes get read out loud',
-      body: 'Somebody always reads theirs to the table, and then everyone opens theirs. Your line arrives with a narrator and an audience already sitting down.' },
-    { n: '04', title: 'It is small enough to keep',
-      body: 'Fortunes end up in wallets, on fridges and in photographs. A message someone chooses to keep is worth more than one they were merely served.' }
+    { n: '01', title: 'It arrives as part of the meal',
+      body: 'The cookie comes with the check the way it always has. Your message is inside something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
+    { n: '02', title: 'It lands at the calmest point of the evening',
+      body: 'The end of a meal is unhurried in a way almost no other advertising moment is. Nothing else is bidding for the table at that point.' },
+    { n: '03', title: 'It reaches a table, not a screen',
+      body: 'A cookie goes to each person present, so a brand can arrive with a group in the same moment rather than one device at a time.' },
+    { n: '04', title: 'It is a physical thing, not an impression',
+      body: 'The slip is small enough to pocket and leaves the restaurant with whoever takes it. It does not disappear when a feed refreshes.' }
   ];
 
   const formats = [
-    { meta: 'The fortune', title: 'Eleven words, read out loud',
-      body: 'The line inside the cookie. Written by us or by you, in your voice. It gets read aloud to the whole table \u2014 the only ad unit that comes with a narrator.' },
+    { meta: 'The fortune', title: 'Eleven words on the slip',
+      body: 'The line inside the cookie, written with you or by you. Eleven words is the whole creative brief \u2014 short enough to take in at a glance, long enough to carry a voice.' },
     { meta: 'The numbers', title: 'Lucky numbers that actually do something',
-      body: 'Every fortune carries its six numbers. Make them a discount code, a draw entry or a store number \u2014 the one part of the slip people already read twice.' },
+      body: 'Every fortune carries its six numbers. They can be a discount code, a draw entry or a store number instead of decoration.' },
     { meta: 'The code',    title: 'A prize on the back of the slip',
       body: 'A QR or promo code on the reverse, so the fortune has something to redeem and you have something to measure.' },
     { meta: 'Targeting',   title: 'City, cuisine, daypart',
@@ -113,14 +116,14 @@ window.WB = (function () {
   const targets = [
     { num: '11', label: 'Words on the fortune \u2014 the whole creative brief' },
     { num: '0',  label: 'Ad blockers at the dinner table' },
-    { num: '1',  label: 'Message, read aloud, to a table that is already listening' }
+    { num: '1',  label: 'Slip inside every cookie, printed to your brief' }
   ];
 
   const posts = [
     { tag: 'Craft',     title: 'Writing for eleven words or fewer', dek: 'The constraint is the format. What survives when there is no room to explain.' },
     { tag: 'Ritual',    title: 'Why the good ad units are objects',  dek: 'Things people hold outlast things people scroll past. A short argument for physical media.' },
     { tag: 'Media',     title: 'Out of home, in the restaurant',     dek: 'Rethinking the category from the table up, where attention is already pointed somewhere.' },
-    { tag: 'Building',  title: 'What we are getting wrong so far',   dek: 'Notes from a brand that has not launched yet, written while it is still true.' }
+    { tag: 'Building',  title: 'What a cookie run actually involves',  dek: 'Brief, print, restaurants, logistics \u2014 the parts of the format nobody asks about.' }
   ];
 
   return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, posts };

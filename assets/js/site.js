@@ -39,8 +39,8 @@
   if (footerHost) {
     footerHost.outerHTML = `
     <section class="closing container reveal">
-      <h2 class="h2">Want to go first?</h2>
-      <p>We’re choosing our first partners now.</p>
+      <h2 class="h2">Let’s talk about your run.</h2>
+      <p>Tell us about the brand and what you’d want on the slip.</p>
       <a class="btn btn--lg" href="contact.html">Get in touch ${arrow}</a>
     </section>
     <footer class="site-footer" id="site-footer">
