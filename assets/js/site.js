@@ -10,12 +10,14 @@
 
 
   /* ---------- the fortune moment ----------
-     Shown once per visitor, at the point the sticky CTA would otherwise fire.
+     Runs on every page load, at the point the sticky CTA would otherwise fire.
      Cracking the cookie is what turns the site warm; the palette is something
-     the visitor causes rather than something they arrive into. */
-  const THEME_KEY = 'wb-theme';
-  const SEEN_KEY  = 'wb-moment-seen';
-  const moment    = document.getElementById('moment');
+     the visitor causes rather than something they arrive into.
+
+     Deliberately not remembered. Every load starts green so the crack always
+     has something to do — persisting warm would mean cracking a cookie to
+     reach a palette already on screen. */
+  const moment = document.getElementById('moment');
 
   const applyTheme = (name, animate) => {
     if (animate) {
@@ -24,7 +26,6 @@
     }
     if (name === 'warm') document.documentElement.setAttribute('data-theme', 'warm');
     else document.documentElement.removeAttribute('data-theme');
-    try { localStorage.setItem(THEME_KEY, name); } catch (e) {}
   };
 
   document.addEventListener('click', e => {
@@ -43,9 +44,8 @@
     };
 
     const showMoment = () => {
-      if (shown) return;
+      if (shown) return;                 /* once per load, not once per visitor */
       shown = true;
-      try { localStorage.setItem(SEEN_KEY, '1'); } catch (e) {}
       moment.hidden = false;
       void moment.offsetHeight;          /* force a reflow so the transition runs */
       moment.classList.add('is-in');
@@ -70,15 +70,16 @@
     });
 
     window.WB.showMoment = showMoment;               // so onScroll can fire it
-    let seen = true;
-    try { seen = localStorage.getItem(SEEN_KEY) === '1'; } catch (e) {}
-    window.WB.momentPending = !seen;
-  }
+    window.WB.momentPending = true;
 
-  /* a returning visitor keeps whichever palette they left on */
-  try {
-    if (localStorage.getItem(THEME_KEY) === 'warm') applyTheme('warm', false);
-  } catch (e) {}
+    /* earlier builds remembered the palette and whether the moment had been
+       seen; neither is read any more, so clear them rather than leave dead
+       keys in the browsers of anyone who visited before. */
+    try {
+      localStorage.removeItem('wb-theme');
+      localStorage.removeItem('wb-moment-seen');
+    } catch (e) {}
+  }
 
   /* ---------- smooth scroll ---------- */
   let lenis = null;
