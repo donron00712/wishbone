@@ -70,7 +70,7 @@
           </p>
         </div>
         <div class="reveal">
-          <div class="cracker" id="cracker" role="img"
+          <div class="cracker" id="cracker" data-media="" role="img"
                aria-label="A fortune cookie breaking open to reveal the paper slip inside, reading: Dessert was the right call. Your brand here. Lucky numbers 4, 9, 16, 23, 38, 41.">
             <div class="cracker__stage">
 
@@ -81,14 +81,37 @@
               </figure>
 
               <div class="biscuit">
-                <svg class="biscuit__half biscuit__half--l" viewBox="0 0 260 170" aria-hidden="true">
-                  <path d="M130 26C86 26 34 62 30 118c-2 22 22 30 34 14 18-24 40-36 66-36l-8-12 10-10-8-14 8-14-4-12Z"/>
+                <svg class="biscuit__half biscuit__half--l" viewBox="0 0 280 220" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="wbBakeL" cx="0.34" cy="0.3" r="0.85">
+                      <stop offset="0" stop-color="#FBEFD2"/>
+                      <stop offset="0.5" stop-color="#F0CB8D"/>
+                      <stop offset="1" stop-color="#D0913F"/>
+                    </radialGradient>
+                  </defs>
+                  <path fill="url(#wbBakeL)"
+                        d="M140 104 L111 40 A78 78 0 0 0 140 190 L135 174 L147 160 L133 144 L147 128 L136 114 Z"/>
+                  <path fill="#B87B2E" opacity=".34"
+                        d="M140 104 L111 40 A78 78 0 0 0 119 47 Z"/>
                 </svg>
-                <svg class="biscuit__half biscuit__half--r" viewBox="0 0 260 170" aria-hidden="true">
-                  <path d="M130 26l-2 8 4 12-8 14 8 14-10 10 8 12c26 0 48 12 66 36 12 16 36 8 34-14C226 62 174 26 130 26Z"/>
+
+                <svg class="biscuit__half biscuit__half--r" viewBox="0 0 280 220" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="wbBakeR" cx="0.68" cy="0.3" r="0.85">
+                      <stop offset="0" stop-color="#F8E8C6"/>
+                      <stop offset="0.5" stop-color="#EBC281"/>
+                      <stop offset="1" stop-color="#C4842F"/>
+                    </radialGradient>
+                  </defs>
+                  <path fill="url(#wbBakeR)"
+                        d="M140 104 L136 114 L147 128 L133 144 L147 160 L135 174 L140 190 A78 78 0 0 0 169 40 Z"/>
+                  <path fill="#A96D24" opacity=".34"
+                        d="M140 104 L169 40 A78 78 0 0 1 161 47 Z"/>
                 </svg>
+
                 <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
                 <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
+                <span class="biscuit__crumb"></span>
               </div>
 
             </div>
