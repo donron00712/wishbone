@@ -150,13 +150,12 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
          whichever palette the visitor left the landing page on. -->
     <div class="moment" id="moment" hidden>
       <div class="moment__scrim" data-moment-close></div>
-      <div class="moment__aura" aria-hidden="true"></div>
       <div class="moment__motes" aria-hidden="true">
-        ${Array.from({ length: 12 }, (_, i) => {
-          const left  = [8, 19, 27, 36, 44, 52, 58, 66, 74, 81, 88, 94][i];
-          const delay = [0, 2.6, 5.1, 1.3, 3.9, 6.4, .7, 4.4, 2.1, 5.8, 3.2, 1.8][i];
-          const dur   = [11, 14, 12, 15, 13, 16, 12, 14, 15, 11, 13, 16][i];
-          const size  = [3, 5, 4, 3, 6, 4, 5, 3, 4, 6, 3, 5][i];
+        ${Array.from({ length: 18 }, (_, i) => {
+          const left  = [6, 12, 19, 25, 31, 37, 43, 48, 54, 59, 65, 70, 76, 81, 86, 90, 94, 97][i];
+          const delay = [0, 2.6, 5.1, 1.3, 3.9, 6.4, .7, 4.4, 2.1, 5.8, 3.2, 1.8, 7.1, .4, 4.9, 2.9, 6.1, 3.5][i];
+          const dur   = [11, 14, 12, 15, 13, 16, 12, 14, 15, 11, 13, 16, 14, 12, 15, 13, 11, 16][i];
+          const size  = [3, 5, 4, 3, 6, 4, 5, 3, 4, 6, 3, 5, 4, 6, 3, 5, 4, 3][i];
           return `<span class="mote" style="--x:${left}%;--d:${delay}s;--t:${dur}s;--s:${size}px"></span>`;
         }).join('')}
       </div>
@@ -164,6 +163,7 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
                 aria-label="Crack open the fortune cookie">
+          <span class="moment__aura" aria-hidden="true"></span>
           <span class="biscuit">
             ${cookieHalves('m')}
             <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
