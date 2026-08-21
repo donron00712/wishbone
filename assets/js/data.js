@@ -108,10 +108,12 @@ window.WB = (function () {
       body: 'The slip has a front and a back. A line each, or a line and a code \u2014 a natural format for a collaboration where both sides get their own surface.' }
   ];
 
+  /* Three different things, not three ways of saying one thing: the
+     constraint, the second surface, and what the medium gets you. */
   const targets = [
-    { num: '11', label: 'Words on the fortune \u2014 the whole creative brief' },
-    { num: '0',  label: 'Ad blockers at the dinner table' },
-    { num: '1',  label: 'Slip inside every cookie, printed to your brief' }
+    { num: '11', label: 'Words on the slip. The entire creative brief.' },
+    { num: '6',  label: 'Lucky numbers underneath, yours to make mean something.' },
+    { num: '0',  label: 'Ways to skip it, block it or scroll past it.' }
   ];
 
   const posts = [
