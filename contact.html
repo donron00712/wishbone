@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Get in touch | Wishbone</title>
+<title>Get in touch | Kismat Cookies</title>
 <meta name="description" content="Tell us about the brand and what you would want printed on the slip.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 <!--#header--><a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header" id="site-header">
       <div class="container">
-        <a class="brand" href="index.html" aria-label="Wishbone home"><svg width="23" height="21" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg><span>Wishbone</span></a>
+        <a class="brand" href="index.html" aria-label="Kismat Cookies home"><svg width="23" height="21" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg><span>Kismat Cookies</span></a>
         <nav class="nav" aria-label="Primary">
           <ul>
             <li><a href="formats.html">The formats</a></li>
@@ -51,7 +51,7 @@
           <p>Tell us about the brand, the markets you care about, and what you’d want the fortune to say.</p>
           <div style="margin-top:56px">
             <h2 style="font-family:Manrope,sans-serif;font-weight:500;font-size:16px;margin-bottom:16px">Or just email us</h2>
-            <a class="footer-mail" href="mailto:hello@wishbone.co">hello@wishbone.co</a>
+            <a class="footer-mail" href="mailto:hello@kismatcookies.com">hello@kismatcookies.com</a>
           </div>
         </div>
 
@@ -92,7 +92,7 @@
 
           <div class="form-success form-success--error" id="form-failure" role="alert">
             <h3 class="h4" style="font-size:24px">That didn’t send.</h3>
-            <p>Something went wrong on our end. Email <a href="mailto:hello@wishbone.co" style="color:var(--text);text-decoration:underline">hello@wishbone.co</a> and we’ll pick it up from there.</p>
+            <p>Something went wrong on our end. Email <a href="mailto:hello@kismatcookies.com" style="color:var(--text);text-decoration:underline">hello@kismatcookies.com</a> and we’ll pick it up from there.</p>
           </div>
 
           <div class="form-success" id="form-success" role="status">
@@ -115,7 +115,7 @@
         <div class="footer-grid">
           <div>
             <h2>Get in touch</h2>
-            <a class="footer-mail" href="mailto:hello@wishbone.co">hello@wishbone.co</a>
+            <a class="footer-mail" href="mailto:hello@kismatcookies.com">hello@kismatcookies.com</a>
           </div>
           <div><h2>The product</h2><ul>
             <li><a href="formats.html">The formats</a></li>
@@ -128,9 +128,9 @@
           </ul></div>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 Wishbone</span>
+          <span>© 2026 Kismat Cookies</span>
           <ul>
-            <li><a href="mailto:hello@wishbone.co">hello@wishbone.co</a></li>
+            <li><a href="mailto:hello@kismatcookies.com">hello@kismatcookies.com</a></li>
             <li><button class="theme-back" type="button" data-theme-back>Back to dark</button></li>
           </ul>
         </div>
@@ -192,7 +192,7 @@
 <script src="assets/js/site.js"></script>
 <script>
 (function () {
-  const MAIL_TO = 'hello@wishbone.co';
+  const MAIL_TO = 'hello@kismatcookies.com';
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
   const failure = document.getElementById('form-failure');
@@ -239,7 +239,7 @@
     } else {
       const body = [...data.entries()].filter(([, v]) => String(v).trim())
         .map(([k, v]) => `${k}: ${v}`).join('\n');
-      window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent('Wishbone enquiry — ' + (data.get('company') || data.get('name')))}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent('Kismat Cookies enquiry — ' + (data.get('company') || data.get('name')))}&body=${encodeURIComponent(body)}`;
     }
 
     form.style.display = 'none';

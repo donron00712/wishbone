@@ -1,8 +1,8 @@
-/* Wishbone — all site content lives here. Edit this file, not the markup. */
+/* Kismat Cookies — all site content lives here. Edit this file, not the markup. */
 window.WB = (function () {
 
   /* TODO: swap for your real address before this goes anywhere public. */
-  const email = 'hello@wishbone.co';
+  const email = 'hello@kismatcookies.com';
 
   const nav = [
     { label: 'The formats', href: 'formats.html' },

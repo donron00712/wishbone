@@ -1,15 +1,16 @@
 {
-  "name": "wishbone",
+  "name": "kismat-cookies",
   "version": "0.1.0",
   "private": true,
-  "description": "Marketing site for Wishbone \u2014 advertising inside real fortune cookies at restaurants.",
+  "description": "Marketing site for Kismat Cookies \u2014 advertising inside real fortune cookies at restaurants.",
   "scripts": {
     "build": "node build.js",
     "start": "node build.js && python3 -m http.server 4321",
     "dev": "node build.js && python3 -m http.server 4321"
   },
   "keywords": [
-    "wishbone",
+    "kismat",
+    "fortune-cookie",
     "advertising",
     "static-site"
   ],

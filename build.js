@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Wishbone build.
+ * Kismat Cookies build.
  *
  * The site used to assemble its own header, footer and every card in the
  * browser, which meant the shipped HTML was 145 words and a visitor with no
@@ -74,7 +74,7 @@ const navLinks = (page) => D.nav.map(i =>
 const header = (page) => `<a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header" id="site-header">
       <div class="container">
-        <a class="brand" href="index.html" aria-label="Wishbone home">${bone()}<span>Wishbone</span></a>
+        <a class="brand" href="index.html" aria-label="Kismat Cookies home">${bone()}<span>Kismat Cookies</span></a>
         <nav class="nav" aria-label="Primary">
           <ul>
             ${navLinks(page)}
@@ -116,7 +116,7 @@ const footer = (page) => `<section class="closing container reveal">
           </ul></div>
         </div>
         <div class="footer-bottom">
-          <span>© ${new Date().getFullYear()} Wishbone</span>
+          <span>© ${new Date().getFullYear()} Kismat Cookies</span>
           <ul>
             <li><a href="mailto:${D.email}">${D.email}</a></li>
             <li><button class="theme-back" type="button" data-theme-back>Back to dark</button></li>
@@ -201,7 +201,7 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
           </div>
           <div class="paper paper--ad" style="--ad-bg:#F7971E;--ad-fg:#14110D">
             <span class="paper__tag">10% offer for you</span>
-            <span class="paper__id"><b>Wishbone</b></span>
+            <span class="paper__id"><b>Kismat Cookies</b></span>
           </div>
         </figure>
         <button class="moment__close" type="button" data-moment-close>Close</button>
