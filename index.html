@@ -299,9 +299,9 @@
     </div>
 
 
-    <!-- The fortune moment. Appears once per visitor at the point the sticky
-         CTA would fire, and hands them the palette switch: crack the cookie,
-         read the line, and the site turns warm. -->
+    <!-- The fortune moment. Landing page only, on every load: crack the
+         cookie, read the slip, and the site turns warm. Other pages inherit
+         whichever palette the visitor left the landing page on. -->
     <div class="moment" id="moment" hidden>
       <div class="moment__scrim" data-moment-close></div>
       <div class="moment__inner" role="dialog" aria-modal="true" aria-labelledby="moment-title">
@@ -351,7 +351,16 @@
           </span>
         </button>
         <p class="moment__hint">Tap to crack it open</p>
-        <p class="moment__line" role="status">Your fortune holds within you.</p>
+        <figure class="moment__slip" role="status">
+          <div class="paper paper--fortune">
+            <p>Your fortune holds within you.</p>
+            <span class="paper__nums">3, 9, 14, 22, 31, 45</span>
+          </div>
+          <div class="paper paper--ad" style="--ad-bg:#F7971E;--ad-fg:#14110D">
+            <span class="paper__tag">&hellip;and so does the next one.</span>
+            <span class="paper__id"><b>Wishbone</b></span>
+          </div>
+        </figure>
         <button class="moment__close" type="button" data-moment-close>Close</button>
       </div>
     </div>

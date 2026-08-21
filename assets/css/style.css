@@ -26,6 +26,7 @@
   --cookie-edge:transparent;
   --cookie-edge-w:0;
   --btn-deep:#020F10; --ink-on-deep:#DAF1DE;
+  --on-gradient:#051F20; --on-gradient-rgb:5,31,32;
   --glow-top-1:#1B4A42; --glow-top-2:#0B2B26;
   --glow-bot-1:#14403A; --glow-bot-2:#082220;
 }
@@ -41,8 +42,11 @@
   --base:#F7971E;
   --bg:#FBB018;
   --surface:rgba(255,255,255,.30);
-  --text:#2B1A06;
-  --muted:#4A2C0A;
+  /* Near-black rather than a warm brown. Both clear contrast easily, but a
+     brown on orange separates only by lightness; a neutral separates by hue
+     as well, which is what actually makes it easy to read. */
+  --text:#14110D;
+  --muted:#332B22;
   --line:rgba(74,44,10,.38);
   --line-soft:rgba(255,255,255,.42);
   --accent:#7A3B00;
@@ -51,13 +55,17 @@
   --gradient:linear-gradient(36.97deg,#FFD200 10%,#F7971E 82%,#D97706 140%);
   --scrim:255,224,150;
   --text-rgb:43,26,6;
-  --cookie-edge:#6B3A0A;
+  --cookie-edge:#4A2A08;
   --cookie-edge-w:2.4;
-  --btn-deep:#FFF6E0; --ink-on-deep:#2B1A06;
+  --btn-deep:#FFF6E0; --ink-on-deep:#14110D;
+  --on-gradient:#14110D; --on-gradient-rgb:20,17,13;
   --glow-top-1:#FFE066; --glow-top-2:#FFD200;
   --glow-bot-1:#FBA91C; --glow-bot-2:#F7971E;
 }
+/* 300 is too light to hold up on a busy gradient — the type needs more
+   substance here than it does on the dark green. */
 [data-theme="warm"] body{
+  font-weight:400;
   background:
     radial-gradient(120% 80% at 50% 18%,#FFE066 0%,#FFD200 34%,#F7971E 100%) fixed,
     #F7971E;
@@ -65,7 +73,7 @@
 [data-theme="warm"] .biscuit__half > path{stroke:var(--cookie-edge);stroke-width:var(--cookie-edge-w)}
 [data-theme="warm"] .biscuit__half{filter:drop-shadow(0 14px 22px rgba(120,60,8,.42))}
 [data-theme="warm"] .site-header.is-stuck{background:rgba(255,214,80,.72)}
-[data-theme="warm"] .btn:hover{background:#2B1A06;color:#FFF6E0}
+[data-theme="warm"] .btn:hover{background:#14110D;color:#FFF6E0}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
@@ -333,20 +341,20 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .format:hover .format__bg,.format:focus-visible .format__bg{opacity:1}
 .format:hover .meta,.format:hover h3,.format:hover p,.format:hover .know,.format:hover .know svg,
 .format:focus-visible .meta,.format:focus-visible h3,.format:focus-visible p,
-.format:focus-visible .know,.format:focus-visible .know svg{color:var(--ink)}
+.format:focus-visible .know,.format:focus-visible .know svg{color:var(--on-gradient)}
 
 /* ---------- the unit: a slip you can look at ---------- */
 .unit{display:grid;gap:48px;align-items:center}
 @media (min-width:1024px){.unit{grid-template-columns:1fr minmax(0,520px);gap:80px}}
 /* A single printed slip, shown flat (formats / why-it-works). */
-.slip-card{position:relative;background:var(--gradient);color:var(--ink);border-radius:18px;
+.slip-card{position:relative;background:var(--gradient);color:var(--on-gradient);border-radius:18px;
   padding:38px 30px 28px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.45);
   transform:rotate(-1.6deg);transition:transform .6s var(--ease)}
 .slip-card:hover{transform:rotate(0deg) scale(1.02)}
-.slip-card .slip{font-size:clamp(19px,2.4vw,26px);color:var(--ink)}
-.slip-card .brandline{margin-top:22px;padding-top:16px;border-top:1px solid rgba(var(--scrim),.24);
+.slip-card .slip{font-size:clamp(19px,2.4vw,26px);color:var(--on-gradient)}
+.slip-card .brandline{margin-top:22px;padding-top:16px;border-top:1px solid rgba(var(--on-gradient-rgb),.24);
   font-family:Syne,sans-serif;font-style:normal;font-weight:700;font-size:12px;letter-spacing:.15em;
-  text-transform:uppercase;color:rgba(var(--scrim),.64)}
+  text-transform:uppercase;color:rgba(var(--on-gradient-rgb),.66)}
 .slip-card .nums{display:block;margin-top:8px;font-size:12px;letter-spacing:.16em;
   color:rgba(var(--scrim),.5)}
 
@@ -694,8 +702,17 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment__cookie{background:none;border:0;padding:0;cursor:pointer;
   width:min(74vw,300px);aspect-ratio:300/250;position:relative;
   transition:transform .4s var(--ease)}
+/* No focus box around the cookie — a rectangle around a round object looks
+   like a mistake. It glows instead, which reads on a pointer and a keyboard
+   alike and still marks focus clearly. */
+.moment__cookie{outline:none}
+.moment__cookie .biscuit__half{transition:filter .45s var(--ease)}
 .moment__cookie:hover{transform:scale(1.04)}
-.moment__cookie:focus-visible{outline:2px solid var(--accent);outline-offset:10px;border-radius:24px}
+.moment__cookie:hover .biscuit__half,
+.moment__cookie:focus-visible .biscuit__half{
+  filter:drop-shadow(0 0 16px rgba(255,214,120,.5)) drop-shadow(0 0 42px rgba(255,190,80,.34))
+         drop-shadow(0 16px 24px rgba(0,0,0,.45))}
+.moment__cookie:focus-visible{transform:scale(1.04)}
 .moment .biscuit{position:absolute;inset:0;width:100%;height:100%;translate:0 0;left:0;top:0}
 
 /* a slow breath while it waits to be tapped */
@@ -715,10 +732,16 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   transition:opacity .3s}
 .moment.is-open .moment__hint{opacity:0}
 
-.moment__line{font-family:Syne,sans-serif;font-size:clamp(26px,5vw,42px);line-height:1.15;
-  color:var(--text);max-width:14ch;margin-top:-6px;
-  opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease) .45s,transform .7s var(--ease) .45s}
-.moment.is-open .moment__line{opacity:1;transform:none}
+.moment__slip{width:min(86vw,330px);display:flex;flex-direction:column;gap:6px;margin-top:-4px;
+  opacity:0;transform:translateY(14px) scale(.94);
+  transition:opacity .7s var(--ease) .45s,transform .7s var(--ease) .45s}
+.moment.is-open .moment__slip{opacity:1;transform:none}
+.moment__slip .paper{box-shadow:0 16px 34px rgba(0,0,0,.5)}
+/* one line, whatever the screen — the type shrinks rather than the line wrapping */
+.moment__slip .paper--fortune p{white-space:nowrap;font-size:clamp(11px,3.4vw,15px)}
+.moment__slip .paper__nums{font-size:clamp(8px,2.4vw,10px)}
+.moment__slip .paper__tag{font-size:clamp(8px,2.4vw,10px)}
+.moment__slip .paper__id b{font-size:clamp(9px,2.6vw,11px)}
 
 .moment__close{margin-top:26px;background:none;border:0;cursor:pointer;
   font-size:13px;letter-spacing:.06em;color:var(--muted);text-decoration:underline;
@@ -737,6 +760,6 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .moment.is-open .biscuit__half--l{animation:none;transform:translate3d(-64px,26px,0) rotate(-24deg)}
   .moment.is-open .biscuit__half--r{animation:none;transform:translate3d(64px,26px,0) rotate(24deg)}
   .moment.is-open .biscuit__crumb{opacity:0}
-  .moment__line{transition-duration:.01ms}
+  .moment__slip{transition-duration:.01ms}
   html.theme-shifting,html.theme-shifting *{transition-duration:.01ms !important}
 }

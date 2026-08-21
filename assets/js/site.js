@@ -10,14 +10,15 @@
 
 
   /* ---------- the fortune moment ----------
-     Runs on every page load, at the point the sticky CTA would otherwise fire.
-     Cracking the cookie is what turns the site warm; the palette is something
-     the visitor causes rather than something they arrive into.
+     Landing page only, at the point the sticky CTA would otherwise fire.
 
-     Deliberately not remembered. Every load starts green so the crack always
-     has something to do — persisting warm would mean cracking a cookie to
-     reach a palette already on screen. */
-  const moment = document.getElementById('moment');
+     The landing page always starts green so the crack always has something to
+     do — arriving already warm would leave the cookie with nothing to change.
+     Every other page inherits whichever palette the visitor left the landing
+     page on, so clicking through does not throw the change away. Session
+     scoped, so a fresh visit starts green again. */
+  const THEME_KEY = 'wb-theme';
+  const moment    = document.getElementById('moment');
 
   const applyTheme = (name, animate) => {
     if (animate) {
@@ -26,7 +27,16 @@
     }
     if (name === 'warm') document.documentElement.setAttribute('data-theme', 'warm');
     else document.documentElement.removeAttribute('data-theme');
+    try { sessionStorage.setItem(THEME_KEY, name); } catch (e) {}
   };
+
+  if (page === 'home') {
+    applyTheme('dark', false);              /* the crack needs somewhere to go */
+  } else {
+    let carried = 'dark';
+    try { carried = sessionStorage.getItem(THEME_KEY) || 'dark'; } catch (e) {}
+    if (carried === 'warm') applyTheme('warm', false);
+  }
 
   document.addEventListener('click', e => {
     if (e.target.closest('[data-theme-back]')) applyTheme('dark', true);
@@ -72,9 +82,8 @@
     window.WB.showMoment = showMoment;               // so onScroll can fire it
     window.WB.momentPending = true;
 
-    /* earlier builds remembered the palette and whether the moment had been
-       seen; neither is read any more, so clear them rather than leave dead
-       keys in the browsers of anyone who visited before. */
+    /* an earlier build kept these in localStorage; the palette is session
+       scoped now, so clear the old keys rather than leave dead data behind. */
     try {
       localStorage.removeItem('wb-theme');
       localStorage.removeItem('wb-moment-seen');
