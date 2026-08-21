@@ -69,25 +69,16 @@
             An ordinary fortune cookie from the outside. Inside is the slip: your line, your
             brand and the lucky numbers, printed to your brief.
           </p>
+          <span class="hero-grid__note" style="margin-top:20px">Illustrative example</span>
         </div>
         <div class="reveal">
           <div class="cracker" id="cracker" data-media="" role="img"
-               aria-label="A fortune cookie breaking open to reveal the two-piece slip inside: the fortune reading Dessert was the right call, with lucky numbers 4, 9, 16, 23, 38, 41, and a sponsor strip below it.">
+               aria-label="A fortune cookie breaking open to reveal the two-piece slip inside: a fortune with its lucky numbers, and a sponsor strip beneath it. Illustrative example.">
             <div class="cracker__stage">
 
-              <figure class="fortune-slip">
-                <div class="paper paper--fortune">
-                  <p>Dessert was the right call.</p>
-                  <span class="paper__nums">4, 9, 16, 23, 38, 41</span>
-                </div>
-                <div class="paper paper--ad" style="--ad-bg:#163832;--ad-fg:#DAF1DE">
-                  <span class="paper__tag">&hellip;and so was the second one.</span>
-                  <span class="paper__id">
-                    <b>Your brand</b>
-                    <em>yourbrand.com/luck</em>
-                  </span>
-                </div>
-              </figure>
+              <!-- Filled from data.js so it is the same slip as the one in the
+                   wall behind. Change data-slip to show a different brand. -->
+              <figure class="fortune-slip" data-slip="Samsung"></figure>
 
               <div class="biscuit">
                 <svg class="biscuit__half biscuit__half--l" viewBox="0 0 280 220" aria-hidden="true">

@@ -68,6 +68,26 @@
     return `<div class="grid-row" data-row="${r}">${tiles + tiles}</div>`;
   }).join('');
 
+  /* ---------- 3b. the slip the cookie opens onto ----------
+     Same data as the wall, so the product reads identically in both places. */
+  const slipHost = document.querySelector('.fortune-slip[data-slip]');
+  if (slipHost) {
+    const f = sampleFortunes.find(x => x.brand === slipHost.dataset.slip) || sampleFortunes[0];
+    slipHost.innerHTML = `
+      <div class="paper paper--fortune">
+        <p>${f.line}</p>
+        <span class="paper__nums">${f.nums}</span>
+      </div>
+      <div class="paper paper--ad" style="--ad-bg:${f.bg};--ad-fg:${f.fg}">
+        ${f.qr ? qrSvg(f.brand, 26) : ''}
+        <span class="paper__tag">${f.tag}</span>
+        <span class="paper__id">
+          <b>${f.brand}</b>
+          <em>${f.url}</em>
+        </span>
+      </div>`;
+  }
+
   /* ---------- 4. why it works ---------- */
   document.getElementById('reasons').innerHTML = reasons.map(r => `
     <li class="reason reveal">
