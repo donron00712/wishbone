@@ -368,39 +368,19 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 
 /* --- the unit ------------------------------------------------------------
    The slip on its own. It used to float over a cracked cookie, which cropped
-   both and explained neither; the cookie already has the moment and the wall,
-   so here the printed slip is the whole subject, numbered against its key. */
-/* Stacked, not side by side: sharing the column left the slip at 236px, which
-   is smaller than it appears in the wall behind it. */
-.spec{display:grid;gap:28px;justify-items:center}
-.spec__slip{display:flex;flex-direction:column;gap:8px;width:min(100%,400px);
-  transform:rotate(-1.4deg);transition:transform .6s var(--ease)}
-.spec:hover .spec__slip{transform:rotate(0deg)}
-.spec__slip .paper{position:relative;box-shadow:0 26px 52px rgba(0,0,0,.42)}
-.spec__slip .paper--fortune{padding:26px 22px 20px}
-.spec__slip .paper--fortune p{font-size:clamp(15px,2vw,19px);line-height:1.35}
-.spec__slip .paper__nums{font-size:clamp(11.5px,1.4vw,13px);margin-top:10px}
-.spec__slip .paper--ad{padding:14px 16px}
-.spec__slip .paper__tag{font-size:clamp(11.5px,1.4vw,13px)}
-.spec__slip .paper__id b{font-size:clamp(13px,1.6vw,15px)}
-.spec__slip .paper__id em{font-size:clamp(9.5px,1.2vw,11px)}
-
-/* the pins that tie each part of the slip to its line in the key */
-.spec__pin{position:absolute;left:-11px;top:-11px;width:23px;height:23px;border-radius:50%;
-  display:grid;place-items:center;font-style:normal;font-weight:700;font-size:12px;
-  background:var(--accent);color:var(--ink);box-shadow:0 3px 8px rgba(0,0,0,.4)}
-.spec__pin--nums{left:-30px;top:50%;translate:0 -50%;width:20px;height:20px;font-size:11px}
-
-.spec__key{display:grid;gap:13px;margin:0;padding:0;list-style:none;width:min(100%,400px)}
-.spec__key li{display:flex;align-items:flex-start;gap:11px;
-  color:var(--muted);font-size:15px;line-height:1.45}
-.spec__key b{flex:none;width:21px;height:21px;border-radius:50%;
-  display:grid;place-items:center;font-size:11.5px;font-weight:700;
-  background:var(--accent);color:var(--ink)}
-
-/* the pins hang off the left edge, so the slip needs room for them */
-.spec{padding-left:30px}
-@media (min-width:900px){.spec{padding-left:34px}}
+   both and explained neither; the cookie already has the fortune moment and
+   the wall, so here the printed slip is the whole subject. */
+.spec{display:flex;flex-direction:column;gap:8px;width:min(100%,420px);
+  margin-inline:auto;transform:rotate(-1.4deg);transition:transform .6s var(--ease)}
+.spec:hover{transform:rotate(0deg)}
+.spec .paper{box-shadow:0 26px 52px rgba(0,0,0,.42)}
+.spec .paper--fortune{padding:30px 24px 22px}
+.spec .paper--fortune p{font-size:clamp(16px,2.1vw,20px);line-height:1.35}
+.spec .paper__nums{font-size:clamp(12px,1.5vw,13.5px);margin-top:11px}
+.spec .paper--ad{padding:15px 17px}
+.spec .paper__tag{font-size:clamp(12px,1.5vw,13.5px)}
+.spec .paper__id b{font-size:clamp(13.5px,1.7vw,15.5px)}
+.spec .paper__id em{font-size:clamp(10px,1.2vw,11.5px)}
 
 /* ============================================================
    THE CRACKER — a fortune cookie breaking open

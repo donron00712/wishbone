@@ -78,21 +78,17 @@
   }).join('');
 
   /* ---------- 3b. the unit ----------
-     The slip on its own, numbered against the key beside it. The cookie is
-     already the subject of the moment and the wall; here what is being sold
-     is the printed slip, so that is the only thing shown. */
+     The slip and nothing else. Same data as the wall, so the thing being
+     explained and the thing filling the hero are one product. */
   const spec = document.querySelector('.spec[data-slip]');
   if (spec) {
     const f = sampleFortunes.find(x => x.brand === spec.dataset.slip) || sampleFortunes[0];
-
-    spec.querySelector('.spec__slip').innerHTML = `
+    spec.innerHTML = `
       <div class="paper paper--fortune">
-        <i class="spec__pin">1</i>
         <p>${f.line}</p>
-        <span class="paper__nums"><i class="spec__pin spec__pin--nums">2</i>${f.nums}</span>
+        <span class="paper__nums">${f.nums}</span>
       </div>
       <div class="paper paper--ad" style="--ad-bg:${f.bg};--ad-fg:${f.fg}">
-        <i class="spec__pin">3</i>
         ${f.qr ? qrSvg(f.brand, 26) : ''}
         <span class="paper__tag">${f.tag}</span>
         <span class="paper__id"><b>${f.brand}</b><em>${f.url}</em></span>
