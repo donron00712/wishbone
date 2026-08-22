@@ -28,49 +28,55 @@
   --btn-deep:#020F10; --ink-on-deep:#DAF1DE;
   --on-gradient:#051F20; --on-gradient-rgb:5,31,32;
   --veil:4,18,17; --aura:255,214,140;
+  --moment-ink:#D8CDB4;   /* the veil is dark in every palette, so this never inverts */
   --glow-top-1:#1B4A42; --glow-top-2:#0B2B26;
   --glow-bot-1:#14403A; --glow-bot-2:#082220;
 }
 
-/* --- Warm mode. Earned by cracking the cookie, not set by default. ---------
-   A spiced amber ground rather than the bright orange. The bright version put
-   white type at 2.08:1 and needed a shadow under every line to be legible at
-   all; this reaches 13.8:1 and needs no propping up. Relative luminance drops
-   from .516 to .019, so it reads as warm rather than as glare.
+/* --- Warm mode: beige. Earned by cracking the cookie, not set by default. ---
+   The one light palette on the site, so several things invert. Type goes dark
+   (12.8:1), the hero vignettes wash pale instead of dark so that dark type
+   still reads over the wall, and the white slips gain a hairline because white
+   on beige is 1.12:1 and would otherwise have no edge at all.
 
-   The palette's orange and yellow are still here — as the accent, the card
-   gradient and the glow, which is the work they do best. Structurally this
-   mirrors the green: dark ground, light type, light cards. Every component
-   rule therefore works unchanged, and the golden cookie reads on its own at
-   9.6:1 with no outline holding it up. */
+   The moment keeps a dark veil regardless of palette. That is deliberate: the
+   golden cookie is 1.26:1 on beige and would disappear, but 10.8:1 on the
+   veil — so the only place a cookie appears is the one place still dark. */
 [data-theme="warm"]{
-  --base:#2C1406;
-  --bg:#3D1E09;
-  --surface:#52290E;
-  --text:#FDF3E3;
-  --muted:#E3C49C;
-  --line:#9A6531;
-  --line-soft:#52290E;
-  --accent:#FFB23F;
-  --accent-soft:#7A4114;
-  --ink:#2C1406;
-  --gradient:linear-gradient(36.97deg,#FFF3DC 10%,#FFD200 82%,#F7971E 140%);
-  --scrim:44,20,6;
-  --text-rgb:253,243,227;
+  --base:#E7D9C2;
+  --bg:#EFE4D2;
+  --surface:#F8F2E7;
+  --text:#2A1F14;
+  --muted:#6B5843;
+  --line:#8A7046;
+  --line-soft:#D8C7A9;
+  --accent:#8A4A1A;
+  --accent-soft:#D8C7A9;
+  --ink:#F8F2E7;
+  --gradient:linear-gradient(36.97deg,#FFF1D8 10%,#F5C56A 82%,#E09A32 140%);
+  --scrim:250,244,232;
+  --text-rgb:42,31,20;
   --cookie-edge:transparent;
   --cookie-edge-w:0;
-  --btn-deep:#1C0C03; --ink-on-deep:#FDF3E3;
-  --on-gradient:#2C1406; --on-gradient-rgb:44,20,6;
-  --veil:32,15,5; --aura:255,205,120;
-  --glow-top-1:#7A4114; --glow-top-2:#3D1E09;
-  --glow-bot-1:#6B3810; --glow-bot-2:#2C1406;
+  --btn-deep:#1C130A; --ink-on-deep:#F8F2E7;
+  --on-gradient:#2A1F14; --on-gradient-rgb:42,31,20;
+  --veil:36,26,16; --aura:255,205,120;
+  --moment-ink:#DFCFAE;
+  --glow-top-1:#FBF3E4; --glow-top-2:#EFE4D2;
+  --glow-bot-1:#E9DAC0; --glow-bot-2:#E7D9C2;
 }
 [data-theme="warm"] body{
   background:
-    radial-gradient(126% 82% at 50% 4%,rgba(255,178,63,.20) 0%,rgba(247,151,30,.09) 40%,transparent 72%),
+    radial-gradient(126% 82% at 50% 4%,rgba(255,255,255,.55) 0%,rgba(255,246,228,.28) 40%,transparent 74%),
     var(--bg);
 }
-[data-theme="warm"] .site-header.is-stuck{background:rgba(44,20,6,.82)}
+[data-theme="warm"] .site-header.is-stuck{background:rgba(239,228,210,.86)}
+/* white on beige is 1.12:1 — the slips need an edge or they read as holes */
+[data-theme="warm"] .paper--fortune{border:1px solid #9C8461}
+[data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(90,66,36,.22)}
+[data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(90,66,36,.26)}
+[data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(90,66,36,.3)}
+[data-theme="warm"] .biscuit__half{filter:drop-shadow(0 16px 24px rgba(90,66,36,.4))}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
@@ -799,7 +805,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   display:flex;flex-direction:column;align-items:center;gap:0}
 
 .moment__eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 -30px}
+  color:var(--moment-ink);margin:0 0 -30px}
 
 .moment__cookie{background:none;border:0;padding:0;cursor:pointer;
   width:min(64vw,244px);aspect-ratio:300/250;position:relative;
@@ -830,7 +836,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment.is-open .moment__cookie{pointer-events:none}
 .moment.is-open .biscuit__crumb{animation:crumb 1.1s var(--ease) forwards}
 
-.moment__hint{font-size:14px;font-weight:500;color:var(--muted);margin-top:-26px;
+.moment__hint{font-size:14px;font-weight:500;color:var(--moment-ink);margin-top:-26px;
   transition:opacity .3s}
 .moment.is-open .moment__hint{opacity:0;height:0;margin:0;overflow:hidden}
 
@@ -847,10 +853,10 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment__slip .paper__id b{font-size:clamp(11.5px,3.2vw,13px)}
 
 .moment__close{height:0;margin:0;padding:0;overflow:hidden;background:none;border:0;cursor:pointer;
-  font-size:13px;letter-spacing:.06em;color:var(--muted);text-decoration:underline;
+  font-size:13px;letter-spacing:.06em;color:var(--moment-ink);text-decoration:underline;
   text-underline-offset:4px;opacity:0;transition:opacity .5s var(--ease) 1.1s}
 .moment.is-open .moment__close{height:auto;margin-top:14px;padding:10px 16px;overflow:visible;opacity:1}
-.moment__close:hover{color:var(--text)}
+.moment__close:hover{color:#FFF6E4}
 
 /* a way back while both palettes exist */
 .theme-back{display:none;background:none;border:0;cursor:pointer;font:inherit;
