@@ -33,55 +33,44 @@
 }
 
 /* --- Warm mode. Earned by cracking the cookie, not set by default. ---------
-   The bright orange-to-yellow ground, with white type on it as asked.
+   A spiced amber ground rather than the bright orange. The bright version put
+   white type at 2.08:1 and needed a shadow under every line to be legible at
+   all; this reaches 13.8:1 and needs no propping up. Relative luminance drops
+   from .516 to .019, so it reads as warm rather than as glare.
 
-   Stated once for the record: white on this ground measures 2.08:1 against a
-   4.5:1 guideline, so anyone reading in sunlight or with low vision will
-   struggle. Everything that can be done without changing the colour has been:
-   the weight goes up to 500, and a soft dark shadow sits under the type to
-   lift it off the background. */
+   The palette's orange and yellow are still here — as the accent, the card
+   gradient and the glow, which is the work they do best. Structurally this
+   mirrors the green: dark ground, light type, light cards. Every component
+   rule therefore works unchanged, and the golden cookie reads on its own at
+   9.6:1 with no outline holding it up. */
 [data-theme="warm"]{
-  --base:#F7971E;
-  --bg:#FBB018;
-  --surface:rgba(255,255,255,.26);
-  --text:#FFFFFF;
-  --muted:#FFF3DC;
-  --line:rgba(255,255,255,.55);
-  --line-soft:rgba(255,255,255,.34);
-  --accent:#FFFFFF;
-  --accent-soft:rgba(255,255,255,.5);
-  --ink:#8A4008;
-  --gradient:linear-gradient(36.97deg,#FFF7E4 10%,#FFE49B 82%,#F9C85C 140%);
-  --scrim:150,80,10;
-  --text-rgb:255,255,255;
-  --cookie-edge:#8A4E12;
-  --cookie-edge-w:2.2;
-  --btn-deep:#FFFFFF; --ink-on-deep:#8A4008;
-  --on-gradient:#3A1C06; --on-gradient-rgb:58,28,6;
-  --veil:46,21,3; --aura:255,228,155;
-  --glow-top-1:#FFE066; --glow-top-2:#FFD200;
-  --glow-bot-1:#FBA91C; --glow-bot-2:#F7971E;
+  --base:#2C1406;
+  --bg:#3D1E09;
+  --surface:#52290E;
+  --text:#FDF3E3;
+  --muted:#E3C49C;
+  --line:#9A6531;
+  --line-soft:#52290E;
+  --accent:#FFB23F;
+  --accent-soft:#7A4114;
+  --ink:#2C1406;
+  --gradient:linear-gradient(36.97deg,#FFF3DC 10%,#FFD200 82%,#F7971E 140%);
+  --scrim:44,20,6;
+  --text-rgb:253,243,227;
+  --cookie-edge:transparent;
+  --cookie-edge-w:0;
+  --btn-deep:#1C0C03; --ink-on-deep:#FDF3E3;
+  --on-gradient:#2C1406; --on-gradient-rgb:44,20,6;
+  --veil:32,15,5; --aura:255,205,120;
+  --glow-top-1:#7A4114; --glow-top-2:#3D1E09;
+  --glow-bot-1:#6B3810; --glow-bot-2:#2C1406;
 }
 [data-theme="warm"] body{
-  font-weight:500;
   background:
-    radial-gradient(120% 80% at 50% 18%,#FFE066 0%,#FFD200 34%,#F7971E 100%) fixed,
-    #F7971E;
+    radial-gradient(126% 82% at 50% 4%,rgba(255,178,63,.20) 0%,rgba(247,151,30,.09) 40%,transparent 72%),
+    var(--bg);
 }
-/* the only thing that lifts white off a light ground without changing it */
-[data-theme="warm"] body,
-[data-theme="warm"] h1,[data-theme="warm"] h2,[data-theme="warm"] h3,
-[data-theme="warm"] .h1,[data-theme="warm"] .h2,[data-theme="warm"] p,
-[data-theme="warm"] .nav a,[data-theme="warm"] .brand{
-  text-shadow:0 1px 2px rgba(120,60,8,.42),0 0 14px rgba(120,60,8,.22)}
-/* cards keep their own light surface, so type on them stays dark and crisp */
-[data-theme="warm"] .slip-card,[data-theme="warm"] .slip-card *,
-[data-theme="warm"] .paper,[data-theme="warm"] .paper *,
-[data-theme="warm"] .format:hover *,[data-theme="warm"] .format:focus-visible *,
-[data-theme="warm"] .btn,[data-theme="warm"] .sticky-cta *,
-[data-theme="warm"] .cookie *,[data-theme="warm"] .modal *{text-shadow:none}
-[data-theme="warm"] .biscuit__half > path{stroke:var(--cookie-edge);stroke-width:var(--cookie-edge-w)}
-[data-theme="warm"] .site-header.is-stuck{background:rgba(250,170,30,.80)}
+[data-theme="warm"] .site-header.is-stuck{background:rgba(44,20,6,.82)}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
