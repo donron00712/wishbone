@@ -72,75 +72,18 @@
           <span class="hero-grid__note" style="margin-top:20px">Illustrative example</span>
         </div>
         <div class="reveal">
-          <div class="cracker" id="cracker" data-media="" role="img"
-               aria-label="A fortune cookie breaking open to reveal the two-piece slip inside: a fortune with its lucky numbers, and a sponsor strip beneath it. Illustrative example.">
-            <div class="cracker__stage">
-
-              <!-- Filled from data.js so it is the same slip as the one in the
-                   wall behind. Change data-slip to show a different brand. -->
-              <figure class="fortune-slip" data-slip="Samsung"></figure>
-
-              <div class="biscuit">
-                <!-- Fortune cookie: a disc with a V-notch folded into the top and a
-                     rim along the folded edge. Drawn to match the shape of the real
-                     thing rather than a cracked circle. The two halves share the same
-                     jagged edge so they mate exactly when closed. -->
-                <svg class="biscuit__half biscuit__half--l" viewBox="0 0 300 250" aria-hidden="true">
-                  <defs>
-                    <radialGradient id="wbBakeL" cx="0.32" cy="0.26" r="0.95">
-                      <stop offset="0" stop-color="#FCF2DA"/>
-                      <stop offset="0.55" stop-color="#EFC886"/>
-                      <stop offset="1" stop-color="#C68432"/>
-                    </radialGradient>
-                    <clipPath id="wbClipL">
-                      <path d="M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z"/>
-                    </clipPath>
-                  </defs>
-                  <path fill="url(#wbBakeL)"
-                        d="M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z"/>
-                  <g clip-path="url(#wbClipL)">
-                    <path fill="none" stroke="#A96D24" stroke-opacity=".38" stroke-width="2.3" stroke-linecap="round"
-                          d="M72 140 A82 70 0 0 0 150 198"/>
-                    <g stroke="#A96D24" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round">
-                      <path d="M70 146 l11 -2"/><path d="M74 162 l11 -3"/><path d="M82 176 l10 -5"/>
-                      <path d="M94 188 l8 -7"/><path d="M113 70 l-8 8"/><path d="M122 79 l-9 7"/>
-                      <path d="M130 90 l-10 6"/><path d="M137 102 l-11 5"/>
-                    </g>
-                  </g>
-                </svg>
-
-                <svg class="biscuit__half biscuit__half--r" viewBox="0 0 300 250" aria-hidden="true">
-                  <defs>
-                    <radialGradient id="wbBakeR" cx="0.7" cy="0.26" r="0.95">
-                      <stop offset="0" stop-color="#F7E6C2"/>
-                      <stop offset="0.55" stop-color="#E8BC78"/>
-                      <stop offset="1" stop-color="#B87927"/>
-                    </radialGradient>
-                    <clipPath id="wbClipR">
-                      <path d="M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z"/>
-                    </clipPath>
-                  </defs>
-                  <path fill="url(#wbBakeR)"
-                        d="M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z"/>
-                  <g clip-path="url(#wbClipR)">
-                    <path fill="none" stroke="#96631E" stroke-opacity=".38" stroke-width="2.3" stroke-linecap="round"
-                          d="M228 140 A82 70 0 0 1 150 198"/>
-                    <g stroke="#96631E" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round">
-                      <path d="M230 146 l-11 -2"/><path d="M226 162 l-11 -3"/><path d="M218 176 l-10 -5"/>
-                      <path d="M206 188 l-8 -7"/><path d="M187 70 l8 8"/><path d="M178 79 l9 7"/>
-                      <path d="M170 90 l10 6"/><path d="M163 102 l11 5"/>
-                    </g>
-                  </g>
-                </svg>
-
-                <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
-                <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
-                <span class="biscuit__crumb"></span>
-              </div>
-
-            </div>
-          </div>
-        </div>
+          <!-- The unit, shown as what it is: an ordinary cookie on the outside,
+               and a printed slip on the inside with the three things you buy.
+               The slip is filled from data.js, so it stays the same product as
+               the one in the wall. -->
+          <figure class="spec" data-slip="Samsung">
+            <div class="spec__slip"></div>
+            <ol class="spec__key">
+              <li><b>1</b><span>Your line. Eleven words or fewer.</span></li>
+              <li><b>2</b><span>Six lucky numbers, yours to use.</span></li>
+              <li><b>3</b><span>Your brand, and where it points.</span></li>
+            </ol>
+          </figure>
       </div>
     </div>
   </section>
