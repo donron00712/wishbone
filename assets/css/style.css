@@ -33,50 +33,85 @@
   --glow-bot-1:#14403A; --glow-bot-2:#082220;
 }
 
-/* --- Warm mode: beige. Earned by cracking the cookie, not set by default. ---
-   The one light palette on the site, so several things invert. Type goes dark
-   (12.8:1), the hero vignettes wash pale instead of dark so that dark type
-   still reads over the wall, and the white slips gain a hairline because white
-   on beige is 1.12:1 and would otherwise have no edge at all.
+/* --- Warm mode: taupe with a light sweep ----------------------------------
+   Built from the reference: a warm mid-tone ground with cream type and a
+   luminous arc bending across it. Two notes on the deviation from it.
 
-   The moment keeps a dark veil regardless of palette. That is deliberate: the
-   golden cookie is 1.26:1 on beige and would disappear, but 10.8:1 on the
-   veil — so the only place a cookie appears is the one place still dark. */
+   The reference ground is roughly #A2947F, which puts its cream body copy at
+   2.64:1 — the mockup itself is hard to read. #645848 keeps the same character
+   and lifts type to 6.3:1, muted to 4.9:1.
+
+   The hairlines run lighter than the ground rather than darker, because on a
+   mid-tone you separate upward toward the light, not down into it. */
 [data-theme="warm"]{
-  --base:#E7D9C2;
-  --bg:#EFE4D2;
-  --surface:#F8F2E7;
-  --text:#2A1F14;
-  --muted:#6B5843;
-  --line:#8A7046;
-  --line-soft:#D8C7A9;
-  --accent:#8A4A1A;
-  --accent-soft:#D8C7A9;
-  --ink:#F8F2E7;
-  --gradient:linear-gradient(36.97deg,#FFF1D8 10%,#F5C56A 82%,#E09A32 140%);
-  --scrim:250,244,232;
-  --text-rgb:42,31,20;
+  --base:#574C3E;
+  --bg:#645848;
+  --surface:#756853;
+  --text:#F9F4EA;
+  --muted:#E2D8C6;
+  --line:#BAAE99;
+  --line-soft:#75684F;
+  --accent:#FFDFA8;
+  --accent-soft:#7E7059;
+  --ink:#241C12;
+  --gradient:linear-gradient(36.97deg,#FFF6E6 10%,#F0DDB6 82%,#D9BE86 140%);
+  --scrim:60,52,40;
+  --text-rgb:249,244,234;
   --cookie-edge:transparent;
   --cookie-edge-w:0;
-  --btn-deep:#1C130A; --ink-on-deep:#F8F2E7;
-  --on-gradient:#2A1F14; --on-gradient-rgb:42,31,20;
-  --veil:36,26,16; --aura:255,205,120;
-  --moment-ink:#DFCFAE;
-  --glow-top-1:#FBF3E4; --glow-top-2:#EFE4D2;
-  --glow-bot-1:#E9DAC0; --glow-bot-2:#E7D9C2;
+  --btn-deep:#241C12; --ink-on-deep:#F9F4EA;
+  --on-gradient:#2C2417; --on-gradient-rgb:44,36,23;
+  --veil:38,31,22; --aura:255,232,190;
+  --moment-ink:#E7DCC5;
+  --glow-top-1:#77694F; --glow-top-2:#645848;
+  --glow-bot-1:#6E6148; --glow-bot-2:#574C3E;
 }
-[data-theme="warm"] body{
-  background:
-    radial-gradient(126% 82% at 50% 4%,rgba(255,255,255,.55) 0%,rgba(255,246,228,.28) 40%,transparent 74%),
-    var(--bg);
+[data-theme="warm"] body{background:var(--bg)}
+[data-theme="warm"] .site-header.is-stuck{background:rgba(87,76,62,.82)}
+
+/* The sweep. Split in two, for a reason worth writing down: a wide bright wash
+   cannot coexist with cream body copy — white at .16 over this ground already
+   drops text to 4.25:1. So the brightness lives in a THIN line, which text can
+   cross without being swallowed, and the width lives in a dim bloom capped at
+   .10 where it stays safe. That is also what the reference actually is on close
+   look: a fine bright edge with a soft glow under it, not a broad band. */
+.sweep{display:none}
+[data-theme="warm"] .sweep{
+  display:block;position:absolute;pointer-events:none;
+  left:-30%;right:-30%;bottom:-58%;height:132%;border-radius:50%;
+  background:radial-gradient(closest-side,
+    transparent 75.4%,
+    rgba(255,252,244,.85) 76.9%,
+    transparent 78.4%);
+  filter:blur(7px)}
+
+/* the glow the line throws — wide, and dim enough to read text over */
+[data-theme="warm"] .underlay::before{
+  content:"";position:absolute;left:-22%;right:-22%;bottom:-52%;height:120%;
+  border-radius:50%;pointer-events:none;top:auto;
+  background:radial-gradient(closest-side,
+    transparent 62%,
+    rgba(255,247,228,.10) 77%,
+    transparent 92%);
+  filter:blur(46px)}
+
+/* The ellipse is sized against the viewport, so on a narrow screen it curls
+   into a tight circle that loops through the copy. Widening it there keeps the
+   visible arc as shallow as it is on a laptop. */
+@media (max-width:900px){
+  [data-theme="warm"] .sweep{left:-150%;right:-150%;bottom:-72%;height:150%;filter:blur(9px)}
+  [data-theme="warm"] .underlay::before{left:-140%;right:-140%;bottom:-64%;height:140%}
+  [data-theme="warm"] .sweep--2{right:-90%;top:-40%;width:200%;height:110%}
 }
-[data-theme="warm"] .site-header.is-stuck{background:rgba(239,228,210,.86)}
-/* white on beige is 1.12:1 — the slips need an edge or they read as holes */
-[data-theme="warm"] .paper--fortune{border:1px solid #9C8461}
-[data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(90,66,36,.22)}
-[data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(90,66,36,.26)}
-[data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(90,66,36,.3)}
-[data-theme="warm"] .biscuit__half{filter:drop-shadow(0 16px 24px rgba(90,66,36,.4))}
+
+/* a second, softer light high on the other side */
+[data-theme="warm"] .sweep--2{
+  left:auto;right:-46%;bottom:auto;top:-54%;width:108%;height:116%;
+  border-radius:50%;filter:blur(58px);
+  background:radial-gradient(closest-side,
+    rgba(255,248,232,.13) 0%,
+    rgba(255,244,220,.05) 46%,
+    transparent 72%)}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
