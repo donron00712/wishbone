@@ -787,45 +787,48 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   100%{opacity:0;transform:translate(128vw,30vh) rotate(14deg)}
 }
 
-/* Clouds. Each one is bottom-anchored, so only the top half of the puffs
-   clears the edge — a cloud cut horizontally, which is what reads as a bank
-   sitting on the horizon rather than a shape floating in the middle of the
-   sky. It starts small in a corner and grows inward and upward, fading as it
-   spreads, while the next is already rising behind it.
+/* Clouds. Bottom-anchored, so only the top half of the puffs clears the edge —
+   a cloud cut horizontally, which reads as a bank on the horizon rather than a
+   shape floating mid-sky. Each starts small in a corner and grows inward and
+   upward, fading as it spreads, with the next already rising behind it.
 
-   transform-origin is the bottom edge, so growth pushes up and out from the
-   corner instead of expanding around a centre point. */
+   Built big and only lightly blurred, so the scalloped silhouette actually
+   reads. Blurring them into haze was the mistake in the first pass: a cloud is
+   recognisable by its bumpy edge, and that is the first thing a heavy blur
+   destroys. Seven discs of varying size along the baseline give the bumps. */
 .cloud{position:absolute;bottom:0;pointer-events:none;
-  width:min(62vw,520px);height:min(26vh,210px);
+  width:min(88vw,760px);height:min(40vh,360px);
   transform-origin:bottom center;opacity:0;
   background:
-    radial-gradient(closest-side circle at 16% 66%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side circle at 36% 34%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side circle at 58% 52%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side circle at 80% 70%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side ellipse at 50% 96%,rgba(var(--aura),.9) 0 100%,transparent 100%);
-  background-size:46% 62%,50% 82%,44% 66%,38% 50%,104% 46%;
-  background-position:0 40%,18% 12%,42% 28%,70% 44%,-2% 62%;
+    radial-gradient(closest-side circle at 10% 74%,rgba(var(--aura),1) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 25% 48%,rgba(var(--aura),1) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 41% 28%,rgba(var(--aura),1) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 57% 44%,rgba(var(--aura),1) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 72% 62%,rgba(var(--aura),1) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 87% 78%,rgba(var(--aura),1) 0 100%,transparent 100%),
+    radial-gradient(closest-side ellipse at 50% 100%,rgba(var(--aura),1) 0 100%,transparent 100%);
+  background-size:30% 46%,34% 60%,40% 74%,36% 64%,32% 52%,26% 40%,108% 56%;
+  background-position:-2% 54%,10% 28%,26% 4%,46% 20%,64% 40%,80% 58%,-4% 60%;
   background-repeat:no-repeat;
-  filter:blur(13px);
+  filter:blur(5px);
   animation:cloud-grow var(--t) ease-out var(--d) infinite}
 
 .cloud--l{left:0}
-.cloud--r{right:0;transform:scaleX(-1)}
+.cloud--r{right:0}
 
 @keyframes cloud-grow{
-  0%   {opacity:0;   transform:translateX(var(--from)) scale(var(--s0))}
-  18%  {opacity:var(--o)}
-  72%  {opacity:calc(var(--o) * .55)}
-  100% {opacity:0;   transform:translateX(var(--to)) scale(var(--s1))}
+  0%   {opacity:0;              transform:translateX(var(--from)) scale(var(--s0))}
+  16%  {opacity:var(--o)}
+  70%  {opacity:calc(var(--o) * .6)}
+  100% {opacity:0;              transform:translateX(var(--to)) scale(var(--s1))}
 }
-/* the right-hand bank is mirrored, so it needs its own keyframes to keep the flip */
+/* mirrored bank — its own keyframes so the flip survives the growth transform */
 .cloud--r{animation-name:cloud-grow-r}
 @keyframes cloud-grow-r{
-  0%   {opacity:0;   transform:scaleX(-1) translateX(var(--from)) scale(var(--s0))}
-  18%  {opacity:var(--o)}
-  72%  {opacity:calc(var(--o) * .55)}
-  100% {opacity:0;   transform:scaleX(-1) translateX(var(--to)) scale(var(--s1))}
+  0%   {opacity:0;              transform:scaleX(-1) translateX(var(--from)) scale(var(--s0))}
+  16%  {opacity:var(--o)}
+  70%  {opacity:calc(var(--o) * .6)}
+  100% {opacity:0;              transform:scaleX(-1) translateX(var(--to)) scale(var(--s1))}
 }
 
 /* motes rising through the sky, brighter than before */

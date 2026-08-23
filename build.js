@@ -177,12 +177,12 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
              behind it. Six of them, three a side, staggered so the bank never
              empties. -->
         ${[
-          { side: 'l', from: -6,  to: 26,  s0: .45, s1: 1.65, t: 26, d:   0, o: .30 },
-          { side: 'l', from: -14, to: 12,  s0: .38, s1: 1.35, t: 34, d: -12, o: .22 },
-          { side: 'l', from: 2,   to: 34,  s0: .52, s1: 1.85, t: 30, d: -23, o: .16 },
-          { side: 'r', from: -6,  to: 26,  s0: .48, s1: 1.70, t: 29, d:  -5, o: .28 },
-          { side: 'r', from: -16, to: 10,  s0: .40, s1: 1.40, t: 37, d: -19, o: .20 },
-          { side: 'r', from: 4,   to: 36,  s0: .55, s1: 1.90, t: 32, d: -28, o: .14 }
+          { side: 'l', from: -18, to: 14, s0: .55, s1: 1.55, t: 26, d:   0, o: .62 },
+          { side: 'l', from: -26, to: 4,  s0: .45, s1: 1.30, t: 34, d: -12, o: .42 },
+          { side: 'l', from: -10, to: 22, s0: .62, s1: 1.75, t: 30, d: -23, o: .30 },
+          { side: 'r', from: -18, to: 14, s0: .58, s1: 1.60, t: 29, d:  -5, o: .58 },
+          { side: 'r', from: -28, to: 2,  s0: .47, s1: 1.35, t: 37, d: -19, o: .38 },
+          { side: 'r', from: -8,  to: 24, s0: .65, s1: 1.80, t: 32, d: -28, o: .26 }
         ].map(c =>
           `<span class="cloud cloud--${c.side}" style="--from:${c.from}vw;--to:${c.to}vw;--s0:${c.s0};--s1:${c.s1};--t:${c.t}s;--d:${c.d}s;--o:${c.o}"></span>`
         ).join('')}
