@@ -3,34 +3,36 @@
    Palette: bone & ember
    ============================================================ */
 :root{
-  /* Deep green palette
-     #051F20  #0B2B26  #163832  #235347  #8EB69B  #DAF1DE */
-  --base:#051F20;
-  --bg:#0B2B26;
-  --surface:#163832;
-  --text:#DAF1DE;
-  --muted:#8EB69B;
-  --line:#3C7E69;
-  --line-soft:#163832;
-  --accent:#8EB69B;
-  --accent-soft:#235347;
-  --ink:#051F20;
-  --gradient:linear-gradient(36.97deg,#DAF1DE 10.09%,#8EB69B 82%,#235347 140%);
+  /* Dark roast — the same family as the light palette, one step further into
+     the bake. Both themes now come off the one fortune-cookie photograph:
+     #DBCDB2 sand  #3D2814 chocolate  #6F481E brown  #906938 caramel
+     #A78258 tan   #B09F84 greige     #D9B687 wheat  */
+  --base:#211407;
+  --bg:#2E1D0C;
+  --surface:#45301A;
+  --text:#F0E3CC;
+  --muted:#C4A87F;
+  --line:#8A6739;
+  --line-soft:#45301A;
+  --accent:#D9B687;
+  --accent-soft:#6F481E;
+  --ink:#211407;
+  --gradient:linear-gradient(36.97deg,#F5EAD6 10.09%,#D9B687 82%,#906938 140%);
   --nav-h:84px;
   --ease:cubic-bezier(.075,.82,.165,1);
   --container:1440px;
   --gutter:16px;
   /* rgb triplets so scrims and washes can be themed */
-  --scrim:5,31,32;
-  --text-rgb:218,241,222;
+  --scrim:33,20,7;
+  --text-rgb:240,227,204;
   --cookie-edge:transparent;
   --cookie-edge-w:0;
-  --btn-deep:#020F10; --ink-on-deep:#DAF1DE;
-  --on-gradient:#051F20; --on-gradient-rgb:5,31,32;
-  --veil:4,18,17; --aura:255,214,140;
+  --btn-deep:#150C03; --ink-on-deep:#F0E3CC;
+  --on-gradient:#211407; --on-gradient-rgb:33,20,7;
+  --veil:24,14,5; --aura:255,214,140;
   --moment-ink:#D8CDB4;   /* the veil is dark in every palette, so this never inverts */
-  --glow-top-1:#1B4A42; --glow-top-2:#0B2B26;
-  --glow-bot-1:#14403A; --glow-bot-2:#082220;
+  --glow-top-1:#4A3116; --glow-top-2:#2E1D0C;
+  --glow-bot-1:#3E2911; --glow-bot-2:#211407;
 }
 
 /* --- Warm mode: sampled from a photograph of the real thing -----------------
