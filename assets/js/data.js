@@ -7,7 +7,7 @@ window.WB = (function () {
   const nav = [
     { label: 'The formats', href: 'formats.html' },
     { label: 'Why it works', href: 'why-it-works.html' },
-    { label: 'Journal',      href: 'journal.html' }
+    { label: 'Case studies', href: 'cases.html' }
   ];
 
   /* Lines that could plausibly be printed on a slip. Used in the hero
@@ -116,12 +116,69 @@ window.WB = (function () {
     { num: '0',  label: 'Ways to skip it, block it or scroll past it.' }
   ];
 
-  const posts = [
-    { tag: 'Craft',     title: 'Writing for eleven words or fewer', dek: 'The constraint is the format. What survives when there is no room to explain.' },
-    { tag: 'Ritual',    title: 'Why the good ad units are objects',  dek: 'Things people hold outlast things people scroll past. A short argument for physical media.' },
-    { tag: 'Media',     title: 'Out of home, in the restaurant',     dek: 'Rethinking the category from the table up, where attention is already pointed somewhere.' },
-    { tag: 'Building',  title: 'What a cookie run actually involves',  dek: 'Brief, print, restaurants, logistics \u2014 the parts of the format nobody asks about.' }
+  /* Real campaigns, run by other people. Every figure here comes from the
+     published case study named in `source`, and `runBy` credits whoever
+     actually ran it. Kismat Cookies has not worked with these brands — this
+     section is evidence that the medium performs, not a client list, and the
+     page says so in as many words. Do not restate any of this as our own. */
+  const cases = [
+    {
+      brand: 'Duolingo',
+      place: 'United States',
+      when:  'Lunar New Year',
+      title: 'Half a million cookies, and a language lesson on the back',
+      body:  'A cryptic fortune on the front, and on the reverse a lesson reminder in Duo\u2019s voice alongside real Mandarin characters \u2014 a language lesson small enough to finish at the table.',
+      stats: [
+        { n: '500,000', l: 'cookies, nationally' },
+        { n: '40M+',    l: 'social impressions' },
+        { n: '15.5%',   l: 'lift in likelihood to use Duolingo' }
+      ],
+      runBy: 'OpenFortune',
+      source: 'openfortune.com'
+    },
+    {
+      brand: 'Dude Wipes',
+      place: 'United States',
+      when:  'Takeaway orders',
+      title: 'A million slips, dropped where the product makes sense',
+      body:  'Bathroom humour on the fortune, the product on the reverse. The placement did the argument: people eating takeaway are people who will shortly be somewhere else.',
+      stats: [
+        { n: '1M',    l: 'slips in takeaway orders' },
+        { n: '74%',   l: 'unaided recall' },
+        { n: '22%',   l: 'kept the slip' }
+      ],
+      runBy: 'OpenFortune',
+      source: 'openfortune.com'
+    },
+    {
+      brand: 'Warner Bros.',
+      place: 'Manhattan',
+      when:  'Dinner service',
+      title: 'A rom-com promoted where the date night already is',
+      body:  'Love-themed fortunes for \u201cIsn\u2019t It Romantic\u201d, placed in Manhattan restaurants at dinnertime \u2014 the film\u2019s subject and the diner\u2019s evening being the same thing.',
+      stats: [
+        { n: '80%',      l: 'unaided film recall' },
+        { n: '81%',      l: 'lift in likelihood to see it' },
+        { n: '500,000+', l: 'social impressions' }
+      ],
+      runBy: 'OpenFortune',
+      source: 'openfortune.com'
+    },
+    {
+      brand: 'Liquid Death',
+      place: 'New York and Los Angeles',
+      when:  'Halloween',
+      title: 'Misfortunes, for a brand that trades on the opposite',
+      body:  'Grim fortunes instead of lucky ones, with a QR code to the brand\u2019s HorrorScope SMS list. The format was inverted rather than borrowed, which is why it travelled.',
+      stats: [
+        { n: 'AdAge',   l: 'press pickup' },
+        { n: 'SMS',     l: 'list sign-ups driven' },
+        { n: 'NYC / LA', l: 'Chinese restaurants' }
+      ],
+      runBy: 'OpenFortune',
+      source: 'openfortune.com'
+    }
   ];
 
-  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, posts };
+  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases };
 })();

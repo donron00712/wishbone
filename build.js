@@ -251,13 +251,19 @@ const targetCells = () => D.targets.map(t =>
   `<div class="target"><div class="num">${t.num}</div><div class="label">${t.label}</div></div>`
 ).join('\n          ');
 
-/* Journal entries are not articles yet, so they are not links. A card that
-   promises a read and delivers a contact form costs more trust than it wins. */
-const postCards = () => D.posts.map(p => `<li>
-          <div class="format format--static">
-            <div><div class="meta">${p.tag}</div><h3>${p.title}</h3></div>
-            <div><p>${p.dek}</p></div>
+/* Case studies. Real campaigns run by other people — each card credits who ran
+   it, and the page states plainly that they are not ours. */
+const caseCards = () => D.cases.map(c => `<li class="case reveal">
+          <div class="case__head">
+            <span class="case__brand">${c.brand}</span>
+            <span class="case__where">${c.place} &middot; ${c.when}</span>
           </div>
+          <h2 class="case__title">${c.title}</h2>
+          <p class="case__body">${c.body}</p>
+          <dl class="case__stats">
+            ${c.stats.map(s => `<div><dt>${s.n}</dt><dd>${s.l}</dd></div>`).join('')}
+          </dl>
+          <p class="case__by">Run by ${c.runBy}</p>
         </li>`).join('\n        ');
 
 const blocks = (page) => ({
@@ -267,7 +273,7 @@ const blocks = (page) => ({
   reasons: reasonCards(D.reasons),
   formats: formatCards(page === 'home'),
   targets: targetCells(),
-  posts: postCards()
+  cases: caseCards()
 });
 
 let touched = 0;
