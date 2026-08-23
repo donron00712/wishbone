@@ -789,16 +789,18 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 
 /* Clouds. Bottom-anchored, so only the top half of the puffs clears the edge —
    a cloud cut horizontally, which reads as a bank on the horizon rather than a
-   shape floating mid-sky. Each starts small in a corner and grows inward and
-   upward, fading as it spreads, with the next already rising behind it.
+   shape floating mid-sky.
 
-   Built big and only lightly blurred, so the scalloped silhouette actually
-   reads. Blurring them into haze was the mistake in the first pass: a cloud is
-   recognisable by its bumpy edge, and that is the first thing a heavy blur
-   destroys. Seven discs of varying size along the baseline give the bumps. */
+   The origin is the corner itself, not the element's centre. That was the bug
+   in the last pass: scaling about `bottom center` grows a wide element evenly
+   in both directions, so it read as a band across the bottom that happened to
+   get larger. Anchored at `bottom left` and `bottom right`, the same growth
+   pushes out of the corner and inward, which is the movement being asked for.
+
+   Only lightly blurred, because a cloud is recognised by its bumpy edge and
+   that is the first thing a heavy blur destroys. */
 .cloud{position:absolute;bottom:0;pointer-events:none;
-  width:min(88vw,760px);height:min(40vh,360px);
-  transform-origin:bottom center;opacity:0;
+  width:min(62vw,540px);height:min(34vh,300px);opacity:0;
   background:
     radial-gradient(closest-side circle at 10% 74%,rgba(var(--aura),1) 0 100%,transparent 100%),
     radial-gradient(closest-side circle at 25% 48%,rgba(var(--aura),1) 0 100%,transparent 100%),
@@ -807,28 +809,33 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
     radial-gradient(closest-side circle at 72% 62%,rgba(var(--aura),1) 0 100%,transparent 100%),
     radial-gradient(closest-side circle at 87% 78%,rgba(var(--aura),1) 0 100%,transparent 100%),
     radial-gradient(closest-side ellipse at 50% 100%,rgba(var(--aura),1) 0 100%,transparent 100%);
-  background-size:30% 46%,34% 60%,40% 74%,36% 64%,32% 52%,26% 40%,108% 56%;
-  background-position:-2% 54%,10% 28%,26% 4%,46% 20%,64% 40%,80% 58%,-4% 60%;
+  /* The discs overlap heavily on purpose. Spaced apart they read as one cloud
+     at full size but break into separate blobs as the cloud scales down, and
+     the blur is a fixed 5px so it cannot bridge a gap that grows with scale. */
+  background-size:52% 78%,58% 96%,64% 112%,60% 100%,54% 84%,46% 66%,120% 74%;
+  background-position:-8% 44%,6% 16%,26% -6%,48% 8%,68% 30%,86% 50%,-10% 56%;
   background-repeat:no-repeat;
-  filter:blur(5px);
-  animation:cloud-grow var(--t) ease-out var(--d) infinite}
+  filter:blur(5px)}
 
-.cloud--l{left:0}
-.cloud--r{right:0}
+.cloud--l{left:0;transform-origin:bottom left;
+  animation:cloud-grow-l var(--t) ease-out var(--d) infinite}
+.cloud--r{right:0;transform-origin:bottom right;
+  /* the puffs run the other way, so the bank is not a copy of the left one */
+  background-position:108% 44%,94% 16%,74% -6%,52% 8%,32% 30%,14% 50%,110% 56%;
+  animation:cloud-grow-r var(--t) ease-out var(--d) infinite}
 
-@keyframes cloud-grow{
-  0%   {opacity:0;              transform:translateX(var(--from)) scale(var(--s0))}
+/* out of the corner and inward: small and tucked in, then large and across */
+@keyframes cloud-grow-l{
+  0%   {opacity:0;         transform:translateX(0)          scale(var(--s0))}
   16%  {opacity:var(--o)}
-  70%  {opacity:calc(var(--o) * .6)}
-  100% {opacity:0;              transform:translateX(var(--to)) scale(var(--s1))}
+  70%  {opacity:calc(var(--o) * .55)}
+  100% {opacity:0;         transform:translateX(var(--to))  scale(var(--s1))}
 }
-/* mirrored bank — its own keyframes so the flip survives the growth transform */
-.cloud--r{animation-name:cloud-grow-r}
 @keyframes cloud-grow-r{
-  0%   {opacity:0;              transform:scaleX(-1) translateX(var(--from)) scale(var(--s0))}
+  0%   {opacity:0;         transform:translateX(0)                    scale(var(--s0))}
   16%  {opacity:var(--o)}
-  70%  {opacity:calc(var(--o) * .6)}
-  100% {opacity:0;              transform:scaleX(-1) translateX(var(--to)) scale(var(--s1))}
+  70%  {opacity:calc(var(--o) * .55)}
+  100% {opacity:0;         transform:translateX(calc(var(--to) * -1)) scale(var(--s1))}
 }
 
 /* motes rising through the sky, brighter than before */
@@ -911,8 +918,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .mote{animation:none;opacity:.4}
   .star{animation:none}
   .shoot{display:none}
-  .cloud{animation:none;opacity:calc(var(--o) * .8);transform:translateX(calc(var(--to) / 2)) scale(1.1)}
-  .cloud--r{transform:scaleX(-1) translateX(calc(var(--to) / 2)) scale(1.1)}
+  .cloud--l{animation:none;opacity:calc(var(--o) * .8);transform:translateX(calc(var(--to) / 2)) scale(1.15)}
+  .cloud--r{animation:none;opacity:calc(var(--o) * .8);transform:translateX(calc(var(--to) / -2)) scale(1.15)}
   .moment__aura{animation:none;transition:none}
   .moment.is-open .moment__cookie::after{animation:none;opacity:0}
   .moment:not(.is-open) .biscuit{animation:none}
