@@ -171,16 +171,20 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         <span class="shoot shoot--a"></span>
         <span class="shoot shoot--b"></span>
 
-        <!-- Cloud bank. Five depths, each a different size, speed and height,
-             so they slide past one another instead of moving as one sheet. -->
+        <!-- Cloud bank. Each cloud is bottom-anchored, so only its top half
+             clears the edge; it starts small in a corner and grows inward and
+             upward, fading as it goes, while the next one is already coming up
+             behind it. Six of them, three a side, staggered so the bank never
+             empties. -->
         ${[
-          { t:  8, s: 1.35, d: 78,  delay:  0,  o: .22 },
-          { t: 24, s: 0.85, d: 104, delay: -34, o: .15 },
-          { t: 72, s: 1.70, d: 64,  delay: -52, o: .24 },
-          { t: 88, s: 1.05, d: 92,  delay: -14, o: .18 },
-          { t: 40, s: 1.20, d: 130, delay: -74, o: .10 }
-        ].map((c, i) =>
-          `<span class="cloud cloud--${i + 1}" style="--top:${c.t}%;--scale:${c.s};--t:${c.d}s;--d:${c.delay}s;--o:${c.o}"></span>`
+          { side: 'l', from: -6,  to: 26,  s0: .45, s1: 1.65, t: 26, d:   0, o: .30 },
+          { side: 'l', from: -14, to: 12,  s0: .38, s1: 1.35, t: 34, d: -12, o: .22 },
+          { side: 'l', from: 2,   to: 34,  s0: .52, s1: 1.85, t: 30, d: -23, o: .16 },
+          { side: 'r', from: -6,  to: 26,  s0: .48, s1: 1.70, t: 29, d:  -5, o: .28 },
+          { side: 'r', from: -16, to: 10,  s0: .40, s1: 1.40, t: 37, d: -19, o: .20 },
+          { side: 'r', from: 4,   to: 36,  s0: .55, s1: 1.90, t: 32, d: -28, o: .14 }
+        ].map(c =>
+          `<span class="cloud cloud--${c.side}" style="--from:${c.from}vw;--to:${c.to}vw;--s0:${c.s0};--s1:${c.s1};--t:${c.t}s;--d:${c.d}s;--o:${c.o}"></span>`
         ).join('')}
       </div>
 

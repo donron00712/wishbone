@@ -33,87 +33,49 @@
   --glow-bot-1:#14403A; --glow-bot-2:#082220;
 }
 
-/* --- Warm mode: beige, with the atmosphere the reference gets its depth from -
-   The reference is a LIGHT design, and that is the whole reason it can carry a
-   luminous sky: every glow it lays down makes its dark type easier to read, not
-   harder. On a mid-tone with cream type the same layers fought the text — three
-   of them overlapping took it to 2.47:1. So the ground is pale and the type is
-   dark, and the atmosphere is then free: a pale sun behind, cloud banks rising
-   from both bottom corners, haze along the top, and a bright arc across. */
+/* --- Warm mode: sampled from a photograph of the real thing -----------------
+   Every value below is lifted from the fortune-cookie photo: the sand of the
+   plate, the chocolate of a baked edge, the browns and tans between.
+   #DBCDB2 #3D2814 #6F481E #906938 #A78258 #B09F84 #D9B687
+
+   Flat, with no gradient anywhere on the page. Two notes on what that costs.
+   The white slips need a hairline, because white on this sand is 1.40:1 and
+   they would read as holes. And the golden cookie is 1.01:1 on it — invisible —
+   which is fine only because the cookie appears nowhere except the moment,
+   whose veil stays dark. */
 [data-theme="warm"]{
-  --base:#EDE1CD;
-  --bg:#EFE4D2;
-  --surface:#FBF6EC;
-  --text:#2A1F14;
-  --muted:#6B5843;
-  --line:#8A7046;
-  --line-soft:#DCCDB2;
-  --accent:#8A4A1A;
-  --accent-soft:#DCCDB2;
-  --ink:#FBF6EC;
-  --gradient:linear-gradient(36.97deg,#FFF6E6 10%,#F3DDB0 82%,#E0BC7C 140%);
-  --scrim:250,244,232;
-  --text-rgb:42,31,20;
+  --base:#D3C3A4;
+  --bg:#DBCDB2;
+  --surface:#EDE4D4;
+  --text:#3D2814;
+  --muted:#6F481E;
+  --line:#906938;
+  --line-soft:#C6B597;
+  --accent:#6F481E;
+  --accent-soft:#C6B597;
+  --ink:#EDE4D4;
+  --gradient:linear-gradient(0deg,#F2EBDE 0%,#F2EBDE 100%);
+  --scrim:219,205,178;
+  --text-rgb:61,40,20;
   --cookie-edge:transparent;
   --cookie-edge-w:0;
-  --btn-deep:#1C130A; --ink-on-deep:#FBF6EC;
-  --on-gradient:#2A1F14; --on-gradient-rgb:42,31,20;
+  --btn-deep:#2A1B0D; --ink-on-deep:#EDE4D4;
+  --on-gradient:#3D2814; --on-gradient-rgb:61,40,20;
   --veil:36,26,16; --aura:255,205,120;
   --moment-ink:#DFCFAE;
-  --glow-top-1:#FBF3E4; --glow-top-2:#EFE4D2;
-  --glow-bot-1:#E9DAC0; --glow-bot-2:#EDE1CD;
+  --glow-top-1:#DBCDB2; --glow-top-2:#DBCDB2;
+  --glow-bot-1:#D3C3A4; --glow-bot-2:#D3C3A4;
 }
 [data-theme="warm"] body{background:var(--bg)}
-[data-theme="warm"] .site-header.is-stuck{background:rgba(239,228,210,.86)}
+[data-theme="warm"] .underlay{background:var(--base)}
+[data-theme="warm"] .site-header.is-stuck{background:rgba(219,205,178,.88)}
 
-/* white on beige is 1.12:1 — the slips need an edge or they read as holes */
-[data-theme="warm"] .paper--fortune{border:1px solid #9C8461}
-[data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(90,66,36,.20)}
-[data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(90,66,36,.24)}
-[data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(90,66,36,.28)}
-[data-theme="warm"] .biscuit__half{filter:drop-shadow(0 16px 24px rgba(90,66,36,.38))}
-
-/* the sky: layered soft forms rather than one flat colour. Free to be this
-   generous because lightening the ground only helps dark type. */
-[data-theme="warm"] .underlay{
-  background:
-    radial-gradient(42% 30% at 50% 56%,rgba(255,246,226,.95) 0%,rgba(255,238,206,.45) 52%,transparent 78%),
-    radial-gradient(62% 44% at 2% 106%,rgba(255,251,242,.9) 0%,rgba(252,240,220,.4) 44%,transparent 72%),
-    radial-gradient(62% 44% at 98% 106%,rgba(255,249,236,.82) 0%,rgba(250,236,214,.36) 44%,transparent 72%),
-    radial-gradient(98% 46% at 50% -6%,rgba(255,253,247,.75) 0%,transparent 66%),
-    var(--base)}
-
-/* the arc of light crossing it */
-.sweep{display:none}
-[data-theme="warm"] .sweep{
-  display:block;position:absolute;pointer-events:none;
-  left:-30%;right:-30%;bottom:-58%;height:132%;border-radius:50%;
-  background:radial-gradient(closest-side,
-    transparent 75.2%,
-    rgba(255,255,255,.95) 76.9%,
-    transparent 78.6%);
-  filter:blur(9px)}
-[data-theme="warm"] .underlay::before{
-  content:"";position:absolute;left:-22%;right:-22%;bottom:-52%;height:120%;
-  border-radius:50%;pointer-events:none;top:auto;
-  background:radial-gradient(closest-side,
-    transparent 60%,
-    rgba(255,252,244,.55) 77%,
-    transparent 93%);
-  filter:blur(44px)}
-[data-theme="warm"] .sweep--2{
-  left:auto;right:-46%;bottom:auto;top:-54%;width:108%;height:116%;
-  border-radius:50%;filter:blur(58px);
-  background:radial-gradient(closest-side,
-    rgba(255,252,246,.6) 0%,rgba(255,246,230,.24) 46%,transparent 72%)}
-
-/* the ellipse is sized against the viewport, so on a phone it curls into a
-   circle looping through the copy; widened, the arc stays shallow */
-@media (max-width:900px){
-  [data-theme="warm"] .sweep{left:-150%;right:-150%;bottom:-72%;height:150%;filter:blur(11px)}
-  [data-theme="warm"] .underlay::before{left:-140%;right:-140%;bottom:-64%;height:140%}
-  [data-theme="warm"] .sweep--2{right:-90%;top:-40%;width:200%;height:110%}
-}
+/* white on this sand is 1.40:1 — the slips need an edge */
+[data-theme="warm"] .paper--fortune{border:1px solid #A78258}
+[data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(61,40,20,.18)}
+[data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(61,40,20,.22)}
+[data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(61,40,20,.26)}
+[data-theme="warm"] .biscuit__half{filter:drop-shadow(0 16px 24px rgba(61,40,20,.34))}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
@@ -825,28 +787,45 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   100%{opacity:0;transform:translate(128vw,30vh) rotate(14deg)}
 }
 
-/* Clouds, drifting through the night sky behind the cookie. Each is a row of
-   overlapping soft discs — the classic cloud silhouette — blurred until the
-   seams disappear. They sit above the veil but below the stars, so stars read
-   through the thin edges the way they do through real cloud. */
-.cloud{position:absolute;left:0;top:var(--top);pointer-events:none;
-  width:420px;height:130px;opacity:var(--o);
-  transform:translate3d(-40vw,0,0) scale(var(--scale));
-  background:
-    radial-gradient(closest-side circle at 18% 72%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side circle at 38% 44%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side circle at 58% 60%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side circle at 78% 76%,rgba(var(--aura),.95) 0 100%,transparent 100%),
-    radial-gradient(closest-side ellipse at 50% 88%,rgba(var(--aura),.85) 0 100%,transparent 100%);
-  background-size:40% 78%,44% 96%,38% 74%,32% 56%,86% 34%;
-  background-position:0 0,20% 0,44% 8%,70% 18%,10% 60%;
-  background-repeat:no-repeat;
-  filter:blur(11px);
-  animation:cloud-drift var(--t) linear var(--d) infinite}
+/* Clouds. Each one is bottom-anchored, so only the top half of the puffs
+   clears the edge — a cloud cut horizontally, which is what reads as a bank
+   sitting on the horizon rather than a shape floating in the middle of the
+   sky. It starts small in a corner and grows inward and upward, fading as it
+   spreads, while the next is already rising behind it.
 
-@keyframes cloud-drift{
-  from{transform:translate3d(-40vw,0,0) scale(var(--scale))}
-  to  {transform:translate3d(125vw,0,0) scale(var(--scale))}
+   transform-origin is the bottom edge, so growth pushes up and out from the
+   corner instead of expanding around a centre point. */
+.cloud{position:absolute;bottom:0;pointer-events:none;
+  width:min(62vw,520px);height:min(26vh,210px);
+  transform-origin:bottom center;opacity:0;
+  background:
+    radial-gradient(closest-side circle at 16% 66%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 36% 34%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 58% 52%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 80% 70%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side ellipse at 50% 96%,rgba(var(--aura),.9) 0 100%,transparent 100%);
+  background-size:46% 62%,50% 82%,44% 66%,38% 50%,104% 46%;
+  background-position:0 40%,18% 12%,42% 28%,70% 44%,-2% 62%;
+  background-repeat:no-repeat;
+  filter:blur(13px);
+  animation:cloud-grow var(--t) ease-out var(--d) infinite}
+
+.cloud--l{left:0}
+.cloud--r{right:0;transform:scaleX(-1)}
+
+@keyframes cloud-grow{
+  0%   {opacity:0;   transform:translateX(var(--from)) scale(var(--s0))}
+  18%  {opacity:var(--o)}
+  72%  {opacity:calc(var(--o) * .55)}
+  100% {opacity:0;   transform:translateX(var(--to)) scale(var(--s1))}
+}
+/* the right-hand bank is mirrored, so it needs its own keyframes to keep the flip */
+.cloud--r{animation-name:cloud-grow-r}
+@keyframes cloud-grow-r{
+  0%   {opacity:0;   transform:scaleX(-1) translateX(var(--from)) scale(var(--s0))}
+  18%  {opacity:var(--o)}
+  72%  {opacity:calc(var(--o) * .55)}
+  100% {opacity:0;   transform:scaleX(-1) translateX(var(--to)) scale(var(--s1))}
 }
 
 /* motes rising through the sky, brighter than before */
@@ -929,7 +908,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .mote{animation:none;opacity:.4}
   .star{animation:none}
   .shoot{display:none}
-  .cloud{animation:none;transform:translate3d(24vw,0,0) scale(var(--scale))}
+  .cloud{animation:none;opacity:calc(var(--o) * .8);transform:translateX(calc(var(--to) / 2)) scale(1.1)}
+  .cloud--r{transform:scaleX(-1) translateX(calc(var(--to) / 2)) scale(1.1)}
   .moment__aura{animation:none;transition:none}
   .moment.is-open .moment__cookie::after{animation:none;opacity:0}
   .moment:not(.is-open) .biscuit{animation:none}
