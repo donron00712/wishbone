@@ -170,6 +170,18 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         })()}
         <span class="shoot shoot--a"></span>
         <span class="shoot shoot--b"></span>
+
+        <!-- Cloud bank. Five depths, each a different size, speed and height,
+             so they slide past one another instead of moving as one sheet. -->
+        ${[
+          { t:  8, s: 1.35, d: 78,  delay:  0,  o: .22 },
+          { t: 24, s: 0.85, d: 104, delay: -34, o: .15 },
+          { t: 72, s: 1.70, d: 64,  delay: -52, o: .24 },
+          { t: 88, s: 1.05, d: 92,  delay: -14, o: .18 },
+          { t: 40, s: 1.20, d: 130, delay: -74, o: .10 }
+        ].map((c, i) =>
+          `<span class="cloud cloud--${i + 1}" style="--top:${c.t}%;--scale:${c.s};--t:${c.d}s;--d:${c.delay}s;--o:${c.o}"></span>`
+        ).join('')}
       </div>
 
       <div class="moment__motes" aria-hidden="true">

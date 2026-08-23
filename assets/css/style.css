@@ -33,85 +33,87 @@
   --glow-bot-1:#14403A; --glow-bot-2:#082220;
 }
 
-/* --- Warm mode: taupe with a light sweep ----------------------------------
-   Built from the reference: a warm mid-tone ground with cream type and a
-   luminous arc bending across it. Two notes on the deviation from it.
-
-   The reference ground is roughly #A2947F, which puts its cream body copy at
-   2.64:1 — the mockup itself is hard to read. #645848 keeps the same character
-   and lifts type to 6.3:1, muted to 4.9:1.
-
-   The hairlines run lighter than the ground rather than darker, because on a
-   mid-tone you separate upward toward the light, not down into it. */
+/* --- Warm mode: beige, with the atmosphere the reference gets its depth from -
+   The reference is a LIGHT design, and that is the whole reason it can carry a
+   luminous sky: every glow it lays down makes its dark type easier to read, not
+   harder. On a mid-tone with cream type the same layers fought the text — three
+   of them overlapping took it to 2.47:1. So the ground is pale and the type is
+   dark, and the atmosphere is then free: a pale sun behind, cloud banks rising
+   from both bottom corners, haze along the top, and a bright arc across. */
 [data-theme="warm"]{
-  --base:#574C3E;
-  --bg:#645848;
-  --surface:#756853;
-  --text:#F9F4EA;
-  --muted:#E2D8C6;
-  --line:#BAAE99;
-  --line-soft:#75684F;
-  --accent:#FFDFA8;
-  --accent-soft:#7E7059;
-  --ink:#241C12;
-  --gradient:linear-gradient(36.97deg,#FFF6E6 10%,#F0DDB6 82%,#D9BE86 140%);
-  --scrim:60,52,40;
-  --text-rgb:249,244,234;
+  --base:#EDE1CD;
+  --bg:#EFE4D2;
+  --surface:#FBF6EC;
+  --text:#2A1F14;
+  --muted:#6B5843;
+  --line:#8A7046;
+  --line-soft:#DCCDB2;
+  --accent:#8A4A1A;
+  --accent-soft:#DCCDB2;
+  --ink:#FBF6EC;
+  --gradient:linear-gradient(36.97deg,#FFF6E6 10%,#F3DDB0 82%,#E0BC7C 140%);
+  --scrim:250,244,232;
+  --text-rgb:42,31,20;
   --cookie-edge:transparent;
   --cookie-edge-w:0;
-  --btn-deep:#241C12; --ink-on-deep:#F9F4EA;
-  --on-gradient:#2C2417; --on-gradient-rgb:44,36,23;
-  --veil:38,31,22; --aura:255,232,190;
-  --moment-ink:#E7DCC5;
-  --glow-top-1:#77694F; --glow-top-2:#645848;
-  --glow-bot-1:#6E6148; --glow-bot-2:#574C3E;
+  --btn-deep:#1C130A; --ink-on-deep:#FBF6EC;
+  --on-gradient:#2A1F14; --on-gradient-rgb:42,31,20;
+  --veil:36,26,16; --aura:255,205,120;
+  --moment-ink:#DFCFAE;
+  --glow-top-1:#FBF3E4; --glow-top-2:#EFE4D2;
+  --glow-bot-1:#E9DAC0; --glow-bot-2:#EDE1CD;
 }
 [data-theme="warm"] body{background:var(--bg)}
-[data-theme="warm"] .site-header.is-stuck{background:rgba(87,76,62,.82)}
+[data-theme="warm"] .site-header.is-stuck{background:rgba(239,228,210,.86)}
 
-/* The sweep. Split in two, for a reason worth writing down: a wide bright wash
-   cannot coexist with cream body copy — white at .16 over this ground already
-   drops text to 4.25:1. So the brightness lives in a THIN line, which text can
-   cross without being swallowed, and the width lives in a dim bloom capped at
-   .10 where it stays safe. That is also what the reference actually is on close
-   look: a fine bright edge with a soft glow under it, not a broad band. */
+/* white on beige is 1.12:1 — the slips need an edge or they read as holes */
+[data-theme="warm"] .paper--fortune{border:1px solid #9C8461}
+[data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(90,66,36,.20)}
+[data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(90,66,36,.24)}
+[data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(90,66,36,.28)}
+[data-theme="warm"] .biscuit__half{filter:drop-shadow(0 16px 24px rgba(90,66,36,.38))}
+
+/* the sky: layered soft forms rather than one flat colour. Free to be this
+   generous because lightening the ground only helps dark type. */
+[data-theme="warm"] .underlay{
+  background:
+    radial-gradient(42% 30% at 50% 56%,rgba(255,246,226,.95) 0%,rgba(255,238,206,.45) 52%,transparent 78%),
+    radial-gradient(62% 44% at 2% 106%,rgba(255,251,242,.9) 0%,rgba(252,240,220,.4) 44%,transparent 72%),
+    radial-gradient(62% 44% at 98% 106%,rgba(255,249,236,.82) 0%,rgba(250,236,214,.36) 44%,transparent 72%),
+    radial-gradient(98% 46% at 50% -6%,rgba(255,253,247,.75) 0%,transparent 66%),
+    var(--base)}
+
+/* the arc of light crossing it */
 .sweep{display:none}
 [data-theme="warm"] .sweep{
   display:block;position:absolute;pointer-events:none;
   left:-30%;right:-30%;bottom:-58%;height:132%;border-radius:50%;
   background:radial-gradient(closest-side,
-    transparent 75.4%,
-    rgba(255,252,244,.85) 76.9%,
-    transparent 78.4%);
-  filter:blur(7px)}
-
-/* the glow the line throws — wide, and dim enough to read text over */
+    transparent 75.2%,
+    rgba(255,255,255,.95) 76.9%,
+    transparent 78.6%);
+  filter:blur(9px)}
 [data-theme="warm"] .underlay::before{
   content:"";position:absolute;left:-22%;right:-22%;bottom:-52%;height:120%;
   border-radius:50%;pointer-events:none;top:auto;
   background:radial-gradient(closest-side,
-    transparent 62%,
-    rgba(255,247,228,.10) 77%,
-    transparent 92%);
-  filter:blur(46px)}
-
-/* The ellipse is sized against the viewport, so on a narrow screen it curls
-   into a tight circle that loops through the copy. Widening it there keeps the
-   visible arc as shallow as it is on a laptop. */
-@media (max-width:900px){
-  [data-theme="warm"] .sweep{left:-150%;right:-150%;bottom:-72%;height:150%;filter:blur(9px)}
-  [data-theme="warm"] .underlay::before{left:-140%;right:-140%;bottom:-64%;height:140%}
-  [data-theme="warm"] .sweep--2{right:-90%;top:-40%;width:200%;height:110%}
-}
-
-/* a second, softer light high on the other side */
+    transparent 60%,
+    rgba(255,252,244,.55) 77%,
+    transparent 93%);
+  filter:blur(44px)}
 [data-theme="warm"] .sweep--2{
   left:auto;right:-46%;bottom:auto;top:-54%;width:108%;height:116%;
   border-radius:50%;filter:blur(58px);
   background:radial-gradient(closest-side,
-    rgba(255,248,232,.13) 0%,
-    rgba(255,244,220,.05) 46%,
-    transparent 72%)}
+    rgba(255,252,246,.6) 0%,rgba(255,246,230,.24) 46%,transparent 72%)}
+
+/* the ellipse is sized against the viewport, so on a phone it curls into a
+   circle looping through the copy; widened, the arc stays shallow */
+@media (max-width:900px){
+  [data-theme="warm"] .sweep{left:-150%;right:-150%;bottom:-72%;height:150%;filter:blur(11px)}
+  [data-theme="warm"] .underlay::before{left:-140%;right:-140%;bottom:-64%;height:140%}
+  [data-theme="warm"] .sweep--2{right:-90%;top:-40%;width:200%;height:110%}
+}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
@@ -823,6 +825,30 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   100%{opacity:0;transform:translate(128vw,30vh) rotate(14deg)}
 }
 
+/* Clouds, drifting through the night sky behind the cookie. Each is a row of
+   overlapping soft discs — the classic cloud silhouette — blurred until the
+   seams disappear. They sit above the veil but below the stars, so stars read
+   through the thin edges the way they do through real cloud. */
+.cloud{position:absolute;left:0;top:var(--top);pointer-events:none;
+  width:420px;height:130px;opacity:var(--o);
+  transform:translate3d(-40vw,0,0) scale(var(--scale));
+  background:
+    radial-gradient(closest-side circle at 18% 72%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 38% 44%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 58% 60%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side circle at 78% 76%,rgba(var(--aura),.95) 0 100%,transparent 100%),
+    radial-gradient(closest-side ellipse at 50% 88%,rgba(var(--aura),.85) 0 100%,transparent 100%);
+  background-size:40% 78%,44% 96%,38% 74%,32% 56%,86% 34%;
+  background-position:0 0,20% 0,44% 8%,70% 18%,10% 60%;
+  background-repeat:no-repeat;
+  filter:blur(11px);
+  animation:cloud-drift var(--t) linear var(--d) infinite}
+
+@keyframes cloud-drift{
+  from{transform:translate3d(-40vw,0,0) scale(var(--scale))}
+  to  {transform:translate3d(125vw,0,0) scale(var(--scale))}
+}
+
 /* motes rising through the sky, brighter than before */
 .moment__motes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .mote{position:absolute;left:var(--x);bottom:14%;width:var(--s);height:var(--s);border-radius:50%;
@@ -903,6 +929,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .mote{animation:none;opacity:.4}
   .star{animation:none}
   .shoot{display:none}
+  .cloud{animation:none;transform:translate3d(24vw,0,0) scale(var(--scale))}
   .moment__aura{animation:none;transition:none}
   .moment.is-open .moment__cookie::after{animation:none;opacity:0}
   .moment:not(.is-open) .biscuit{animation:none}
