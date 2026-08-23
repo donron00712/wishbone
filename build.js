@@ -171,21 +171,6 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         <span class="shoot shoot--a"></span>
         <span class="shoot shoot--b"></span>
 
-        <!-- Cloud bank. Each cloud is bottom-anchored, so only its top half
-             clears the edge; it starts small in a corner and grows inward and
-             upward, fading as it goes, while the next one is already coming up
-             behind it. Six of them, three a side, staggered so the bank never
-             empties. -->
-        ${[
-          { side: 'l', to: 14, s0: .34, s1: 1.30, t: 26, d: 0, o: .62 },
-          { side: 'l', from: -26, to: 4,  s0: .28, s1: 1.05, t: 34, d: -12, o: .42 },
-          { side: 'l', to: 22, s0: .38, s1: 1.50, t: 30, d: -23, o: .30 },
-          { side: 'r', to: 14, s0: .36, s1: 1.35, t: 29, d: -5, o: .58 },
-          { side: 'r', from: -28, to: 2,  s0: .30, s1: 1.10, t: 37, d: -19, o: .38 },
-          { side: 'r', from: -8,  to: 24, s0: .40, s1: 1.55, t: 32, d: -28, o: .26 }
-        ].map(c =>
-          `<span class="cloud cloud--${c.side}" style="--to:${c.to}vw;--s0:${c.s0};--s1:${c.s1};--t:${c.t}s;--d:${c.d}s;--o:${c.o}"></span>`
-        ).join('')}
       </div>
 
       <div class="moment__motes" aria-hidden="true">
