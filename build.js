@@ -332,7 +332,13 @@ const socialHead = (page, html) => {
       name: 'Kismat Cookies',
       url: SITE,
       logo: SITE + '/assets/media/og.png',
-      description: 'Advertising inside real fortune cookies — a brand\u2019s line, code and lucky numbers printed on the slip served with the restaurant check.'
+      description: 'Advertising inside real fortune cookies — a brand\u2019s line, code and lucky numbers printed on the slip served with the restaurant check.',
+      email: D.email,
+      areaServed: { '@type': 'Country', name: 'India' },
+      /* Canonical profile URL only. sameAs is how Google matches this entity
+         to the same company elsewhere, and a view-state query string
+         (?viewAsMember=...) makes it a different string to match against. */
+      sameAs: ['https://www.linkedin.com/company/kismat-cookies/']
     },
     {
       '@type': 'WebSite',
