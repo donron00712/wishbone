@@ -22,3 +22,8 @@ build/
 # Local env
 .env
 .env.local
+
+# Phone screenshots dropped into assets/media/ while sourcing photography.
+# Ignored so they cannot reach a public repo by accident — this repo is public.
+# Delete this rule once the folder holds only files you are cleared to publish.
+assets/media/Screenshot_*
