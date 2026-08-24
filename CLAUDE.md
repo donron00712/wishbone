@@ -101,11 +101,15 @@ Several "bugs" this session were this artifact, not the code.
   fortune cookies cannot show another company's without reading as a client
   list, and no disclaimer fixes that. They were left out; `wall-01`–`wall-08`
   are the eight that were clean.
-- `wall-01`–`wall-08` are **AI-generated**, and say so in their alt text in
-  `data.js`. They are not photographs of cookies we have produced. The owner
-  chose to carry that in alt text rather than visibly on the page; if the alt
-  text is ever rewritten, the distinction needs to land somewhere else rather
-  than quietly disappear.
+- **Every picture in the wall is AI-generated.** `wall-01`–`wall-08` say so in
+  their alt text in `data.js`. The three licensed stock photographs that used
+  to sit alongside them were dropped at the owner's request, so there is no
+  photograph of a real cookie anywhere on the site — the only real footage is
+  the film in the fortune moment. The owner chose to carry the AI distinction
+  in alt text rather than visibly on the page; if that alt text is ever
+  rewritten, the distinction needs to land somewhere else rather than quietly
+  disappear. (`git show bee3f90` has the stock photographs if they are wanted
+  back.)
 
 ## Outstanding, needs the owner
 

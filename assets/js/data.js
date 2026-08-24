@@ -129,22 +129,16 @@ window.WB = (function () {
      wall selling branded fortune cookies cannot show another company's without
      reading as a client list. They were left out.
 
-     cookie-tray / cookie-slip / cookie-open are licensed stock photographs.
-     wall-01 to wall-08 are AI-generated and say so in their alt text; they are
-     not photographs of cookies we have produced. If that distinction ever
-     stops being carried in the alt text, it needs to move somewhere else on
-     the page rather than quietly disappear.
+     Every picture in this wall is now AI-generated — the licensed stock
+     photographs were dropped, so there is no photograph of a real cookie left
+     on the page. Each one says so in its alt text. If that distinction ever
+     stops being carried there, it needs to move somewhere else on the page
+     rather than quietly disappear.
 
      Drop files in assets/media/ and add an entry:
        { src: 'assets/media/cookie-01.jpg', alt: 'A cracked fortune cookie on a
          white plate, the slip half out.', credit: 'Photo: your name' }  */
   const photos = [
-    { src: 'assets/media/cookie-tray.jpg',
-      alt: 'Three freshly folded fortune cookies cooling on a metal tray.' },
-    { src: 'assets/media/cookie-slip.jpg',
-      alt: 'A fortune cookie snapped in two, the printed slip stretched between the halves.' },
-    { src: 'assets/media/cookie-open.jpg',
-      alt: 'An opened fortune cookie with its slip held between the two halves.' },
     { src: 'assets/media/wall-01.jpg',
       alt: 'AI-generated image: a hand holds a cracked fortune cookie over a pavement, the slip stretched between the halves.' },
     { src: 'assets/media/wall-02.jpg',
