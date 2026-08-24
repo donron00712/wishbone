@@ -4,5 +4,18 @@
   "buildCommand": "node build.js",
   "installCommand": null,
   "outputDirectory": ".",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.kismatcookies.com"
+        }
+      ],
+      "destination": "https://kismatcookies.com/:path*",
+      "permanent": true
+    }
+  ]
 }

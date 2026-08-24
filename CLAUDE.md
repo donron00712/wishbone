@@ -16,7 +16,14 @@ npm run build    # regenerate the root pages from src/pages + data.js
 npm start        # build, then serve on :4321
 npm run add-photo <file>   # crop/compress an image for the hero wall
 npm run add-video <file>   # encode footage for the fortune moment
+npm run og                 # re-render assets/media/og.svg to the share card
 ```
+
+`build.js` also writes `robots.txt`, `sitemap.xml`, and a `<!--#social-->` block
+of canonical/OG/Twitter tags into every page's `<head>`. All three are derived
+from the pages themselves, so a new file in `src/pages/` is canonical, shared
+and crawlable with nothing else to remember. Canonical host is
+`https://kismatcookies.com`; `vercel.json` redirects `www` to it.
 
 Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 `header`, `footer`, `ooh`, `reasons`, `formats`, `targets`, `cases`.

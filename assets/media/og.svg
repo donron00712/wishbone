@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif">
+  <!-- Source for og.png. Drawn from the same cookie the site draws in code and
+       the same palette tokens, so the share card and the page are one brand.
+       Regenerate with:  npm run og  -->
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.46" r="0.62">
+      <stop offset="0" stop-color="#8A5A22" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#5A3A14" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#2E1D0C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bakeL" cx="0.32" cy="0.26" r="0.95">
+      <stop offset="0" stop-color="#FCF2DA"/><stop offset="0.55" stop-color="#EFC886"/><stop offset="1" stop-color="#C68432"/>
+    </radialGradient>
+    <radialGradient id="bakeR" cx="0.68" cy="0.26" r="0.95">
+      <stop offset="0" stop-color="#FCF2DA"/><stop offset="0.55" stop-color="#EFC886"/><stop offset="1" stop-color="#C68432"/>
+    </radialGradient>
+    <clipPath id="clipL"><path d="M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z"/></clipPath>
+    <clipPath id="clipR"><path d="M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="630" fill="#2E1D0C"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- the cookie, cracked, as it is on the page -->
+  <g transform="translate(600 232) scale(1.15)">
+    <g transform="translate(-150 -125)">
+      <g transform="translate(-46 0) rotate(-15 150 134)" clip-path="url(#clipL)">
+        <path d="M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z" fill="url(#bakeL)"/>
+        <g stroke="#B4762B" stroke-opacity="0.5" stroke-width="2.4" stroke-linecap="round" fill="none">
+          <path d="M112 82 L106 66"/><path d="M124 78 L120 61"/><path d="M136 79 L134 62"/>
+          <path d="M92 150 Q120 168 150 172"/>
+        </g>
+      </g>
+      <g transform="translate(46 0) rotate(15 150 134)" clip-path="url(#clipR)">
+        <path d="M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z" fill="url(#bakeR)"/>
+        <g stroke="#B4762B" stroke-opacity="0.5" stroke-width="2.4" stroke-linecap="round" fill="none">
+          <path d="M188 82 L194 66"/><path d="M176 78 L180 61"/><path d="M164 79 L166 62"/>
+          <path d="M208 150 Q180 168 150 172"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- the slip, which is the product -->
+  <g transform="translate(600 300)">
+    <rect x="-215" y="-27" width="430" height="54" rx="5" fill="#F4EEE2"/>
+    <text x="0" y="6" text-anchor="middle" font-size="21" fill="#3D2814" letter-spacing="0.2">Your brand, on the slip inside.</text>
+  </g>
+
+  <text x="600" y="432" text-anchor="middle" font-size="62" font-weight="700" fill="#F0E3CC" letter-spacing="-1">Kismat Cookies</text>
+  <text x="600" y="486" text-anchor="middle" font-size="27" fill="#C8B79B">Advertising inside real fortune cookies,</text>
+  <text x="600" y="524" text-anchor="middle" font-size="27" fill="#C8B79B">at restaurants everywhere.</text>
+
+  <text x="600" y="580" text-anchor="middle" font-size="16" fill="#8E7B5F" letter-spacing="3.4">KISMATCOOKIES.COM</text>
+</svg>

@@ -292,6 +292,39 @@ const caseCards = () => D.cases.map(c => `<li class="case reveal">
           <p class="case__by">Run by ${c.runBy}</p>
         </li>`).join('\n        ');
 
+/* ---- canonical, social and crawl metadata --------------------------------
+   Derived from each page's own <title> and description rather than a second
+   list to keep in step with them. Paths are the clean ones cleanUrls serves,
+   so the canonical matches the URL a visitor actually has. */
+const SITE = 'https://kismatcookies.com';
+const pathFor = (page) => page === 'index' ? '/' : `/${page}`;
+
+const socialHead = (page, html) => {
+  const title = (html.match(/<title>([^<]*)<\/title>/) || [, 'Kismat Cookies'])[1];
+  const desc  = (html.match(/<meta name="description" content="([^"]*)"/) || [, ''])[1];
+  /* "The formats | Kismat Cookies" reads as a tab label; a share card wants
+     the page's own name, and og:site_name carries the brand separately. */
+  const ogTitle = page === 'index'
+    ? 'Kismat Cookies'
+    : title.replace(/\s*\|\s*Kismat Cookies\s*$/, '');
+  const url = SITE + pathFor(page);
+  return `<link rel="canonical" href="${url}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kismat Cookies">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="${url}">
+<meta property="og:title" content="${esc(ogTitle)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:image" content="${SITE}/assets/media/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A fortune cookie cracked open beside the words Kismat Cookies.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(ogTitle)}">
+<meta name="twitter:description" content="${esc(desc)}">
+<meta name="twitter:image" content="${SITE}/assets/media/og.png">`;
+};
+
 const blocks = (page) => ({
   header: header(page),
   footer: footer(page),
@@ -303,14 +336,43 @@ const blocks = (page) => ({
 });
 
 let touched = 0;
+const pages = [];
 for (const file of fs.readdirSync('src/pages').filter(f => f.endsWith('.html'))) {
   const page = path.basename(file, '.html');
   let html = fs.readFileSync(path.join('src/pages', file), 'utf8');
   const b = blocks(page === 'index' ? 'home' : page);
   html = html.replace(/<!--#(\w+)-->[\s\S]*?<!--\/#\1-->/g, (m, name) =>
     b[name] !== undefined ? `<!--#${name}-->${b[name]}<!--/#${name}-->` : m);
+  /* Rebuilt from scratch each time rather than edited in place, so running
+     the build twice does not stack two copies of the block. */
+  html = html.replace(/\n?<!--#social-->[\s\S]*?<!--\/#social-->/g, '')
+             .replace('</head>', `<!--#social-->\n${socialHead(page, html)}\n<!--/#social-->\n</head>`);
   fs.writeFileSync(file, html);
   touched++;
   console.log(`  built ${file}`);
+  pages.push(page);
 }
+/* robots.txt and sitemap.xml are written from the page list above, so a new
+   page in src/pages is crawlable without anyone remembering to add it. */
+fs.writeFileSync('robots.txt',
+`User-agent: *
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`);
+
+const today = new Date().toISOString().slice(0, 10);
+fs.writeFileSync('sitemap.xml',
+`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.sort((a, b) => (a === 'index' ? -1 : b === 'index' ? 1 : a.localeCompare(b)))
+  .map(p => `  <url>
+    <loc>${SITE}${pathFor(p)}</loc>
+    <lastmod>${today}</lastmod>
+    <priority>${p === 'index' ? '1.0' : '0.8'}</priority>
+  </url>`).join('\n')}
+</urlset>
+`);
+console.log('  wrote robots.txt + sitemap.xml');
+
 console.log(`\n${touched} pages built from src/pages + assets/js/data.js`);
