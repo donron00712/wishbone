@@ -1,6 +1,6 @@
 /* Homepage: pinned hero sequence, why-it-works, formats */
 (function () {
-  const { wishes, sampleFortunes, icons } = window.WB;
+  const { wishes, sampleFortunes, photos, icons } = window.WB;
 
   /* The wishbone mark, used as the separator between fortunes in the marquee.
      Lives here because this is the only place that still draws one. */
@@ -58,8 +58,17 @@
   /* ---------- 3. the drifting wall of brands behind stage two ---------- */
   const wrapper = document.querySelector('.grid-wrapper');
   const perRow = 8;
+
+  /* A photograph of a real cookie, sitting in the wall as one more tile.
+     Only used if data.js has any — see the note there about what may go in. */
+  const photoTile = p => `
+      <div class="tile tile--photo">
+        <img src="${p.src}" alt="${p.alt}" loading="lazy" decoding="async">
+        ${p.credit ? `<span class="tile__credit">${p.credit}</span>` : ''}
+      </div>`;
+
   wrapper.innerHTML = [0, 1, 2].map(r => {
-    const tiles = sampleFortunes.slice(r * perRow, r * perRow + perRow).map(f => `
+    const slips = sampleFortunes.slice(r * perRow, r * perRow + perRow).map(f => `
       <div class="tile">
         <div class="paper paper--fortune">
           <p>${f.line}</p>
@@ -73,7 +82,14 @@
             <em>${f.url}</em>
           </span>
         </div>
-      </div>`).join('');
+      </div>`);
+
+    /* photographs are dealt one per row and folded in, so the wall reads as a
+       mix rather than a block of slips followed by a block of pictures */
+    const pic = photos[r];
+    if (pic) slips.splice(Math.min(3, slips.length), 0, photoTile(pic));
+
+    const tiles = slips.join('');
     return `<div class="grid-row" data-row="${r}">${tiles + tiles}</div>`;
   }).join('');
 

@@ -116,6 +116,18 @@ window.WB = (function () {
     { num: '0',  label: 'Ways to skip it, block it or scroll past it.' }
   ];
 
+  /* Photographs of real cookies, mixed into the wall alongside the printed
+     slips. Empty by default, and it must stay that way until each file is one
+     you are allowed to publish: your own photograph, a licensed stock image, or
+     one whose creator has given permission in writing. Screenshots from social
+     media are none of those — they are someone else's copyrighted work, and
+     using them also implies that account endorses us.
+
+     Drop files in assets/media/ and add an entry:
+       { src: 'assets/media/cookie-01.jpg', alt: 'A cracked fortune cookie on a
+         white plate, the slip half out.', credit: 'Photo: your name' }  */
+  const photos = [];
+
   /* Real campaigns, run by other people. Every figure here comes from the
      published case study named in `source`, and `runBy` credits whoever
      actually ran it. Kismat Cookies has not worked with these brands — this
@@ -180,5 +192,5 @@ window.WB = (function () {
     }
   ];
 
-  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases };
+  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos };
 })();

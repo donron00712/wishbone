@@ -52,3 +52,31 @@ small edit rather than a hunt:
 
 Nothing else in the codebase reads a colour directly — every component goes
 through the tokens — so no component rules need touching.
+
+## Photographs in the hero wall
+
+`assets/js/data.js` has a `photos` array, empty by default. Add an entry and the
+photo appears as a tile in the wall alongside the printed slips:
+
+```js
+const photos = [
+  { src: 'assets/media/cookie-01.jpg',
+    alt: 'A cracked fortune cookie on a white plate, the slip half out.',
+    credit: 'Photo: your name' }
+];
+```
+
+One photo is used per row, folded in among the slips. Put the files in
+`assets/media/`.
+
+**Only add a file you are allowed to publish.** That means one of:
+
+- a photograph you took
+- a stock image you have licensed (Unsplash and Pexels are free for commercial
+  use; Getty, Stocksy and Adobe Stock are paid)
+- an image whose creator has given you permission in writing
+
+A screenshot from Instagram or TikTok is none of those. The photograph belongs
+to whoever took it, publishing it here without permission is infringement, and
+showing someone's username next to this brand implies an endorsement that does
+not exist.
