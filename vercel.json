@@ -7,6 +7,17 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.kismatcookies.com"
+        }
+      ],
+      "destination": "https://kismatcookies.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -15,6 +26,17 @@
         }
       ],
       "destination": "https://kismatcookies.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "wishbone-swart.vercel.app"
+        }
+      ],
+      "destination": "https://kismatcookies.com/",
       "permanent": true
     },
     {
