@@ -27,3 +27,15 @@ build/
 # Ignored so they cannot reach a public repo by accident — this repo is public.
 # Delete this rule once the folder holds only files you are cleared to publish.
 assets/media/Screenshot_*
+
+# The same screenshots came back as assets/media/images/1.png-10.png, which
+# the rule above does not catch — renaming a file does not change who owns it.
+# Every one of them still has the Instagram like-count and comment rail in
+# frame. Keep the whole folder out until it holds only files we can publish.
+assets/media/images/
+
+# Source footage, kept locally. The site loads the encoded moment-film.* files
+# that add-video.js writes; the multi-megabyte original has no reason to be in
+# a public repo.
+assets/media/Video.mp4
+assets/media/video.mp4

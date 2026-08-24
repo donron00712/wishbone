@@ -7,7 +7,8 @@
     "build": "node build.js",
     "start": "node build.js && python3 -m http.server 4321",
     "dev": "node build.js && python3 -m http.server 4321",
-    "add-photo": "node add-photo.js"
+    "add-photo": "node add-photo.js",
+    "add-video": "node add-video.js"
   },
   "keywords": [
     "kismat",

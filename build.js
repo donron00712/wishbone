@@ -18,6 +18,13 @@ global.window = {};
 require('./assets/js/data.js');
 const D = global.window.WB;
 
+/* Footage for the fortune moment, if data.js names one. Attribute values are
+   escaped because alt and caption are prose someone will edit by hand. */
+const film = D.momentFilm || {};
+const esc = (v) => String(v)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;');
+
 const arrow = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const smallArrow = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="m1 9.66667 8.66667-8.66667m0 0v8.32m0-8.32h-8.32" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg>`;
 const bone = (w = 23, h = 21) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
@@ -183,6 +190,11 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         }).join('')}
       </div>
       <div class="moment__inner" role="dialog" aria-modal="true" aria-labelledby="moment-title">
+        <!-- The stage is centred, so the film growing from nothing on the right
+             walks the fortune to the left on its own. One transition, not two
+             that have to be kept in step. -->
+        <div class="moment__stage">
+        <div class="moment__fortune">
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
                 aria-label="Crack open the fortune cookie">
@@ -205,6 +217,20 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
             <span class="paper__id"><b>Kismat Cookies</b></span>
           </div>
         </figure>
+        </div>
+${film.stem ? `        <!-- Written out only when data.js names a stem, and revealed only
+             once the file has decoded a frame, so a missing or broken video
+             leaves the moment as one centred column rather than a black box. -->
+        <div class="moment__film" id="moment-film">
+          <video class="moment__video" id="moment-video"
+                 preload="none" muted loop playsinline
+                 poster="${film.stem}.jpg"${film.alt ? ` aria-label="${esc(film.alt)}"` : ''}>
+            <source src="${film.stem}.webm" type="video/webm">
+            <source src="${film.stem}.mp4" type="video/mp4">
+          </video>${film.caption ? `
+          <p class="moment__caption">${esc(film.caption)}</p>` : ''}
+        </div>
+` : ''}        </div>
         <button class="moment__close" type="button" data-moment-close>Close</button>
       </div>
     </div>` : ''}

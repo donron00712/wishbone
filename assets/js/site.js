@@ -44,11 +44,24 @@
 
   if (moment) {
     const cookie = document.getElementById('moment-cookie');
+    const film   = document.getElementById('moment-film');
+    const video  = document.getElementById('moment-video');
     let shown = false, opened = false;
+
+    /* The film only joins the layout once it has decoded a frame, so a missing
+       or broken file leaves one centred column rather than a black rectangle.
+       Same rule the hero cracker already plays by. */
+    if (video) {
+      video.addEventListener('loadeddata', () => {
+        moment.classList.add('has-film');
+        void film.offsetHeight;      /* in case the cookie was already cracked */
+      }, { once: true });
+    }
 
     const closeMoment = () => {
       moment.classList.remove('is-in');
       setTimeout(() => { moment.hidden = true; }, 500);
+      if (video) video.pause();          /* nothing decoding behind a hidden overlay */
       if (lenis) lenis.start();
       onScroll();                                  // let the sticky CTA back in
     };
@@ -59,6 +72,10 @@
       moment.hidden = false;
       void moment.offsetHeight;          /* force a reflow so the transition runs */
       moment.classList.add('is-in');
+      /* Buffer while the cookie waits to be tapped. The markup says
+         preload="none", so a visit that never reaches the moment never asks
+         for the file at all. */
+      if (video) { video.preload = 'auto'; video.load(); }
       if (lenis) lenis.stop();
       cookie.focus({ preventScroll: true });
     };
@@ -67,6 +84,9 @@
       if (opened) return;
       opened = true;
       moment.classList.add('is-open');
+      /* Muted and inline, so this is allowed without a gesture — and it has
+         one anyway. Reduced motion keeps the poster frame instead. */
+      if (video && !reduced) video.play().catch(() => {});
       setTimeout(() => applyTheme('warm', true), 620);   // after the halves part
       setTimeout(closeMoment, 4200);                     // then hand the page back
     };

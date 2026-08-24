@@ -253,6 +253,11 @@
         <span class="mote" style="--x:7%;--d:0s;--t:11s;--s:3px"></span><span class="mote" style="--x:15%;--d:2.6s;--t:14s;--s:5px"></span><span class="mote" style="--x:23%;--d:5.1s;--t:12s;--s:4px"></span><span class="mote" style="--x:31%;--d:1.3s;--t:15s;--s:3px"></span><span class="mote" style="--x:39%;--d:3.9s;--t:13s;--s:6px"></span><span class="mote" style="--x:46%;--d:6.4s;--t:16s;--s:4px"></span><span class="mote" style="--x:54%;--d:0.7s;--t:12s;--s:5px"></span><span class="mote" style="--x:61%;--d:4.4s;--t:14s;--s:3px"></span><span class="mote" style="--x:69%;--d:2.1s;--t:15s;--s:4px"></span><span class="mote" style="--x:76%;--d:5.8s;--t:11s;--s:6px"></span><span class="mote" style="--x:83%;--d:3.2s;--t:13s;--s:3px"></span><span class="mote" style="--x:89%;--d:1.8s;--t:16s;--s:5px"></span><span class="mote" style="--x:94%;--d:7.1s;--t:14s;--s:4px"></span><span class="mote" style="--x:97%;--d:0.4s;--t:12s;--s:6px"></span>
       </div>
       <div class="moment__inner" role="dialog" aria-modal="true" aria-labelledby="moment-title">
+        <!-- The stage is centred, so the film growing from nothing on the right
+             walks the fortune to the left on its own. One transition, not two
+             that have to be kept in step. -->
+        <div class="moment__stage">
+        <div class="moment__fortune">
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
                 aria-label="Crack open the fortune cookie">
@@ -310,6 +315,19 @@
             <span class="paper__id"><b>Kismat Cookies</b></span>
           </div>
         </figure>
+        </div>
+        <!-- Written out only when data.js names a stem, and revealed only
+             once the file has decoded a frame, so a missing or broken video
+             leaves the moment as one centred column rather than a black box. -->
+        <div class="moment__film" id="moment-film">
+          <video class="moment__video" id="moment-video"
+                 preload="none" muted loop playsinline
+                 poster="assets/media/moment-film.jpg" aria-label="A pair of hands cracks a fortune cookie open and draws out the printed slip inside.">
+            <source src="assets/media/moment-film.webm" type="video/webm">
+            <source src="assets/media/moment-film.mp4" type="video/mp4">
+          </video>
+        </div>
+        </div>
         <button class="moment__close" type="button" data-moment-close>Close</button>
       </div>
     </div>

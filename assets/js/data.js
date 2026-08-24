@@ -135,6 +135,26 @@ window.WB = (function () {
       alt: 'An opened fortune cookie with its slip held between the two halves.' }
   ];
 
+  /* Footage for the fortune moment, shown beside the slip once the cookie has
+     been cracked. Same licensing rule as the photographs above: shot by us,
+     licensed, or permitted in writing.
+
+     `stem` is a path with no extension. Drop <stem>.webm, <stem>.mp4 and
+     <stem>.jpg into assets/media/ and the panel appears on its own. Leave it
+     empty and the moment stays exactly as it is — one centred column, with no
+     request made and no empty frame.
+
+     Shoot it 4:5 portrait, 864x1080, four to six seconds and seamlessly
+     looping. The moment hands the page back 4.2s after the crack, so this is a
+     loop the visitor catches rather than a film they watch. No audio track —
+     it autoplays muted, so a track would only cost bytes.
+     `npm run add-video <file>` encodes all three to those numbers. */
+  const momentFilm = {
+    stem: 'assets/media/moment-film',
+    alt:  'A pair of hands cracks a fortune cookie open and draws out the printed slip inside.',
+    caption: ''
+  };
+
   /* Real campaigns, run by other people. Every figure here comes from the
      published case study named in `source`, and `runBy` credits whoever
      actually ran it. Kismat Cookies has not worked with these brands — this
@@ -199,5 +219,5 @@ window.WB = (function () {
     }
   ];
 
-  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos };
+  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos, momentFilm };
 })();
