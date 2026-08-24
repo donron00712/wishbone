@@ -116,46 +116,35 @@ window.WB = (function () {
     { num: '0',  label: 'Ways to skip it, block it or scroll past it.' }
   ];
 
-  /* Pictures for the wall.
+  /* Pictures for the wall. Empty on purpose.
 
-     Two rules, and they have been paid for once already. Anything published
-     here has to be ours to publish: our own photograph, a licensed stock
-     image, or one whose creator has permitted it in writing. Screenshots from
-     social media are none of those, and using them also implies the account
-     endorses us.
+     The wall falls back to slips alone when this array is empty, which is the
+     state it is in now — the eight pictures that were here have been taken
+     down. Leave it empty until there are files that are ours to publish.
 
-     Second rule, learned the same way: no third-party brand marks. Two of the
-     images offered for this wall carried real chains' branded slips, and a
-     wall selling branded fortune cookies cannot show another company's without
-     reading as a client list. They were left out.
+     Three rules, each of them already paid for once:
 
-     Every picture in this wall is now AI-generated — the licensed stock
-     photographs were dropped, so there is no photograph of a real cookie left
-     on the page. Each one says so in its alt text. If that distinction ever
-     stops being carried there, it needs to move somewhere else on the page
-     rather than quietly disappear.
+     1. It has to be ours. Our own photograph, a licensed stock image, or one
+        whose creator has permitted it in writing. Screenshots from social
+        media are none of those, and using them also implies the account
+        endorses us. Cropping a screenshot changes how it looks, not who owns
+        it.
+     2. No third-party brand marks. Two of the images offered for this wall
+        carried real chains' branded slips, and a wall selling branded fortune
+        cookies cannot show another company's without reading as a client list.
+     3. Say what a picture is. If anything here is ever AI-generated rather
+        than photographed, that has to be legible to a visitor somewhere, not
+        just to whoever reads this file.
+
+     Shoot square and at least 900px — the tile renders at 432 CSS px once the
+     hero's 1.45x scale is applied, so 600px was already soft on retina.
+     `npm run add-photo <file>` crops and compresses; it currently writes 600px
+     and wants raising before the next batch.
 
      Drop files in assets/media/ and add an entry:
        { src: 'assets/media/cookie-01.jpg', alt: 'A cracked fortune cookie on a
          white plate, the slip half out.', credit: 'Photo: your name' }  */
-  const photos = [
-    { src: 'assets/media/wall-01.jpg',
-      alt: 'AI-generated image: a hand holds a cracked fortune cookie over a pavement, the slip stretched between the halves.' },
-    { src: 'assets/media/wall-02.jpg',
-      alt: 'AI-generated image: a hand draws the slip out of a fortune cookie against a white coat.' },
-    { src: 'assets/media/wall-03.jpg',
-      alt: 'AI-generated image: a hand holds a fortune slip close to the camera, lucky numbers printed underneath.' },
-    { src: 'assets/media/wall-04.jpg',
-      alt: 'AI-generated image: a fortune slip held between finger and thumb, filling the frame.' },
-    { src: 'assets/media/wall-05.jpg',
-      alt: 'AI-generated image: a hand holds a fortune slip in front of a green houseplant.' },
-    { src: 'assets/media/wall-06.jpg',
-      alt: 'AI-generated image: a hand holds a cracked cookie and a slip printed in red type.' },
-    { src: 'assets/media/wall-07.jpg',
-      alt: 'AI-generated image: a fortune cookie broken open on a wooden table, a pale blue slip across it.' },
-    { src: 'assets/media/wall-08.jpg',
-      alt: 'AI-generated image: an open palm holding two cookie halves and the slip between them.' }
-  ];
+  const photos = [];
 
   /* Footage for the fortune moment, shown beside the slip once the cookie has
      been cracked. Same licensing rule as the photographs above: shot by us,

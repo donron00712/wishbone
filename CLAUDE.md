@@ -96,20 +96,18 @@ Several "bugs" this session were this artifact, not the code.
   and `assets/media/images/` are both gitignored so they cannot reach the
   public repo by accident. The second rule exists because the screenshots came
   back once renamed to `1.png`–`10.png`, which the first rule did not catch.
-- **No third-party brand marks in the wall.** Two of those images carried real
-  chains' branded fortune slips (Panda Express, Wing's). A wall selling branded
-  fortune cookies cannot show another company's without reading as a client
-  list, and no disclaimer fixes that. They were left out; `wall-01`–`wall-08`
-  are the eight that were clean.
-- **Every picture in the wall is AI-generated.** `wall-01`–`wall-08` say so in
-  their alt text in `data.js`. The three licensed stock photographs that used
-  to sit alongside them were dropped at the owner's request, so there is no
-  photograph of a real cookie anywhere on the site — the only real footage is
-  the film in the fortune moment. The owner chose to carry the AI distinction
-  in alt text rather than visibly on the page; if that alt text is ever
-  rewritten, the distinction needs to land somewhere else rather than quietly
-  disappear. (`git show bee3f90` has the stock photographs if they are wanted
-  back.)
+- **No third-party brand marks in the wall.** Two of the images offered for it
+  carried real chains' branded fortune slips (Panda Express, Wing's). A wall
+  selling branded fortune cookies cannot show another company's without reading
+  as a client list, and no disclaimer fixes that.
+- **The wall currently has no pictures at all.** `photos` in `data.js` is an
+  empty array and the wall falls back to slips alone. `wall-01`–`wall-08` were
+  taken down because they were not ours to publish. Do not restore them from
+  history — get licensed images, or shoot them.
+- Note that removing them from `HEAD` does not remove them from a public git
+  history: they remain reachable at `bee3f90`, and the three stock photographs
+  before them at `505488e`. Cleaning that up needs a history rewrite and a
+  cache purge, or a fresh repo.
 
 ## Outstanding, needs the owner
 
