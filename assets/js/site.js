@@ -180,12 +180,24 @@
   const cookie = document.getElementById('cookie');
   const modal = document.getElementById('cookie-modal');
   const KEY = 'wb-cookie-consent';
-  if (cookie && !localStorage.getItem(KEY)) setTimeout(() => cookie.classList.add('is-visible'), 900);
+
+  /* Storage throws rather than failing quietly when a browser is set to block
+     it — Brave with shields up, Safari in private mode, a filled quota. Both
+     ends are guarded, because an unguarded write here took the whole page down
+     with it: settle() threw on its first line, so the bar never dismissed and
+     onScroll() never ran, which left consentUp true and gated the fortune
+     moment forever. The visitor saw a dead Accept button. */
+  const remember = v => { try { localStorage.setItem(KEY, v); } catch (e) {} };
+  const recall = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+
+  if (cookie && !recall()) setTimeout(() => cookie.classList.add('is-visible'), 900);
   const settle = value => {
-    localStorage.setItem(KEY, value);
+    /* Answer the bar first and persist second. Someone who cannot be
+       remembered still gets their choice honoured for this page view. */
     cookie.classList.remove('is-visible');
     modal.classList.remove('is-open');
     onScroll();                 // the bottom is free again
+    remember(value);
   };
   document.addEventListener('click', e => {
     const action = e.target.closest('[data-cookie]');
