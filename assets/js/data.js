@@ -126,7 +126,14 @@ window.WB = (function () {
      Drop files in assets/media/ and add an entry:
        { src: 'assets/media/cookie-01.jpg', alt: 'A cracked fortune cookie on a
          white plate, the slip half out.', credit: 'Photo: your name' }  */
-  const photos = [];
+  const photos = [
+    { src: 'assets/media/cookie-tray.jpg',
+      alt: 'Three freshly folded fortune cookies cooling on a metal tray.' },
+    { src: 'assets/media/cookie-slip.jpg',
+      alt: 'A fortune cookie snapped in two, the printed slip stretched between the halves.' },
+    { src: 'assets/media/cookie-open.jpg',
+      alt: 'An opened fortune cookie with its slip held between the two halves.' }
+  ];
 
   /* Real campaigns, run by other people. Every figure here comes from the
      published case study named in `source`, and `runBy` credits whoever
