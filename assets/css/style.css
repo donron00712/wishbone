@@ -344,9 +344,22 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .format:focus-visible .meta,.format:focus-visible h3,.format:focus-visible p,
 .format:focus-visible .know,.format:focus-visible .know svg{color:var(--on-gradient)}
 
-/* A photograph in the wall, sized like a slip tile so the two intermix. */
-.tile--photo{padding:0;overflow:hidden;position:relative;display:block}
-.tile--photo img{width:100%;height:100%;object-fit:cover;display:block}
+/* A photograph in the wall, sized like a slip tile so the two intermix.
+
+   Doubled up as `.tile.tile--photo` on purpose. A single class ties with the
+   plain `.tile` rules on specificity, so whichever is written later wins —
+   and the phone breakpoint further down sets padding:13px, which used to
+   inset the picture and leave a band of tile background around it with the
+   image's own square corners showing inside the tile's rounded ones. Two
+   classes beat one at every breakpoint, whatever the source order.
+
+   The radius is inherited by the image rather than left to overflow:hidden
+   alone: the wall is GPU-transformed (GSAP scales it 1.45 -> 1), and WebKit
+   is unreliable about clipping to a rounded box inside a transformed
+   ancestor. Cheap insurance against hairline square corners on iOS. */
+.tile.tile--photo{padding:0;overflow:hidden;position:relative;display:block}
+.tile.tile--photo img{width:100%;height:100%;object-fit:cover;display:block;
+  border-radius:inherit}
 .tile__credit{position:absolute;left:8px;bottom:7px;font-size:9px;letter-spacing:.05em;
   color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);opacity:.85}
 
