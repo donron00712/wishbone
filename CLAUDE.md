@@ -58,11 +58,26 @@ Structural gotchas found the hard way:
 
 ## The fortune moment
 
-Landing page only, every load. At the scroll cue where the sticky CTA fires, a
-cookie appears centre-screen; tapping it cracks it open, reveals a slip, and
-turns the site from dark roast to beige. Other pages inherit the palette via
-`sessionStorage`; the landing page always resets to dark so the crack has
-somewhere to go.
+Landing page only. At the scroll cue where the sticky CTA fires, a cookie
+appears centre-screen; tapping it cracks it open, reveals a slip, and turns the
+site from dark roast to beige. Other pages inherit the palette via
+`sessionStorage`.
+
+**It does not run on every load.** It runs on a fresh arrival and on every
+refresh, but not when someone returns to the landing page from elsewhere on the
+site — they have had their cookie, and interrupting a visitor mid-tour is a
+different thing from greeting one who just arrived. Refresh and return are both
+page loads, so two signals separate them: the navigation type (`reload`) and
+`wb-toured`, a session flag every non-landing page writes. A refresh wins
+outright, so `home → formats → home` stays quiet but refreshing there brings it
+back. Referrer would be the obvious third signal and is deliberately unused —
+privacy browsers strip it, Brave included.
+
+The reset to dark is tied to the same decision, not to the page. When the
+cookie is due the landing page resets so the crack has somewhere to go; when it
+is skipped the page inherits the carried palette like any other. Resetting
+unconditionally would strand a returning visitor in dark with no way back to
+warm, since the moment is the only thing that turns the site.
 
 Night sky behind it: 46 stars on individual twinkle clocks, 14 rising motes,
 2 shooting stars, and a bloom anchored **inside the cookie button** (pinned to a

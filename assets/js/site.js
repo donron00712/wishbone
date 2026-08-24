@@ -12,13 +12,36 @@
   /* ---------- the fortune moment ----------
      Landing page only, at the point the sticky CTA would otherwise fire.
 
-     The landing page always starts green so the crack always has something to
-     do — arriving already warm would leave the cookie with nothing to change.
-     Every other page inherits whichever palette the visitor left the landing
-     page on, so clicking through does not throw the change away. Session
-     scoped, so a fresh visit starts green again. */
+     When it runs, the landing page starts dark so the crack has somewhere to
+     go — arriving already warm would leave the cookie nothing to change. Every
+     other page inherits whichever palette the visitor left the landing page
+     on, so clicking through does not throw the change away.
+
+     It runs on a fresh arrival and on every refresh, but not when someone
+     comes back to the landing page from elsewhere on the site. They have had
+     their cookie already, and interrupting someone reading their way around
+     is a different thing from greeting someone who just arrived.
+
+     Refresh and return are both page loads, so they are told apart by two
+     signals rather than one: the navigation type says whether this load was a
+     reload, and a session flag written by every non-landing page says whether
+     the visitor has been anywhere else yet. Referrer would have been the
+     obvious third option and is not used — privacy browsers strip it, Brave
+     included, so it would fail for a chunk of real visitors.
+
+     A refresh wins outright, because refreshing was asked to always bring the
+     cookie back. So home -> formats -> home stays quiet, and refreshing there
+     brings it back. */
   const THEME_KEY = 'wb-theme';
+  const TOUR_KEY  = 'wb-toured';
   const moment    = document.getElementById('moment');
+
+  /* sessionStorage throws rather than failing quietly when a browser blocks
+     it, the same way localStorage does for consent further down. */
+  const session = {
+    get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  };
 
   const applyTheme = (name, animate) => {
     if (animate) {
@@ -27,15 +50,26 @@
     }
     if (name === 'warm') document.documentElement.setAttribute('data-theme', 'warm');
     else document.documentElement.removeAttribute('data-theme');
-    try { sessionStorage.setItem(THEME_KEY, name); } catch (e) {}
+    session.set(THEME_KEY, name);
   };
 
-  if (page === 'home') {
+  const navType = (performance.getEntriesByType('navigation')[0] || {}).type;
+
+  /* Whether the cookie is due on this load. Every other page just records
+     that the visitor has been somewhere. */
+  const momentDue = page === 'home' &&
+    (navType === 'reload' || !session.get(TOUR_KEY));
+
+  if (page !== 'home') session.set(TOUR_KEY, '1');
+
+  if (momentDue) {
     applyTheme('dark', false);              /* the crack needs somewhere to go */
-  } else {
-    let carried = 'dark';
-    try { carried = sessionStorage.getItem(THEME_KEY) || 'dark'; } catch (e) {}
-    if (carried === 'warm') applyTheme('warm', false);
+  } else if (session.get(THEME_KEY) === 'warm') {
+    /* Covers the landing page too, when the cookie is not due. Resetting to
+       dark there would strand the visitor: the moment is the only thing that
+       turns the site warm, so with it skipped there is no way back to the
+       palette they already chose. */
+    applyTheme('warm', false);
   }
 
   document.addEventListener('click', e => {
@@ -100,7 +134,7 @@
     });
 
     window.WB.showMoment = showMoment;               // so onScroll can fire it
-    window.WB.momentPending = true;
+    window.WB.momentPending = momentDue;
 
     /* an earlier build kept these in localStorage; the palette is session
        scoped now, so clear the old keys rather than leave dead data behind. */
