@@ -59,6 +59,19 @@
   const wrapper = document.querySelector('.grid-wrapper');
   const perRow = 8;
 
+  /* Three rows stand 478px tall on a phone — 57% of the viewport, leaving a
+     band of dead ground above and below a wall that is supposed to read as
+     endless. Five rows carry it past the edge instead. Desktop already
+     overflows at three (948px against an 820 viewport) so it keeps them, and
+     the tiles stay the size they are: filling the height by growing them
+     instead would put a single 272px tile across most of a phone screen. */
+  const rowCount = window.matchMedia('(max-width:767px)').matches ? 5 : 3;
+
+  /* More rows than there are fortunes to fill them, so rows past the end of
+     the list wrap back to the start rather than coming out empty. */
+  const rowSlips = r => Array.from({ length: perRow },
+    (_, i) => sampleFortunes[(r * perRow + i) % sampleFortunes.length]);
+
   /* A photograph of a real cookie, sitting in the wall as one more tile.
      Only used if data.js has any — see the note there about what may go in. */
   const photoTile = p => `
@@ -67,8 +80,8 @@
         ${p.credit ? `<span class="tile__credit">${p.credit}</span>` : ''}
       </div>`;
 
-  wrapper.innerHTML = [0, 1, 2].map(r => {
-    const slips = sampleFortunes.slice(r * perRow, r * perRow + perRow).map(f => `
+  wrapper.innerHTML = Array.from({ length: rowCount }, (_, r) => {
+    const slips = rowSlips(r).map(f => `
       <div class="tile">
         <div class="paper paper--fortune">
           <p>${f.line}</p>
@@ -89,7 +102,7 @@
        slips followed by a block of pictures — and so every picture in data.js
        is actually reached. Taking photos[r] only ever showed the first three,
        however many were listed. */
-    photos.filter((_, i) => i % 3 === r).forEach((pic, k) => {
+    photos.filter((_, i) => i % rowCount === r).forEach((pic, k) => {
       slips.splice(Math.min(2 + k * 3, slips.length), 0, photoTile(pic));
     });
 
@@ -168,7 +181,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   /* intro */
-  gsap.timeline({ delay: 0.25 })
+  const intro = gsap.timeline({ delay: 0.25 })
     .fromTo(frames, { opacity: 0, scale: 0.82 },
       { opacity: 1, scale: 1, duration: 1.6, ease: 'expo.out', stagger: 0.12 })
     .fromTo(chars, { opacity: 0, yPercent: 55, rotateX: -92 },
@@ -177,6 +190,16 @@
       { opacity: 1, y: 0, duration: 0.9, ease: 'expo.out', stagger: 0.08 }, '-=0.55')
     .fromTo(marquee, { opacity: 0, y: 24 },
       { opacity: 1, y: 0, duration: 0.9, ease: 'expo.out' }, '-=0.7');
+
+  /* Scrolling during the intro finishes it on the spot. Both timelines drive
+     the marquee and the title: the intro is animating them in on a clock while
+     the scrubbed timeline is taking them out on scroll position, and the intro
+     wins the tick because it renders later. The visible symptom is the marquee
+     flickering back over the wall for as long as the intro has left to run.
+     Scrolling is a clear enough signal that the visitor is past the intro. */
+  window.addEventListener('scroll', () => {
+    if (intro.isActive()) intro.progress(1);
+  }, { once: true, passive: true });
 
   /* scrubbed handover from stage one to stage two */
   const tl = gsap.timeline({
@@ -188,7 +211,17 @@
      moment the timeline is built — mid-intro — and pin the frames and marquee
      at whatever partial scale/opacity the intro happened to be at. */
   tl.to(titleWrap, { scale: 0.88, yPercent: -8, opacity: 0, ease: 'none', duration: 0.3 }, 0)
-    .to(marquee,   { opacity: 0, y: 40, ease: 'none', duration: 0.22, immediateRender: false }, 0)
+    /* fromTo, not to. A bare .to() captures its start value the first time it
+       renders, and with immediateRender:false that can happen mid-intro while
+       the marquee is still faded out — it then animates 0 to 0, hides nothing,
+       and the intro leaves the marquee sitting at opacity 1 over the wall for
+       the rest of the page. Naming the start explicitly makes the tween mean
+       the same thing whenever it first renders. Gone by 0.16, before the wall
+       is set visible at 0.18, because the marquee is z-index 6 against the
+       wall's 2 and any overlap lays scrolling text across the tiles. */
+    .fromTo(marquee, { opacity: 1, y: 0 },
+      { opacity: 0, y: 40, ease: 'none', duration: 0.16,
+        immediateRender: false, overwrite: 'auto' }, 0)
     .to(frames[0], { scale: 1.5, opacity: 0, ease: 'none', duration: 0.35, immediateRender: false }, 0)
     .to(frames[1], { scale: 1.28, opacity: 0.35, ease: 'none', duration: 0.35, immediateRender: false }, 0)
 
@@ -196,15 +229,23 @@
     .fromTo(heroGrid, { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.18 }, 0.2)
     .fromTo(wrapper, { scale: 1.45 }, { scale: 1, ease: 'none', duration: 0.5 }, 0.18)
 
-    .fromTo(rows[0], { xPercent: -14 }, { xPercent: 4,   ease: 'none', duration: 0.82 }, 0.18)
-    .fromTo(rows[1], { xPercent: 6 },   { xPercent: -12, ease: 'none', duration: 0.82 }, 0.18)
-    .fromTo(rows[2], { xPercent: -9 },  { xPercent: 7,   ease: 'none', duration: 0.82 }, 0.18)
 
     .fromTo(gridCopy, { opacity: 0, y: 26 }, { opacity: 1, y: 0, ease: 'none', duration: 0.14 }, 0.42)
     .fromTo(keep, { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.08 }, 0.44)
     .to(keep, { opacity: 0, ease: 'none', duration: 0.08 }, 0.82)
     .to(heroGrid, { opacity: 0, ease: 'none', duration: 0.12 }, 0.88)
     .to(gridCopy, { y: -30, ease: 'none', duration: 0.12 }, 0.88);
+
+  /* Each row drifts its own way so the wall never reads as one sliding block.
+     Cycled rather than written out per row, because a phone builds five rows
+     and a desktop three. Every tween is positioned absolutely at 0.18, so
+     adding them after the chain puts them exactly where the chain did. */
+  const drift = [[-14, 4], [6, -12], [-9, 7], [11, -5], [-6, 10]];
+  rows.forEach((row, i) => {
+    const [from, to] = drift[i % drift.length];
+    tl.fromTo(row, { xPercent: from },
+      { xPercent: to, ease: 'none', duration: 0.82 }, 0.18);
+  });
 
   /* dev helper: index.html?stage=0..1 jumps to a point in the hero sequence */
   const stage = new URLSearchParams(location.search).get('stage');
