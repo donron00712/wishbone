@@ -181,7 +181,9 @@
   gsap.registerPlugin(ScrollTrigger);
 
   /* intro */
-  const intro = gsap.timeline({ delay: 0.25 })
+  const intro = gsap.timeline({ delay: 0.25,
+      /* hand the 58 character layers back once they have stopped moving */
+      onComplete: () => title.classList.add('is-settled') })
     .fromTo(frames, { opacity: 0, scale: 0.82 },
       { opacity: 1, scale: 1, duration: 1.6, ease: 'expo.out', stagger: 0.12 })
     .fromTo(chars, { opacity: 0, yPercent: 55, rotateX: -92 },

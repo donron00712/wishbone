@@ -217,7 +217,12 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .hero-title-wrap{position:relative;z-index:10;text-align:center;padding-inline:32px;width:100%;
   display:flex;flex-direction:column;align-items:center}
 .hero-title{max-width:820px;margin-inline:auto}
+/* will-change is promised only while the chars are actually moving. Left on,
+   58 of them hold 58 GPU layers for the life of the page, which costs memory
+   on a phone and buys nothing once the intro has landed — home.js clears it
+   when the intro completes. */
 .hero-title .char{display:inline-block;opacity:0;will-change:transform,opacity}
+.hero-title.is-settled .char{will-change:auto}
 .hero-title .word{white-space:nowrap;display:inline-block}
 .hero-sub{margin-top:24px;max-width:440px;opacity:.9}
 .hero-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:40px}
@@ -771,6 +776,14 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
    A one-time interruption: the cookie arrives centre-screen, the visitor
    cracks it, reads the line, and the palette turns over behind them. Shown
    once per visitor and dismissible at any point — it must never be a wall. */
+/* The hidden attribute has to be honoured explicitly: a UA sheet's
+   display:none loses to any author display, so `display:grid` below quietly
+   overrode `<div class="moment" hidden>` and left the overlay live on every
+   page load. Nothing was visible — opacity is 0 — but 46 stars, 14 motes, two
+   shooting stars, the aura and the idling biscuit all kept animating, under a
+   full-screen backdrop-filter compositing every frame, against a scroll scrub
+   and smooth-scroll already asking for the main thread. */
+.moment[hidden]{display:none}
 .moment{position:fixed;inset:0;z-index:120;display:grid;place-items:center;
   opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
 .moment.is-in{opacity:1;pointer-events:auto}
