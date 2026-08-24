@@ -916,9 +916,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment__caption{width:var(--film-w);margin:12px 0 0;font-size:12.5px;
   letter-spacing:.03em;line-height:1.45;color:var(--moment-ink);opacity:.75}
 
-/* Phones stack it under the slip and shrink it, because a 4:5 frame at any
-   real width next to the cookie will not fit a phone viewport. Height snaps
-   rather than eases, the same as the slip above it does. */
+/* Phones stack the film under the slip. Height snaps rather than eases, the
+   same as the slip above it does. */
 @media (max-width:860px){
   /* The stack can genuinely outrun a short phone, so let the overlay scroll.
      `safe` matters: plain centring would push the top of the panel off the
@@ -926,12 +925,44 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
      cap above guarantees the two columns fit. */
   .moment{place-items:safe center;overflow-y:auto}
   .moment__stage{flex-direction:column}
-  .moment__film{--film-w:min(48vw,186px,26vh);
-    width:auto;height:0;margin-left:0;overflow:hidden;
+
+  /* Slip and film share one width, so the stack has a single edge down both
+     sides. Three different widths — cookie 240, slip 323, film 180 — read as
+     a ragged column even with every one of them centred, which is what made
+     this look broken on a phone rather than merely narrow.
+
+     300 is the number that lets the film keep its 4:5 without the stack
+     outrunning the viewport: at the slip's old 323 the frame stood 404px
+     tall and pushed the whole panel into a scroll. Cropping to square would
+     have fitted too, but at this size it zooms so far into the hands that
+     the cookie stops being legible — the footage is the product, so it keeps
+     the shape it was shot in and the slip comes in to meet it. */
+  .moment__slip,
+  .moment__film{--film-w:min(80vw,300px)}
+  .moment__slip{width:var(--film-w)}
+  .moment__film{width:auto;height:0;margin-left:0;overflow:hidden;
     transform:translateY(-16px) scale(.94);
     transition:transform .7s var(--ease),opacity .5s var(--ease) .3s}
   .moment.has-film.is-open .moment__film{
     width:auto;height:auto;margin:14px 0 0;overflow:visible}
+  .moment__video{border-radius:14px}
+
+  /* With a film in the stack the cookie gives up a little size to it. At its
+     full 64vw the panel cleared an 812-tall phone by 24px, which is no margin
+     at all once a browser chrome bar is showing. Only when there is a film to
+     make room for — without one the cookie keeps the screen to itself. */
+  .moment.has-film .moment__cookie{width:min(56vw,215px)}
+}
+
+/* Short phones — an SE at 667, an older Android at 640. The stack above needs
+   763px, so without this it scrolls, and a moment you have to scroll is not a
+   moment. Everything comes down together so the shared edge survives. */
+@media (max-width:860px) and (max-height:700px){
+  .moment__slip,
+  .moment__film{--film-w:min(62vw,230px)}
+  .moment.has-film .moment__cookie{width:min(42vw,158px)}
+  .moment__eyebrow{margin-bottom:-22px}
+  .moment.has-film.is-open .moment__film{margin-top:10px}
 }
 
 .moment__close{height:0;margin:0;padding:0;overflow:hidden;background:none;border:0;cursor:pointer;
