@@ -93,7 +93,19 @@ Several "bugs" this session were this artifact, not the code.
 - No invented statistics, no behavioural promises, no launch-status language.
 - Photography **and footage** must be shot by us, licensed, or permitted in
   writing. Instagram screenshots are none of those; `assets/media/Screenshot_*`
-  is gitignored so they cannot reach the public repo by accident.
+  and `assets/media/images/` are both gitignored so they cannot reach the
+  public repo by accident. The second rule exists because the screenshots came
+  back once renamed to `1.png`–`10.png`, which the first rule did not catch.
+- **No third-party brand marks in the wall.** Two of those images carried real
+  chains' branded fortune slips (Panda Express, Wing's). A wall selling branded
+  fortune cookies cannot show another company's without reading as a client
+  list, and no disclaimer fixes that. They were left out; `wall-01`–`wall-08`
+  are the eight that were clean.
+- `wall-01`–`wall-08` are **AI-generated**, and say so in their alt text in
+  `data.js`. They are not photographs of cookies we have produced. The owner
+  chose to carry that in alt text rather than visibly on the page; if the alt
+  text is ever rewritten, the distinction needs to land somewhere else rather
+  than quietly disappear.
 
 ## Outstanding, needs the owner
 
@@ -103,4 +115,7 @@ Several "bugs" this session were this artifact, not the code.
    the visitor's mail client, so enquiries arrive, but a real endpoint is better.
 3. The repo is **public**.
 4. The logo mark is still a literal **wishbone**, drawn for the old brand name.
-5. Not built yet: alternating slip/photo layout in the hero wall.
+5. The hero wall deals pictures round-robin across its three rows, folded in
+   every third tile. It used to take `photos[r]`, which showed only the first
+   three however many were listed. A true alternating slip/photo layout is
+   still not built.

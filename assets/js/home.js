@@ -84,10 +84,14 @@
         </div>
       </div>`);
 
-    /* photographs are dealt one per row and folded in, so the wall reads as a
-       mix rather than a block of slips followed by a block of pictures */
-    const pic = photos[r];
-    if (pic) slips.splice(Math.min(3, slips.length), 0, photoTile(pic));
+    /* Pictures are dealt round-robin across the three rows and folded in at
+       spaced positions, so the wall reads as a mix rather than a block of
+       slips followed by a block of pictures — and so every picture in data.js
+       is actually reached. Taking photos[r] only ever showed the first three,
+       however many were listed. */
+    photos.filter((_, i) => i % 3 === r).forEach((pic, k) => {
+      slips.splice(Math.min(2 + k * 3, slips.length), 0, photoTile(pic));
+    });
 
     const tiles = slips.join('');
     return `<div class="grid-row" data-row="${r}">${tiles + tiles}</div>`;
