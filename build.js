@@ -322,7 +322,28 @@ const socialHead = (page, html) => {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
 <meta name="twitter:description" content="${esc(desc)}">
-<meta name="twitter:image" content="${SITE}/assets/media/og.png">`;
+<meta name="twitter:image" content="${SITE}/assets/media/og.png">${page === 'index' ? `
+<script type="application/ld+json">${JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': SITE + '/#org',
+      name: 'Kismat Cookies',
+      url: SITE,
+      logo: SITE + '/assets/media/og.png',
+      description: 'Advertising inside real fortune cookies — a brand\u2019s line, code and lucky numbers printed on the slip served with the restaurant check.'
+    },
+    {
+      '@type': 'WebSite',
+      '@id': SITE + '/#site',
+      name: 'Kismat Cookies',
+      url: SITE,
+      publisher: { '@id': SITE + '/#org' },
+      inLanguage: 'en'
+    }
+  ]
+})}</script>` : ''}`;
 };
 
 const blocks = (page) => ({
