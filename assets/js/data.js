@@ -145,13 +145,13 @@ window.WB = (function () {
      request made and no empty frame.
 
      Shoot it 4:5 portrait, 864x1080, four to six seconds and seamlessly
-     looping. The moment hands the page back 4.2s after the crack, so this is a
-     loop the visitor catches rather than a film they watch. No audio track —
+     looping. The moment hands the page back 14s after the crack, so that is all
+     the room a clip has. No audio track —
      it autoplays muted, so a track would only cost bytes.
      `npm run add-video <file>` encodes all three to those numbers. */
   const momentFilm = {
     stem: 'assets/media/moment-film',
-    alt:  'A pair of hands cracks a fortune cookie open and draws out the printed slip inside.',
+    alt:  'A pair of hands unwraps a fortune cookie, snaps it open and draws out the printed slip inside.',
     caption: ''
   };
 

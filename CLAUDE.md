@@ -69,7 +69,7 @@ missing file leaves the single centred column it has always been. Set
 `momentFilm.stem` in `data.js`; leave it empty and nothing is requested at all.
 
 Shoot it **4:5 portrait, 864x1080, no audio track**, and remember the moment
-hands the page back **4.2s after the crack** — anything past that is never
+hands the page back **14s after the crack** — anything past that is never
 seen. `npm run add-video <file> [name] --from <s> --to <s>` cuts and encodes
 the `.mp4`, `.webm` and `.jpg` poster to those numbers in one go.
 

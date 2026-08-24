@@ -10,9 +10,8 @@
  * paste into data.js. Needs ffmpeg, which you already have.
  *
  * 864x1080 is the frame at 2x: it renders at ~400 CSS px wide on a desktop.
- * The moment hands the page back 4.2s after the crack, so anything longer
- * than about six seconds will not be seen to the end — this is a loop the
- * visitor catches, not a film they watch. --from and --to cut it down to the
+ * The moment hands the page back 14s after the crack, so anything longer
+ * than that will not be seen to the end. --from and --to cut it down to the
  * seconds that carry the point, in the source's own timeline:
  *
  *   node add-video.js raw.mov moment-film --from 5 --to 12.9
@@ -72,14 +71,14 @@ console.log(`\n  wrote ${stem}.mp4   (${kb(`${stem}.mp4`)} KB)`);
 console.log(`  wrote ${stem}.webm  (${kb(`${stem}.webm`)} KB)`);
 console.log(`  wrote ${stem}.jpg   (${kb(`${stem}.jpg`)} KB)\n`);
 
-/* the moment closes 4.2s after the crack, so say so rather than let it surprise */
+/* the moment closes 14s after the crack, so say so rather than let it surprise */
 try {
   const dur = parseFloat(execSync(
     `ffprobe -v error -show_entries format=duration -of csv=p=0 "${stem}.mp4"`
   ).toString().trim());
-  if (dur > 6) {
-    console.log(`  Note: this runs ${dur.toFixed(1)}s. The moment closes 4.2s after`);
-    console.log('  the crack, so only the first few seconds are ever seen.\n');
+  if (dur > 14) {
+    console.log(`  Note: this runs ${dur.toFixed(1)}s. The moment closes 14s after`);
+    console.log('  the crack, so the tail of it is never seen.\n');
   }
 } catch (e) {}
 

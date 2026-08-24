@@ -88,7 +88,7 @@
          one anyway. Reduced motion keeps the poster frame instead. */
       if (video && !reduced) video.play().catch(() => {});
       setTimeout(() => applyTheme('warm', true), 620);   // after the halves part
-      setTimeout(closeMoment, 4200);                     // then hand the page back
+      setTimeout(closeMoment, 14000);                    // then hand the page back
     };
 
     cookie.addEventListener('click', crack);
