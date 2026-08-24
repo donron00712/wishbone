@@ -81,7 +81,7 @@ const navLinks = (page) => D.nav.map(i =>
 const header = (page) => `<a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header" id="site-header">
       <div class="container">
-        <a class="brand" href="index.html" aria-label="Kismat Cookies home">${bone()}<span>Kismat Cookies</span></a>
+        <a class="brand" href="/" aria-label="Kismat Cookies home">${bone()}<span>Kismat Cookies</span></a>
         <nav class="nav" aria-label="Primary">
           <ul>
             ${navLinks(page)}
@@ -118,7 +118,7 @@ const footer = (page) => `<section class="closing container reveal">
             ${navLinks(page)}
           </ul></div>
           <div><h2>Pages</h2><ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="contact.html">Get in touch</a></li>
           </ul></div>
         </div>

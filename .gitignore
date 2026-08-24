@@ -39,3 +39,5 @@ assets/media/images/
 # a public repo.
 assets/media/Video.mp4
 assets/media/video.mp4
+.vercel
+.env*

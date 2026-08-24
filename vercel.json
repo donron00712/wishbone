@@ -3,5 +3,6 @@
   "framework": null,
   "buildCommand": "node build.js",
   "installCommand": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "cleanUrls": true
 }
