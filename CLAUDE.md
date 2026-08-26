@@ -139,8 +139,12 @@ Several "bugs" this session were this artifact, not the code.
    are all published and verified. DMARC is still GoDaddy's default
    (`p=quarantine`, reports going to `dmarc_rua@onsecureserver.net`) and wants
    replacing with our own once DKIM is confirmed passing in the wild.
-2. `FORM_ENDPOINT` in `src/pages/contact.html` is empty — the form falls back to
-   the visitor's mail client, so enquiries arrive, but a real endpoint is better.
+2. ~~`FORM_ENDPOINT` is empty~~ — **resolved.** The contact form posts to
+   Formspree (`/f/mnpaeebb`, free tier, 50 submissions a month). The mailto
+   fallback is still in the file and still runs if the constant is ever
+   emptied, and a failed POST shows the failure panel with the address rather
+   than a false success — the form must never validate, congratulate and drop
+   the message.
 3. The repo is **public**.
 4. The logo mark is still a literal **wishbone**, drawn for the old brand name.
 5. The hero wall deals pictures round-robin across its three rows, folded in
