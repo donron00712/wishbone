@@ -133,8 +133,12 @@ Several "bugs" this session were this artifact, not the code.
 
 ## Outstanding, needs the owner
 
-1. `hello@kismatcookies.com` in `data.js` is **an invented placeholder**, live
-   on a public site.
+1. ~~`hello@kismatcookies.com` is an invented placeholder~~ — **resolved.** It
+   is a real Google Workspace mailbox now. MX (`smtp.google.com`), SPF
+   (`include:_spf.google.com`) and a 2048-bit DKIM key at `google._domainkey`
+   are all published and verified. DMARC is still GoDaddy's default
+   (`p=quarantine`, reports going to `dmarc_rua@onsecureserver.net`) and wants
+   replacing with our own once DKIM is confirmed passing in the wild.
 2. `FORM_ENDPOINT` in `src/pages/contact.html` is empty — the form falls back to
    the visitor's mail client, so enquiries arrive, but a real endpoint is better.
 3. The repo is **public**.
