@@ -558,6 +558,16 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .footer-mail{font-family:"Plus Jakarta Sans",sans-serif;font-size:clamp(22px,3vw,34px);letter-spacing:-.02em;
   color:var(--text) !important;display:inline-block}
 .footer-mail:hover{color:var(--accent) !important}
+
+/* The LinkedIn line under the address. Deliberately quieter than the mail —
+   the address is the ask, this is the reassurance that there is a company
+   behind it. The arrow is the same one every outbound link on the site uses. */
+.footer-social{margin:14px 0 0}
+.footer-social a{display:inline-flex;align-items:center;gap:7px;font-size:14px;
+  color:var(--muted);text-decoration:none}
+.footer-social a:hover{color:var(--text)}
+.footer-social svg{flex:none;transition:transform .25s var(--ease)}
+.footer-social a:hover svg{transform:translate(2px,-2px)}
 .footer-bottom{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;
   font-size:14px;color:var(--muted)}
@@ -678,6 +688,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
      thumb-sized target without changing how they look. */
   .site-footer a,.footer-bottom a,.theme-back{display:inline-block;padding:9px 0}
   .footer-mail{padding:9px 0}   /* also the one in the contact sidebar */
+  .footer-social a{padding:9px 0}
   .cookie .link{padding:10px 4px}
   .brand{padding:4px 0}
 

@@ -113,6 +113,8 @@ const footer = (page) => `<section class="closing container reveal">
           <div>
             <h2>Get in touch</h2>
             <a class="footer-mail" href="mailto:${D.email}">${D.email}</a>
+            <p class="footer-social"><a href="${D.linkedin}"
+               target="_blank" rel="noopener">LinkedIn ${smallArrow}</a></p>
           </div>
           <div><h2>The product</h2><ul>
             ${navLinks(page)}
@@ -338,7 +340,7 @@ const socialHead = (page, html) => {
       /* Canonical profile URL only. sameAs is how Google matches this entity
          to the same company elsewhere, and a view-state query string
          (?viewAsMember=...) makes it a different string to match against. */
-      sameAs: ['https://www.linkedin.com/company/kismat-cookies']
+      sameAs: [D.linkedin]
     },
     {
       '@type': 'WebSite',
@@ -352,9 +354,19 @@ const socialHead = (page, html) => {
 })}</script>` : ''}`;
 };
 
+/* The contact page's "or just email us" block. A region rather than markup in
+   the template, because the address was hardcoded there and had already drifted
+   from data.js once — everything else on the site reads it from one place. */
+const reach = () => `
+            <h2 style="font-family:Manrope,sans-serif;font-weight:500;font-size:16px;margin-bottom:16px">Or just email us</h2>
+            <a class="footer-mail" href="mailto:${D.email}">${D.email}</a>
+            <p class="footer-social"><a href="${D.linkedin}"
+               target="_blank" rel="noopener">Kismat Cookies on LinkedIn ${smallArrow}</a></p>`;
+
 const blocks = (page) => ({
   header: header(page),
   footer: footer(page),
+  reach: reach(),
   ooh: reasonCards(D.oohPoints),
   reasons: reasonCards(D.reasons),
   formats: formatCards(page === 'home'),

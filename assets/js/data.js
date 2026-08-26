@@ -1,8 +1,13 @@
 /* Kismat Cookies — all site content lives here. Edit this file, not the markup. */
 window.WB = (function () {
 
-  /* TODO: swap for your real address before this goes anywhere public. */
+  /* A real Google Workspace mailbox — MX, SPF and DKIM all verified. */
   const email = 'hello@kismatcookies.com';
+
+  /* Canonical profile URL, with no tracking or view-state query on the end.
+     build.js also feeds this to the Organization schema's sameAs, where a
+     query string would make it a different string for Google to match on. */
+  const linkedin = 'https://www.linkedin.com/company/kismat-cookies';
 
   const nav = [
     { label: 'The formats', href: 'formats.html' },
@@ -230,5 +235,5 @@ window.WB = (function () {
     }
   ];
 
-  return { email, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos, momentFilm };
+  return { email, linkedin, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos, momentFilm };
 })();
