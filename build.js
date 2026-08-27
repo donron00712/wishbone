@@ -74,9 +74,18 @@ const cookieHalves = (sfx) => `
                   </g>
                 </svg>`;
 
-const navLinks = (page) => D.nav.map(i =>
-  `<li><a href="${i.href}"${page === i.href.replace('.html', '') ? ' aria-current="page"' : ''}>${i.label}</a></li>`
-).join('\n            ');
+/* Pages that still build and still answer on their URL, but are kept out of
+   the navigation, out of the sitemap, and told not to be indexed. One list
+   drives all three, so putting a page back is deleting a word from here
+   rather than remembering three separate places. */
+const HIDDEN = ['cases'];
+const isHidden = (page) => HIDDEN.includes(page === 'home' ? 'index' : page);
+
+const navLinks = (page) => D.nav
+  .filter(i => !HIDDEN.includes(i.href.replace('.html', '')))
+  .map(i =>
+    `<li><a href="${i.href}"${page === i.href.replace('.html', '') ? ' aria-current="page"' : ''}>${i.label}</a></li>`
+  ).join('\n            ');
 
 const header = (page) => `<a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header" id="site-header">
@@ -310,7 +319,9 @@ const socialHead = (page, html) => {
     ? 'Kismat Cookies'
     : title.replace(/\s*\|\s*Kismat Cookies\s*$/, '');
   const url = SITE + pathFor(page);
-  return `<link rel="canonical" href="${url}">
+  /* A hidden page keeps its canonical — if it is already indexed, the tag is
+     what tells Google which URL the noindex applies to. */
+  return `${isHidden(page) ? '<meta name="robots" content="noindex,follow">\n' : ''}<link rel="canonical" href="${url}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kismat Cookies">
 <meta property="og:locale" content="en_US">
@@ -404,7 +415,8 @@ const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync('sitemap.xml',
 `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.sort((a, b) => (a === 'index' ? -1 : b === 'index' ? 1 : a.localeCompare(b)))
+${pages.filter(p => !HIDDEN.includes(p))
+  .sort((a, b) => (a === 'index' ? -1 : b === 'index' ? 1 : a.localeCompare(b)))
   .map(p => `  <url>
     <loc>${SITE}${pathFor(p)}</loc>
     <lastmod>${today}</lastmod>

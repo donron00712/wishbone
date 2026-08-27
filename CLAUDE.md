@@ -37,6 +37,9 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 - `assets/css/style.css` — everything, token-driven
 - `build.js` — assembles header/footer/cards at build time
 - Pages: index, formats, why-it-works, cases, contact
+- `HIDDEN` in `build.js` lists pages that still build and still answer on
+  their URL, but are kept out of the nav, out of `sitemap.xml`, and marked
+  `noindex`. `cases` is in it. Delete the name to put a page back.
 
 ## Two palettes, one family
 
