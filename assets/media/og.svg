@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif">
-  <!-- Source for og.png. Drawn from the same cookie the site draws in code and
-       the same palette tokens, so the share card and the page are one brand.
+  <!-- Source for og.png. The wrapper paths are copied from WRAP_L/WRAP_R in
+       build.js so the share card draws exactly what the page draws.
        Regenerate with:  npm run og  -->
   <defs>
     <radialGradient id="glow" cx="0.5" cy="0.46" r="0.62">
@@ -8,51 +8,41 @@
       <stop offset="0.45" stop-color="#5A3A14" stop-opacity="0.28"/>
       <stop offset="1" stop-color="#2E1D0C" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bakeL" cx="0.32" cy="0.26" r="0.95">
-      <stop offset="0" stop-color="#FCF2DA"/><stop offset="0.55" stop-color="#EFC886"/><stop offset="1" stop-color="#C68432"/>
-    </radialGradient>
-    <radialGradient id="bakeR" cx="0.68" cy="0.26" r="0.95">
-      <stop offset="0" stop-color="#FCF2DA"/><stop offset="0.55" stop-color="#EFC886"/><stop offset="1" stop-color="#C68432"/>
-    </radialGradient>
-    <clipPath id="clipL"><path d="M26 96 C68 88 112 88 150 94 L158 106 L146 118 L157 130 L145 142 L150 156 C112 162 68 162 26 154 A17 29 0 0 1 26 96 Z"/></clipPath>
-    <clipPath id="clipR"><path d="M150 94 C188 88 232 88 274 96 A17 29 0 0 1 274 154 C232 162 188 162 150 156 L145 142 L157 130 L146 118 L158 106 Z"/></clipPath>
+    <linearGradient id="wrapL" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#FBF4E6"/><stop offset="0.42" stop-color="#F0E4CB"/>
+      <stop offset="0.78" stop-color="#DFCDA9"/><stop offset="1" stop-color="#C6B085"/>
+    </linearGradient>
+    <linearGradient id="wrapR" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#F8F0DF"/><stop offset="0.42" stop-color="#EBDDC1"/>
+      <stop offset="0.78" stop-color="#D8C49C"/><stop offset="1" stop-color="#BCA477"/>
+    </linearGradient>
+    <clipPath id="clipL"><path d="M150 92 C122 87 92 88 66 93 L60 100 L48 96 L46 106 L34 102 L30 114 L26 125 L30 136 L34 148 L46 144 L48 154 L60 150 L66 157 C92 162 122 163 150 158 L154 150 L146 141 L155 132 L145 123 L154 114 L146 105 Z"/></clipPath>
+    <clipPath id="clipR"><path d="M150 92 L146 105 L154 114 L145 123 L155 132 L146 141 L154 150 L150 158 C178 163 208 162 234 157 L240 150 L252 154 L254 144 L266 148 L270 136 L274 125 L270 114 L266 102 L254 106 L252 96 L240 100 L234 93 C208 88 178 87 150 92 Z"/></clipPath>
   </defs>
 
   <rect width="1200" height="630" fill="#2E1D0C"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- the cookie, cracked, as it is on the page -->
-  <g transform="translate(600 232) scale(1.15)">
+  <!-- the wrapper, torn open, as it is on the page -->
+  <g transform="translate(600 226) scale(1.2)">
     <g transform="translate(-150 -125)">
-      <g transform="translate(-46 0) rotate(-15 150 134)" clip-path="url(#clipL)">
-        <path d="M26 96 C68 88 112 88 150 94 L158 106 L146 118 L157 130 L145 142 L150 156 C112 162 68 162 26 154 A17 29 0 0 1 26 96 Z" fill="url(#bakeL)"/>
-        <g fill="none" stroke-linecap="round">
-          <path stroke="#B0832F" stroke-opacity="0.34" stroke-width="2.4" d="M34 138 C74 148 112 150 150 146"/>
-          <path stroke="#FFF8E7" stroke-opacity="0.5" stroke-width="2.2" d="M40 106 C78 100 114 100 148 104"/>
-        </g>
-        <g fill="#8A5F22" fill-opacity="0.5">
-          <ellipse cx="62" cy="114" rx="2.6" ry="1.6"/><ellipse cx="90" cy="134" rx="2.4" ry="1.5"/>
-          <ellipse cx="110" cy="110" rx="2.7" ry="1.6"/><ellipse cx="128" cy="140" rx="2.3" ry="1.4"/>
+      <g transform="translate(-44 0) rotate(-14 150 125)">
+        <path d="M150 92 C122 87 92 88 66 93 L60 100 L48 96 L46 106 L34 102 L30 114 L26 125 L30 136 L34 148 L46 144 L48 154 L60 150 L66 157 C92 162 122 163 150 158 L154 150 L146 141 L155 132 L145 123 L154 114 L146 105 Z" fill="url(#wrapL)"/>
+        <g clip-path="url(#clipL)">
+          <rect x="20" y="112" width="132" height="15" fill="#C08A3A" fill-opacity="0.85"/>
+          <rect x="20" y="112" width="132" height="3" fill="#8F6220" fill-opacity="0.45"/>
+          <path fill="#FFFDF6" fill-opacity="0.5" d="M66 90 C96 86 124 87 150 90 L150 101 C124 98 96 97 66 101 Z"/>
+          <path fill="#A98A56" fill-opacity="0.22" d="M20 146 C70 156 110 158 152 154 L152 172 L20 172 Z"/>
         </g>
       </g>
-      <g transform="translate(46 0) rotate(15 150 134)" clip-path="url(#clipR)">
-        <path d="M150 94 C188 88 232 88 274 96 A17 29 0 0 1 274 154 C232 162 188 162 150 156 L145 142 L157 130 L146 118 L158 106 Z" fill="url(#bakeR)"/>
-        <g fill="none" stroke-linecap="round">
-          <path stroke="#9A7029" stroke-opacity="0.34" stroke-width="2.4" d="M266 138 C226 148 188 150 150 146"/>
-          <path stroke="#FFF8E7" stroke-opacity="0.44" stroke-width="2.2" d="M260 106 C222 100 186 100 152 104"/>
+      <g transform="translate(44 0) rotate(14 150 125)">
+        <path d="M150 92 L146 105 L154 114 L145 123 L155 132 L146 141 L154 150 L150 158 C178 163 208 162 234 157 L240 150 L252 154 L254 144 L266 148 L270 136 L274 125 L270 114 L266 102 L254 106 L252 96 L240 100 L234 93 C208 88 178 87 150 92 Z" fill="url(#wrapR)"/>
+        <g clip-path="url(#clipR)">
+          <rect x="148" y="112" width="132" height="15" fill="#B67F33" fill-opacity="0.85"/>
+          <rect x="148" y="112" width="132" height="3" fill="#855A1C" fill-opacity="0.45"/>
+          <path fill="#FFFDF6" fill-opacity="0.44" d="M150 90 C176 87 204 86 234 90 L234 101 C204 97 176 98 150 101 Z"/>
+          <path fill="#9E7F4C" fill-opacity="0.22" d="M280 146 C230 156 190 158 148 154 L148 172 L280 172 Z"/>
         </g>
-        <g fill="#7C5520" fill-opacity="0.5">
-          <ellipse cx="238" cy="114" rx="2.6" ry="1.6"/><ellipse cx="210" cy="134" rx="2.4" ry="1.5"/>
-          <ellipse cx="190" cy="110" rx="2.7" ry="1.6"/><ellipse cx="172" cy="140" rx="2.3" ry="1.4"/>
-        </g>
-      </g>
-      <g transform="translate(-46 0) rotate(-15 150 134)">
-        <ellipse cx="26" cy="125" rx="17" ry="29" fill="#9C6E2C"/>
-        <ellipse cx="29" cy="125" rx="8" ry="16" fill="#6B4718"/>
-      </g>
-      <g transform="translate(46 0) rotate(15 150 134)">
-        <ellipse cx="274" cy="125" rx="17" ry="29" fill="#8D6326"/>
-        <ellipse cx="271" cy="125" rx="8" ry="16" fill="#5E3F15"/>
       </g>
     </g>
   </g>

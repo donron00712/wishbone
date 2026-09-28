@@ -30,113 +30,73 @@ const smallArrow = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" 
 const bone = (w = 23, h = 21) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
 
 
-/* The cannoli, emitted wherever it is needed. `sfx` keeps the gradient and
-   clip ids unique so two of them on one page cannot collide.
+/* The wrapper, emitted wherever it is needed. `sfx` keeps the gradient and clip
+   ids unique so two of them on one page cannot collide.
 
-   A hollow rolled tube, snapped across the middle. Both halves share one break
-   polyline traversed in opposite directions, so the jagged edges interlock
-   instead of crossing — the trick the fortune cookie used, and the reason the
-   pieces read as having come apart rather than been drawn apart.
+   A sealed sachet with crimped ends, torn across the middle. Two earlier passes
+   tried to draw the cannoli itself and both failed the only test that matters —
+   they looked like a cartoon of food rather than food. Drawing the wrapper
+   instead sidesteps that entirely: a sachet is paper and geometry, which vector
+   renders honestly, and the thing that is hard to draw stays inside it where
+   nobody has to judge it.
 
-   Three things do the work of making it read as hollow rather than as a solid
-   lozenge, and all three were missing from the first attempt:
+   It is also truer to the product. A real run arrives wrapped, and the wrapper
+   is a brand surface in its own right, which is why there is a printed band on
+   it rather than blank paper.
 
-     - the open end is a RING, not a disc: a pale pastry rim with the dark hole
-       inside it. A flat dark ellipse just looked like a capped end. The hole is
-       deliberately small against the rim — a fried shell has a thick wall, and
-       a wide hole reads as a napkin ring rather than something you could bake.
-     - the body tapers, and the silhouette is wider at the mouth than at the
-       break, so the eye reads a cylinder seen slightly end-on.
-     - an underside shadow inside the clip, so the tube turns away from the
-       light instead of sitting flat.
+   Both halves share one tear line traversed in opposite directions, so the
+   ragged edges interlock instead of crossing — the same trick every version of
+   this has used, and the reason the halves read as having been pulled apart
+   rather than drawn apart. */
+const TEAR_UP   = "L154 150 L146 141 L155 132 L145 123 L154 114 L146 105";
+const TEAR_DOWN = "L146 105 L154 114 L145 123 L155 132 L146 141 L154 150 L150 158";
 
-   Each half keeps its open end pointing outward, because that hollow is the
-   product: it is where the slip goes. The animation parts them left and right,
-   so both mouths turn toward the viewer as they separate. */
-/* The break spans 93..155, the same 62px the mouths do, and the long edges are
-   nearly straight. An earlier pass bowed them and left the break narrower than
-   the ends, which gave the intact roll a waist — an hourglass rather than a
-   tube. The closed state is what a visitor sees first, so it has to hold. */
-const BRK_D = "L161 102 L149 112 L159 121 L147 131 L158 140 L146 148 L150 155";
-const BRK_U = "L146 148 L158 140 L147 131 L159 121 L149 112 L161 102 L152 93";
+const WRAP_L = `M150 92 C122 87 92 88 66 93 L60 100 L48 96 L46 106 L34 102 L30 114 L26 125 L30 136 L34 148 L46 144 L48 154 L60 150 L66 157 C92 162 122 163 150 158 ${TEAR_UP} Z`;
+const WRAP_R = `M150 92 ${TEAR_DOWN} C178 163 208 162 234 157 L240 150 L252 154 L254 144 L266 148 L270 136 L274 125 L270 114 L266 102 L254 106 L252 96 L240 100 L234 93 C208 88 178 87 150 92 Z`;
 
-const ROLL_L = `M26 94 C72 90 112 90 152 93 ${BRK_D} C112 158 72 158 26 156 A18 31 0 0 1 26 94 Z`;
-const ROLL_R = `M150 155 ${BRK_U} C188 90 228 90 274 94 A18 31 0 0 1 274 156 C228 158 188 158 150 155 Z`;
-
-const rollHalves = (sfx) => `
+const wrapHalves = (sfx) => `
                 <svg class="biscuit__half biscuit__half--l" viewBox="0 0 300 250" aria-hidden="true">
                   <defs>
-                    <linearGradient id="bakeL${sfx}" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#FDF8EC"/><stop offset="0.38" stop-color="#F2E2BE"/>
-                      <stop offset="0.74" stop-color="#DCC08A"/><stop offset="1" stop-color="#BB9450"/>
+                    <linearGradient id="wrapL${sfx}" x1="0" y1="0" x2="0.25" y2="1">
+                      <stop offset="0" stop-color="#FBF4E6"/><stop offset="0.42" stop-color="#F0E4CB"/>
+                      <stop offset="0.78" stop-color="#DFCDA9"/><stop offset="1" stop-color="#C6B085"/>
                     </linearGradient>
-                    <clipPath id="clipL${sfx}"><path d="${ROLL_L}"/></clipPath>
+                    <clipPath id="clipL${sfx}"><path d="${WRAP_L}"/></clipPath>
                   </defs>
-                  <path fill="url(#bakeL${sfx})" d="${ROLL_L}"/>
+                  <path fill="url(#wrapL${sfx})" d="${WRAP_L}"/>
                   <g clip-path="url(#clipL${sfx})">
-                    <!-- underside turning away from the light -->
-                    <path fill="#A87B33" fill-opacity=".30" d="M26 141 C80 154 120 156 156 152 L156 174 L20 174 Z"/>
-                    <!-- the seam where the rolled sheet overlaps, running the length -->
-                    <path fill="none" stroke="#B08536" stroke-opacity=".38" stroke-width="2" stroke-linecap="round"
-                          d="M32 138 C74 146 114 147 152 143"/>
-                    <!-- highlight along the top of the curve -->
-                    <path fill="none" stroke="#FFFCF4" stroke-opacity=".62" stroke-width="2.6" stroke-linecap="round"
-                          d="M42 103 C78 99 114 99 148 102"/>
-                    <!-- cumin and sesame through the flour -->
-                    <g fill="#7A5218">
-                      <ellipse cx="58" cy="112" rx="2.7" ry="1.5" fill-opacity=".55" transform="rotate(-16 58 112)"/>
-                      <ellipse cx="84" cy="132" rx="2.3" ry="1.4" fill-opacity=".45" transform="rotate(24 84 132)"/>
-                      <ellipse cx="104" cy="108" rx="2.8" ry="1.6" fill-opacity=".6"  transform="rotate(-6 104 108)"/>
-                      <ellipse cx="126" cy="136" rx="2.2" ry="1.3" fill-opacity=".42" transform="rotate(32 126 136)"/>
-                      <ellipse cx="70" cy="146" rx="2.1" ry="1.3" fill-opacity=".38" transform="rotate(10 70 146)"/>
-                      <ellipse cx="118" cy="119" rx="2.5" ry="1.5" fill-opacity=".5"  transform="rotate(-30 118 119)"/>
-                      <ellipse cx="92" cy="105" rx="2" ry="1.2"   fill-opacity=".4"  transform="rotate(14 92 105)"/>
-                      <ellipse cx="140" cy="126" rx="2.2" ry="1.3" fill-opacity=".46" transform="rotate(-20 140 126)"/>
-                      <ellipse cx="48" cy="128" rx="2.4" ry="1.4" fill-opacity=".5"  transform="rotate(28 48 128)"/>
+                    <!-- the printed band: the wrapper is a brand surface too -->
+                    <rect x="20" y="112" width="132" height="15" fill="#C08A3A" fill-opacity=".85"/>
+                    <rect x="20" y="112" width="132" height="3" fill="#8F6220" fill-opacity=".45"/>
+                    <!-- the sheen of a folded sheet catching the light -->
+                    <path fill="#FFFDF6" fill-opacity=".5" d="M66 90 C96 86 124 87 150 90 L150 101 C124 98 96 97 66 101 Z"/>
+                    <!-- creases running out of the crimp -->
+                    <g stroke="#B79B6C" stroke-opacity=".42" stroke-width="1.4" stroke-linecap="round">
+                      <path d="M62 100 L74 110"/><path d="M60 126 L74 126"/><path d="M62 150 L74 140"/>
                     </g>
+                    <!-- the sachet turning under -->
+                    <path fill="#A98A56" fill-opacity=".22" d="M20 146 C70 156 110 158 152 154 L152 172 L20 172 Z"/>
                   </g>
-                  <!-- the open end: a pastry ring with the hollow inside it -->
-                  <ellipse cx="26" cy="125" rx="18" ry="31" fill="#F1E1BE"/>
-                  <ellipse cx="26" cy="125" rx="18" ry="31" fill="none" stroke="#B89355" stroke-opacity=".5" stroke-width="1.4"/>
-                  <ellipse cx="29" cy="125" rx="8" ry="16" fill="#593912"/>
-                  <ellipse cx="30" cy="123.5" rx="5.6" ry="11.5" fill="#3E250B" fill-opacity=".7"/>
-                  <path fill="none" stroke="#FFFBF0" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"
-                        d="M14 108 A18 31 0 0 0 14 142"/>
                 </svg>
 
                 <svg class="biscuit__half biscuit__half--r" viewBox="0 0 300 250" aria-hidden="true">
                   <defs>
-                    <linearGradient id="bakeR${sfx}" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#FAF3E3"/><stop offset="0.38" stop-color="#EDDBB3"/>
-                      <stop offset="0.74" stop-color="#D4B57C" /><stop offset="1" stop-color="#B08843"/>
+                    <linearGradient id="wrapR${sfx}" x1="0" y1="0" x2="0.25" y2="1">
+                      <stop offset="0" stop-color="#F8F0DF"/><stop offset="0.42" stop-color="#EBDDC1"/>
+                      <stop offset="0.78" stop-color="#D8C49C"/><stop offset="1" stop-color="#BCA477"/>
                     </linearGradient>
-                    <clipPath id="clipR${sfx}"><path d="${ROLL_R}"/></clipPath>
+                    <clipPath id="clipR${sfx}"><path d="${WRAP_R}"/></clipPath>
                   </defs>
-                  <path fill="url(#bakeR${sfx})" d="${ROLL_R}"/>
+                  <path fill="url(#wrapR${sfx})" d="${WRAP_R}"/>
                   <g clip-path="url(#clipR${sfx})">
-                    <path fill="#9C7029" fill-opacity=".30" d="M274 141 C220 154 180 156 144 152 L144 174 L280 174 Z"/>
-                    <path fill="none" stroke="#9E762C" stroke-opacity=".38" stroke-width="2" stroke-linecap="round"
-                          d="M268 138 C226 146 186 147 148 143"/>
-                    <path fill="none" stroke="#FFFCF4" stroke-opacity=".52" stroke-width="2.6" stroke-linecap="round"
-                          d="M258 103 C222 99 186 99 152 102"/>
-                    <g fill="#6E4A15">
-                      <ellipse cx="242" cy="112" rx="2.7" ry="1.5" fill-opacity=".55" transform="rotate(16 242 112)"/>
-                      <ellipse cx="216" cy="132" rx="2.3" ry="1.4" fill-opacity=".45" transform="rotate(-24 216 132)"/>
-                      <ellipse cx="196" cy="108" rx="2.8" ry="1.6" fill-opacity=".6"  transform="rotate(6 196 108)"/>
-                      <ellipse cx="174" cy="136" rx="2.2" ry="1.3" fill-opacity=".42" transform="rotate(-32 174 136)"/>
-                      <ellipse cx="230" cy="146" rx="2.1" ry="1.3" fill-opacity=".38" transform="rotate(-10 230 146)"/>
-                      <ellipse cx="182" cy="119" rx="2.5" ry="1.5" fill-opacity=".5"  transform="rotate(30 182 119)"/>
-                      <ellipse cx="208" cy="105" rx="2" ry="1.2"   fill-opacity=".4"  transform="rotate(-14 208 105)"/>
-                      <ellipse cx="160" cy="126" rx="2.2" ry="1.3" fill-opacity=".46" transform="rotate(20 160 126)"/>
-                      <ellipse cx="252" cy="128" rx="2.4" ry="1.4" fill-opacity=".5"  transform="rotate(-28 252 128)"/>
+                    <rect x="148" y="112" width="132" height="15" fill="#B67F33" fill-opacity=".85"/>
+                    <rect x="148" y="112" width="132" height="3" fill="#855A1C" fill-opacity=".45"/>
+                    <path fill="#FFFDF6" fill-opacity=".44" d="M150 90 C176 87 204 86 234 90 L234 101 C204 97 176 98 150 101 Z"/>
+                    <g stroke="#AC9063" stroke-opacity=".42" stroke-width="1.4" stroke-linecap="round">
+                      <path d="M238 100 L226 110"/><path d="M240 126 L226 126"/><path d="M238 150 L226 140"/>
                     </g>
+                    <path fill="#9E7F4C" fill-opacity=".22" d="M280 146 C230 156 190 158 148 154 L148 172 L280 172 Z"/>
                   </g>
-                  <ellipse cx="274" cy="125" rx="18" ry="31" fill="#EBDAB2"/>
-                  <ellipse cx="274" cy="125" rx="18" ry="31" fill="none" stroke="#AC8747" stroke-opacity=".5" stroke-width="1.4"/>
-                  <ellipse cx="271" cy="125" rx="8" ry="16" fill="#4E3210"/>
-                  <ellipse cx="270" cy="123.5" rx="5.6" ry="11.5" fill="#36200A" fill-opacity=".7"/>
-                  <path fill="none" stroke="#FFFBF0" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"
-                        d="M286 108 A18 31 0 0 1 286 142"/>
                 </svg>`;
 
 
@@ -274,16 +234,16 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         <div class="moment__fortune">
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
-                aria-label="Snap open the cannoli">
+                aria-label="Open the wrapper">
           <span class="moment__aura" aria-hidden="true"></span>
           <span class="biscuit">
-            ${rollHalves('m')}
+            ${wrapHalves('m')}
             <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
             <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
             <span class="biscuit__crumb"></span>
           </span>
         </button>
-        <p class="moment__hint">Tap to crack it open</p>
+        <p class="moment__hint">Tap to open it</p>
         <figure class="moment__slip" role="status">
           <div class="paper paper--fortune">
             <p>Your fortune holds within you.</p>
@@ -397,7 +357,7 @@ const socialHead = (page, html) => {
 <meta property="og:image" content="${SITE}/assets/media/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A rice-flour cannoli snapped open beside the words Kismat Cookies.">
+<meta property="og:image:alt" content="A sealed wrapper torn open beside the words Kismat Cookies.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
 <meta name="twitter:description" content="${esc(desc)}">

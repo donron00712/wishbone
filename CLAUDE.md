@@ -41,15 +41,23 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 - `assets/js/site.js` — shared behaviour only; it does **not** build DOM
 - `assets/js/home.js` — the hero sequence, the wall, the unit slip
 - `assets/css/style.css` — everything, token-driven
-- `build.js` — assembles header/footer/cards at build time. `ROLL_L`/`ROLL_R`
-  draw the cannoli: a hollow tube snapped across the middle, two halves
-  sharing one break polyline traversed in opposite directions so the jagged
-  edges interlock. Each half's open end points outward, because that hollow
-  is where the slip goes. `assets/media/og.svg` repeats the same paths.
-  Two things earned by getting them wrong first: the open end is a pale ring
-  with a **small** dark hole, because a wide hole reads as a napkin ring and a
-  filled ellipse reads as a capped end; and the break spans the same height as
-  the mouths, because a narrower one gave the intact roll a waist.
+- `build.js` — assembles header/footer/cards at build time. `WRAP_L`/`WRAP_R`
+  draw a **sealed sachet with crimped ends, torn across the middle** — the
+  thing the visitor taps in the fortune moment. Both halves share one tear
+  line traversed in opposite directions so the ragged edges interlock.
+
+  **Do not try to draw the food.** Two passes drew the cannoli itself — a
+  hollow tube with a rim and a hole — and both looked like a cartoon of a
+  snack. Vector renders paper and geometry honestly and food badly. Drawing
+  the wrapper puts the hard part inside the packet where nobody has to judge
+  it, and it is truer to the product anyway: a real run arrives wrapped, and
+  the wrapper is a brand surface, which is why there is a printed band on it.
+  If the artwork ever needs to show the food itself, that is a photograph,
+  not a path.
+
+  `assets/media/og.svg` copies WRAP_L/WRAP_R verbatim. It drifted twice by
+  being patched separately; regenerate it from build.js rather than editing
+  its paths by hand.
 - Pages: index, formats, why-it-works, cases, contact
 - `HIDDEN` in `build.js` lists pages that still build and still answer on
   their URL, but are kept out of the nav, out of `sitemap.xml`, and marked
