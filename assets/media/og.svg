@@ -14,8 +14,8 @@
     <radialGradient id="bakeR" cx="0.68" cy="0.26" r="0.95">
       <stop offset="0" stop-color="#FCF2DA"/><stop offset="0.55" stop-color="#EFC886"/><stop offset="1" stop-color="#C68432"/>
     </radialGradient>
-    <clipPath id="clipL"><path d="M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z"/></clipPath>
-    <clipPath id="clipR"><path d="M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z"/></clipPath>
+    <clipPath id="clipL"><path d="M26 96 C68 88 112 88 150 94 L158 106 L146 118 L157 130 L145 142 L150 156 C112 162 68 162 26 154 A17 29 0 0 1 26 96 Z"/></clipPath>
+    <clipPath id="clipR"><path d="M150 94 C188 88 232 88 274 96 A17 29 0 0 1 274 154 C232 162 188 162 150 156 L145 142 L157 130 L146 118 L158 106 Z"/></clipPath>
   </defs>
 
   <rect width="1200" height="630" fill="#2E1D0C"/>
@@ -25,18 +25,34 @@
   <g transform="translate(600 232) scale(1.15)">
     <g transform="translate(-150 -125)">
       <g transform="translate(-46 0) rotate(-15 150 134)" clip-path="url(#clipL)">
-        <path d="M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z" fill="url(#bakeL)"/>
-        <g stroke="#B4762B" stroke-opacity="0.5" stroke-width="2.4" stroke-linecap="round" fill="none">
-          <path d="M112 82 L106 66"/><path d="M124 78 L120 61"/><path d="M136 79 L134 62"/>
-          <path d="M92 150 Q120 168 150 172"/>
+        <path d="M26 96 C68 88 112 88 150 94 L158 106 L146 118 L157 130 L145 142 L150 156 C112 162 68 162 26 154 A17 29 0 0 1 26 96 Z" fill="url(#bakeL)"/>
+        <g fill="none" stroke-linecap="round">
+          <path stroke="#B0832F" stroke-opacity="0.34" stroke-width="2.4" d="M34 138 C74 148 112 150 150 146"/>
+          <path stroke="#FFF8E7" stroke-opacity="0.5" stroke-width="2.2" d="M40 106 C78 100 114 100 148 104"/>
+        </g>
+        <g fill="#8A5F22" fill-opacity="0.5">
+          <ellipse cx="62" cy="114" rx="2.6" ry="1.6"/><ellipse cx="90" cy="134" rx="2.4" ry="1.5"/>
+          <ellipse cx="110" cy="110" rx="2.7" ry="1.6"/><ellipse cx="128" cy="140" rx="2.3" ry="1.4"/>
         </g>
       </g>
       <g transform="translate(46 0) rotate(15 150 134)" clip-path="url(#clipR)">
-        <path d="M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z" fill="url(#bakeR)"/>
-        <g stroke="#B4762B" stroke-opacity="0.5" stroke-width="2.4" stroke-linecap="round" fill="none">
-          <path d="M188 82 L194 66"/><path d="M176 78 L180 61"/><path d="M164 79 L166 62"/>
-          <path d="M208 150 Q180 168 150 172"/>
+        <path d="M150 94 C188 88 232 88 274 96 A17 29 0 0 1 274 154 C232 162 188 162 150 156 L145 142 L157 130 L146 118 L158 106 Z" fill="url(#bakeR)"/>
+        <g fill="none" stroke-linecap="round">
+          <path stroke="#9A7029" stroke-opacity="0.34" stroke-width="2.4" d="M266 138 C226 148 188 150 150 146"/>
+          <path stroke="#FFF8E7" stroke-opacity="0.44" stroke-width="2.2" d="M260 106 C222 100 186 100 152 104"/>
         </g>
+        <g fill="#7C5520" fill-opacity="0.5">
+          <ellipse cx="238" cy="114" rx="2.6" ry="1.6"/><ellipse cx="210" cy="134" rx="2.4" ry="1.5"/>
+          <ellipse cx="190" cy="110" rx="2.7" ry="1.6"/><ellipse cx="172" cy="140" rx="2.3" ry="1.4"/>
+        </g>
+      </g>
+      <g transform="translate(-46 0) rotate(-15 150 134)">
+        <ellipse cx="26" cy="125" rx="17" ry="29" fill="#9C6E2C"/>
+        <ellipse cx="29" cy="125" rx="11.5" ry="22" fill="#6B4718"/>
+      </g>
+      <g transform="translate(46 0) rotate(15 150 134)">
+        <ellipse cx="274" cy="125" rx="17" ry="29" fill="#8D6326"/>
+        <ellipse cx="271" cy="125" rx="11.5" ry="22" fill="#5E3F15"/>
       </g>
     </g>
   </g>
@@ -48,7 +64,7 @@
   </g>
 
   <text x="600" y="432" text-anchor="middle" font-size="62" font-weight="700" fill="#F0E3CC" letter-spacing="-1">Kismat Cookies</text>
-  <text x="600" y="486" text-anchor="middle" font-size="27" fill="#C8B79B">Advertising inside real fortune cookies,</text>
+  <text x="600" y="486" text-anchor="middle" font-size="27" fill="#C8B79B">Advertising inside kuzhalappam,</text>
   <text x="600" y="524" text-anchor="middle" font-size="27" fill="#C8B79B">at restaurants everywhere.</text>
 
   <text x="600" y="580" text-anchor="middle" font-size="16" fill="#8E7B5F" letter-spacing="3.4">KISMATCOOKIES.COM</text>

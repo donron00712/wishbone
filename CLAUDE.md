@@ -1,7 +1,10 @@
 # Kismat Cookies
 
 Marketing site for an advertising medium: brands buy the printed slip inside a
-fortune cookie served with the restaurant check. The audience is media buyers,
+**kuzhalappam** — the crisp Kerala rice-flour roll — served with the restaurant
+check. The medium changed from fortune cookies in Sept 2026; the brand name
+"Kismat Cookies" was kept deliberately, along with the domain, mailbox and
+LinkedIn page that hang off it. The audience is media buyers,
 not diners. Live at https://wishbone-swart.vercel.app (the URL still carries the
 old brand name; the repo is `donron00712/wishbone` and it is **public**).
 
@@ -35,7 +38,11 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 - `assets/js/site.js` — shared behaviour only; it does **not** build DOM
 - `assets/js/home.js` — the hero sequence, the wall, the unit slip
 - `assets/css/style.css` — everything, token-driven
-- `build.js` — assembles header/footer/cards at build time
+- `build.js` — assembles header/footer/cards at build time. `ROLL_L`/`ROLL_R`
+  draw the kuzhalappam: a hollow tube snapped across the middle, two halves
+  sharing one break polyline traversed in opposite directions so the jagged
+  edges interlock. Each half's open end points outward, because that hollow
+  is where the slip goes. `assets/media/og.svg` repeats the same paths.
 - Pages: index, formats, why-it-works, cases, contact
 - `HIDDEN` in `build.js` lists pages that still build and still answer on
   their URL, but are kept out of the nav, out of `sitemap.xml`, and marked
@@ -61,8 +68,8 @@ Structural gotchas found the hard way:
 
 ## The fortune moment
 
-Landing page only. At the scroll cue where the sticky CTA fires, a cookie
-appears centre-screen; tapping it cracks it open, reveals a slip, and turns the
+Landing page only. At the scroll cue where the sticky CTA fires, a kuzhalappam
+appears centre-screen; tapping it snaps it open, reveals a slip, and turns the
 site from dark roast to beige. Other pages inherit the palette via
 `sessionStorage`.
 
@@ -86,7 +93,13 @@ Night sky behind it: 46 stars on individual twinkle clocks, 14 rising motes,
 2 shooting stars, and a bloom anchored **inside the cookie button** (pinned to a
 percentage of the overlay, it drifted away from the cookie).
 
-Once open, footage sits to the right of the fortune. The stage is centred, so
+**`momentFilm.stem` is empty, on purpose.** `assets/media/moment-film.*` are
+still on disk and still good footage — of a fortune cookie, which is what the
+medium was when they were shot. Playing them beside copy about kuzhalappam
+would show a buyer a product we do not sell. Do not re-point the stem at them;
+shoot the roll.
+
+Once there is footage, it sits to the right of the fortune. The stage is centred, so
 the film growing from zero width is what walks the fortune column to the left —
 one transition, not two that have to be kept in step. The panel only joins the
 layout once the video has decoded a frame (`has-film`, set in `site.js`), so a

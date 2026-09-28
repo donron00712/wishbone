@@ -89,26 +89,26 @@ window.WB = (function () {
 
   const reasons = [
     { n: '01', title: 'It arrives as part of the meal',
-      body: 'The cookie comes with the check the way it always has. Your message is inside something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
+      body: 'The kuzhalappam comes with the check the way it always has. Your message is inside something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
     { n: '02', title: 'It lands at the calmest point of the evening',
       body: 'The end of a meal is unhurried in a way almost no other advertising moment is. Nothing else is bidding for the table at that point.' },
     { n: '03', title: 'It reaches a table, not a screen',
-      body: 'A cookie goes to each person present, so a brand can arrive with a group in the same moment rather than one device at a time.' },
+      body: 'One goes to each person present, so a brand can arrive with a group in the same moment rather than one device at a time.' },
     { n: '04', title: 'It is a physical thing, not an impression',
       body: 'The slip is small enough to pocket and leaves the restaurant with whoever takes it. It does not disappear when a feed refreshes.' }
   ];
 
   const formats = [
     { meta: 'The fortune', title: 'Eleven words on the slip',
-      body: 'The line inside the cookie, written with you or by you. Eleven words is the whole creative brief \u2014 short enough to take in at a glance, long enough to carry a voice.' },
+      body: 'The line inside the roll, written with you or by you. Eleven words is the whole creative brief \u2014 short enough to take in at a glance, long enough to carry a voice.' },
     { meta: 'The numbers', title: 'Lucky numbers that actually do something',
       body: 'Every fortune carries its six numbers. They can be a discount code, a draw entry or a store number instead of decoration.' },
     { meta: 'The code',    title: 'A prize on the back of the slip',
       body: 'A QR or promo code on the reverse, so the fortune has something to redeem and you have something to measure.' },
     { meta: 'Targeting',   title: 'City, cuisine, daypart',
-      body: 'Choose where the cookies land: a neighbourhood, a cuisine, a dinner rush, a single street. Placement is a media buy, not a mailing list.' },
+      body: 'Choose where the rolls land: a neighbourhood, a cuisine, a dinner rush, a single street. Placement is a media buy, not a mailing list.' },
     { meta: 'The drop',    title: 'Limited runs for a moment',
-      body: 'Short, dated runs built around a launch, a holiday, a fixture, a Lunar New Year service. Scarcity the table can feel.' },
+      body: 'Short, dated runs built around a launch, a holiday, a fixture, a festival week. Scarcity the table can feel.' },
     { meta: 'Co-branding', title: 'Two brands, two sides',
       body: 'The slip has a front and a back. A line each, or a line and a code \u2014 a natural format for a collaboration where both sides get their own surface.' }
   ];
@@ -151,23 +151,32 @@ window.WB = (function () {
          white plate, the slip half out.', credit: 'Photo: your name' }  */
   const photos = [];
 
-  /* Footage for the fortune moment, shown beside the slip once the cookie has
-     been cracked. Same licensing rule as the photographs above: shot by us,
-     licensed, or permitted in writing.
+  /* Footage for the fortune moment, shown beside the slip once the roll has
+     been snapped open. Empty on purpose.
+
+     The files at assets/media/moment-film.* are still on disk, and they are
+     still good footage — of a fortune cookie. That was the medium when they
+     were shot. Playing them beside copy about kuzhalappam would show a buyer
+     a product we do not sell, which is the one thing this site has been
+     careful not to do anywhere else. Better a centred column than footage
+     that contradicts the page.
+
+     Same licensing rule as the photographs above: shot by us, licensed, or
+     permitted in writing.
 
      `stem` is a path with no extension. Drop <stem>.webm, <stem>.mp4 and
      <stem>.jpg into assets/media/ and the panel appears on its own. Leave it
-     empty and the moment stays exactly as it is — one centred column, with no
-     request made and no empty frame.
+     empty and the moment stays as it is — one centred column, with no request
+     made and no empty frame.
 
      Shoot it 4:5 portrait, 864x1080, four to six seconds and seamlessly
-     looping. The moment hands the page back 14s after the crack, so that is all
-     the room a clip has. No audio track —
-     it autoplays muted, so a track would only cost bytes.
+     looping. The moment hands the page back 14s after the crack, so that is
+     all the room a clip has. No audio track — it autoplays muted, so a track
+     would only cost bytes.
      `npm run add-video <file>` encodes all three to those numbers. */
   const momentFilm = {
-    stem: 'assets/media/moment-film',
-    alt:  'A pair of hands unwraps a fortune cookie, snaps it open and draws out the printed slip inside.',
+    stem: '',
+    alt:  'Hands snap a kuzhalappam open and draw out the printed slip inside.',
     caption: ''
   };
 

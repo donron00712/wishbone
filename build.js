@@ -30,49 +30,74 @@ const smallArrow = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" 
 const bone = (w = 23, h = 21) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
 
 
-/* The cookie, emitted wherever it is needed. `sfx` keeps the gradient and
+/* The kuzhalappam, emitted wherever it is needed. `sfx` keeps the gradient and
    clip ids unique so two of them on one page cannot collide.
-   Both halves share one break polyline, traversed in opposite directions,
-   so the jagged edges interlock instead of crossing. */
-const BREAK_L = "M150 116 C144 94 134 76 120 66 C113 61 104 61 99 67 A86 74 0 0 0 150 202 L143 186 L156 172 L142 156 L155 142 Z";
-const BREAK_R = "M150 116 L155 142 L142 156 L156 172 L143 186 L150 202 A86 74 0 0 0 201 67 C196 61 187 61 180 66 C166 76 156 94 150 116 Z";
 
-const cookieHalves = (sfx) => `
+   A hollow rolled tube, snapped across the middle. Both halves share one break
+   polyline traversed in opposite directions, so the jagged edges interlock
+   instead of crossing — the same trick the fortune cookie used, and the reason
+   the pieces read as having come apart rather than been drawn apart.
+
+   Each half keeps its open end pointing outward, because that hollow is the
+   product: it is where the slip goes. The animation parts them left and right,
+   so both mouths turn toward the viewer as they separate. */
+const BREAK_DOWN = "L158 106 L146 118 L157 130 L145 142 L150 156";
+const BREAK_UP   = "L145 142 L157 130 L146 118 L158 106";
+
+const ROLL_L = `M26 96 C68 88 112 88 150 94 ${BREAK_DOWN} C112 162 68 162 26 154 A17 29 0 0 1 26 96 Z`;
+const ROLL_R = `M150 94 C188 88 232 88 274 96 A17 29 0 0 1 274 154 C232 162 188 162 150 156 ${BREAK_UP} Z`;
+
+const rollHalves = (sfx) => `
                 <svg class="biscuit__half biscuit__half--l" viewBox="0 0 300 250" aria-hidden="true">
                   <defs>
-                    <radialGradient id="bakeL${sfx}" cx="0.32" cy="0.26" r="0.95">
-                      <stop offset="0" stop-color="#FCF2DA"/><stop offset="0.55" stop-color="#EFC886"/><stop offset="1" stop-color="#C68432"/>
+                    <radialGradient id="bakeL${sfx}" cx="0.34" cy="0.24" r="0.95">
+                      <stop offset="0" stop-color="#FDF7E8"/><stop offset="0.55" stop-color="#EBD6AC"/><stop offset="1" stop-color="#C49A55"/>
                     </radialGradient>
-                    <clipPath id="clipL${sfx}"><path d="${BREAK_L}"/></clipPath>
+                    <clipPath id="clipL${sfx}"><path d="${ROLL_L}"/></clipPath>
                   </defs>
-                  <path fill="url(#bakeL${sfx})" d="${BREAK_L}"/>
+                  <path fill="url(#bakeL${sfx})" d="${ROLL_L}"/>
                   <g clip-path="url(#clipL${sfx})">
-                    <path fill="none" stroke="#A96D24" stroke-opacity=".38" stroke-width="2.3" stroke-linecap="round" d="M72 140 A82 70 0 0 0 150 198"/>
-                    <g stroke="#A96D24" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round">
-                      <path d="M70 146 l11 -2"/><path d="M74 162 l11 -3"/><path d="M82 176 l10 -5"/>
-                      <path d="M94 188 l8 -7"/><path d="M113 70 l-8 8"/><path d="M122 79 l-9 7"/>
-                      <path d="M130 90 l-10 6"/><path d="M137 102 l-11 5"/>
+                    <path fill="none" stroke="#B0832F" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round" d="M34 138 C74 148 112 150 150 146"/>
+                    <path fill="none" stroke="#FFF8E7" stroke-opacity=".5" stroke-width="2" stroke-linecap="round" d="M40 106 C78 100 114 100 148 104"/>
+                    <g fill="#8A5F22" fill-opacity=".5">
+                      <ellipse cx="62" cy="114" rx="2.6" ry="1.6" transform="rotate(-18 62 114)"/>
+                      <ellipse cx="88" cy="134" rx="2.4" ry="1.5" transform="rotate(22 88 134)"/>
+                      <ellipse cx="108" cy="110" rx="2.7" ry="1.6" transform="rotate(-8 108 110)"/>
+                      <ellipse cx="128" cy="140" rx="2.3" ry="1.4" transform="rotate(34 128 140)"/>
+                      <ellipse cx="74" cy="148" rx="2.2" ry="1.4" transform="rotate(12 74 148)"/>
+                      <ellipse cx="120" cy="122" rx="2.5" ry="1.5" transform="rotate(-28 120 122)"/>
                     </g>
                   </g>
+                  <ellipse cx="26" cy="125" rx="17" ry="29" fill="#9C6E2C" fill-opacity=".92"/>
+                  <ellipse cx="29" cy="125" rx="11.5" ry="22" fill="#6B4718" fill-opacity=".85"/>
+                  <path fill="none" stroke="#FFF6E2" stroke-opacity=".45" stroke-width="2" stroke-linecap="round" d="M20 104 A17 29 0 0 0 20 146"/>
                 </svg>
 
                 <svg class="biscuit__half biscuit__half--r" viewBox="0 0 300 250" aria-hidden="true">
                   <defs>
-                    <radialGradient id="bakeR${sfx}" cx="0.7" cy="0.26" r="0.95">
-                      <stop offset="0" stop-color="#F7E6C2"/><stop offset="0.55" stop-color="#E8BC78"/><stop offset="1" stop-color="#B87927"/>
+                    <radialGradient id="bakeR${sfx}" cx="0.66" cy="0.24" r="0.95">
+                      <stop offset="0" stop-color="#F8F0DD"/><stop offset="0.55" stop-color="#E4CB9C"/><stop offset="1" stop-color="#B88C46"/>
                     </radialGradient>
-                    <clipPath id="clipR${sfx}"><path d="${BREAK_R}"/></clipPath>
+                    <clipPath id="clipR${sfx}"><path d="${ROLL_R}"/></clipPath>
                   </defs>
-                  <path fill="url(#bakeR${sfx})" d="${BREAK_R}"/>
+                  <path fill="url(#bakeR${sfx})" d="${ROLL_R}"/>
                   <g clip-path="url(#clipR${sfx})">
-                    <path fill="none" stroke="#96631E" stroke-opacity=".38" stroke-width="2.3" stroke-linecap="round" d="M228 140 A82 70 0 0 1 150 198"/>
-                    <g stroke="#96631E" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round">
-                      <path d="M230 146 l-11 -2"/><path d="M226 162 l-11 -3"/><path d="M218 176 l-10 -5"/>
-                      <path d="M206 188 l-8 -7"/><path d="M187 70 l8 8"/><path d="M178 79 l9 7"/>
-                      <path d="M170 90 l10 6"/><path d="M163 102 l11 5"/>
+                    <path fill="none" stroke="#9A7029" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round" d="M266 138 C226 148 188 150 150 146"/>
+                    <path fill="none" stroke="#FFF8E7" stroke-opacity=".44" stroke-width="2" stroke-linecap="round" d="M260 106 C222 100 186 100 152 104"/>
+                    <g fill="#7C5520" fill-opacity=".5">
+                      <ellipse cx="238" cy="114" rx="2.6" ry="1.6" transform="rotate(18 238 114)"/>
+                      <ellipse cx="212" cy="134" rx="2.4" ry="1.5" transform="rotate(-22 212 134)"/>
+                      <ellipse cx="192" cy="110" rx="2.7" ry="1.6" transform="rotate(8 192 110)"/>
+                      <ellipse cx="172" cy="140" rx="2.3" ry="1.4" transform="rotate(-34 172 140)"/>
+                      <ellipse cx="226" cy="148" rx="2.2" ry="1.4" transform="rotate(-12 226 148)"/>
+                      <ellipse cx="180" cy="122" rx="2.5" ry="1.5" transform="rotate(28 180 122)"/>
                     </g>
                   </g>
+                  <ellipse cx="274" cy="125" rx="17" ry="29" fill="#8D6326" fill-opacity=".92"/>
+                  <ellipse cx="271" cy="125" rx="11.5" ry="22" fill="#5E3F15" fill-opacity=".85"/>
+                  <path fill="none" stroke="#FFF6E2" stroke-opacity=".38" stroke-width="2" stroke-linecap="round" d="M280 104 A17 29 0 0 1 280 146"/>
                 </svg>`;
+
 
 /* Pages that still build and still answer on their URL, but are kept out of
    the navigation, out of the sitemap, and told not to be indexed. One list
@@ -164,7 +189,7 @@ const footer = (page) => `<section class="closing container reveal">
 
 
 ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every load: crack the
-         cookie, read the slip, and the site turns warm. Other pages inherit
+         roll, read the slip, and the site turns warm. Other pages inherit
          whichever palette the visitor left the landing page on. -->
     <div class="moment" id="moment" hidden>
       <div class="moment__scrim" data-moment-close></div>
@@ -208,10 +233,10 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         <div class="moment__fortune">
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
-                aria-label="Crack open the fortune cookie">
+                aria-label="Snap open the kuzhalappam">
           <span class="moment__aura" aria-hidden="true"></span>
           <span class="biscuit">
-            ${cookieHalves('m')}
+            ${rollHalves('m')}
             <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
             <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
             <span class="biscuit__crumb"></span>
@@ -331,7 +356,7 @@ const socialHead = (page, html) => {
 <meta property="og:image" content="${SITE}/assets/media/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A fortune cookie cracked open beside the words Kismat Cookies.">
+<meta property="og:image:alt" content="A kuzhalappam snapped open beside the words Kismat Cookies.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -345,7 +370,7 @@ const socialHead = (page, html) => {
       name: 'Kismat Cookies',
       url: SITE,
       logo: SITE + '/assets/media/og.png',
-      description: 'Advertising inside real fortune cookies — a brand\u2019s line, code and lucky numbers printed on the slip served with the restaurant check.',
+      description: 'Advertising inside kuzhalappam — the crisp rice-flour roll served with the restaurant check, carrying a brand\u2019s line, code and lucky numbers on the slip inside.',
       email: D.email,
       areaServed: { '@type': 'Country', name: 'India' },
       /* Canonical profile URL only. sameAs is how Google matches this entity
