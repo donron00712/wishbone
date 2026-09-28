@@ -30,72 +30,113 @@ const smallArrow = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" 
 const bone = (w = 23, h = 21) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
 
 
-/* The kuzhalappam, emitted wherever it is needed. `sfx` keeps the gradient and
+/* The cannoli, emitted wherever it is needed. `sfx` keeps the gradient and
    clip ids unique so two of them on one page cannot collide.
 
    A hollow rolled tube, snapped across the middle. Both halves share one break
    polyline traversed in opposite directions, so the jagged edges interlock
-   instead of crossing — the same trick the fortune cookie used, and the reason
-   the pieces read as having come apart rather than been drawn apart.
+   instead of crossing — the trick the fortune cookie used, and the reason the
+   pieces read as having come apart rather than been drawn apart.
+
+   Three things do the work of making it read as hollow rather than as a solid
+   lozenge, and all three were missing from the first attempt:
+
+     - the open end is a RING, not a disc: a pale pastry rim with the dark hole
+       inside it. A flat dark ellipse just looked like a capped end. The hole is
+       deliberately small against the rim — a fried shell has a thick wall, and
+       a wide hole reads as a napkin ring rather than something you could bake.
+     - the body tapers, and the silhouette is wider at the mouth than at the
+       break, so the eye reads a cylinder seen slightly end-on.
+     - an underside shadow inside the clip, so the tube turns away from the
+       light instead of sitting flat.
 
    Each half keeps its open end pointing outward, because that hollow is the
    product: it is where the slip goes. The animation parts them left and right,
    so both mouths turn toward the viewer as they separate. */
-const BREAK_DOWN = "L158 106 L146 118 L157 130 L145 142 L150 156";
-const BREAK_UP   = "L145 142 L157 130 L146 118 L158 106";
+/* The break spans 93..155, the same 62px the mouths do, and the long edges are
+   nearly straight. An earlier pass bowed them and left the break narrower than
+   the ends, which gave the intact roll a waist — an hourglass rather than a
+   tube. The closed state is what a visitor sees first, so it has to hold. */
+const BRK_D = "L161 102 L149 112 L159 121 L147 131 L158 140 L146 148 L150 155";
+const BRK_U = "L146 148 L158 140 L147 131 L159 121 L149 112 L161 102 L152 93";
 
-const ROLL_L = `M26 96 C68 88 112 88 150 94 ${BREAK_DOWN} C112 162 68 162 26 154 A17 29 0 0 1 26 96 Z`;
-const ROLL_R = `M150 94 C188 88 232 88 274 96 A17 29 0 0 1 274 154 C232 162 188 162 150 156 ${BREAK_UP} Z`;
+const ROLL_L = `M26 94 C72 90 112 90 152 93 ${BRK_D} C112 158 72 158 26 156 A18 31 0 0 1 26 94 Z`;
+const ROLL_R = `M150 155 ${BRK_U} C188 90 228 90 274 94 A18 31 0 0 1 274 156 C228 158 188 158 150 155 Z`;
 
 const rollHalves = (sfx) => `
                 <svg class="biscuit__half biscuit__half--l" viewBox="0 0 300 250" aria-hidden="true">
                   <defs>
-                    <radialGradient id="bakeL${sfx}" cx="0.34" cy="0.24" r="0.95">
-                      <stop offset="0" stop-color="#FDF7E8"/><stop offset="0.55" stop-color="#EBD6AC"/><stop offset="1" stop-color="#C49A55"/>
-                    </radialGradient>
+                    <linearGradient id="bakeL${sfx}" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#FDF8EC"/><stop offset="0.38" stop-color="#F2E2BE"/>
+                      <stop offset="0.74" stop-color="#DCC08A"/><stop offset="1" stop-color="#BB9450"/>
+                    </linearGradient>
                     <clipPath id="clipL${sfx}"><path d="${ROLL_L}"/></clipPath>
                   </defs>
                   <path fill="url(#bakeL${sfx})" d="${ROLL_L}"/>
                   <g clip-path="url(#clipL${sfx})">
-                    <path fill="none" stroke="#B0832F" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round" d="M34 138 C74 148 112 150 150 146"/>
-                    <path fill="none" stroke="#FFF8E7" stroke-opacity=".5" stroke-width="2" stroke-linecap="round" d="M40 106 C78 100 114 100 148 104"/>
-                    <g fill="#8A5F22" fill-opacity=".5">
-                      <ellipse cx="62" cy="114" rx="2.6" ry="1.6" transform="rotate(-18 62 114)"/>
-                      <ellipse cx="88" cy="134" rx="2.4" ry="1.5" transform="rotate(22 88 134)"/>
-                      <ellipse cx="108" cy="110" rx="2.7" ry="1.6" transform="rotate(-8 108 110)"/>
-                      <ellipse cx="128" cy="140" rx="2.3" ry="1.4" transform="rotate(34 128 140)"/>
-                      <ellipse cx="74" cy="148" rx="2.2" ry="1.4" transform="rotate(12 74 148)"/>
-                      <ellipse cx="120" cy="122" rx="2.5" ry="1.5" transform="rotate(-28 120 122)"/>
+                    <!-- underside turning away from the light -->
+                    <path fill="#A87B33" fill-opacity=".30" d="M26 141 C80 154 120 156 156 152 L156 174 L20 174 Z"/>
+                    <!-- the seam where the rolled sheet overlaps, running the length -->
+                    <path fill="none" stroke="#B08536" stroke-opacity=".38" stroke-width="2" stroke-linecap="round"
+                          d="M32 138 C74 146 114 147 152 143"/>
+                    <!-- highlight along the top of the curve -->
+                    <path fill="none" stroke="#FFFCF4" stroke-opacity=".62" stroke-width="2.6" stroke-linecap="round"
+                          d="M42 103 C78 99 114 99 148 102"/>
+                    <!-- cumin and sesame through the flour -->
+                    <g fill="#7A5218">
+                      <ellipse cx="58" cy="112" rx="2.7" ry="1.5" fill-opacity=".55" transform="rotate(-16 58 112)"/>
+                      <ellipse cx="84" cy="132" rx="2.3" ry="1.4" fill-opacity=".45" transform="rotate(24 84 132)"/>
+                      <ellipse cx="104" cy="108" rx="2.8" ry="1.6" fill-opacity=".6"  transform="rotate(-6 104 108)"/>
+                      <ellipse cx="126" cy="136" rx="2.2" ry="1.3" fill-opacity=".42" transform="rotate(32 126 136)"/>
+                      <ellipse cx="70" cy="146" rx="2.1" ry="1.3" fill-opacity=".38" transform="rotate(10 70 146)"/>
+                      <ellipse cx="118" cy="119" rx="2.5" ry="1.5" fill-opacity=".5"  transform="rotate(-30 118 119)"/>
+                      <ellipse cx="92" cy="105" rx="2" ry="1.2"   fill-opacity=".4"  transform="rotate(14 92 105)"/>
+                      <ellipse cx="140" cy="126" rx="2.2" ry="1.3" fill-opacity=".46" transform="rotate(-20 140 126)"/>
+                      <ellipse cx="48" cy="128" rx="2.4" ry="1.4" fill-opacity=".5"  transform="rotate(28 48 128)"/>
                     </g>
                   </g>
-                  <ellipse cx="26" cy="125" rx="17" ry="29" fill="#9C6E2C" fill-opacity=".92"/>
-                  <ellipse cx="29" cy="125" rx="11.5" ry="22" fill="#6B4718" fill-opacity=".85"/>
-                  <path fill="none" stroke="#FFF6E2" stroke-opacity=".45" stroke-width="2" stroke-linecap="round" d="M20 104 A17 29 0 0 0 20 146"/>
+                  <!-- the open end: a pastry ring with the hollow inside it -->
+                  <ellipse cx="26" cy="125" rx="18" ry="31" fill="#F1E1BE"/>
+                  <ellipse cx="26" cy="125" rx="18" ry="31" fill="none" stroke="#B89355" stroke-opacity=".5" stroke-width="1.4"/>
+                  <ellipse cx="29" cy="125" rx="8" ry="16" fill="#593912"/>
+                  <ellipse cx="30" cy="123.5" rx="5.6" ry="11.5" fill="#3E250B" fill-opacity=".7"/>
+                  <path fill="none" stroke="#FFFBF0" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"
+                        d="M14 108 A18 31 0 0 0 14 142"/>
                 </svg>
 
                 <svg class="biscuit__half biscuit__half--r" viewBox="0 0 300 250" aria-hidden="true">
                   <defs>
-                    <radialGradient id="bakeR${sfx}" cx="0.66" cy="0.24" r="0.95">
-                      <stop offset="0" stop-color="#F8F0DD"/><stop offset="0.55" stop-color="#E4CB9C"/><stop offset="1" stop-color="#B88C46"/>
-                    </radialGradient>
+                    <linearGradient id="bakeR${sfx}" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#FAF3E3"/><stop offset="0.38" stop-color="#EDDBB3"/>
+                      <stop offset="0.74" stop-color="#D4B57C" /><stop offset="1" stop-color="#B08843"/>
+                    </linearGradient>
                     <clipPath id="clipR${sfx}"><path d="${ROLL_R}"/></clipPath>
                   </defs>
                   <path fill="url(#bakeR${sfx})" d="${ROLL_R}"/>
                   <g clip-path="url(#clipR${sfx})">
-                    <path fill="none" stroke="#9A7029" stroke-opacity=".34" stroke-width="2.2" stroke-linecap="round" d="M266 138 C226 148 188 150 150 146"/>
-                    <path fill="none" stroke="#FFF8E7" stroke-opacity=".44" stroke-width="2" stroke-linecap="round" d="M260 106 C222 100 186 100 152 104"/>
-                    <g fill="#7C5520" fill-opacity=".5">
-                      <ellipse cx="238" cy="114" rx="2.6" ry="1.6" transform="rotate(18 238 114)"/>
-                      <ellipse cx="212" cy="134" rx="2.4" ry="1.5" transform="rotate(-22 212 134)"/>
-                      <ellipse cx="192" cy="110" rx="2.7" ry="1.6" transform="rotate(8 192 110)"/>
-                      <ellipse cx="172" cy="140" rx="2.3" ry="1.4" transform="rotate(-34 172 140)"/>
-                      <ellipse cx="226" cy="148" rx="2.2" ry="1.4" transform="rotate(-12 226 148)"/>
-                      <ellipse cx="180" cy="122" rx="2.5" ry="1.5" transform="rotate(28 180 122)"/>
+                    <path fill="#9C7029" fill-opacity=".30" d="M274 141 C220 154 180 156 144 152 L144 174 L280 174 Z"/>
+                    <path fill="none" stroke="#9E762C" stroke-opacity=".38" stroke-width="2" stroke-linecap="round"
+                          d="M268 138 C226 146 186 147 148 143"/>
+                    <path fill="none" stroke="#FFFCF4" stroke-opacity=".52" stroke-width="2.6" stroke-linecap="round"
+                          d="M258 103 C222 99 186 99 152 102"/>
+                    <g fill="#6E4A15">
+                      <ellipse cx="242" cy="112" rx="2.7" ry="1.5" fill-opacity=".55" transform="rotate(16 242 112)"/>
+                      <ellipse cx="216" cy="132" rx="2.3" ry="1.4" fill-opacity=".45" transform="rotate(-24 216 132)"/>
+                      <ellipse cx="196" cy="108" rx="2.8" ry="1.6" fill-opacity=".6"  transform="rotate(6 196 108)"/>
+                      <ellipse cx="174" cy="136" rx="2.2" ry="1.3" fill-opacity=".42" transform="rotate(-32 174 136)"/>
+                      <ellipse cx="230" cy="146" rx="2.1" ry="1.3" fill-opacity=".38" transform="rotate(-10 230 146)"/>
+                      <ellipse cx="182" cy="119" rx="2.5" ry="1.5" fill-opacity=".5"  transform="rotate(30 182 119)"/>
+                      <ellipse cx="208" cy="105" rx="2" ry="1.2"   fill-opacity=".4"  transform="rotate(-14 208 105)"/>
+                      <ellipse cx="160" cy="126" rx="2.2" ry="1.3" fill-opacity=".46" transform="rotate(20 160 126)"/>
+                      <ellipse cx="252" cy="128" rx="2.4" ry="1.4" fill-opacity=".5"  transform="rotate(-28 252 128)"/>
                     </g>
                   </g>
-                  <ellipse cx="274" cy="125" rx="17" ry="29" fill="#8D6326" fill-opacity=".92"/>
-                  <ellipse cx="271" cy="125" rx="11.5" ry="22" fill="#5E3F15" fill-opacity=".85"/>
-                  <path fill="none" stroke="#FFF6E2" stroke-opacity=".38" stroke-width="2" stroke-linecap="round" d="M280 104 A17 29 0 0 1 280 146"/>
+                  <ellipse cx="274" cy="125" rx="18" ry="31" fill="#EBDAB2"/>
+                  <ellipse cx="274" cy="125" rx="18" ry="31" fill="none" stroke="#AC8747" stroke-opacity=".5" stroke-width="1.4"/>
+                  <ellipse cx="271" cy="125" rx="8" ry="16" fill="#4E3210"/>
+                  <ellipse cx="270" cy="123.5" rx="5.6" ry="11.5" fill="#36200A" fill-opacity=".7"/>
+                  <path fill="none" stroke="#FFFBF0" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"
+                        d="M286 108 A18 31 0 0 1 286 142"/>
                 </svg>`;
 
 
@@ -233,7 +274,7 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         <div class="moment__fortune">
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
-                aria-label="Snap open the kuzhalappam">
+                aria-label="Snap open the cannoli">
           <span class="moment__aura" aria-hidden="true"></span>
           <span class="biscuit">
             ${rollHalves('m')}
@@ -356,7 +397,7 @@ const socialHead = (page, html) => {
 <meta property="og:image" content="${SITE}/assets/media/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A kuzhalappam snapped open beside the words Kismat Cookies.">
+<meta property="og:image:alt" content="A rice-flour cannoli snapped open beside the words Kismat Cookies.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -370,7 +411,7 @@ const socialHead = (page, html) => {
       name: 'Kismat Cookies',
       url: SITE,
       logo: SITE + '/assets/media/og.png',
-      description: 'Advertising inside kuzhalappam — the crisp rice-flour roll served with the restaurant check, carrying a brand\u2019s line, code and lucky numbers on the slip inside.',
+      description: 'Advertising inside a rice-flour cannoli served with the restaurant check, carrying a brand\u2019s line, code and lucky numbers on the slip inside.',
       email: D.email,
       areaServed: { '@type': 'Country', name: 'India' },
       /* Canonical profile URL only. sameAs is how Google matches this entity

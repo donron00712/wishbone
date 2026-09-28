@@ -48,11 +48,11 @@
       </g>
       <g transform="translate(-46 0) rotate(-15 150 134)">
         <ellipse cx="26" cy="125" rx="17" ry="29" fill="#9C6E2C"/>
-        <ellipse cx="29" cy="125" rx="11.5" ry="22" fill="#6B4718"/>
+        <ellipse cx="29" cy="125" rx="8" ry="16" fill="#6B4718"/>
       </g>
       <g transform="translate(46 0) rotate(15 150 134)">
         <ellipse cx="274" cy="125" rx="17" ry="29" fill="#8D6326"/>
-        <ellipse cx="271" cy="125" rx="11.5" ry="22" fill="#5E3F15"/>
+        <ellipse cx="271" cy="125" rx="8" ry="16" fill="#5E3F15"/>
       </g>
     </g>
   </g>
@@ -64,7 +64,7 @@
   </g>
 
   <text x="600" y="432" text-anchor="middle" font-size="62" font-weight="700" fill="#F0E3CC" letter-spacing="-1">Kismat Cookies</text>
-  <text x="600" y="486" text-anchor="middle" font-size="27" fill="#C8B79B">Advertising inside kuzhalappam,</text>
+  <text x="600" y="486" text-anchor="middle" font-size="27" fill="#C8B79B">Advertising inside a rice-flour cannoli,</text>
   <text x="600" y="524" text-anchor="middle" font-size="27" fill="#C8B79B">at restaurants everywhere.</text>
 
   <text x="600" y="580" text-anchor="middle" font-size="16" fill="#8E7B5F" letter-spacing="3.4">KISMATCOOKIES.COM</text>

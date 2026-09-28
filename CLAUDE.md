@@ -1,10 +1,13 @@
 # Kismat Cookies
 
 Marketing site for an advertising medium: brands buy the printed slip inside a
-**kuzhalappam** — the crisp Kerala rice-flour roll — served with the restaurant
-check. The medium changed from fortune cookies in Sept 2026; the brand name
-"Kismat Cookies" was kept deliberately, along with the domain, mailbox and
-LinkedIn page that hang off it. The audience is media buyers,
+**rice-flour cannoli** — a crisp hollow roll, kuzhalappam by another name —
+served with the restaurant check. The medium changed from fortune cookies in
+Sept 2026. The site says "cannoli" rather than "kuzhalappam" because a media
+buyer in Mumbai or Delhi reads the shape instantly from the first word; the
+longer descriptions keep "rice-flour" on the front so it is not mistaken for
+the Italian ricotta pastry. The brand name "Kismat Cookies" was kept
+deliberately, along with the domain, mailbox and LinkedIn page hanging off it. The audience is media buyers,
 not diners. Live at https://wishbone-swart.vercel.app (the URL still carries the
 old brand name; the repo is `donron00712/wishbone` and it is **public**).
 
@@ -39,10 +42,14 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 - `assets/js/home.js` — the hero sequence, the wall, the unit slip
 - `assets/css/style.css` — everything, token-driven
 - `build.js` — assembles header/footer/cards at build time. `ROLL_L`/`ROLL_R`
-  draw the kuzhalappam: a hollow tube snapped across the middle, two halves
+  draw the cannoli: a hollow tube snapped across the middle, two halves
   sharing one break polyline traversed in opposite directions so the jagged
   edges interlock. Each half's open end points outward, because that hollow
   is where the slip goes. `assets/media/og.svg` repeats the same paths.
+  Two things earned by getting them wrong first: the open end is a pale ring
+  with a **small** dark hole, because a wide hole reads as a napkin ring and a
+  filled ellipse reads as a capped end; and the break spans the same height as
+  the mouths, because a narrower one gave the intact roll a waist.
 - Pages: index, formats, why-it-works, cases, contact
 - `HIDDEN` in `build.js` lists pages that still build and still answer on
   their URL, but are kept out of the nav, out of `sitemap.xml`, and marked
@@ -68,7 +75,7 @@ Structural gotchas found the hard way:
 
 ## The fortune moment
 
-Landing page only. At the scroll cue where the sticky CTA fires, a kuzhalappam
+Landing page only. At the scroll cue where the sticky CTA fires, a cannoli
 appears centre-screen; tapping it snaps it open, reveals a slip, and turns the
 site from dark roast to beige. Other pages inherit the palette via
 `sessionStorage`.
@@ -97,7 +104,7 @@ percentage of the overlay, it drifted away from the cookie).
 still on disk and still good footage — of a fortune cookie, which is what the
 medium was when they were shot. Playing them beside copy about kuzhalappam
 would show a buyer a product we do not sell. Do not re-point the stem at them;
-shoot the roll.
+shoot the cannoli.
 
 Once there is footage, it sits to the right of the fortune. The stage is centred, so
 the film growing from zero width is what walks the fortune column to the left —

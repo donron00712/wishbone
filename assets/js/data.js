@@ -89,7 +89,7 @@ window.WB = (function () {
 
   const reasons = [
     { n: '01', title: 'It arrives as part of the meal',
-      body: 'The kuzhalappam comes with the check the way it always has. Your message is inside something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
+      body: 'The cannoli comes with the check the way it always has. Your message is inside something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
     { n: '02', title: 'It lands at the calmest point of the evening',
       body: 'The end of a meal is unhurried in a way almost no other advertising moment is. Nothing else is bidding for the table at that point.' },
     { n: '03', title: 'It reaches a table, not a screen',
@@ -151,12 +151,12 @@ window.WB = (function () {
          white plate, the slip half out.', credit: 'Photo: your name' }  */
   const photos = [];
 
-  /* Footage for the fortune moment, shown beside the slip once the roll has
+  /* Footage for the fortune moment, shown beside the slip once the cannoli has
      been snapped open. Empty on purpose.
 
      The files at assets/media/moment-film.* are still on disk, and they are
      still good footage — of a fortune cookie. That was the medium when they
-     were shot. Playing them beside copy about kuzhalappam would show a buyer
+     were shot. Playing them beside copy about a rice-flour cannoli would show
      a product we do not sell, which is the one thing this site has been
      careful not to do anywhere else. Better a centred column than footage
      that contradicts the page.
@@ -176,7 +176,7 @@ window.WB = (function () {
      `npm run add-video <file>` encodes all three to those numbers. */
   const momentFilm = {
     stem: '',
-    alt:  'Hands snap a kuzhalappam open and draw out the printed slip inside.',
+    alt:  'Hands snap a rice-flour cannoli open and draw out the printed slip inside.',
     caption: ''
   };
 
