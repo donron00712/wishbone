@@ -43,15 +43,19 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 - `assets/css/style.css` — everything, token-driven
 - `build.js` — assembles header/footer/cards at build time.
 
-  **There is no drawn snack, and there should not be one.** Three passes tried:
-  the cannoli as a hollow tube, then with a tighter rim, then a sealed wrapper
-  around it. Vector renders paper and geometry honestly and food badly, and
-  every attempt read as a cartoon of a snack. What the visitor taps now is a
-  **rolled slip** (`.roll`, pure CSS — a rectangle with two curled ends), which
-  unrolls into the fortune. It is the product, it is the payoff, and it is the
-  one object here that survives the next pivot: the medium has already changed
-  once and a slip is still a slip. If the artwork ever needs to show the food,
-  that is a photograph, not a path.
+  **Nothing is drawn, and nothing should be.** Four passes tried: the cannoli
+  as a hollow tube, then with a tighter rim, then a sealed wrapper around it,
+  then a plain paper bar standing in for the slip. All four invented an object
+  purely so there was something to tap, and all four looked it.
+
+  The slip is the illustration. `.scroll` clips the **real** slip — the same
+  `.paper--fortune` + `.paper--ad` pair the wall and the unit render — down to
+  a rolled edge, and tapping opens the clip so it unrolls. Nothing is swapped
+  at the tap: it is one piece of paper throughout, which is why it reads as a
+  reveal rather than as one object leaving and another arriving. It is also the
+  product, and it survives the next pivot — the medium changed once this week
+  and a slip is still a slip. If the artwork ever needs to show the food, that
+  is a photograph, not a path.
 
   `.biscuit*` and `.cracker*` in the CSS are **dead** — `#cracker` exists on no
   page, and the moment stopped using `.biscuit` when the roll replaced it. Safe

@@ -77,7 +77,7 @@
 [data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(61,40,20,.18)}
 [data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(61,40,20,.22)}
 [data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(61,40,20,.26)}
-[data-theme="warm"] .roll{box-shadow:0 18px 34px rgba(61,40,20,.34),0 1px 0 rgba(255,255,255,.7) inset}
+[data-theme="warm"] .scroll{box-shadow:0 14px 30px rgba(61,40,20,.34)}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
@@ -883,8 +883,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment__eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
   color:var(--moment-ink);margin:0 0 10px}
 
-.moment__cookie{background:none;border:0;padding:0;cursor:pointer;
-  width:min(64vw,244px);aspect-ratio:300/120;position:relative;
+.moment__cookie{background:none;border:0;padding:24px 0;cursor:pointer;
+  width:min(86vw,330px);position:relative;display:block;
   transition:transform .4s var(--ease)}
 /* No focus box around the cookie — a rectangle around a round object looks
    like a mistake. It glows instead, which reads on a pointer and a keyboard
@@ -893,54 +893,36 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .moment__cookie:hover{transform:scale(1.04)}
 .moment__cookie:focus-visible{transform:scale(1.04)}
 
-/* The rolled slip — the thing you tap. Built from CSS rather than a path
-   because it is a rectangle with two curled ends, and there is nothing here a
-   vector would draw better. Three earlier passes drew the snack itself and
-   every one read as a cartoon of food; the slip is the product anyway. */
-.roll{position:absolute;left:50%;top:50%;translate:-50% -50%;
-  width:min(62vw,232px);height:38px;border-radius:7px;
-  background:linear-gradient(180deg,#FFFDF7 0%,#F6F0E4 44%,#E2D5BD 100%);
-  box-shadow:0 18px 34px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.7) inset;
-  transition:filter .45s var(--ease)}
-/* the curl at each end, so it reads as rolled rather than as a bar */
-.roll::before,.roll::after{content:"";position:absolute;top:-4px;bottom:-4px;width:18px;
-  border-radius:9px;background:linear-gradient(180deg,#FBF6EA 0%,#EADFC8 52%,#CFBE9E 100%);
-  box-shadow:0 3px 8px rgba(0,0,0,.32)}
-.roll::before{left:-5px}
-.roll::after{right:-5px}
-.moment__cookie:hover .roll,
-.moment__cookie:focus-visible .roll{
-  filter:drop-shadow(0 0 16px rgba(255,214,120,.5)) drop-shadow(0 0 42px rgba(255,190,80,.34))}
+/* The slip IS the illustration. Three passes drew the snack and a fourth drew
+   a paper bar standing in for the slip; all four were an object invented to be
+   tapped. This clips the real slip to a rolled edge instead — closed, you see
+   the top few pixels of the actual fortune paper with a shadow under it, which
+   is what a rolled slip looks like. Opening the clip unrolls the real thing.
+
+   Nothing is swapped at the tap, so there is no moment where one object leaves
+   and another arrives. It is the same piece of paper throughout, which is also
+   the piece of paper the wall and the unit section render. */
+.scroll{display:block;width:min(86vw,330px);max-height:15px;overflow:hidden;
+  border-radius:7px;box-shadow:0 14px 30px rgba(0,0,0,.55);
+  transition:max-height .9s var(--ease),box-shadow .5s var(--ease)}
+.moment.is-open .scroll{max-height:440px;box-shadow:none;overflow:visible}
+.moment__cookie:hover .scroll,
+.moment__cookie:focus-visible .scroll{
+  box-shadow:0 14px 30px rgba(0,0,0,.55),0 0 22px rgba(255,214,120,.55)}
 
 /* a slow breath while it waits to be tapped */
 @keyframes moment-idle{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
-.moment:not(.is-open) .roll{animation:moment-idle 3.4s ease-in-out infinite}
+.moment:not(.is-open) .scroll{animation:moment-idle 3.4s ease-in-out infinite}
 
-/* the unroll: one shot, forwards, no loop. The roll opens out and dissolves
-   as the slip below expands into the space, so the two read as one movement
-   rather than as something vanishing and something else arriving. */
-@keyframes moment-unroll{
-  0%{opacity:1;transform:scaleY(1)}
-  55%{opacity:.55;transform:scaleY(2.8) translateY(-3px)}
-  100%{opacity:0;transform:scaleY(4.6) translateY(-7px)}
-}
-.moment.is-open .roll{animation:moment-unroll .72s var(--ease) forwards}
-/* The button keeps its space while the roll opens out, then gives it back so
-   the slip sits under the label rather than under a gap where the roll was.
-   overflow stays visible: the unroll scales past the box it is leaving. */
-.moment.is-open .moment__cookie{pointer-events:none;
-  aspect-ratio:auto;height:0;overflow:visible;
-  transition:height .42s var(--ease) .5s}
+/* The unroll is the max-height transition on .scroll above; there is no
+   keyframe here any more because nothing is being thrown away. */
+.moment.is-open .moment__cookie{pointer-events:none;padding-bottom:0}
 
 .moment__hint{font-size:14px;font-weight:500;color:var(--moment-ink);margin-top:6px;
   transition:opacity .3s}
 .moment.is-open .moment__hint{opacity:0;height:0;margin:0;overflow:hidden}
 
-.moment__slip{width:min(86vw,330px);display:flex;flex-direction:column;gap:6px;
-  height:0;margin:0;overflow:hidden;
-  opacity:0;transform:translateY(14px) scale(.94);
-  transition:opacity .7s var(--ease) .45s,transform .7s var(--ease) .45s}
-.moment.is-open .moment__slip{height:auto;margin-top:6px;overflow:visible;opacity:1;transform:none}
+.moment__slip{width:100%;display:flex;flex-direction:column;gap:6px}
 .moment__slip .paper{box-shadow:0 16px 34px rgba(0,0,0,.5)}
 /* one line, whatever the screen — the type shrinks rather than the line wrapping */
 .moment__slip .paper--fortune p{white-space:nowrap;font-size:clamp(12px,3.6vw,15px)}
@@ -1040,8 +1022,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .shoot{display:none}
   .moment__aura{animation:none;transition:none}
   .moment.is-open .moment__cookie::after{animation:none;opacity:0}
-  .moment:not(.is-open) .roll{animation:none}
-  .moment.is-open .roll{animation:none;opacity:0}
+  .moment:not(.is-open) .scroll{animation:none}
+  .scroll{transition-duration:.01ms}
   .moment__slip{transition-duration:.01ms}
   .moment__film{transition-duration:.01ms;transform:none}
   html.theme-shifting,html.theme-shifting *{transition-duration:.01ms !important}
