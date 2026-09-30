@@ -429,97 +429,6 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .spec .paper__id b{font-size:clamp(13.5px,1.7vw,15.5px)}
 .spec .paper__id em{font-size:clamp(10px,1.2vw,11.5px)}
 
-/* ============================================================
-   THE CRACKER — a fortune cookie breaking open
-   One 8s loop: the cookie sits, splits, the slip rises and is read,
-   then it resets. Held still until scrolled into view, and skipped
-   entirely for anyone who asked for reduced motion.
-   ============================================================ */
-.cracker{--crack-x:98px;--crack-y:60px;
-  position:relative;width:100%;aspect-ratio:4/3;max-height:440px;
-  display:flex;align-items:center;justify-content:center;
-  perspective:1000px;perspective-origin:50% 45%}
-.cracker__stage{position:relative;width:min(100%,420px);height:100%;
-  transform-style:preserve-3d;display:flex;align-items:center;justify-content:center}
-
-/* Real footage, when a file is dropped into assets/media/. */
-.cracker.has-video{perspective:none}
-.cracker__video{width:100%;height:100%;object-fit:contain;display:block}
-
-/* --- the biscuit (named to avoid colliding with .cookie, the consent bar) --- */
-.biscuit{position:absolute;left:50%;top:50%;translate:-50% -50%;
-  width:min(88%,318px);aspect-ratio:300/250;transform-style:preserve-3d;z-index:2}
-.biscuit__half{position:absolute;inset:0;width:100%;height:100%;
-  transform-origin:50% 46%;filter:drop-shadow(0 16px 24px rgba(0,0,0,.45))}
-/* fills are SVG gradients — CSS only adds the drop shadow */
-
-/* --- the slip: the same two-piece unit that fills the hero wall --- */
-.fortune-slip{position:absolute;z-index:4;width:min(84%,300px);
-  display:flex;flex-direction:column;gap:7px;
-  opacity:0;transform:translateY(-4px) scale(.66) rotate(-2deg)}
-.fortune-slip .paper{box-shadow:0 14px 32px rgba(0,0,0,.5)}
-.fortune-slip .paper--fortune p{font-size:13px}
-.fortune-slip .paper__nums{font-size:11px}
-@media (min-width:768px){
-  .fortune-slip .paper--fortune p{font-size:14.5px}
-  .fortune-slip .paper__nums{font-size:10.5px}
-}
-
-/* --- crumbs --- */
-.biscuit__crumb{position:absolute;left:50%;top:56%;width:9px;height:7px;border-radius:2px 3px 2px 3px;
-  background:linear-gradient(150deg,#F3D296,#D2913F);opacity:0;z-index:3;
-  box-shadow:0 2px 4px rgba(0,0,0,.35)}
-.biscuit__crumb:nth-of-type(2){width:6px;height:5px}
-.biscuit__crumb:nth-of-type(3){width:11px;height:8px}
-.biscuit__crumb:nth-of-type(4){width:5px;height:5px}
-.biscuit__crumb:nth-of-type(5){width:8px;height:6px}
-
-/* --- the loop, only once in view --- */
-.cracker.is-in .biscuit__half--l{animation:crack-left 8s var(--ease) infinite}
-.cracker.is-in .biscuit__half--r{animation:crack-right 8s var(--ease) infinite}
-.cracker.is-in .fortune-slip{animation:slip-rise 8s var(--ease) infinite}
-.cracker.is-in .biscuit__crumb:nth-of-type(1){animation:crumb 8s var(--ease) infinite;--cx:-58px;--cy:44px}
-.cracker.is-in .biscuit__crumb:nth-of-type(2){animation:crumb 8s var(--ease) infinite;--cx:52px;--cy:52px}
-.cracker.is-in .biscuit__crumb:nth-of-type(3){animation:crumb 8s var(--ease) infinite;--cx:-30px;--cy:64px}
-.cracker.is-in .biscuit__crumb:nth-of-type(4){animation:crumb 8s var(--ease) infinite;--cx:28px;--cy:70px}
-.cracker.is-in .biscuit__crumb:nth-of-type(5){animation:crumb 8s var(--ease) infinite;--cx:6px;--cy:82px}
-
-@keyframes crack-left{
-  0%,14%   {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
-  17%      {transform:translate3d(-2px,0,0) rotate(-1.5deg) rotateY(0deg)}
-  20%      {transform:translate3d(2px,0,0) rotate(1deg) rotateY(0deg)}
-  34%,74%  {transform:translate3d(calc(var(--crack-x) * -1),var(--crack-y),-30px) rotate(-19deg) rotateY(22deg)}
-  92%,100% {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
-}
-@keyframes crack-right{
-  0%,14%   {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
-  17%      {transform:translate3d(2px,0,0) rotate(1.5deg) rotateY(0deg)}
-  20%      {transform:translate3d(-2px,0,0) rotate(-1deg) rotateY(0deg)}
-  34%,74%  {transform:translate3d(var(--crack-x),var(--crack-y),-30px) rotate(19deg) rotateY(-22deg)}
-  92%,100% {transform:translate3d(0,0,0) rotate(0deg) rotateY(0deg)}
-}
-@keyframes slip-rise{
-  0%,18%   {opacity:0;transform:translateY(-4px) scale(.66) rotate(-2deg)}
-  38%      {opacity:1;transform:translateY(-34px) scale(1) rotate(-1.5deg)}
-  70%      {opacity:1;transform:translateY(-38px) scale(1) rotate(-1.5deg)}
-  84%,100% {opacity:0;transform:translateY(-6px) scale(.68) rotate(-2deg)}
-}
-@keyframes crumb{
-  0%,16%  {opacity:0;transform:translate(0,0) scale(.6)}
-  22%     {opacity:.85;transform:translate(calc(var(--cx) * .35),calc(var(--cy) * -.2)) scale(1)}
-  46%     {opacity:0;transform:translate(var(--cx),var(--cy)) scale(.7)}
-  100%    {opacity:0;transform:translate(var(--cx),var(--cy)) scale(.7)}
-}
-
-/* Static, already-open state when motion is unwelcome. */
-@media (prefers-reduced-motion:reduce){
-  .cracker .biscuit__half--l{transform:translate3d(calc(var(--crack-x) * -1),var(--crack-y),0) rotate(-19deg)}
-  .cracker .biscuit__half--r{transform:translate3d(var(--crack-x),var(--crack-y),0) rotate(19deg)}
-  .cracker .fortune-slip{opacity:1;transform:translateY(-34px) scale(1) rotate(-1.5deg)}
-  .cracker .biscuit__crumb{opacity:0}
-  .cracker.is-in .biscuit__half--l,.cracker.is-in .biscuit__half--r,
-  .cracker.is-in .fortune-slip,.cracker.is-in .biscuit__crumb{animation:none}
-}
 
 /* ---------- stat / target strip ---------- */
 /* Three figures, given the room to actually land. The numbers were set at
@@ -735,9 +644,6 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .reason{padding:26px;gap:12px}
   .reason h3{font-size:22px}
   .slip-card{padding:32px 24px}
-  .cracker{--crack-x:64px;--crack-y:44px;aspect-ratio:1/1;max-height:330px}
-  .biscuit{width:min(80%,235px)}
-  .fortune-slip{width:min(88%,255px)}
 
   /* Consent bar was eating a third of the screen. */
   .cookie{padding:14px;gap:12px;border-radius:14px}
@@ -791,7 +697,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
    display:none loses to any author display, so `display:grid` below quietly
    overrode `<div class="moment" hidden>` and left the overlay live on every
    page load. Nothing was visible — opacity is 0 — but 46 stars, 14 motes, two
-   shooting stars, the aura and the idling biscuit all kept animating, under a
+   shooting stars, the aura and the idling slip all kept animating, under a
    full-screen backdrop-filter compositing every frame, against a scroll scrub
    and smooth-scroll already asking for the main thread. */
 .moment[hidden]{display:none}

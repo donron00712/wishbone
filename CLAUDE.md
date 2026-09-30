@@ -57,10 +57,6 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
   and a slip is still a slip. If the artwork ever needs to show the food, that
   is a photograph, not a path.
 
-  `.biscuit*` and `.cracker*` in the CSS are **dead** — `#cracker` exists on no
-  page, and the moment stopped using `.biscuit` when the roll replaced it. Safe
-  to delete whenever someone is in there.
-
 - Pages: index, formats, why-it-works, cases, contact
 - `HIDDEN` in `build.js` lists pages that still build and still answer on
   their URL, but are kept out of the nav, out of `sitemap.xml`, and marked

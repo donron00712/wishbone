@@ -83,8 +83,7 @@
     let shown = false, opened = false;
 
     /* The film only joins the layout once it has decoded a frame, so a missing
-       or broken file leaves one centred column rather than a black rectangle.
-       Same rule the hero cracker already plays by. */
+       or broken file leaves one centred column rather than a black rectangle. */
     if (video) {
       video.addEventListener('loadeddata', () => {
         moment.classList.add('has-film');
