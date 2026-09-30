@@ -41,23 +41,22 @@ Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 - `assets/js/site.js` — shared behaviour only; it does **not** build DOM
 - `assets/js/home.js` — the hero sequence, the wall, the unit slip
 - `assets/css/style.css` — everything, token-driven
-- `build.js` — assembles header/footer/cards at build time. `WRAP_L`/`WRAP_R`
-  draw a **sealed sachet with crimped ends, torn across the middle** — the
-  thing the visitor taps in the fortune moment. Both halves share one tear
-  line traversed in opposite directions so the ragged edges interlock.
+- `build.js` — assembles header/footer/cards at build time.
 
-  **Do not try to draw the food.** Two passes drew the cannoli itself — a
-  hollow tube with a rim and a hole — and both looked like a cartoon of a
-  snack. Vector renders paper and geometry honestly and food badly. Drawing
-  the wrapper puts the hard part inside the packet where nobody has to judge
-  it, and it is truer to the product anyway: a real run arrives wrapped, and
-  the wrapper is a brand surface, which is why there is a printed band on it.
-  If the artwork ever needs to show the food itself, that is a photograph,
-  not a path.
+  **There is no drawn snack, and there should not be one.** Three passes tried:
+  the cannoli as a hollow tube, then with a tighter rim, then a sealed wrapper
+  around it. Vector renders paper and geometry honestly and food badly, and
+  every attempt read as a cartoon of a snack. What the visitor taps now is a
+  **rolled slip** (`.roll`, pure CSS — a rectangle with two curled ends), which
+  unrolls into the fortune. It is the product, it is the payoff, and it is the
+  one object here that survives the next pivot: the medium has already changed
+  once and a slip is still a slip. If the artwork ever needs to show the food,
+  that is a photograph, not a path.
 
-  `assets/media/og.svg` copies WRAP_L/WRAP_R verbatim. It drifted twice by
-  being patched separately; regenerate it from build.js rather than editing
-  its paths by hand.
+  `.biscuit*` and `.cracker*` in the CSS are **dead** — `#cracker` exists on no
+  page, and the moment stopped using `.biscuit` when the roll replaced it. Safe
+  to delete whenever someone is in there.
+
 - Pages: index, formats, why-it-works, cases, contact
 - `HIDDEN` in `build.js` lists pages that still build and still answer on
   their URL, but are kept out of the nav, out of `sitemap.xml`, and marked

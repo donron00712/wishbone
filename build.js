@@ -30,75 +30,18 @@ const smallArrow = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" 
 const bone = (w = 23, h = 21) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
 
 
-/* The wrapper, emitted wherever it is needed. `sfx` keeps the gradient and clip
-   ids unique so two of them on one page cannot collide.
+/* There is no drawn snack any more, and deliberately so. Three passes tried:
+   the cannoli as a hollow tube, then with a tighter rim, then a sealed wrapper
+   around it. Vector renders paper and geometry honestly and food badly, and
+   each attempt read as a cartoon of a snack rather than the thing itself.
 
-   A sealed sachet with crimped ends, torn across the middle. Two earlier passes
-   tried to draw the cannoli itself and both failed the only test that matters —
-   they looked like a cartoon of food rather than food. Drawing the wrapper
-   instead sidesteps that entirely: a sachet is paper and geometry, which vector
-   renders honestly, and the thing that is hard to draw stays inside it where
-   nobody has to judge it.
+   What the visitor taps now is the product: a rolled slip. It unrolls into the
+   fortune, which is the one object on this site that is both the thing being
+   sold and the thing being given away. It also survives the next pivot — the
+   medium has already changed once, and a slip is still a slip.
 
-   It is also truer to the product. A real run arrives wrapped, and the wrapper
-   is a brand surface in its own right, which is why there is a printed band on
-   it rather than blank paper.
-
-   Both halves share one tear line traversed in opposite directions, so the
-   ragged edges interlock instead of crossing — the same trick every version of
-   this has used, and the reason the halves read as having been pulled apart
-   rather than drawn apart. */
-const TEAR_UP   = "L154 150 L146 141 L155 132 L145 123 L154 114 L146 105";
-const TEAR_DOWN = "L146 105 L154 114 L145 123 L155 132 L146 141 L154 150 L150 158";
-
-const WRAP_L = `M150 92 C122 87 92 88 66 93 L60 100 L48 96 L46 106 L34 102 L30 114 L26 125 L30 136 L34 148 L46 144 L48 154 L60 150 L66 157 C92 162 122 163 150 158 ${TEAR_UP} Z`;
-const WRAP_R = `M150 92 ${TEAR_DOWN} C178 163 208 162 234 157 L240 150 L252 154 L254 144 L266 148 L270 136 L274 125 L270 114 L266 102 L254 106 L252 96 L240 100 L234 93 C208 88 178 87 150 92 Z`;
-
-const wrapHalves = (sfx) => `
-                <svg class="biscuit__half biscuit__half--l" viewBox="0 0 300 250" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="wrapL${sfx}" x1="0" y1="0" x2="0.25" y2="1">
-                      <stop offset="0" stop-color="#FBF4E6"/><stop offset="0.42" stop-color="#F0E4CB"/>
-                      <stop offset="0.78" stop-color="#DFCDA9"/><stop offset="1" stop-color="#C6B085"/>
-                    </linearGradient>
-                    <clipPath id="clipL${sfx}"><path d="${WRAP_L}"/></clipPath>
-                  </defs>
-                  <path fill="url(#wrapL${sfx})" d="${WRAP_L}"/>
-                  <g clip-path="url(#clipL${sfx})">
-                    <!-- the printed band: the wrapper is a brand surface too -->
-                    <rect x="20" y="112" width="132" height="15" fill="#C08A3A" fill-opacity=".85"/>
-                    <rect x="20" y="112" width="132" height="3" fill="#8F6220" fill-opacity=".45"/>
-                    <!-- the sheen of a folded sheet catching the light -->
-                    <path fill="#FFFDF6" fill-opacity=".5" d="M66 90 C96 86 124 87 150 90 L150 101 C124 98 96 97 66 101 Z"/>
-                    <!-- creases running out of the crimp -->
-                    <g stroke="#B79B6C" stroke-opacity=".42" stroke-width="1.4" stroke-linecap="round">
-                      <path d="M62 100 L74 110"/><path d="M60 126 L74 126"/><path d="M62 150 L74 140"/>
-                    </g>
-                    <!-- the sachet turning under -->
-                    <path fill="#A98A56" fill-opacity=".22" d="M20 146 C70 156 110 158 152 154 L152 172 L20 172 Z"/>
-                  </g>
-                </svg>
-
-                <svg class="biscuit__half biscuit__half--r" viewBox="0 0 300 250" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="wrapR${sfx}" x1="0" y1="0" x2="0.25" y2="1">
-                      <stop offset="0" stop-color="#F8F0DF"/><stop offset="0.42" stop-color="#EBDDC1"/>
-                      <stop offset="0.78" stop-color="#D8C49C"/><stop offset="1" stop-color="#BCA477"/>
-                    </linearGradient>
-                    <clipPath id="clipR${sfx}"><path d="${WRAP_R}"/></clipPath>
-                  </defs>
-                  <path fill="url(#wrapR${sfx})" d="${WRAP_R}"/>
-                  <g clip-path="url(#clipR${sfx})">
-                    <rect x="148" y="112" width="132" height="15" fill="#B67F33" fill-opacity=".85"/>
-                    <rect x="148" y="112" width="132" height="3" fill="#855A1C" fill-opacity=".45"/>
-                    <path fill="#FFFDF6" fill-opacity=".44" d="M150 90 C176 87 204 86 234 90 L234 101 C204 97 176 98 150 101 Z"/>
-                    <g stroke="#AC9063" stroke-opacity=".42" stroke-width="1.4" stroke-linecap="round">
-                      <path d="M238 100 L226 110"/><path d="M240 126 L226 126"/><path d="M238 150 L226 140"/>
-                    </g>
-                    <path fill="#9E7F4C" fill-opacity=".22" d="M280 146 C230 156 190 158 148 154 L148 172 L280 172 Z"/>
-                  </g>
-                </svg>`;
-
+   The roll is built from CSS, not SVG. It is a rectangle with two curled ends;
+   there is nothing here a path would draw better. */
 
 /* Pages that still build and still answer on their URL, but are kept out of
    the navigation, out of the sitemap, and told not to be indexed. One list
@@ -234,16 +177,11 @@ ${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every lo
         <div class="moment__fortune">
         <p class="moment__eyebrow" id="moment-title">One for you</p>
         <button class="moment__cookie" type="button" id="moment-cookie"
-                aria-label="Open the wrapper">
+                aria-label="Unroll your fortune">
           <span class="moment__aura" aria-hidden="true"></span>
-          <span class="biscuit">
-            ${wrapHalves('m')}
-            <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
-            <span class="biscuit__crumb"></span><span class="biscuit__crumb"></span>
-            <span class="biscuit__crumb"></span>
-          </span>
+          <span class="roll" aria-hidden="true"></span>
         </button>
-        <p class="moment__hint">Tap to open it</p>
+        <p class="moment__hint">Tap to unroll it</p>
         <figure class="moment__slip" role="status">
           <div class="paper paper--fortune">
             <p>Your fortune holds within you.</p>

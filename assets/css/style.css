@@ -77,7 +77,7 @@
 [data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(61,40,20,.18)}
 [data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(61,40,20,.22)}
 [data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(61,40,20,.26)}
-[data-theme="warm"] .biscuit__half{filter:drop-shadow(0 16px 24px rgba(61,40,20,.34))}
+[data-theme="warm"] .roll{box-shadow:0 18px 34px rgba(61,40,20,.34),0 1px 0 rgba(255,255,255,.7) inset}
 
 /* the wash between palettes; added for a beat, then removed */
 html.theme-shifting,html.theme-shifting *{
@@ -881,38 +881,58 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   flex:0 0 auto}
 
 .moment__eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--moment-ink);margin:0 0 -30px}
+  color:var(--moment-ink);margin:0 0 10px}
 
 .moment__cookie{background:none;border:0;padding:0;cursor:pointer;
-  width:min(64vw,244px);aspect-ratio:300/250;position:relative;
+  width:min(64vw,244px);aspect-ratio:300/120;position:relative;
   transition:transform .4s var(--ease)}
 /* No focus box around the cookie — a rectangle around a round object looks
    like a mistake. It glows instead, which reads on a pointer and a keyboard
    alike and still marks focus clearly. */
 .moment__cookie{outline:none}
-.moment__cookie .biscuit__half{transition:filter .45s var(--ease)}
 .moment__cookie:hover{transform:scale(1.04)}
-.moment__cookie:hover .biscuit__half,
-.moment__cookie:focus-visible .biscuit__half{
-  filter:drop-shadow(0 0 16px rgba(255,214,120,.5)) drop-shadow(0 0 42px rgba(255,190,80,.34))
-         drop-shadow(0 16px 24px rgba(0,0,0,.45))}
 .moment__cookie:focus-visible{transform:scale(1.04)}
-.moment .biscuit{position:absolute;inset:0;width:100%;height:100%;translate:0 0;left:0;top:0}
+
+/* The rolled slip — the thing you tap. Built from CSS rather than a path
+   because it is a rectangle with two curled ends, and there is nothing here a
+   vector would draw better. Three earlier passes drew the snack itself and
+   every one read as a cartoon of food; the slip is the product anyway. */
+.roll{position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:min(62vw,232px);height:38px;border-radius:7px;
+  background:linear-gradient(180deg,#FFFDF7 0%,#F6F0E4 44%,#E2D5BD 100%);
+  box-shadow:0 18px 34px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.7) inset;
+  transition:filter .45s var(--ease)}
+/* the curl at each end, so it reads as rolled rather than as a bar */
+.roll::before,.roll::after{content:"";position:absolute;top:-4px;bottom:-4px;width:18px;
+  border-radius:9px;background:linear-gradient(180deg,#FBF6EA 0%,#EADFC8 52%,#CFBE9E 100%);
+  box-shadow:0 3px 8px rgba(0,0,0,.32)}
+.roll::before{left:-5px}
+.roll::after{right:-5px}
+.moment__cookie:hover .roll,
+.moment__cookie:focus-visible .roll{
+  filter:drop-shadow(0 0 16px rgba(255,214,120,.5)) drop-shadow(0 0 42px rgba(255,190,80,.34))}
 
 /* a slow breath while it waits to be tapped */
 @keyframes moment-idle{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
-.moment:not(.is-open) .biscuit{animation:moment-idle 3.4s ease-in-out infinite}
+.moment:not(.is-open) .roll{animation:moment-idle 3.4s ease-in-out infinite}
 
-/* the crack: one shot, forwards, no loop */
-@keyframes moment-left{to{transform:translate3d(-78px,-6px,0) rotate(-26deg);opacity:1}}
-@keyframes moment-right{to{transform:translate3d(78px,-6px,0) rotate(26deg);opacity:1}}
-.moment.is-open .biscuit{animation:none}
-.moment.is-open .biscuit__half--l{animation:moment-left .85s var(--ease) forwards}
-.moment.is-open .biscuit__half--r{animation:moment-right .85s var(--ease) forwards}
-.moment.is-open .moment__cookie{pointer-events:none}
-.moment.is-open .biscuit__crumb{animation:crumb 1.1s var(--ease) forwards}
+/* the unroll: one shot, forwards, no loop. The roll opens out and dissolves
+   as the slip below expands into the space, so the two read as one movement
+   rather than as something vanishing and something else arriving. */
+@keyframes moment-unroll{
+  0%{opacity:1;transform:scaleY(1)}
+  55%{opacity:.55;transform:scaleY(2.8) translateY(-3px)}
+  100%{opacity:0;transform:scaleY(4.6) translateY(-7px)}
+}
+.moment.is-open .roll{animation:moment-unroll .72s var(--ease) forwards}
+/* The button keeps its space while the roll opens out, then gives it back so
+   the slip sits under the label rather than under a gap where the roll was.
+   overflow stays visible: the unroll scales past the box it is leaving. */
+.moment.is-open .moment__cookie{pointer-events:none;
+  aspect-ratio:auto;height:0;overflow:visible;
+  transition:height .42s var(--ease) .5s}
 
-.moment__hint{font-size:14px;font-weight:500;color:var(--moment-ink);margin-top:-26px;
+.moment__hint{font-size:14px;font-weight:500;color:var(--moment-ink);margin-top:6px;
   transition:opacity .3s}
 .moment.is-open .moment__hint{opacity:0;height:0;margin:0;overflow:hidden}
 
@@ -998,7 +1018,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .moment__slip,
   .moment__film{--film-w:min(62vw,230px)}
   .moment.has-film .moment__cookie{width:min(42vw,158px)}
-  .moment__eyebrow{margin-bottom:-22px}
+  .moment__eyebrow{margin-bottom:8px}
   .moment.has-film.is-open .moment__film{margin-top:10px}
 }
 
@@ -1020,10 +1040,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .shoot{display:none}
   .moment__aura{animation:none;transition:none}
   .moment.is-open .moment__cookie::after{animation:none;opacity:0}
-  .moment:not(.is-open) .biscuit{animation:none}
-  .moment.is-open .biscuit__half--l{animation:none;transform:translate3d(-78px,-6px,0) rotate(-26deg)}
-  .moment.is-open .biscuit__half--r{animation:none;transform:translate3d(78px,-6px,0) rotate(26deg)}
-  .moment.is-open .biscuit__crumb{opacity:0}
+  .moment:not(.is-open) .roll{animation:none}
+  .moment.is-open .roll{animation:none;opacity:0}
   .moment__slip{transition-duration:.01ms}
   .moment__film{transition-duration:.01ms;transform:none}
   html.theme-shifting,html.theme-shifting *{transition-duration:.01ms !important}
