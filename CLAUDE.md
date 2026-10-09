@@ -135,6 +135,53 @@ Two leftovers worth knowing about:
 - `add-video.js` and `npm run og` still work, but `add-video` encodes to the
   4:5 frame the moment wanted and now has nowhere to put the result.
 
+## The trial-run QR
+
+The printed slip carries a QR. It points at **`sweetslips.co/go`**, never at
+the client, and `api/go.js` 302s it onward. That indirection is the whole
+design: the scan is counted on our own server — which is the number being sold
+— the destination can change without reprinting a slip, and a client URL that
+dies is a one-line fix rather than a dead code in every pocket. 302 and
+`Cache-Control: no-store` are deliberate; a 301 is cached by browsers and
+intermediaries, so a later change of destination would never reach anyone who
+had already scanned.
+
+Four casings resolve (`/go`, `/GO`, `/Go`, `/gO`) via rewrites in
+`vercel.json`, because the printed form is uppercase on some artwork.
+
+Counting is server-side through the GA4 Measurement Protocol — no cookie, no
+tag on the page, no consent question, and nothing that can be blocked in the
+scanner's browser. **A Google Tag is not needed and should not be added for
+this.** Read the *event* count in GA4, not users: every scan gets a fresh
+`client_id`, so the user count is an artifact and roughly equals the event
+count.
+
+Configured as Vercel environment variables, Production only so preview
+deployments cannot pollute the count. All three are optional in code by
+design — a missing variable must never produce a dead QR:
+
+| variable | set | note |
+|---|---|---|
+| `GO_DESTINATION` | yes | `https://www.nuptune.in/` — the `www` form it canonicalises to, saving a hop |
+| `GA_MEASUREMENT_ID` | yes | |
+| `GA_API_SECRET` | yes | GA4 Admin → Data Streams → Measurement Protocol |
+
+Changing one needs a redeploy (`vercel redeploy <prod-url>`) before the
+running function sees it.
+
+Art files and the print spec are in `assets/media/qr/`, with its own README.
+Two things learned there that are easy to get wrong:
+
+- The SVGs are emitted as **filled** rectangles, not segno's default stroked
+  path. Illustrator can be told not to scale strokes, and a QR whose strokes
+  did not scale with its geometry is dead but still looks plausible on screen.
+- Error correction is not the safety net it is sold as. Measured against
+  CoreImage — the decoder iPhones actually use — a contiguous blot survived to
+  20% only over plain data; 15% killed it in the centre or over a corner
+  locator. The spec's "30%" is a codeword ceiling that assumes the symbol can
+  still be *found*. **No logo in the middle of the code**, whatever a designer
+  asks for.
+
 ## To do — owner
 
 Left over from the move to `sweetslips.co` on 9 Oct 2026. The site itself is
