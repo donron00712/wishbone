@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kismatcookies.com/sitemap.xml
+Sitemap: https://sweetslips.co/sitemap.xml

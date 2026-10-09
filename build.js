@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Kismat Cookies build.
+ * sweetslips build.
  *
  * The site used to assemble its own header, footer and every card in the
  * browser, which meant the shipped HTML was 145 words and a visitor with no
@@ -55,7 +55,7 @@ const navLinks = (page) => D.nav
 const header = (page) => `<a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header" id="site-header">
       <div class="container">
-        <a class="brand" href="/" aria-label="Kismat Cookies home">${bone()}<span>Kismat Cookies</span></a>
+        <a class="brand" href="/" aria-label="sweetslips home">${bone()}<span>sweetslips</span></a>
         <nav class="nav" aria-label="Primary">
           <ul>
             ${navLinks(page)}
@@ -99,7 +99,7 @@ const footer = (page) => `<section class="closing container reveal">
           </ul></div>
         </div>
         <div class="footer-bottom">
-          <span>© ${new Date().getFullYear()} Kismat Cookies</span>
+          <span>© ${new Date().getFullYear()} sweetslips</span>
           <ul>
             <li><a href="mailto:${D.email}">${D.email}</a></li>
           </ul>
@@ -188,23 +188,23 @@ const caseCards = () => D.cases.map(c => `<li class="case reveal">
    Derived from each page's own <title> and description rather than a second
    list to keep in step with them. Paths are the clean ones cleanUrls serves,
    so the canonical matches the URL a visitor actually has. */
-const SITE = 'https://kismatcookies.com';
+const SITE = 'https://sweetslips.co';
 const pathFor = (page) => page === 'index' ? '/' : `/${page}`;
 
 const socialHead = (page, html) => {
-  const title = (html.match(/<title>([^<]*)<\/title>/) || [, 'Kismat Cookies'])[1];
+  const title = (html.match(/<title>([^<]*)<\/title>/) || [, 'sweetslips'])[1];
   const desc  = (html.match(/<meta name="description" content="([^"]*)"/) || [, ''])[1];
-  /* "The formats | Kismat Cookies" reads as a tab label; a share card wants
+  /* "The formats | sweetslips" reads as a tab label; a share card wants
      the page's own name, and og:site_name carries the brand separately. */
   const ogTitle = page === 'index'
-    ? 'Kismat Cookies'
-    : title.replace(/\s*\|\s*Kismat Cookies\s*$/, '');
+    ? 'sweetslips'
+    : title.replace(/\s*\|\s*sweetslips\s*$/, '');
   const url = SITE + pathFor(page);
   /* A hidden page keeps its canonical — if it is already indexed, the tag is
      what tells Google which URL the noindex applies to. */
   return `${isHidden(page) ? '<meta name="robots" content="noindex,follow">\n' : ''}<link rel="canonical" href="${url}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Kismat Cookies">
+<meta property="og:site_name" content="sweetslips">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(ogTitle)}">
@@ -212,7 +212,7 @@ const socialHead = (page, html) => {
 <meta property="og:image" content="${SITE}/assets/media/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A printed fortune slip beside the words Kismat Cookies.">
+<meta property="og:image:alt" content="A printed fortune slip beside the words sweetslips.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -223,7 +223,7 @@ const socialHead = (page, html) => {
     {
       '@type': 'Organization',
       '@id': SITE + '/#org',
-      name: 'Kismat Cookies',
+      name: 'sweetslips',
       url: SITE,
       logo: SITE + '/assets/media/og.png',
       description: 'Advertising on the printed slip that reaches the customer with the restaurant check \u2014 a brand\u2019s line, code and lucky numbers, set to brief.',
@@ -237,7 +237,7 @@ const socialHead = (page, html) => {
     {
       '@type': 'WebSite',
       '@id': SITE + '/#site',
-      name: 'Kismat Cookies',
+      name: 'sweetslips',
       url: SITE,
       publisher: { '@id': SITE + '/#org' },
       inLanguage: 'en'
@@ -253,7 +253,7 @@ const reach = () => `
             <h2 style="font-family:Manrope,sans-serif;font-weight:500;font-size:16px;margin-bottom:16px">Or just email us</h2>
             <a class="footer-mail" href="mailto:${D.email}">${D.email}</a>
             <p class="footer-social"><a href="${D.linkedin}"
-               target="_blank" rel="noopener">Kismat Cookies on LinkedIn ${smallArrow}</a></p>`;
+               target="_blank" rel="noopener">sweetslips on LinkedIn ${smallArrow}</a></p>`;
 
 const blocks = (page) => ({
   header: header(page),

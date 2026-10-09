@@ -1,4 +1,4 @@
-# Kismat Cookies
+# sweetslips
 
 Marketing site for an advertising medium: brands buy the **printed slip** that
 reaches the customer with the restaurant check — their line, their code and the
@@ -10,9 +10,15 @@ description and schema field. The slip is what is actually sold and the one
 thing that survived all three, so the copy is written around it. If the medium
 changes again, nothing here has to.
 
-Live at https://kismatcookies.com. The repo is `donron00712/wishbone` and it is
-**public**. The brand name "Kismat Cookies" was kept deliberately, along with
-the domain, mailbox and LinkedIn page hanging off it.
+Live at https://sweetslips.co. The repo is `donron00712/wishbone` and it is
+**public**.
+
+The brand was **Kismat Cookies** on `kismatcookies.com` until Oct 2026. The
+name is written **all lowercase** — `sweetslips`, never `SweetSlips` or
+`Sweet Slips` — including at the start of a sentence. `kismatcookies.com`
+301s to the new domain while the owner still holds it; they intend to let it
+lapse once the move is finished, which is when those redirect rules in
+`vercel.json` can go.
 
 ## The one rule that will bite you
 
@@ -32,7 +38,8 @@ npm run og                 # re-render assets/media/og.svg to the share card
 of canonical/OG/Twitter tags into every page's `<head>`. All three are derived
 from the pages themselves, so a new file in `src/pages/` is canonical, shared
 and crawlable with nothing else to remember. Canonical host is
-`https://kismatcookies.com`; `vercel.json` redirects `www` to it.
+`https://sweetslips.co`; `vercel.json` redirects `www`, both old
+`kismatcookies.com` hosts and the old Vercel URL to it.
 
 Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 `header`, `footer`, `ooh`, `reasons`, `formats`, `targets`, `cases`.
@@ -90,7 +97,7 @@ Several "bugs" this session were this artifact, not the code.
 
 - Brand names in the wall are **illustrative** and labelled as such.
 - `cases.html` shows real campaigns run by **OpenFortune**, credited on every
-  card, with a note stating Kismat has no relationship with those brands. Do not
+  card, with a note stating sweetslips has no relationship with those brands. Do not
   restate them as our own work.
 - No invented statistics, no behavioural promises, no launch-status language.
 - Photography **and footage** must be shot by us, licensed, or permitted in
@@ -130,8 +137,11 @@ Two leftovers worth knowing about:
 
 ## Outstanding, needs the owner
 
-1. ~~`hello@kismatcookies.com` is an invented placeholder~~ — **resolved.** It
-   is a real Google Workspace mailbox now. MX (`smtp.google.com`), SPF
+1. **`hello@sweetslips.co` does not exist yet.** The mailbox, MX, SPF, DKIM and
+   DMARC were all set up on the old domain and none of it carries over — the
+   whole chain has to be redone on `sweetslips.co`. Until it is, the address
+   printed on all five pages and in the structured data bounces. The old
+   `hello@kismatcookies.com` was MX (`smtp.google.com`), SPF
    (`include:_spf.google.com`) and a 2048-bit DKIM key at `google._domainkey`
    are all published and verified. DMARC is still GoDaddy's default
    (`p=quarantine`, reports going to `dmarc_rua@onsecureserver.net`) and wants

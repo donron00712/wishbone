@@ -1,8 +1,8 @@
-/* Kismat Cookies — all site content lives here. Edit this file, not the markup. */
+/* sweetslips — all site content lives here. Edit this file, not the markup. */
 window.WB = (function () {
 
   /* A real Google Workspace mailbox — MX, SPF and DKIM all verified. */
-  const email = 'hello@kismatcookies.com';
+  const email = 'hello@sweetslips.co';
 
   /* Canonical profile URL, with no tracking or view-state query on the end.
      build.js also feeds this to the Organization schema's sameAs, where a
@@ -153,7 +153,7 @@ window.WB = (function () {
 
   /* Real campaigns, run by other people. Every figure here comes from the
      published case study named in `source`, and `runBy` credits whoever
-     actually ran it. Kismat Cookies has not worked with these brands — this
+     actually ran it. sweetslips has not worked with these brands — this
      section is evidence that the medium performs, not a client list, and the
      page says so in as many words. Do not restate any of this as our own. */
   const cases = [

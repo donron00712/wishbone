@@ -7,14 +7,25 @@
   "cleanUrls": true,
   "redirects": [
     {
-      "source": "/",
+      "source": "/:path*",
       "has": [
         {
           "type": "host",
-          "value": "www.kismatcookies.com"
+          "value": "www.sweetslips.co"
         }
       ],
-      "destination": "https://kismatcookies.com/",
+      "destination": "https://sweetslips.co/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "kismatcookies.com"
+        }
+      ],
+      "destination": "https://sweetslips.co/:path*",
       "permanent": true
     },
     {
@@ -25,18 +36,7 @@
           "value": "www.kismatcookies.com"
         }
       ],
-      "destination": "https://kismatcookies.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "wishbone-swart.vercel.app"
-        }
-      ],
-      "destination": "https://kismatcookies.com/",
+      "destination": "https://sweetslips.co/:path*",
       "permanent": true
     },
     {
@@ -47,7 +47,7 @@
           "value": "wishbone-swart.vercel.app"
         }
       ],
-      "destination": "https://kismatcookies.com/:path*",
+      "destination": "https://sweetslips.co/:path*",
       "permanent": true
     }
   ]

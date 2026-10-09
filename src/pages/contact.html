@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Get in touch | Kismat Cookies</title>
+<title>Get in touch | sweetslips</title>
 <meta name="description" content="Tell us about the brand and what you would want printed on the slip.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +65,7 @@
 
           <div class="form-success form-success--error" id="form-failure" role="alert">
             <h3 class="h4" style="font-size:24px">That didn’t send.</h3>
-            <p>Something went wrong on our end. Email <a href="mailto:hello@kismatcookies.com" style="color:var(--text);text-decoration:underline">hello@kismatcookies.com</a> and we’ll pick it up from there.</p>
+            <p>Something went wrong on our end. Email <a href="mailto:hello@sweetslips.co" style="color:var(--text);text-decoration:underline">hello@sweetslips.co</a> and we’ll pick it up from there.</p>
           </div>
 
           <div class="form-success" id="form-success" role="status">
@@ -85,7 +85,7 @@
 <script src="assets/js/site.js"></script>
 <script>
 (function () {
-  const MAIL_TO = 'hello@kismatcookies.com';
+  const MAIL_TO = 'hello@sweetslips.co';
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
   const failure = document.getElementById('form-failure');
@@ -132,7 +132,7 @@
     } else {
       const body = [...data.entries()].filter(([, v]) => String(v).trim())
         .map(([k, v]) => `${k}: ${v}`).join('\n');
-      window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent('Kismat Cookies enquiry — ' + (data.get('company') || data.get('name')))}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent('sweetslips enquiry — ' + (data.get('company') || data.get('name')))}&body=${encodeURIComponent(body)}`;
     }
 
     form.style.display = 'none';
