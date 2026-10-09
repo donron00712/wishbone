@@ -151,35 +151,6 @@ window.WB = (function () {
          white plate, the slip half out.', credit: 'Photo: your name' }  */
   const photos = [];
 
-  /* Footage for the fortune moment, shown beside the slip once the cannoli has
-     been snapped open. Empty on purpose.
-
-     The files at assets/media/moment-film.* are still on disk, and they are
-     still good footage — of a fortune cookie. That was the medium when they
-     were shot. Playing them beside copy about a rice-flour cannoli would show
-     a product we do not sell, which is the one thing this site has been
-     careful not to do anywhere else. Better a centred column than footage
-     that contradicts the page.
-
-     Same licensing rule as the photographs above: shot by us, licensed, or
-     permitted in writing.
-
-     `stem` is a path with no extension. Drop <stem>.webm, <stem>.mp4 and
-     <stem>.jpg into assets/media/ and the panel appears on its own. Leave it
-     empty and the moment stays as it is — one centred column, with no request
-     made and no empty frame.
-
-     Shoot it 4:5 portrait, 864x1080, four to six seconds and seamlessly
-     looping. The moment hands the page back 14s after the crack, so that is
-     all the room a clip has. No audio track — it autoplays muted, so a track
-     would only cost bytes.
-     `npm run add-video <file>` encodes all three to those numbers. */
-  const momentFilm = {
-    stem: '',
-    alt:  'Hands snap a rice-flour cannoli open and draw out the printed slip inside.',
-    caption: ''
-  };
-
   /* Real campaigns, run by other people. Every figure here comes from the
      published case study named in `source`, and `runBy` credits whoever
      actually ran it. Kismat Cookies has not worked with these brands — this
@@ -244,5 +215,5 @@ window.WB = (function () {
     }
   ];
 
-  return { email, linkedin, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos, momentFilm };
+  return { email, linkedin, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos };
 })();

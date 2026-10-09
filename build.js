@@ -18,9 +18,8 @@ global.window = {};
 require('./assets/js/data.js');
 const D = global.window.WB;
 
-/* Footage for the fortune moment, if data.js names one. Attribute values are
-   escaped because alt and caption are prose someone will edit by hand. */
-const film = D.momentFilm || {};
+/* Attribute values are escaped because alt and caption are prose someone will
+   edit by hand. */
 const esc = (v) => String(v)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
@@ -106,7 +105,6 @@ const footer = (page) => `<section class="closing container reveal">
           <span>© ${new Date().getFullYear()} Kismat Cookies</span>
           <ul>
             <li><a href="mailto:${D.email}">${D.email}</a></li>
-            <li><button class="theme-back" type="button" data-theme-back>Back to dark</button></li>
           </ul>
         </div>
       </div>
@@ -131,88 +129,6 @@ const footer = (page) => `<section class="closing container reveal">
       </div>
     </div>
 
-
-${page === 'home' ? `    <!-- The fortune moment. Landing page only, on every load: crack the
-         roll, read the slip, and the site turns warm. Other pages inherit
-         whichever palette the visitor left the landing page on. -->
-    <div class="moment" id="moment" hidden>
-      <div class="moment__scrim" data-moment-close></div>
-      <!-- Night sky. Positions are derived from the index rather than random,
-           so the same sky is served to everyone and to every rebuild. -->
-      <div class="moment__sky" aria-hidden="true">
-        ${(() => {
-          let h = 1103515245;
-          const rnd = () => (h = (h * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
-          let out = '';
-          for (let i = 0; i < 46; i++) {
-            const x = (rnd() * 100).toFixed(2);
-            const y = (rnd() * 100).toFixed(2);
-            const size = (1.1 + rnd() * 2.4).toFixed(2);
-            const op = (0.45 + rnd() * 0.55).toFixed(2);
-            const dur = (2.6 + rnd() * 4.8).toFixed(2);
-            const del = (rnd() * 7).toFixed(2);
-            out += `<span class="star" style="--x:${x}%;--y:${y}%;--s:${size}px;--o:${op};--t:${dur}s;--d:${del}s"></span>`;
-          }
-          return out;
-        })()}
-        <span class="shoot shoot--a"></span>
-        <span class="shoot shoot--b"></span>
-
-      </div>
-
-      <div class="moment__motes" aria-hidden="true">
-        ${Array.from({ length: 14 }, (_, i) => {
-          const left  = [7, 15, 23, 31, 39, 46, 54, 61, 69, 76, 83, 89, 94, 97][i];
-          const delay = [0, 2.6, 5.1, 1.3, 3.9, 6.4, .7, 4.4, 2.1, 5.8, 3.2, 1.8, 7.1, .4][i];
-          const dur   = [11, 14, 12, 15, 13, 16, 12, 14, 15, 11, 13, 16, 14, 12][i];
-          const size  = [3, 5, 4, 3, 6, 4, 5, 3, 4, 6, 3, 5, 4, 6][i];
-          return `<span class="mote" style="--x:${left}%;--d:${delay}s;--t:${dur}s;--s:${size}px"></span>`;
-        }).join('')}
-      </div>
-      <div class="moment__inner" role="dialog" aria-modal="true" aria-labelledby="moment-title">
-        <!-- The stage is centred, so the film growing from nothing on the right
-             walks the fortune to the left on its own. One transition, not two
-             that have to be kept in step. -->
-        <div class="moment__stage">
-        <div class="moment__fortune">
-        <p class="moment__eyebrow" id="moment-title">One for you</p>
-        <!-- The slip is the illustration. There is nothing else to tap: the
-             scroll clips it to a rolled edge, and opening the clip unrolls the
-             real thing rather than swapping one object for another. -->
-        <button class="moment__cookie" type="button" id="moment-cookie"
-                aria-label="Unroll your fortune">
-          <span class="moment__aura" aria-hidden="true"></span>
-          <span class="scroll">
-            <figure class="moment__slip" role="status">
-              <div class="paper paper--fortune">
-                <p>Your fortune holds within you.</p>
-                <span class="paper__nums">3, 9, 14, 22, 31, 45</span>
-              </div>
-              <div class="paper paper--ad" style="--ad-bg:#F7971E;--ad-fg:#14110D">
-                <span class="paper__tag">10% offer for you</span>
-                <span class="paper__id"><b>Kismat Cookies</b></span>
-              </div>
-            </figure>
-          </span>
-        </button>
-        <p class="moment__hint">Tap to unroll it</p>
-        </div>
-${film.stem ? `        <!-- Written out only when data.js names a stem, and revealed only
-             once the file has decoded a frame, so a missing or broken video
-             leaves the moment as one centred column rather than a black box. -->
-        <div class="moment__film" id="moment-film">
-          <video class="moment__video" id="moment-video"
-                 preload="none" muted loop playsinline
-                 poster="${film.stem}.jpg"${film.alt ? ` aria-label="${esc(film.alt)}"` : ''}>
-            <source src="${film.stem}.webm" type="video/webm">
-            <source src="${film.stem}.mp4" type="video/mp4">
-          </video>${film.caption ? `
-          <p class="moment__caption">${esc(film.caption)}</p>` : ''}
-        </div>
-` : ''}        </div>
-        <button class="moment__close" type="button" data-moment-close>Close</button>
-      </div>
-    </div>` : ''}
 
     <div class="modal" id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
       <div class="modal__scrim" data-close></div>

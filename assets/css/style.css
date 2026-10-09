@@ -29,60 +29,11 @@
   --cookie-edge-w:0;
   --btn-deep:#150C03; --ink-on-deep:#F0E3CC;
   --on-gradient:#211407; --on-gradient-rgb:33,20,7;
-  --veil:24,14,5; --aura:255,214,140;
-  --moment-ink:#D8CDB4;   /* the veil is dark in every palette, so this never inverts */
   --glow-top-1:#4A3116; --glow-top-2:#2E1D0C;
   --glow-bot-1:#3E2911; --glow-bot-2:#211407;
 }
 
-/* --- Warm mode: sampled from a photograph of the real thing -----------------
-   Every value below is lifted from the fortune-cookie photo: the sand of the
-   plate, the chocolate of a baked edge, the browns and tans between.
-   #DBCDB2 #3D2814 #6F481E #906938 #A78258 #B09F84 #D9B687
 
-   Flat, with no gradient anywhere on the page. Two notes on what that costs.
-   The white slips need a hairline, because white on this sand is 1.40:1 and
-   they would read as holes. And the golden cookie is 1.01:1 on it — invisible —
-   which is fine only because the cookie appears nowhere except the moment,
-   whose veil stays dark. */
-[data-theme="warm"]{
-  --base:#D3C3A4;
-  --bg:#DBCDB2;
-  --surface:#EDE4D4;
-  --text:#3D2814;
-  --muted:#6F481E;
-  --line:#906938;
-  --line-soft:#C6B597;
-  --accent:#6F481E;
-  --accent-soft:#C6B597;
-  --ink:#EDE4D4;
-  --gradient:linear-gradient(0deg,#F2EBDE 0%,#F2EBDE 100%);
-  --scrim:219,205,178;
-  --text-rgb:61,40,20;
-  --cookie-edge:transparent;
-  --cookie-edge-w:0;
-  --btn-deep:#2A1B0D; --ink-on-deep:#EDE4D4;
-  --on-gradient:#3D2814; --on-gradient-rgb:61,40,20;
-  --veil:36,26,16; --aura:255,205,120;
-  --moment-ink:#DFCFAE;
-  --glow-top-1:#DBCDB2; --glow-top-2:#DBCDB2;
-  --glow-bot-1:#D3C3A4; --glow-bot-2:#D3C3A4;
-}
-[data-theme="warm"] body{background:var(--bg)}
-[data-theme="warm"] .underlay{background:var(--base)}
-[data-theme="warm"] .site-header.is-stuck{background:rgba(219,205,178,.88)}
-
-/* white on this sand is 1.40:1 — the slips need an edge */
-[data-theme="warm"] .paper--fortune{border:1px solid #A78258}
-[data-theme="warm"] .paper{box-shadow:0 10px 26px rgba(61,40,20,.18)}
-[data-theme="warm"] .spec .paper{box-shadow:0 22px 44px rgba(61,40,20,.22)}
-[data-theme="warm"] .slip-card{box-shadow:0 30px 70px rgba(61,40,20,.26)}
-[data-theme="warm"] .scroll{box-shadow:0 14px 30px rgba(61,40,20,.34)}
-
-/* the wash between palettes; added for a beat, then removed */
-html.theme-shifting,html.theme-shifting *{
-  transition:background-color .9s ease,background-image .9s ease,color .9s ease,
-             border-color .9s ease,fill .9s ease,stroke .9s ease,box-shadow .9s ease !important}
 @media (min-width:768px){ :root{ --gutter:48px; } }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -415,8 +366,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 
 /* --- the unit ------------------------------------------------------------
    The slip on its own. It used to float over a cracked cookie, which cropped
-   both and explained neither; the cookie already has the fortune moment and
-   the wall, so here the printed slip is the whole subject. */
+   both and explained neither; here the printed slip is the whole subject. */
 .spec{display:flex;flex-direction:column;gap:8px;width:min(100%,420px);
   margin-inline:auto;transform:rotate(-1.4deg);transition:transform .6s var(--ease)}
 .spec:hover{transform:rotate(0deg)}
@@ -578,8 +528,8 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
      slips cropped mid-card and looked broken; smaller they tile properly
      and sit behind the copy instead of fighting it. */
   /* Scoped to .tile: these sizes are for the wall, which is texture. The same
-     component is real, readable content in the unit section and the moment, so
-     it must not inherit 7px type there. */
+     component is real, readable content in the unit section, so it must not
+     inherit 7px type there. */
   .tile{width:150px;height:150px;border-radius:18px;padding:13px;gap:6px}
   .tile .paper{padding:7px 7px;box-shadow:0 3px 9px rgba(0,0,0,.3)}
   .tile .paper--fortune p{font-size:8px;line-height:1.3}
@@ -595,7 +545,7 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 
   /* Footer and utility links sat at 19-21px tall. Padding gives them a
      thumb-sized target without changing how they look. */
-  .site-footer a,.footer-bottom a,.theme-back{display:inline-block;padding:9px 0}
+  .site-footer a,.footer-bottom a{display:inline-block;padding:9px 0}
   .footer-mail{padding:9px 0}   /* also the one in the contact sidebar */
   .footer-social a{padding:9px 0}
   .cookie .link{padding:10px 4px}
@@ -689,248 +639,3 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 }
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 
-/* ============ the fortune moment ============================================
-   A one-time interruption: the cookie arrives centre-screen, the visitor
-   cracks it, reads the line, and the palette turns over behind them. Shown
-   once per visitor and dismissible at any point — it must never be a wall. */
-/* The hidden attribute has to be honoured explicitly: a UA sheet's
-   display:none loses to any author display, so `display:grid` below quietly
-   overrode `<div class="moment" hidden>` and left the overlay live on every
-   page load. Nothing was visible — opacity is 0 — but 46 stars, 14 motes, two
-   shooting stars, the aura and the idling slip all kept animating, under a
-   full-screen backdrop-filter compositing every frame, against a scroll scrub
-   and smooth-scroll already asking for the main thread. */
-.moment[hidden]{display:none}
-.moment{position:fixed;inset:0;z-index:120;display:grid;place-items:center;
-  opacity:0;pointer-events:none;transition:opacity .5s var(--ease)}
-.moment.is-in{opacity:1;pointer-events:auto}
-/* The moment is lit from the middle: the page is veiled so the cookie becomes
-   the only light source, rather than sitting on a flat wash of the page colour. */
-.moment__scrim{position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(closest-side at 50% 44%,rgba(var(--aura),.22) 0%,rgba(var(--aura),.08) 46%,transparent 74%),
-    radial-gradient(132% 100% at 50% 44%,rgba(var(--veil),.74) 0%,rgba(var(--veil),.96) 56%,rgba(var(--veil),.995) 100%);
-  backdrop-filter:blur(8px) saturate(.92)}
-
-/* the bloom behind the cookie, which swells as it opens */
-.moment__aura{position:absolute;left:50%;top:52%;translate:-50% -50%;z-index:0;
-  width:340%;aspect-ratio:1;pointer-events:none;
-  background:
-    radial-gradient(closest-side,rgba(var(--aura),.46) 0%,rgba(var(--aura),.20) 22%,rgba(var(--aura),.07) 44%,transparent 68%);
-  opacity:.85;animation:aura-breathe 6.5s ease-in-out infinite;
-  transition:opacity 1.2s var(--ease)}
-/* a tighter core so the cookie sits in light rather than in front of it */
-.moment__aura::after{content:"";position:absolute;left:50%;top:50%;translate:-50% -50%;
-  width:42%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(var(--aura),.55),rgba(var(--aura),.18) 55%,transparent 78%)}
-@keyframes aura-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
-.moment.is-open .moment__aura{opacity:1;animation-duration:4.5s}
-
-/* one ring, once, at the moment it gives */
-.moment__cookie::after{content:"";position:absolute;left:50%;top:52%;translate:-50% -50%;
-  width:70%;aspect-ratio:1;border-radius:50%;pointer-events:none;z-index:0;
-  border:1px solid rgba(var(--aura),.55);opacity:0}
-.moment.is-open .moment__cookie::after{animation:aura-ring 1.5s var(--ease) .1s forwards}
-@keyframes aura-ring{
-  0%{opacity:.75;transform:translate(-50%,-50%) scale(.5)}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(3.4)}
-}
-
-/* --- night sky ------------------------------------------------------------
-   Stars sit above the veil so they read as light rather than as dust, each
-   twinkling on its own clock so the field never pulses together. */
-.moment__sky{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.star{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);
-  border-radius:50%;background:rgb(var(--aura));
-  box-shadow:0 0 5px rgba(var(--aura),.9),0 0 12px rgba(var(--aura),.45);
-  opacity:var(--o);animation:twinkle var(--t) ease-in-out var(--d) infinite}
-@keyframes twinkle{
-  0%,100%{opacity:calc(var(--o) * .3);transform:scale(.8)}
-  50%{opacity:var(--o);transform:scale(1)}
-}
-
-/* two wishes crossing, rarely */
-.shoot{position:absolute;width:120px;height:1.5px;border-radius:2px;opacity:0;
-  background:linear-gradient(90deg,transparent,rgba(var(--aura),.95),transparent);
-  filter:drop-shadow(0 0 5px rgba(var(--aura),.8))}
-.shoot--a{top:16%;left:-12%;animation:shoot 13s ease-in 3s infinite}
-.shoot--b{top:62%;left:-12%;animation:shoot 17s ease-in 9.5s infinite}
-@keyframes shoot{
-  0%{opacity:0;transform:translate(0,0) rotate(14deg)}
-  3%{opacity:1}
-  11%{opacity:0;transform:translate(128vw,30vh) rotate(14deg)}
-  100%{opacity:0;transform:translate(128vw,30vh) rotate(14deg)}
-}
-
-/* motes rising through the sky, brighter than before */
-.moment__motes{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.mote{position:absolute;left:var(--x);bottom:14%;width:var(--s);height:var(--s);border-radius:50%;
-  background:rgb(var(--aura));box-shadow:0 0 7px rgba(var(--aura),.75);opacity:0;
-  animation:mote-rise var(--t) linear var(--d) infinite}
-@keyframes mote-rise{
-  0%{transform:translateY(40px) scale(.5);opacity:0}
-  12%{opacity:1}
-  70%{opacity:.7}
-  100%{transform:translateY(-46vh) scale(1);opacity:0}
-}
-/* backdrop-filter makes the scrim a stacking context, so the panel needs to
-   say out loud that it sits above it. */
-.moment__inner{position:relative;z-index:1;text-align:center;padding:24px;
-  display:flex;flex-direction:column;align-items:center;gap:0}
-
-/* The fortune keeps the column it always had; the stage around it is what
-   makes room for the film. Because the stage is centred, the film growing
-   from zero width on the right walks the fortune to the left by itself —
-   one transition rather than two that have to agree with each other. */
-.moment__stage{display:flex;align-items:center;justify-content:center}
-.moment__fortune{display:flex;flex-direction:column;align-items:center;
-  flex:0 0 auto}
-
-.moment__eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--moment-ink);margin:0 0 10px}
-
-.moment__cookie{background:none;border:0;padding:24px 0;cursor:pointer;
-  width:min(86vw,330px);position:relative;display:block;
-  transition:transform .4s var(--ease)}
-/* No focus box around the cookie — a rectangle around a round object looks
-   like a mistake. It glows instead, which reads on a pointer and a keyboard
-   alike and still marks focus clearly. */
-.moment__cookie{outline:none}
-.moment__cookie:hover{transform:scale(1.04)}
-.moment__cookie:focus-visible{transform:scale(1.04)}
-
-/* The slip IS the illustration. Three passes drew the snack and a fourth drew
-   a paper bar standing in for the slip; all four were an object invented to be
-   tapped. This clips the real slip to a rolled edge instead — closed, you see
-   the top few pixels of the actual fortune paper with a shadow under it, which
-   is what a rolled slip looks like. Opening the clip unrolls the real thing.
-
-   Nothing is swapped at the tap, so there is no moment where one object leaves
-   and another arrives. It is the same piece of paper throughout, which is also
-   the piece of paper the wall and the unit section render. */
-.scroll{display:block;width:min(86vw,330px);max-height:15px;overflow:hidden;
-  border-radius:7px;box-shadow:0 14px 30px rgba(0,0,0,.55);
-  transition:max-height .9s var(--ease),box-shadow .5s var(--ease)}
-.moment.is-open .scroll{max-height:440px;box-shadow:none;overflow:visible}
-.moment__cookie:hover .scroll,
-.moment__cookie:focus-visible .scroll{
-  box-shadow:0 14px 30px rgba(0,0,0,.55),0 0 22px rgba(255,214,120,.55)}
-
-/* a slow breath while it waits to be tapped */
-@keyframes moment-idle{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
-.moment:not(.is-open) .scroll{animation:moment-idle 3.4s ease-in-out infinite}
-
-/* The unroll is the max-height transition on .scroll above; there is no
-   keyframe here any more because nothing is being thrown away. */
-.moment.is-open .moment__cookie{pointer-events:none;padding-bottom:0}
-
-.moment__hint{font-size:14px;font-weight:500;color:var(--moment-ink);margin-top:6px;
-  transition:opacity .3s}
-.moment.is-open .moment__hint{opacity:0;height:0;margin:0;overflow:hidden}
-
-.moment__slip{width:100%;display:flex;flex-direction:column;gap:6px}
-.moment__slip .paper{box-shadow:0 16px 34px rgba(0,0,0,.5)}
-/* one line, whatever the screen — the type shrinks rather than the line wrapping */
-.moment__slip .paper--fortune p{white-space:nowrap;font-size:clamp(12px,3.6vw,15px)}
-.moment__slip .paper__nums{font-size:clamp(12px,3.2vw,13px)}
-.moment__slip .paper__tag{font-size:clamp(12px,3.2vw,13.5px)}
-.moment__slip .paper__id b{font-size:clamp(11.5px,3.2vw,13px)}
-
-/* --- the film beside the fortune -------------------------------------------
-   Only ever laid out once the video has decoded a frame (`has-film`, set in
-   site.js), so a missing or broken file leaves the moment as the single
-   centred column it has always been rather than an empty frame. */
-.moment__film{--film-w:min(34vw,400px,50vh);   /* 50vh, because it stands 1.25x its own width */
-  display:none;flex:0 0 auto;margin-left:0;
-  width:0;opacity:0;pointer-events:none;
-  transform:translateX(-30px) scale(.94);
-  transition:width .9s var(--ease),margin-left .9s var(--ease),
-             transform .9s var(--ease),opacity .55s var(--ease) .3s}
-.moment.has-film .moment__film{display:block}
-.moment.has-film.is-open .moment__film{
-  width:var(--film-w);margin-left:clamp(20px,3.2vw,44px);
-  opacity:1;transform:none;pointer-events:auto}
-
-/* Held at its full width throughout, so the frame never squashes while the
-   wrapper is still opening — the wrapper clips nothing, it just has no width
-   yet, and the opacity delay covers the overhang. */
-.moment__video{display:block;width:var(--film-w);aspect-ratio:4/5;
-  object-fit:cover;border-radius:16px;background:rgba(0,0,0,.35);
-  box-shadow:0 24px 52px rgba(0,0,0,.55),0 0 0 1px rgba(var(--aura),.20) inset}
-
-.moment__caption{width:var(--film-w);margin:12px 0 0;font-size:12.5px;
-  letter-spacing:.03em;line-height:1.45;color:var(--moment-ink);opacity:.75}
-
-/* Phones stack the film under the slip. Height snaps rather than eases, the
-   same as the slip above it does. */
-@media (max-width:860px){
-  /* The stack can genuinely outrun a short phone, so let the overlay scroll.
-     `safe` matters: plain centring would push the top of the panel off the
-     top edge with no way back to it. Desktop needs none of this — the 50vh
-     cap above guarantees the two columns fit. */
-  .moment{place-items:safe center;overflow-y:auto}
-  .moment__stage{flex-direction:column}
-
-  /* Slip and film share one width, so the stack has a single edge down both
-     sides. Three different widths — cookie 240, slip 323, film 180 — read as
-     a ragged column even with every one of them centred, which is what made
-     this look broken on a phone rather than merely narrow.
-
-     300 is the number that lets the film keep its 4:5 without the stack
-     outrunning the viewport: at the slip's old 323 the frame stood 404px
-     tall and pushed the whole panel into a scroll. Cropping to square would
-     have fitted too, but at this size it zooms so far into the hands that
-     the cookie stops being legible — the footage is the product, so it keeps
-     the shape it was shot in and the slip comes in to meet it. */
-  .moment__slip,
-  .moment__film{--film-w:min(80vw,300px)}
-  .moment__slip{width:var(--film-w)}
-  .moment__film{width:auto;height:0;margin-left:0;overflow:hidden;
-    transform:translateY(-16px) scale(.94);
-    transition:transform .7s var(--ease),opacity .5s var(--ease) .3s}
-  .moment.has-film.is-open .moment__film{
-    width:auto;height:auto;margin:14px 0 0;overflow:visible}
-  .moment__video{border-radius:14px}
-
-  /* With a film in the stack the cookie gives up a little size to it. At its
-     full 64vw the panel cleared an 812-tall phone by 24px, which is no margin
-     at all once a browser chrome bar is showing. Only when there is a film to
-     make room for — without one the cookie keeps the screen to itself. */
-  .moment.has-film .moment__cookie{width:min(56vw,215px)}
-}
-
-/* Short phones — an SE at 667, an older Android at 640. The stack above needs
-   763px, so without this it scrolls, and a moment you have to scroll is not a
-   moment. Everything comes down together so the shared edge survives. */
-@media (max-width:860px) and (max-height:700px){
-  .moment__slip,
-  .moment__film{--film-w:min(62vw,230px)}
-  .moment.has-film .moment__cookie{width:min(42vw,158px)}
-  .moment__eyebrow{margin-bottom:8px}
-  .moment.has-film.is-open .moment__film{margin-top:10px}
-}
-
-.moment__close{height:0;margin:0;padding:0;overflow:hidden;background:none;border:0;cursor:pointer;
-  font-size:13px;letter-spacing:.06em;color:var(--moment-ink);text-decoration:underline;
-  text-underline-offset:4px;opacity:0;transition:opacity .5s var(--ease) 1.1s}
-.moment.is-open .moment__close{height:auto;margin-top:14px;padding:10px 16px;overflow:visible;opacity:1}
-.moment__close:hover{color:#FFF6E4}
-
-/* a way back while both palettes exist */
-.theme-back{display:none;background:none;border:0;cursor:pointer;font:inherit;
-  font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:4px}
-[data-theme="warm"] .theme-back{display:inline}
-.theme-back:hover{color:var(--text)}
-
-@media (prefers-reduced-motion:reduce){
-  .mote{animation:none;opacity:.4}
-  .star{animation:none}
-  .shoot{display:none}
-  .moment__aura{animation:none;transition:none}
-  .moment.is-open .moment__cookie::after{animation:none;opacity:0}
-  .moment:not(.is-open) .scroll{animation:none}
-  .scroll{transition-duration:.01ms}
-  .moment__slip{transition-duration:.01ms}
-  .moment__film{transition-duration:.01ms;transform:none}
-  html.theme-shifting,html.theme-shifting *{transition-duration:.01ms !important}
-}

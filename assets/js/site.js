@@ -9,140 +9,6 @@
   window.WB.icons = { smallArrow };
 
 
-  /* ---------- the fortune moment ----------
-     Landing page only, at the point the sticky CTA would otherwise fire.
-
-     When it runs, the landing page starts dark so the crack has somewhere to
-     go — arriving already warm would leave the cookie nothing to change. Every
-     other page inherits whichever palette the visitor left the landing page
-     on, so clicking through does not throw the change away.
-
-     It runs on a fresh arrival and on every refresh, but not when someone
-     comes back to the landing page from elsewhere on the site. They have had
-     their cookie already, and interrupting someone reading their way around
-     is a different thing from greeting someone who just arrived.
-
-     Refresh and return are both page loads, so they are told apart by two
-     signals rather than one: the navigation type says whether this load was a
-     reload, and a session flag written by every non-landing page says whether
-     the visitor has been anywhere else yet. Referrer would have been the
-     obvious third option and is not used — privacy browsers strip it, Brave
-     included, so it would fail for a chunk of real visitors.
-
-     A refresh wins outright, because refreshing was asked to always bring the
-     cookie back. So home -> formats -> home stays quiet, and refreshing there
-     brings it back. */
-  const THEME_KEY = 'wb-theme';
-  const TOUR_KEY  = 'wb-toured';
-  const moment    = document.getElementById('moment');
-
-  /* sessionStorage throws rather than failing quietly when a browser blocks
-     it, the same way localStorage does for consent further down. */
-  const session = {
-    get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
-  };
-
-  const applyTheme = (name, animate) => {
-    if (animate) {
-      document.documentElement.classList.add('theme-shifting');
-      setTimeout(() => document.documentElement.classList.remove('theme-shifting'), 1000);
-    }
-    if (name === 'warm') document.documentElement.setAttribute('data-theme', 'warm');
-    else document.documentElement.removeAttribute('data-theme');
-    session.set(THEME_KEY, name);
-  };
-
-  const navType = (performance.getEntriesByType('navigation')[0] || {}).type;
-
-  /* Whether the cookie is due on this load. Every other page just records
-     that the visitor has been somewhere. */
-  const momentDue = page === 'home' &&
-    (navType === 'reload' || !session.get(TOUR_KEY));
-
-  if (page !== 'home') session.set(TOUR_KEY, '1');
-
-  if (momentDue) {
-    applyTheme('dark', false);              /* the crack needs somewhere to go */
-  } else if (session.get(THEME_KEY) === 'warm') {
-    /* Covers the landing page too, when the cookie is not due. Resetting to
-       dark there would strand the visitor: the moment is the only thing that
-       turns the site warm, so with it skipped there is no way back to the
-       palette they already chose. */
-    applyTheme('warm', false);
-  }
-
-  document.addEventListener('click', e => {
-    if (e.target.closest('[data-theme-back]')) applyTheme('dark', true);
-  });
-
-  if (moment) {
-    const cookie = document.getElementById('moment-cookie');
-    const film   = document.getElementById('moment-film');
-    const video  = document.getElementById('moment-video');
-    let shown = false, opened = false;
-
-    /* The film only joins the layout once it has decoded a frame, so a missing
-       or broken file leaves one centred column rather than a black rectangle. */
-    if (video) {
-      video.addEventListener('loadeddata', () => {
-        moment.classList.add('has-film');
-        void film.offsetHeight;      /* in case the cookie was already cracked */
-      }, { once: true });
-    }
-
-    const closeMoment = () => {
-      moment.classList.remove('is-in');
-      setTimeout(() => { moment.hidden = true; }, 500);
-      if (video) video.pause();          /* nothing decoding behind a hidden overlay */
-      if (lenis) lenis.start();
-      onScroll();                                  // let the sticky CTA back in
-    };
-
-    const showMoment = () => {
-      if (shown) return;                 /* once per load, not once per visitor */
-      shown = true;
-      moment.hidden = false;
-      void moment.offsetHeight;          /* force a reflow so the transition runs */
-      moment.classList.add('is-in');
-      /* Buffer while the cookie waits to be tapped. The markup says
-         preload="none", so a visit that never reaches the moment never asks
-         for the file at all. */
-      if (video) { video.preload = 'auto'; video.load(); }
-      if (lenis) lenis.stop();
-      cookie.focus({ preventScroll: true });
-    };
-
-    const crack = () => {
-      if (opened) return;
-      opened = true;
-      moment.classList.add('is-open');
-      /* Muted and inline, so this is allowed without a gesture — and it has
-         one anyway. Reduced motion keeps the poster frame instead. */
-      if (video && !reduced) video.play().catch(() => {});
-      setTimeout(() => applyTheme('warm', true), 620);   // after the halves part
-      setTimeout(closeMoment, 14000);                    // then hand the page back
-    };
-
-    cookie.addEventListener('click', crack);
-    document.addEventListener('click', e => {
-      if (e.target.closest('[data-moment-close]')) closeMoment();
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && moment.classList.contains('is-in')) closeMoment();
-    });
-
-    window.WB.showMoment = showMoment;               // so onScroll can fire it
-    window.WB.momentPending = momentDue;
-
-    /* an earlier build kept these in localStorage; the palette is session
-       scoped now, so clear the old keys rather than leave dead data behind. */
-    try {
-      localStorage.removeItem('wb-theme');
-      localStorage.removeItem('wb-moment-seen');
-    } catch (e) {}
-  }
-
   /* ---------- smooth scroll ---------- */
   let lenis = null;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -171,15 +37,7 @@
       /* Both of these live at the bottom of the screen, so they stack on top
          of each other on a phone. Consent gets the space until it is answered. */
       const consentUp = document.getElementById('cookie').classList.contains('is-visible');
-      const momentUp  = document.getElementById('moment')?.classList.contains('is-in');
-      cta.classList.toggle('is-visible', past && !nearEnd && !consentUp && !momentUp);
-
-      /* The moment takes the same cue the CTA does — but only once, and only
-         after consent has been dealt with, so the screen is never contested. */
-      if (past && !consentUp && window.WB.momentPending && window.WB.showMoment) {
-        window.WB.momentPending = false;
-        window.WB.showMoment();
-      }
+      cta.classList.toggle('is-visible', past && !nearEnd && !consentUp);
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -218,8 +76,8 @@
      it — Brave with shields up, Safari in private mode, a filled quota. Both
      ends are guarded, because an unguarded write here took the whole page down
      with it: settle() threw on its first line, so the bar never dismissed and
-     onScroll() never ran, which left consentUp true and gated the fortune
-     moment forever. The visitor saw a dead Accept button. */
+     onScroll() never ran, which left consentUp true. The visitor saw a dead
+     Accept button. */
   const remember = v => { try { localStorage.setItem(KEY, v); } catch (e) {} };
   const recall = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
 
