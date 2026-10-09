@@ -135,7 +135,50 @@ Two leftovers worth knowing about:
 - `add-video.js` and `npm run og` still work, but `add-video` encodes to the
   4:5 frame the moment wanted and now has nowhere to put the result.
 
-## Outstanding, needs the owner
+## To do — owner
+
+Left over from the move to `sweetslips.co` on 9 Oct 2026. The site itself is
+done and live; everything here is account work outside the repo.
+
+**1. Mail on the new domain — nothing carries over.**
+`hello@sweetslips.co` does not exist. It is printed on all five pages, in the
+Organization schema, and is the contact form's fallback, so **it bounces
+today**. The whole chain has to be rebuilt on the new domain:
+
+- add `sweetslips.co` to Google Workspace and verify it (Account → Domains)
+- MX: `smtp.google.com`, priority 1
+- SPF: `TXT @` → `v=spf1 include:_spf.google.com ~all`
+- DKIM: generate 2048-bit in Admin → Apps → Gmail → Authenticate email, add
+  the `google._domainkey` TXT, then click Start authentication
+- DMARC last, once DKIM passes: `TXT _dmarc` →
+  `v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:hello@sweetslips.co`
+- then test from the new mailbox to mail-tester.com
+
+**2. Search Console.** `sweetslips.co` is a new property: verify it (Domain
+method, TXT at GoDaddy), submit `sitemap.xml`, and request indexing on the five
+URLs. The old property keeps reporting until the 301s are recrawled, which is
+what carries the existing indexing across.
+
+**3. Formspree.** The form still works — the endpoint is independent of the
+domain — but its notification still goes to the old mailbox. Change it in the
+Formspree dashboard once the new one exists.
+
+**4. LinkedIn.** The page is still at `/company/kismat-cookies`, which is what
+`data.js` points at. Rename it there, then update `linkedin` in `data.js`.
+
+**5. Drop the old domain.** When `kismatcookies.com` lapses, delete its three
+rules from `vercel.json` (it, its `www`, and the old Vercel URL) and remove the
+domains from the Vercel project.
+
+**6. The logo is still a wishbone** — drawn for a brand two names ago.
+
+**7. No photography anywhere.** The hero wall has no pictures and there is no
+footage. `assets/media/moment-film.*` is 4.3 MB of fortune-cookie video that
+nothing references and that no longer matches the product; safe to delete.
+
+## Notes on past decisions
+
+
 
 1. **`hello@sweetslips.co` does not exist yet.** The mailbox, MX, SPF, DKIM and
    DMARC were all set up on the old domain and none of it carries over — the
