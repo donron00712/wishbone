@@ -28,5 +28,11 @@
       "destination": "https://sweetslips.co/$1",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/go",
+      "destination": "/api/go"
+    }
   ]
 }
