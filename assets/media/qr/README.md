@@ -24,10 +24,11 @@ Neither file names a food, and neither carries a logo. See below.
 
 ## Rules the print has to hold
 
-- **Minimum 20 mm square.** Measured, not guessed: simulated at a phone's
-  capture resolution with soft focus and grey-on-grey contrast, 20 mm and
-  15 mm both decoded, 12 mm did not. 15 mm is the floor and has no margin;
-  20 mm is the size to ask for.
+- **Ask for 20 mm square.** The floors are lower and were measured, not
+  guessed — simulated at a phone's capture resolution with soft focus and
+  grey-on-grey contrast. `qr-slip` decoded at 15 mm and failed at 12 mm;
+  `qr-slip-compact`, with fewer and so larger modules, held to 12 mm. Neither
+  floor has any margin in it, and a floor is not a target.
 - **Keep the quiet zone.** The 4-module white margin is part of the code, not
   padding around it. It is already inside the file. Do not crop to the black
   edge, and do not let type or a rule encroach on it.
@@ -38,6 +39,13 @@ Neither file names a food, and neither carries a logo. See below.
 - **Do not touch the three corner squares.** They are how a scanner finds the
   code. Damage there is unrecoverable at any error-correction level — the
   decoder never locates the symbol, so the error correction never runs.
+- **If it is ever regenerated elsewhere, set error correction to H.** It is
+  free and generators default low. The code produced by a third-party site
+  for this campaign came back at level M: the same 25x25 symbol as
+  `qr-slip-compact` at level Q, tolerating a third less damage — 10% against
+  15% — for a setting that cost nothing to ask for. Set the margin to 4 while
+  there, and never accept a "dynamic" or "trackable" code, which encodes the
+  generator's short link instead of ours and dies with their free trial.
 - **Black on white, or near enough.** The files ship pure `#000` on `#fff`. If
   the brand palette is wanted instead, the dark must stay genuinely dark;
   verify by decoding the proof, not by eye.

@@ -175,6 +175,9 @@ Two things learned there that are easy to get wrong:
 - The SVGs are emitted as **filled** rectangles, not segno's default stroked
   path. Illustrator can be told not to scale strokes, and a QR whose strokes
   did not scale with its geometry is dead but still looks plausible on screen.
+- Error correction is free, and third-party generators default low. The code
+  one produced for this campaign came back at level M — the same 25x25 symbol
+  as our level-Q file, tolerating a third less damage for nothing gained.
 - Error correction is not the safety net it is sold as. Measured against
   CoreImage — the decoder iPhones actually use — a contiguous blot survived to
   20% only over plain data; 15% killed it in the centre or over a corner
