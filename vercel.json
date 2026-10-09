@@ -33,6 +33,18 @@
     {
       "source": "/go",
       "destination": "/api/go"
+    },
+    {
+      "source": "/gO",
+      "destination": "/api/go"
+    },
+    {
+      "source": "/Go",
+      "destination": "/api/go"
+    },
+    {
+      "source": "/GO",
+      "destination": "/api/go"
     }
   ]
 }
