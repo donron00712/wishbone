@@ -15,10 +15,10 @@ Live at https://sweetslips.co. The repo is `donron00712/wishbone` and it is
 
 The brand was **Kismat Cookies** on `kismatcookies.com` until Oct 2026. The
 name is written **all lowercase** — `sweetslips`, never `SweetSlips` or
-`Sweet Slips` — including at the start of a sentence. `kismatcookies.com`
-301s to the new domain while the owner still holds it; they intend to let it
-lapse once the move is finished, which is when those redirect rules in
-`vercel.json` can go.
+`Sweet Slips` — including at the start of a sentence. The old domain has been
+detached from the Vercel project and now 404s; its redirect rules are gone
+from `vercel.json`, and the pages Google indexed on it will drop out rather
+than pass anything on.
 
 ## The one rule that will bite you
 
@@ -38,8 +38,8 @@ npm run og                 # re-render assets/media/og.svg to the share card
 of canonical/OG/Twitter tags into every page's `<head>`. All three are derived
 from the pages themselves, so a new file in `src/pages/` is canonical, shared
 and crawlable with nothing else to remember. Canonical host is
-`https://sweetslips.co`; `vercel.json` redirects `www`, both old
-`kismatcookies.com` hosts and the old Vercel URL to it.
+`https://sweetslips.co`; `vercel.json` redirects `www` and the old Vercel URL
+to it.
 
 Regions between `<!--#name-->` and `<!--/#name-->` are filled by `build.js`:
 `header`, `footer`, `ooh`, `reasons`, `formats`, `targets`, `cases`.
@@ -140,10 +140,15 @@ Two leftovers worth knowing about:
 Left over from the move to `sweetslips.co` on 9 Oct 2026. The site itself is
 done and live; everything here is account work outside the repo.
 
-**1. Mail on the new domain — nothing carries over.**
-`hello@sweetslips.co` does not exist. It is printed on all five pages, in the
-Organization schema, and is the contact form's fallback, so **it bounces
-today**. The whole chain has to be rebuilt on the new domain:
+**1. Mail — parked, and the address is a known placeholder.**
+`hello@sweetslips.co` **does not exist and bounces.** It is kept in `data.js`
+as a placeholder at the owner's decision, which means it is printed on all five
+pages, sits in the Organization schema, and is the contact form's mailto
+fallback. Anyone who emails it gets nothing back. Enquiries through the form
+still arrive, because Formspree does not send as the domain.
+
+When it is picked up, none of the old domain's setup carries over — the whole
+chain is built fresh on `sweetslips.co`:
 
 - add `sweetslips.co` to Google Workspace and verify it (Account → Domains)
 - MX: `smtp.google.com`, priority 1
@@ -165,10 +170,6 @@ Formspree dashboard once the new one exists.
 
 **4. LinkedIn.** The page is still at `/company/kismat-cookies`, which is what
 `data.js` points at. Rename it there, then update `linkedin` in `data.js`.
-
-**5. Drop the old domain.** When `kismatcookies.com` lapses, delete its three
-rules from `vercel.json` (it, its `www`, and the old Vercel URL) and remove the
-domains from the Vercel project.
 
 **6. The logo is still a wishbone** — drawn for a brand two names ago.
 
