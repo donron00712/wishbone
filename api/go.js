@@ -29,6 +29,11 @@
 
 const FALLBACK = 'https://sweetslips.co/';
 
+/* Where the slips actually are. Everything local — the date a scan is filed
+   under, the hour it is grouped into — is derived from this, not from the
+   server clock or from whatever GA4's property happens to be set to. */
+const TZ = 'Asia/Kolkata';
+
 const UTM = {
   utm_source: 'sweetslips',
   utm_medium: 'print',
@@ -61,6 +66,19 @@ async function recordScan(req) {
      which this deliberately inflates. */
   const clientId = `${Date.now()}.${Math.floor(Math.random() * 1e10)}`;
 
+  /* The local date and hour, stamped here rather than inferred from GA4.
+     GA4 files an event under its property's reporting time zone, and this
+     function runs in UTC — 5h30 behind the restaurant. A property left on the
+     US Pacific default is 12h30 behind, which files every Indian lunch under
+     the previous day. The property time zone is the real fix; this is the
+     copy that stays correct whatever the property is set to, and it survives
+     someone changing that setting mid-run. */
+  const now = new Date();
+  const local = (opts) =>
+    new Intl.DateTimeFormat('en-CA', { timeZone: TZ, hour12: false, ...opts }).format(now);
+  const scanDate = local({ year: 'numeric', month: '2-digit', day: '2-digit' });
+  const scanHour = local({ hour: '2-digit' });
+
   await fetch(
     `https://www.google-analytics.com/mp/collect?measurement_id=${id}&api_secret=${secret}`,
     {
@@ -74,6 +92,8 @@ async function recordScan(req) {
             campaign: UTM.utm_campaign,
             country: h['x-vercel-ip-country'] || '',
             city: h['x-vercel-ip-city'] || '',
+            scan_date: scanDate,   // YYYY-MM-DD, restaurant local
+            scan_hour: scanHour,   // 00-23, restaurant local
             engagement_time_msec: 1,
           },
         }],
