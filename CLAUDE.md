@@ -1,15 +1,18 @@
 # Kismat Cookies
 
-Marketing site for an advertising medium: brands buy the printed slip inside a
-**rice-flour cannoli** — a crisp hollow roll, kuzhalappam by another name —
-served with the restaurant check. The medium changed from fortune cookies in
-Sept 2026. The site says "cannoli" rather than "kuzhalappam" because a media
-buyer in Mumbai or Delhi reads the shape instantly from the first word; the
-longer descriptions keep "rice-flour" on the front so it is not mistaken for
-the Italian ricotta pastry. The brand name "Kismat Cookies" was kept
-deliberately, along with the domain, mailbox and LinkedIn page hanging off it. The audience is media buyers,
-not diners. Live at https://wishbone-swart.vercel.app (the URL still carries the
-old brand name; the repo is `donron00712/wishbone` and it is **public**).
+Marketing site for an advertising medium: brands buy the **printed slip** that
+reaches the customer with the restaurant check — their line, their code and the
+lucky numbers, set to brief. The audience is media buyers, not diners.
+
+**The site does not name a food, on purpose.** It said fortune cookie, then
+kuzhalappam, then cannoli, and each change meant rewriting every headline,
+description and schema field. The slip is what is actually sold and the one
+thing that survived all three, so the copy is written around it. If the medium
+changes again, nothing here has to.
+
+Live at https://kismatcookies.com. The repo is `donron00712/wishbone` and it is
+**public**. The brand name "Kismat Cookies" was kept deliberately, along with
+the domain, mailbox and LinkedIn page hanging off it.
 
 ## The one rule that will bite you
 

@@ -89,7 +89,7 @@ window.WB = (function () {
 
   const reasons = [
     { n: '01', title: 'It arrives as part of the meal',
-      body: 'The cannoli comes with the check the way it always has. Your message is inside something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
+      body: 'The slip comes with the check the way it always has. Your message is on something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
     { n: '02', title: 'It lands at the calmest point of the evening',
       body: 'The end of a meal is unhurried in a way almost no other advertising moment is. Nothing else is bidding for the table at that point.' },
     { n: '03', title: 'It reaches a table, not a screen',
@@ -100,13 +100,13 @@ window.WB = (function () {
 
   const formats = [
     { meta: 'The fortune', title: 'Eleven words on the slip',
-      body: 'The line inside the roll, written with you or by you. Eleven words is the whole creative brief \u2014 short enough to take in at a glance, long enough to carry a voice.' },
+      body: 'The line on the slip, written with you or by you. Eleven words is the whole creative brief \u2014 short enough to take in at a glance, long enough to carry a voice.' },
     { meta: 'The numbers', title: 'Lucky numbers that actually do something',
       body: 'Every fortune carries its six numbers. They can be a discount code, a draw entry or a store number instead of decoration.' },
     { meta: 'The code',    title: 'A prize on the back of the slip',
       body: 'A QR or promo code on the reverse, so the fortune has something to redeem and you have something to measure.' },
     { meta: 'Targeting',   title: 'City, cuisine, daypart',
-      body: 'Choose where the rolls land: a neighbourhood, a cuisine, a dinner rush, a single street. Placement is a media buy, not a mailing list.' },
+      body: 'Choose where the slips land: a neighbourhood, a cuisine, a dinner rush, a single street. Placement is a media buy, not a mailing list.' },
     { meta: 'The drop',    title: 'Limited runs for a moment',
       body: 'Short, dated runs built around a launch, a holiday, a fixture, a festival week. Scarcity the table can feel.' },
     { meta: 'Co-branding', title: 'Two brands, two sides',
@@ -147,8 +147,8 @@ window.WB = (function () {
      and wants raising before the next batch.
 
      Drop files in assets/media/ and add an entry:
-       { src: 'assets/media/cookie-01.jpg', alt: 'A cracked fortune cookie on a
-         white plate, the slip half out.', credit: 'Photo: your name' }  */
+       { src: 'assets/media/slip-01.jpg', alt: 'A printed slip on a saucer
+         beside the check.', credit: 'Photo: your name' }  */
   const photos = [];
 
   /* Real campaigns, run by other people. Every figure here comes from the

@@ -29,18 +29,15 @@ const smallArrow = `<svg width="11" height="11" viewBox="0 0 11 11" fill="none" 
 const bone = (w = 23, h = 21) => `<svg width="${w}" height="${h}" viewBox="0 0 24 22" fill="none" aria-hidden="true"><path d="M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="3.2" cy="4.1" r="1.9" fill="currentColor"/><circle cx="20.8" cy="4.1" r="1.9" fill="currentColor"/></svg>`;
 
 
-/* There is no drawn snack any more, and deliberately so. Three passes tried:
-   the cannoli as a hollow tube, then with a tighter rim, then a sealed wrapper
-   around it. Vector renders paper and geometry honestly and food badly, and
-   each attempt read as a cartoon of a snack rather than the thing itself.
+/* Nothing on this site is drawn, and nothing should be. Four passes once
+   tried: a hollow tube, a tighter rim, a sealed wrapper, a paper bar — all for
+   an overlay that has since been removed. Vector renders paper and geometry
+   honestly and food badly, and every attempt read as a cartoon of a snack.
 
-   What the visitor taps now is the product: a rolled slip. It unrolls into the
-   fortune, which is the one object on this site that is both the thing being
-   sold and the thing being given away. It also survives the next pivot — the
-   medium has already changed once, and a slip is still a slip.
-
-   The roll is built from CSS, not SVG. It is a rectangle with two curled ends;
-   there is nothing here a path would draw better. */
+   The site no longer names a food at all. What is sold is the printed slip
+   that reaches the customer with the check, which is the one thing that has
+   stayed true through two changes of medium. If the artwork ever needs to show
+   what the slip arrives in, that is a photograph, not a path. */
 
 /* Pages that still build and still answer on their URL, but are kept out of
    the navigation, out of the sitemap, and told not to be indexed. One list
@@ -215,7 +212,7 @@ const socialHead = (page, html) => {
 <meta property="og:image" content="${SITE}/assets/media/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A sealed wrapper torn open beside the words Kismat Cookies.">
+<meta property="og:image:alt" content="A printed fortune slip beside the words Kismat Cookies.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -229,7 +226,7 @@ const socialHead = (page, html) => {
       name: 'Kismat Cookies',
       url: SITE,
       logo: SITE + '/assets/media/og.png',
-      description: 'Advertising inside a rice-flour cannoli served with the restaurant check, carrying a brand\u2019s line, code and lucky numbers on the slip inside.',
+      description: 'Advertising on the printed slip that reaches the customer with the restaurant check \u2014 a brand\u2019s line, code and lucky numbers, set to brief.',
       email: D.email,
       areaServed: { '@type': 'Country', name: 'India' },
       /* Canonical profile URL only. sameAs is how Google matches this entity

@@ -1,61 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif">
-  <!-- Source for og.png. The wrapper paths are copied from WRAP_L/WRAP_R in
-       build.js so the share card draws exactly what the page draws.
+  <!-- Source for og.png. The card shows the slip, because the slip is what is
+       sold — the site no longer names a food anywhere, and the artwork should
+       not either. The two papers mirror the fortune and ad papers the wall and
+       the unit render, so a shared link previews the same object the site does.
+       (Their class names are written out of this comment on purpose: a double
+       hyphen is illegal inside an XML comment and makes the file unparseable.)
        Regenerate with:  npm run og  -->
   <defs>
-    <radialGradient id="glow" cx="0.5" cy="0.46" r="0.62">
-      <stop offset="0" stop-color="#8A5A22" stop-opacity="0.55"/>
-      <stop offset="0.45" stop-color="#5A3A14" stop-opacity="0.28"/>
+    <radialGradient id="glow" cx="0.5" cy="0.40" r="0.62">
+      <stop offset="0" stop-color="#8A5A22" stop-opacity="0.5"/>
+      <stop offset="0.45" stop-color="#5A3A14" stop-opacity="0.26"/>
       <stop offset="1" stop-color="#2E1D0C" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="wrapL" x1="0" y1="0" x2="0.25" y2="1">
-      <stop offset="0" stop-color="#FBF4E6"/><stop offset="0.42" stop-color="#F0E4CB"/>
-      <stop offset="0.78" stop-color="#DFCDA9"/><stop offset="1" stop-color="#C6B085"/>
-    </linearGradient>
-    <linearGradient id="wrapR" x1="0" y1="0" x2="0.25" y2="1">
-      <stop offset="0" stop-color="#F8F0DF"/><stop offset="0.42" stop-color="#EBDDC1"/>
-      <stop offset="0.78" stop-color="#D8C49C"/><stop offset="1" stop-color="#BCA477"/>
-    </linearGradient>
-    <clipPath id="clipL"><path d="M150 92 C122 87 92 88 66 93 L60 100 L48 96 L46 106 L34 102 L30 114 L26 125 L30 136 L34 148 L46 144 L48 154 L60 150 L66 157 C92 162 122 163 150 158 L154 150 L146 141 L155 132 L145 123 L154 114 L146 105 Z"/></clipPath>
-    <clipPath id="clipR"><path d="M150 92 L146 105 L154 114 L145 123 L155 132 L146 141 L154 150 L150 158 C178 163 208 162 234 157 L240 150 L252 154 L254 144 L266 148 L270 136 L274 125 L270 114 L266 102 L254 106 L252 96 L240 100 L234 93 C208 88 178 87 150 92 Z"/></clipPath>
   </defs>
 
   <rect width="1200" height="630" fill="#2E1D0C"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- the wrapper, torn open, as it is on the page -->
-  <g transform="translate(600 226) scale(1.2)">
-    <g transform="translate(-150 -125)">
-      <g transform="translate(-44 0) rotate(-14 150 125)">
-        <path d="M150 92 C122 87 92 88 66 93 L60 100 L48 96 L46 106 L34 102 L30 114 L26 125 L30 136 L34 148 L46 144 L48 154 L60 150 L66 157 C92 162 122 163 150 158 L154 150 L146 141 L155 132 L145 123 L154 114 L146 105 Z" fill="url(#wrapL)"/>
-        <g clip-path="url(#clipL)">
-          <rect x="20" y="112" width="132" height="15" fill="#C08A3A" fill-opacity="0.85"/>
-          <rect x="20" y="112" width="132" height="3" fill="#8F6220" fill-opacity="0.45"/>
-          <path fill="#FFFDF6" fill-opacity="0.5" d="M66 90 C96 86 124 87 150 90 L150 101 C124 98 96 97 66 101 Z"/>
-          <path fill="#A98A56" fill-opacity="0.22" d="M20 146 C70 156 110 158 152 154 L152 172 L20 172 Z"/>
-        </g>
-      </g>
-      <g transform="translate(44 0) rotate(14 150 125)">
-        <path d="M150 92 L146 105 L154 114 L145 123 L155 132 L146 141 L154 150 L150 158 C178 163 208 162 234 157 L240 150 L252 154 L254 144 L266 148 L270 136 L274 125 L270 114 L266 102 L254 106 L252 96 L240 100 L234 93 C208 88 178 87 150 92 Z" fill="url(#wrapR)"/>
-        <g clip-path="url(#clipR)">
-          <rect x="148" y="112" width="132" height="15" fill="#B67F33" fill-opacity="0.85"/>
-          <rect x="148" y="112" width="132" height="3" fill="#855A1C" fill-opacity="0.45"/>
-          <path fill="#FFFDF6" fill-opacity="0.44" d="M150 90 C176 87 204 86 234 90 L234 101 C204 97 176 98 150 101 Z"/>
-          <path fill="#9E7F4C" fill-opacity="0.22" d="M280 146 C230 156 190 158 148 154 L148 172 L280 172 Z"/>
-        </g>
-      </g>
-    </g>
+  <!-- the slip: the fortune, then the brand's surface under it -->
+  <g transform="translate(600 0)">
+    <rect x="-280" y="92" width="560" height="124" rx="6" fill="#F4EEE2"/>
+    <text x="0" y="146" text-anchor="middle" font-size="31" fill="#3D2814">Your fortune holds within you.</text>
+    <text x="0" y="188" text-anchor="middle" font-size="23" fill="#7A6A52">3, 9, 14, 22, 31, 45</text>
+
+    <rect x="-280" y="226" width="560" height="74" rx="6" fill="#F7971E"/>
+    <text x="-250" y="271" font-size="23" fill="#14110D">10% offer for you</text>
+    <text x="250" y="271" text-anchor="end" font-size="23" font-weight="700" fill="#14110D">Kismat Cookies</text>
   </g>
 
-  <!-- the slip, which is the product -->
-  <g transform="translate(600 300)">
-    <rect x="-215" y="-27" width="430" height="54" rx="5" fill="#F4EEE2"/>
-    <text x="0" y="6" text-anchor="middle" font-size="21" fill="#3D2814" letter-spacing="0.2">Your brand, on the slip inside.</text>
-  </g>
+  <text x="600" y="412" text-anchor="middle" font-size="62" font-weight="700" fill="#F0E3CC" letter-spacing="-1">Kismat Cookies</text>
+  <text x="600" y="468" text-anchor="middle" font-size="27" fill="#C8B79B">Your brand on the slip that reaches the table,</text>
+  <text x="600" y="506" text-anchor="middle" font-size="27" fill="#C8B79B">at restaurants everywhere.</text>
 
-  <text x="600" y="432" text-anchor="middle" font-size="62" font-weight="700" fill="#F0E3CC" letter-spacing="-1">Kismat Cookies</text>
-  <text x="600" y="486" text-anchor="middle" font-size="27" fill="#C8B79B">Advertising inside a rice-flour cannoli,</text>
-  <text x="600" y="524" text-anchor="middle" font-size="27" fill="#C8B79B">at restaurants everywhere.</text>
-
-  <text x="600" y="580" text-anchor="middle" font-size="16" fill="#8E7B5F" letter-spacing="3.4">KISMATCOOKIES.COM</text>
+  <text x="600" y="570" text-anchor="middle" font-size="16" fill="#8E7B5F" letter-spacing="3.4">KISMATCOOKIES.COM</text>
 </svg>
