@@ -7,7 +7,7 @@ window.WB = (function () {
   /* Canonical profile URL, with no tracking or view-state query on the end.
      build.js also feeds this to the Organization schema's sameAs, where a
      query string would make it a different string for Google to match on. */
-  const linkedin = 'https://www.linkedin.com/company/kismat-cookies';
+  const linkedin = 'https://www.linkedin.com/company/sweetslip';
 
   const nav = [
     { label: 'The formats', href: 'formats.html' },

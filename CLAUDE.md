@@ -251,17 +251,14 @@ that resolves through GoDaddy's flattening record
 
 One piece is still GoDaddy's default rather than ours:
 
-- **DMARC** is `v=DMARC1; p=quarantine; adkim=r; aspf=r;` with reports going to
-  `dmarc_rua@onsecureserver.net` — GoDaddy's address, not one we can read.
-  Replace the `rua` with `mailto:hello@sweetslips.co` so the reports arrive
-  somewhere we see them.
-- Worth one send to mail-tester.com from the new mailbox to confirm the chain
-  passes in the wild rather than only in DNS.
+- **DMARC** is still GoDaddy's default — `v=DMARC1; p=quarantine; adkim=r;
+  aspf=r; rua=mailto:dmarc_rua@onsecureserver.net`. The policy is fine; the
+  `rua` is GoDaddy's address, so the reports that say whether anyone is forging
+  this domain go somewhere nobody here reads. Replace that one field with
+  `mailto:hello@sweetslips.co`. Everything else in the record stays as it is.
+- mail-tester.com: passed (owner, 15 Oct 2026).
 
-**2. Search Console.** `sweetslips.co` is a new property: verify it (Domain
-method, TXT at GoDaddy), submit `sitemap.xml`, and request indexing on the five
-URLs. The old property keeps reporting until the 301s are recrawled, which is
-what carries the existing indexing across.
+**2. ~~Search Console~~ — done (owner, 15 Oct 2026.)**
 
 **3. Formspree.** The form posts to `/f/xzedkjdg`, a new endpoint created
 15 Oct 2026 to replace `/f/mnpaeebb`, which notified the old Kismat mailbox.
@@ -274,25 +271,27 @@ silently — the form reports success to the visitor either way.
 `GA_API_SECRET` are set on Vercel Production. Outstanding before anything is
 printed:
 
-- **Set the GA4 property's reporting time zone to India Standard Time.** It is
-  not retroactive. On the US Pacific default — 12h30 behind India — every lunch
-  service is filed under the previous day, and a mistake found mid-run cannot
-  be cleaned up. Each scan also carries `scan_date`/`scan_hour` stamped in IST
-  by `api/go.js` as a backstop, but those only reach reports once registered as
-  custom definitions, which is also not retroactive.
-- **4 test scans** are in the property from building it. Subtract them.
+- **The reporting time zone was deliberately left alone** (owner, 15 Oct 2026),
+  as were the custom definitions for `scan_date`/`scan_hour`. So GA4's day
+  boundaries are the property's, not India's, and the IST stamp `api/go.js`
+  puts on every scan is visible in Realtime and DebugView but not in the
+  standard reports. Day-level totals are therefore indicative. The run total,
+  which is what the trial is actually measuring, is unaffected.
+- Test scans from building it have been accounted for (owner).
 - Print `assets/media/qr/qr-slip.svg`; if the QR is regenerated elsewhere, set
   error correction to H and the margin to 4, and never accept a "dynamic" or
   "trackable" code.
 
-**4. LinkedIn.** The page is still at `/company/kismat-cookies`, which is what
-`data.js` points at. Rename it there, then update `linkedin` in `data.js`.
+**4. ~~LinkedIn~~ — done 15 Oct 2026.** `data.js` points at
+`/company/sweetslip`. Note the handle is **singular** — `/company/sweetslips`
+404s. Verified 200 before it was wired in.
 
 **6. The logo is still a wishbone** — drawn for a brand two names ago.
 
 **7. No photography anywhere.** The hero wall has no pictures and there is no
-footage. `assets/media/moment-film.*` is 4.3 MB of fortune-cookie video that
-nothing references and that no longer matches the product; safe to delete.
+footage. The owner will supply images later. `assets/media/moment-film.*` was
+deleted on 15 Oct 2026 — 4.2 MB of fortune-cookie video nothing referenced.
+It is still in git history if it is ever wanted.
 
 ## Notes on past decisions
 
