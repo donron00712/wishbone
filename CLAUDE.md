@@ -185,6 +185,31 @@ Two things learned there that are easy to get wrong:
   still be *found*. **No logo in the middle of the code**, whatever a designer
   asks for.
 
+## The contact page
+
+One field, taking **either an email address or a mobile number**, with a
+"What happens next" card beside it. The pattern came from a reference the
+owner supplied; it was translated into the dark palette rather than copied,
+and the pill keeps a light surface because a field you type into should look
+like paper.
+
+- The single field is classified in the page's own script into a Formspree
+  field named `email` or `phone`. The test is deliberately loose — it picks a
+  shape so the enquiry can be labelled and replied to, and a person reads it
+  either way. A rule strict enough to be "correct" rejects valid addresses and
+  every number written with a space in it.
+- The three steps live in `nextSteps` in `data.js` and are rendered by the
+  `nextsteps` region. **They promise no timings.** How fast a run goes up
+  depends on restaurants and print, neither of which is ours to commit to in
+  a web page, and the reference's "live in 1-2 weeks" would have been a number
+  we invented.
+- Below 520px the pill unrolls into a stacked field. The input needs
+  `flex:none` there: in a column flex container its `flex-basis` of 0 beats
+  its height and collapses it to a 22px line box, which is what it did until
+  it was caught.
+- The old multi-field form is gone, and `.form`/`.field` went with it. What a
+  brand wants on the slip is now asked on the call rather than in the form.
+
 ## To do — owner
 
 Left over from the move to `sweetslips.co` on 9 Oct 2026. The site itself is

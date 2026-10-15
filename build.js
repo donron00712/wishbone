@@ -255,10 +255,23 @@ const reach = () => `
             <p class="footer-social"><a href="${D.linkedin}"
                target="_blank" rel="noopener">sweetslips on LinkedIn ${smallArrow}</a></p>`;
 
+/* "What happens next" — the three steps beside the contact form. Numbered in
+   markup rather than by an <ol> counter because each number sits in its own
+   disc beside the step, and a list marker cannot be placed there. */
+const nextSteps = () => D.nextSteps.map((s, i) => `
+              <li class="step">
+                <span class="step__n" aria-hidden="true">${i + 1}</span>
+                <div>
+                  <h3 class="step__t">${s.title}</h3>
+                  <p class="step__b">${s.body}</p>
+                </div>
+              </li>`).join('');
+
 const blocks = (page) => ({
   header: header(page),
   footer: footer(page),
   reach: reach(),
+  nextsteps: nextSteps(),
   ooh: reasonCards(D.oohPoints),
   reasons: reasonCards(D.reasons),
   formats: formatCards(page === 'home'),

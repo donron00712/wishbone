@@ -18,48 +18,25 @@
 <main id="content">
   <section class="page-hero" style="padding-bottom:40px">
     <div class="container">
-      <div class="contact-grid">
+      <div class="contact-grid contact-grid--lead">
         <div class="reveal">
-          <p class="eyebrow">Get in touch</p>
-          <h1 class="h2" style="margin-top:20px">Let’s talk.</h1>
-          <p>Tell us about the brand, the markets you care about, and what you’d want the fortune to say.</p>
-          <div style="margin-top:56px">
-            <!--#reach--><!--/#reach-->
-          </div>
-        </div>
+          <p class="eyebrow">Ready when you are</p>
+          <h1 class="h2" style="margin-top:20px">Let’s get your brand on the slip.</h1>
+          <p class="lead-sub">Leave your email or mobile number and we’ll get in touch to plan your first run.</p>
 
-        <div class="reveal">
-          <form class="form" id="contact-form" novalidate>
-            <div class="field" data-required>
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
-              <span class="error">Please enter your full name.</span>
+          <form class="lead" id="contact-form" novalidate>
+            <div class="lead__pill">
+              <label class="sr-only" for="contact">Email or mobile number</label>
+              <input id="contact" name="contact" type="text" inputmode="email"
+                     autocomplete="email" placeholder="Email or mobile number" required>
+              <button class="btn btn--ember lead__go" type="submit">Get started
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
-            <div class="field">
-              <label for="company">Brand or company</label>
-              <input id="company" name="company" type="text" autocomplete="organization">
-            </div>
-            <div class="field" data-required data-email>
-              <label for="email">Your email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
-              <span class="error">Please enter your email so we can get back to you.</span>
-            </div>
-            <div class="field">
-              <label for="phone">Phone (optional)</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel">
-            </div>
-            <div class="field">
-              <label for="message">What would your fortune say? (optional)</label>
-              <textarea id="message" name="message" rows="4" placeholder="Eleven words, give or take."></textarea>
-            </div>
+            <p class="lead__error" id="contact-error" role="alert">Enter an email address or a mobile number so we can reach you.</p>
             <div class="honeypot" aria-hidden="true">
               <label for="fax">Leave this field blank</label>
               <input id="fax" name="fax" type="text" tabindex="-1" autocomplete="off">
-            </div>
-            <div>
-              <button class="btn btn--lg" type="submit">Send message
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
             </div>
           </form>
 
@@ -69,9 +46,24 @@
           </div>
 
           <div class="form-success" id="form-success" role="status">
-            <h3 class="h4" style="font-size:26px">Your fortune is on its way.</h3>
-            <p>Thanks — your message is on its way. We’ll come back to you at the address you gave us.</p>
+            <h3 class="h4" style="font-size:26px">Thanks — that’s with us.</h3>
+            <p>We’ll come back to you at the address or number you left.</p>
           </div>
+
+        </div>
+
+        <aside class="reveal steps-card" aria-labelledby="next-h">
+          <h2 class="steps-card__h" id="next-h">What happens next</h2>
+          <ol class="steps">
+            <!--#nextsteps--><!--/#nextsteps-->
+          </ol>
+        </aside>
+
+        <!-- Out of the left column so that on a phone it falls below the steps
+             card rather than between the form and it. On a wide screen the
+             grid puts it back under the form. -->
+        <div class="reveal lead__reach">
+          <!--#reach--><!--/#reach-->
         </div>
       </div>
     </div>
@@ -87,36 +79,53 @@
 (function () {
   const MAIL_TO = 'hello@sweetslips.co';
   const form = document.getElementById('contact-form');
+  const input = document.getElementById('contact');
+  const pill = document.querySelector('.lead__pill');
   const success = document.getElementById('form-success');
   const failure = document.getElementById('form-failure');
 
-  const validate = () => {
-    let ok = true;
-    form.querySelectorAll('.field').forEach(field => {
-      const input = field.querySelector('input, textarea');
-      if (!input) return;
-      let bad = false;
-      if (field.hasAttribute('data-required') && !input.value.trim()) bad = true;
-      if (field.hasAttribute('data-email') && input.value.trim() && !/^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(input.value)) bad = true;
-      field.classList.toggle('is-invalid', bad);
-      if (bad && ok) { input.focus(); ok = false; }
-    });
-    return ok;
+  /* One field taking either kind of contact, so the classifier has to decide
+     which arrived. Deliberately loose: this only picks a shape so the enquiry
+     can be labelled and replied to, and the real check is that a person reads
+     it. A rule strict enough to be "correct" would reject valid addresses and
+     every number written with a space in it. */
+  const EMAIL = /^[^@\s]+@[^@\s.]+\.[^@\s]+$/;
+  const classify = raw => {
+    const v = raw.trim();
+    if (!v) return null;
+    if (EMAIL.test(v)) return 'email';
+    /* E.164 tops out at 15 digits; anything under 7 is not a phone number
+       anyone can be reached on. Spaces, dashes, brackets and a leading + are
+       how people actually type them, so they are stripped, not rejected. */
+    const digits = v.replace(/[^0-9]/g, '');
+    if (/^\+?[0-9()\-.\s]+$/.test(v) && digits.length >= 7 && digits.length <= 15) return 'phone';
+    return null;
   };
 
-  /* Set this to a form endpoint (Formspree, Vercel function, whatever) and the
-     form posts to it. Left empty, it opens the visitor's mail client with the
-     message pre-filled instead — slower, but the enquiry actually arrives.
-     It must never validate, congratulate, and drop the message. */
+  const showError = on => {
+    pill.classList.toggle('is-invalid', on);
+    input.setAttribute('aria-invalid', String(on));
+  };
+
   const FORM_ENDPOINT = 'https://formspree.io/f/mnpaeebb';
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
     if (form.fax.value) return;              /* honeypot caught a bot */
-    if (!validate()) return;
 
-    const data = new FormData(form);
-    data.delete('fax');
+    const kind = classify(input.value);
+    if (!kind) { showError(true); input.focus(); return; }
+    showError(false);
+
+    const value = input.value.trim();
+    const data = new FormData();
+    data.append(kind, value);                /* "email" or "phone" */
+    data.append('_subject', 'sweetslips enquiry — ' + value);
+    /* Formspree replies to the address in a field named email. Without one it
+       still delivers, so a phone enquiry arrives the same way and is answered
+       by calling back. */
+    if (kind === 'email') data.append('_replyto', value);
+
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
 
@@ -130,19 +139,16 @@
         return;
       }
     } else {
-      const body = [...data.entries()].filter(([, v]) => String(v).trim())
-        .map(([k, v]) => `${k}: ${v}`).join('\n');
-      window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent('sweetslips enquiry — ' + (data.get('company') || data.get('name')))}&body=${encodeURIComponent(body)}`;
+      /* The fallback that must never be removed: a failed or missing endpoint
+         has to hand the enquiry somewhere real, not congratulate and drop it. */
+      window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent('sweetslips enquiry')}&body=${encodeURIComponent(kind + ': ' + value)}`;
     }
 
     form.style.display = 'none';
     success.classList.add('is-visible');
   });
 
-  form.addEventListener('input', e => {
-    const field = e.target.closest('.field');
-    field && field.classList.remove('is-invalid');
-  });
+  input.addEventListener('input', () => showError(false));
 })();
 </script>
 </body>

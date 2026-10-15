@@ -502,17 +502,69 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 /* ---------- contact ---------- */
 .contact-grid{display:grid;gap:48px;padding-bottom:120px}
 @media (min-width:1024px){.contact-grid{grid-template-columns:1fr minmax(0,620px);gap:80px}}
-.form{display:grid;gap:24px}
-.field{display:flex;flex-direction:column;gap:8px}
-.field label{font-size:14px;color:var(--muted)}
-.field input,.field textarea{background:transparent;border:0;border-bottom:1px solid var(--line);
-  padding:12px 0;font-size:17px;font-weight:300;transition:border-color .35s var(--ease)}
-.field textarea{resize:vertical;min-height:110px}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--text)}
-.field .error{font-size:13px;color:#F2A6A6;display:none}
-.field.is-invalid input,.field.is-invalid textarea{border-color:#F2A6A6}
-.field.is-invalid .error{display:block}
+/* ---- contact: one field, and the three steps beside it ---------------- */
+/* The reference for this was a light page with a cream pill on a pastel wash.
+   Translated rather than copied: the pill keeps its light surface because a
+   field you type into should look like paper, and everything around it is the
+   dark palette the rest of the site is in. */
+.contact-grid--lead{align-items:start}
+@media (min-width:1024px){
+  .contact-grid--lead{grid-template-columns:1fr minmax(0,520px);row-gap:56px}
+  /* The reach block is last in the source so a phone reads form, steps, then
+     "or just email us". Here it goes back under the form, and the steps card
+     spans both rows beside them. */
+  .contact-grid--lead > :first-child{grid-column:1;grid-row:1}
+  .contact-grid--lead > .steps-card{grid-column:2;grid-row:1 / span 2}
+  .contact-grid--lead > .lead__reach{grid-column:1;grid-row:2;margin-top:0}
+}
+.lead-sub{margin-top:24px;max-width:460px;color:var(--muted);font-size:clamp(16px,1.6vw,20px);text-wrap:balance}
+.lead{margin-top:40px}
+.lead__pill{display:flex;align-items:center;gap:8px;max-width:520px;
+  background:var(--text);border:1px solid var(--text);border-radius:100px;
+  padding:7px 7px 7px 10px;
+  transition:border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.lead__pill input{flex:1;min-width:0;background:transparent;border:0;
+  color:var(--ink);font-family:inherit;font-size:17px;padding:0 10px;height:44px}
+.lead__pill input::placeholder{color:rgba(33,20,7,.62)}
+.lead__pill input:focus{outline:none}
+.lead__pill:focus-within{box-shadow:0 0 0 3px rgba(var(--text-rgb),.22)}
+.lead__pill.is-invalid{border-color:#C2473F;box-shadow:0 0 0 3px rgba(194,71,63,.26)}
+.lead__go{flex:none;height:44px}
+/* The button sits on the light pill, so it inverts: dark ground, light type.
+   #150C03 on #F0E3CC and the reverse both clear AAA. */
+.lead__error{display:none;margin-top:12px;font-size:14px;color:#F2A6A6}
+.lead__pill.is-invalid ~ .lead__error{display:block}
+.lead__reach{margin-top:56px}
+@media (max-width:519px){
+  /* Below this the pill cannot hold a field and a button side by side without
+     the placeholder truncating, so it unrolls into a stacked field. */
+  .lead__pill{flex-direction:column;align-items:stretch;gap:10px;border-radius:26px;padding:10px}
+  /* flex:none matters: once the pill is a column, the input's flex-basis of 0
+     wins over its height and collapses it to the 22px of its own line box.
+     It has to stop flexing before a height means anything. */
+  .lead__pill input{flex:none;height:44px;padding:0 8px}
+  .lead__go{justify-content:center;width:100%}
+}
+
+.steps-card{background:var(--surface);border:1px solid var(--line-soft);
+  border-radius:28px;padding:32px}
+@media (max-width:767px){.steps-card{padding:24px;border-radius:22px}}
+.steps-card__h{font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;
+  font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.steps{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:28px;counter-reset:none}
+.step{display:flex;gap:16px;align-items:flex-start}
+.step__n{flex:none;width:34px;height:34px;border-radius:100px;
+  display:grid;place-items:center;background:var(--accent-soft);color:var(--text);
+  font-size:15px;line-height:1}
+.step__t{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:19px;
+  line-height:1.25;letter-spacing:-.015em;color:var(--text)}
+.step__b{margin-top:6px;color:var(--muted);font-size:15px;line-height:1.55}
+
 .honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+/* Visible to a screen reader, not on screen. The lead field's label is a
+   placeholder visually, and a placeholder is not a label. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 .form-success{border:1px solid var(--line);border-radius:24px;padding:28px;display:none}
 .form-success.is-visible{display:block}
 .form-success--error{border-color:#F2A6A6}
