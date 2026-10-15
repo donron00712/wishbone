@@ -213,6 +213,12 @@ should look like paper.
   `flex:none` there: in a column flex container its `flex-basis` of 0 beats
   its height and collapses it to a 22px line box, which is what it did until
   it was caught.
+- **No closing block and no sticky bar on this page.** `footer(page)` emits
+  both everywhere else; both exist only to push a visitor to the contact page,
+  so on the contact page itself they said "Let's talk about your run" above a
+  Get in touch button linking to itself, with a floating bar offering the same.
+  Suppressed by the `page === 'contact'` guards in `footer()`. `site.js` guards
+  every `#sticky-cta` lookup, so its absence is safe.
 - **The column is centred.** With the card gone a left-hugging column left the
   whole right of the screen empty, which reads as a layout missing a piece.
   Centring it means re-centring everything width-capped inside it — and the

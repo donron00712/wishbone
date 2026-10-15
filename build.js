@@ -76,11 +76,16 @@ const header = (page) => `<a class="skip-link" href="#content">Skip to content</
       </nav>
     </div>`;
 
-const footer = (page) => `<section class="closing container reveal">
+/* The closing block and the sticky bar both exist to push a visitor towards
+   the contact page, so neither is emitted on it. Left in, the contact page
+   ended with "Let’s talk about your run" above a Get in touch button linking
+   to itself, and a floating bar offering the same — which reads as a page
+   that does not know where it is. */
+const footer = (page) => `${page === 'contact' ? '' : `<section class="closing container reveal">
       <h2 class="h2">Let’s talk about your run.</h2>
       <p>Tell us about the brand and what you’d want on the slip.</p>
       <a class="btn btn--lg" href="contact.html">Get in touch ${arrow}</a>
-    </section>
+    </section>`}
     <footer class="site-footer" id="site-footer">
       <div class="container">
         <div class="footer-grid">
@@ -107,7 +112,7 @@ const footer = (page) => `<section class="closing container reveal">
       </div>
     </footer>
 
-    <aside class="sticky-cta" id="sticky-cta" aria-live="polite">
+    ${page === 'contact' ? '' : `<aside class="sticky-cta" id="sticky-cta" aria-live="polite">
       <button class="sticky-close" type="button" aria-label="Dismiss">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-linecap="round"/></svg>
       </button>
@@ -115,7 +120,7 @@ const footer = (page) => `<section class="closing container reveal">
       <p>Let’s talk it through.</p>
       <span class="spacer"></span>
       <a class="btn" href="contact.html">Get in touch ${arrow}</a>
-    </aside>
+    </aside>`}
 
     <div class="cookie" id="cookie">
       <p>We use a small number of cookies to understand how this site is used. Nothing is sold on, and you can change your mind at any time.</p>

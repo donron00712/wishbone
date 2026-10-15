@@ -509,9 +509,10 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
    use in two. Centred rather than left-aligned because with the card gone a
    left-hugging column leaves the whole right of the screen empty, which reads
    as a layout missing a piece rather than a deliberate one. */
-.contact-grid--lead{align-items:start;row-gap:56px;justify-content:center;text-align:center}
+.contact-grid--lead{align-items:start;row-gap:44px;justify-content:center;
+  text-align:center;padding-bottom:72px}
 @media (min-width:1024px){
-  .contact-grid--lead{grid-template-columns:minmax(0,680px);gap:0;row-gap:56px}
+  .contact-grid--lead{grid-template-columns:minmax(0,680px);gap:0;row-gap:44px}
 }
 /* Everything width-capped has to be re-centred, or it stays pinned left inside
    a centred column and only looks half-done. The `p` rule is the one that
@@ -541,7 +542,11 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
    #150C03 on #F0E3CC and the reverse both clear AAA. */
 .lead__error{display:none;margin-top:12px;font-size:14px;color:#F2A6A6}
 .lead__pill.is-invalid ~ .lead__error{display:block}
-.lead__reach{margin-top:56px}
+/* No margin of its own: the grid's row-gap already spaces it. It used to
+   carry margin-top:56px, cancelled by a rule in the card's grid placement —
+   when the card went, the cancellation went with it and the two stacked into
+   a 112px gap. */
+.lead__reach{margin-top:0}
 @media (max-width:519px){
   /* Below this the pill cannot hold a field and a button side by side without
      the placeholder truncating, so it unrolls into a stacked field. */
