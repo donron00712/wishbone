@@ -282,9 +282,17 @@ printed:
   error correction to H and the margin to 4, and never accept a "dynamic" or
   "trackable" code.
 
-**4. ~~LinkedIn~~ — done 15 Oct 2026.** `data.js` points at
-`/company/sweetslip`. Note the handle is **singular** — `/company/sweetslips`
-404s. Verified 200 before it was wired in.
+**4. LinkedIn — wired up, but the handle is wrong and has to change again.**
+`data.js` points at `/company/sweetslip`, **singular**, which is what resolves
+today; `/company/sweetslips` 404s. The singular is not a choice — LinkedIn
+locks a company's public URL for 30 days after a change, so the plural that
+matches the brand and the domain could not be taken.
+
+**From roughly 14 Nov 2026** the owner renames it to `/company/sweetslips`.
+When that happens, `linkedin` in `data.js` must be updated **the same day**:
+LinkedIn does not reliably redirect an old vanity URL, so the moment the
+rename lands, the link on all five pages dies. Check the new URL returns 200
+before committing — that is how the current one was verified.
 
 **6. The logo is still a wishbone** — drawn for a brand two names ago.
 
