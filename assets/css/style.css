@@ -523,6 +523,14 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .contact-grid--lead p,
 .contact-grid--lead .lead__pill,
 .contact-grid--lead .form-success{margin-inline:auto}
+/* Letter-spacing is added after the LAST letter as well, so a centred
+   letter-spaced line always sits half a letter-space left of true centre — the
+   contact eyebrow measured 4px out against the rest of the page. text-indent
+   puts that half-space back on the front. Applied wherever letter-spaced text
+   is centred; left-aligned eyebrows carry the trailing space harmlessly, so
+   they are left alone. */
+.contact-grid--lead .eyebrow,
+.section__head.is-centered .eyebrow{text-indent:.16em}
 .lead-sub{margin-top:24px;max-width:460px;color:var(--muted);font-size:clamp(16px,1.6vw,20px);text-wrap:balance}
 .lead{margin-top:40px}
 /* The pill keeps a light surface: a field you type into should look like
