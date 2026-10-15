@@ -263,11 +263,27 @@ method, TXT at GoDaddy), submit `sitemap.xml`, and request indexing on the five
 URLs. The old property keeps reporting until the 301s are recrawled, which is
 what carries the existing indexing across.
 
-**3. Formspree.** The form works — the endpoint is independent of the domain —
-but its notification still goes to the **old** mailbox. Now that
-`hello@sweetslips.co` receives, point it there in the Formspree dashboard.
-This is the one that silently loses enquiries if it is left: the form will keep
-reporting success to the visitor either way.
+**3. Formspree.** The form posts to `/f/xzedkjdg`, a new endpoint created
+15 Oct 2026 to replace `/f/mnpaeebb`, which notified the old Kismat mailbox.
+A live test submission was delivered and confirmed. **Still to check: that the
+new form's notification address is `hello@sweetslips.co`** and not the
+Formspree account's own default. This is the failure that loses enquiries
+silently — the form reports success to the visitor either way.
+
+**3b. The trial-run QR.** `GO_DESTINATION`, `GA_MEASUREMENT_ID` and
+`GA_API_SECRET` are set on Vercel Production. Outstanding before anything is
+printed:
+
+- **Set the GA4 property's reporting time zone to India Standard Time.** It is
+  not retroactive. On the US Pacific default — 12h30 behind India — every lunch
+  service is filed under the previous day, and a mistake found mid-run cannot
+  be cleaned up. Each scan also carries `scan_date`/`scan_hour` stamped in IST
+  by `api/go.js` as a backstop, but those only reach reports once registered as
+  custom definitions, which is also not retroactive.
+- **4 test scans** are in the property from building it. Subtract them.
+- Print `assets/media/qr/qr-slip.svg`; if the QR is regenerated elsewhere, set
+  error correction to H and the margin to 4, and never accept a "dynamic" or
+  "trackable" code.
 
 **4. LinkedIn.** The page is still at `/company/kismat-cookies`, which is what
 `data.js` points at. Rename it there, then update `linkedin` in `data.js`.
