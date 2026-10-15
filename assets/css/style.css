@@ -503,15 +503,25 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .contact-grid{display:grid;gap:48px;padding-bottom:120px}
 @media (min-width:1024px){.contact-grid{grid-template-columns:1fr minmax(0,620px);gap:80px}}
 /* ---- contact: one field ------------------------------------------------
-   A single column. There was a "what happens next" card in the second column
-   until it was taken out; the grid is overridden back to one column here
-   rather than unpicked from `.contact-grid`, which the other pages still use
-   in two. Held to a readable measure so the field does not stretch across a
-   wide screen. */
-.contact-grid--lead{align-items:start;row-gap:56px}
+   A single centred column. There was a "what happens next" card in the second
+   column until it was taken out; the grid is overridden back to one column
+   here rather than unpicked from `.contact-grid`, which the other pages still
+   use in two. Centred rather than left-aligned because with the card gone a
+   left-hugging column leaves the whole right of the screen empty, which reads
+   as a layout missing a piece rather than a deliberate one. */
+.contact-grid--lead{align-items:start;row-gap:56px;justify-content:center;text-align:center}
 @media (min-width:1024px){
-  .contact-grid--lead{grid-template-columns:minmax(0,620px);gap:0;row-gap:56px}
+  .contact-grid--lead{grid-template-columns:minmax(0,680px);gap:0;row-gap:56px}
 }
+/* Everything width-capped has to be re-centred, or it stays pinned left inside
+   a centred column and only looks half-done. The `p` rule is the one that
+   matters and is easy to miss: `.page-hero p` caps every paragraph here at
+   600px, so in a 680px column the eyebrow and the LinkedIn line centred their
+   text inside a box that was itself 40px off-centre. Measured, not eyeballed —
+   it is small enough to look like nothing and wrong enough to notice. */
+.contact-grid--lead p,
+.contact-grid--lead .lead__pill,
+.contact-grid--lead .form-success{margin-inline:auto}
 .lead-sub{margin-top:24px;max-width:460px;color:var(--muted);font-size:clamp(16px,1.6vw,20px);text-wrap:balance}
 .lead{margin-top:40px}
 /* The pill keeps a light surface: a field you type into should look like

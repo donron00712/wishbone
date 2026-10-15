@@ -213,6 +213,15 @@ should look like paper.
   `flex:none` there: in a column flex container its `flex-basis` of 0 beats
   its height and collapses it to a 22px line box, which is what it did until
   it was caught.
+- **The column is centred.** With the card gone a left-hugging column left the
+  whole right of the screen empty, which reads as a layout missing a piece.
+  Centring it means re-centring everything width-capped inside it — and the
+  `p` rule is the one that is easy to miss, because `.page-hero p` caps every
+  paragraph at 600px: in a 680px column the eyebrow and the LinkedIn line
+  centred their text inside a box that was itself 40px off-centre. **Verify
+  centring by measuring the text, not the element box** — a Range over the
+  text content catches this and a `getBoundingClientRect` on the element does
+  not.
 - **`.page-hero p` overrides anything set on a bare class inside it.** It is
   a class plus an element, so it beats a single class and forces 16px with a
   24px top margin whatever the component rule says. This silently broke the
