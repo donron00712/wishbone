@@ -87,19 +87,6 @@ window.WB = (function () {
       body: 'Out-of-home speaks to everyone present rather than to a segment. At a dinner table that means a brand can arrive with a group rather than an individual.' }
   ];
 
-  /* The contact page's "what happens next" card. Three steps and no promised
-     timings: how fast a run goes up depends on the restaurants and the print,
-     neither of which is ours to commit to in a web page. A step that said
-     "live in two weeks" would be a number we invented. */
-  const nextSteps = [
-    { title: 'We get in touch',
-      body: 'A short call about the brand, the markets you care about, and the kind of restaurant you want to be in.' },
-    { title: 'We plan the run',
-      body: 'Together we settle the restaurants, the volume and the dates \u2014 and what the slip actually says.' },
-    { title: 'The slips go out',
-      body: 'Your line goes to print and reaches the table with the check, one to each person there.' }
-  ];
-
   const reasons = [
     { n: '01', title: 'It arrives as part of the meal',
       body: 'The slip comes with the check the way it always has. Your message is on something the restaurant is already handing over, rather than an interruption bought against someone\u2019s attention.' },
@@ -228,5 +215,5 @@ window.WB = (function () {
     }
   ];
 
-  return { email, linkedin, nav, wishes, sampleFortunes, oohPoints, reasons, nextSteps, formats, targets, cases, photos };
+  return { email, linkedin, nav, wishes, sampleFortunes, oohPoints, reasons, formats, targets, cases, photos };
 })();

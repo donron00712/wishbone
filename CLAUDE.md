@@ -187,45 +187,38 @@ Two things learned there that are easy to get wrong:
 
 ## The contact page
 
-One field, taking **either an email address or a mobile number**, with a
-"What happens next" card beside it. The pattern came from a reference the
-owner supplied; it was translated into the dark palette rather than copied,
-and the pill keeps a light surface because a field you type into should look
-like paper.
+**One field, taking either an email address or a mobile number.** That is the
+whole page: a heading, the field, and the address. The pattern came from a
+reference the owner supplied; it was translated into the dark palette rather
+than copied, and the pill keeps a light surface because a field you type into
+should look like paper.
 
 - The single field is classified in the page's own script into a Formspree
   field named `email` or `phone`. The test is deliberately loose — it picks a
   shape so the enquiry can be labelled and replied to, and a person reads it
   either way. A rule strict enough to be "correct" rejects valid addresses and
   every number written with a space in it.
-- The three steps live in `nextSteps` in `data.js` and are rendered by the
-  `nextsteps` region. **They promise no timings.** How fast a run goes up
-  depends on restaurants and print, neither of which is ours to commit to in
-  a web page, and the reference's "live in 1-2 weeks" would have been a number
-  we invented.
-- **The layout is the two-column one, chosen after four alternatives were
-  rejected.** Form on the left, a "What happens next" card on the right with
-  the steps numbered 1-3 in discs. Three later directions were built or offered
-  and turned down: a centred hero with the steps as ticks along a hairline; a
-  plain single column; and three concepts (the form drawn as a slip, an inline
-  fill-in-the-blank sentence, a wall of slips beside the field). **This is the
-  settled design — do not redesign it without being asked.**
+- **A phone enquiry has no reply address.** `_replyto` is only set when an
+  email arrives, so replying to that notification reaches nobody; the number
+  is put in the subject line so it can be called. This is inherent to taking
+  phone numbers at all, not a gap to be fixed.
+- **A "what happens next" card was removed in Oct 2026** at the owner's
+  request, after several passes at it. With it went `nextSteps` in `data.js`,
+  the `nextsteps` region in `build.js`, and the `.steps-card`/`.step` rules.
+  The layout overrides `.contact-grid` back to a single column rather than
+  unpicking it, because the other pages still use that class in two.
+  **Do not reintroduce a process explainer here without being asked** — five
+  directions for it were rejected before it was dropped altogether.
+- Below 520px the pill unrolls into a stacked field. The input needs
+  `flex:none` there: in a column flex container its `flex-basis` of 0 beats
+  its height and collapses it to a 22px line box, which is what it did until
+  it was caught.
 - **`.page-hero p` overrides anything set on a bare class inside it.** It is
-  `.page-hero p` — a class plus an element, so it beats `.step__b` and sets
-  16px with a 24px top margin whatever the component rule says. That is why
-  the steps card read loose and broken for several passes while the stylesheet
-  appeared to say 15px and 6px. Component rules inside the page hero need the
-  card in the selector; `.steps-card .step__b` is the fix. **Check computed
-  styles, not the stylesheet, for anything inside `.page-hero`.**
-- The markers are joined by a fading rule, which turns three loose rows into
-  one sequence and puts the gutter under each marker to work — that empty
-  column running down the card was most of what made it look unresolved. The
-  marker is nudged up 4px to meet the title rather than the title's leading
-  being stretched to meet it: centring by line-height holds only while every
-  title is one line. Checked against a forced two-line title.
-- Below 1024px the card drops under the form. The reach block is last in the
-  source so a phone reads form, then steps, then "or just email us"; the grid
-  puts it back under the form on a wide screen.
+  a class plus an element, so it beats a single class and forces 16px with a
+  24px top margin whatever the component rule says. This silently broke the
+  spacing of the card that used to sit here, for several passes, while the
+  stylesheet appeared to say something else. **Check computed styles, not the
+  stylesheet, for anything inside `.page-hero`.**
 - The old multi-field form is gone, and `.form`/`.field` went with it. What a
   brand wants on the slip is now asked on the call rather than in the form.
 

@@ -502,23 +502,20 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 /* ---------- contact ---------- */
 .contact-grid{display:grid;gap:48px;padding-bottom:120px}
 @media (min-width:1024px){.contact-grid{grid-template-columns:1fr minmax(0,620px);gap:80px}}
-/* ---- contact: one field, and the three steps beside it ---------------- */
-/* The reference for this was a light page with a cream pill on a pastel wash.
-   Translated rather than copied: the pill keeps its light surface because a
-   field you type into should look like paper, and everything around it is the
-   dark palette the rest of the site is in. */
-.contact-grid--lead{align-items:start}
+/* ---- contact: one field ------------------------------------------------
+   A single column. There was a "what happens next" card in the second column
+   until it was taken out; the grid is overridden back to one column here
+   rather than unpicked from `.contact-grid`, which the other pages still use
+   in two. Held to a readable measure so the field does not stretch across a
+   wide screen. */
+.contact-grid--lead{align-items:start;row-gap:56px}
 @media (min-width:1024px){
-  .contact-grid--lead{grid-template-columns:1fr minmax(0,520px);row-gap:56px}
-  /* The reach block is last in the source so a phone reads form, steps, then
-     "or just email us". Here it goes back under the form, and the steps card
-     spans both rows beside them. */
-  .contact-grid--lead > :first-child{grid-column:1;grid-row:1}
-  .contact-grid--lead > .steps-card{grid-column:2;grid-row:1 / span 2}
-  .contact-grid--lead > .lead__reach{grid-column:1;grid-row:2;margin-top:0}
+  .contact-grid--lead{grid-template-columns:minmax(0,620px);gap:0;row-gap:56px}
 }
 .lead-sub{margin-top:24px;max-width:460px;color:var(--muted);font-size:clamp(16px,1.6vw,20px);text-wrap:balance}
 .lead{margin-top:40px}
+/* The pill keeps a light surface: a field you type into should look like
+   paper, and this site sells something printed on paper. */
 .lead__pill{display:flex;align-items:center;gap:8px;max-width:520px;
   background:var(--text);border:1px solid var(--text);border-radius:100px;
   padding:7px 7px 7px 10px;
@@ -545,37 +542,6 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
   .lead__pill input{flex:none;height:44px;padding:0 8px}
   .lead__go{justify-content:center;width:100%}
 }
-
-.steps-card{background:var(--surface);border:1px solid var(--line-soft);
-  border-radius:28px;padding:32px 32px 36px}
-@media (max-width:767px){.steps-card{padding:24px 24px 28px;border-radius:22px}}
-.steps-card__h{font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;
-  font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.steps{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:26px}
-/* A rule runs from each marker down to the next, so the three read as one
-   sequence instead of three loose rows. It also puts the column under the
-   marker to work — indenting the body left that gutter empty down the whole
-   card, which is most of what made this look unresolved. */
-.step{display:flex;gap:16px;align-items:flex-start;position:relative}
-.step::before{content:"";position:absolute;left:15px;top:33px;bottom:-26px;
-  width:1px;background:linear-gradient(var(--line) 0%, rgba(138,103,57,.15) 100%)}
-.step:last-child::before{display:none}
-/* The marker is nudged up rather than the title's leading stretched to meet
-   it: centring them by line-height works only while every title is one line,
-   and falls apart the moment one wraps. */
-.step__n{flex:none;width:31px;height:31px;border-radius:100px;margin-top:-4px;
-  display:grid;place-items:center;background:var(--accent-soft);color:var(--text);
-  font-family:"Plus Jakarta Sans",sans-serif;font-size:13px;font-weight:500;line-height:1}
-.step__t{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;font-size:18px;
-  line-height:1.3;letter-spacing:-.015em;color:var(--text)}
-/* These two carry .steps-card because the card lives inside .page-hero, whose
-   own `p` rule is a class-plus-element selector and therefore beats a bare
-   class. Without it the body set at 16px with a 24px top margin regardless of
-   what is written here — which is the gap that made the card look airy and
-   broken rather than spaced. */
-.steps-card .step__b{margin-top:6px;color:var(--muted);font-size:15px;
-  line-height:1.6;max-width:40ch}
-.steps-card .step__t{margin:0}
 
 .honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 /* Visible to a screen reader, not on screen. The lead field's label is a
