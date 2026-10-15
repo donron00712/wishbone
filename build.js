@@ -250,7 +250,7 @@ const socialHead = (page, html) => {
    the template, because the address was hardcoded there and had already drifted
    from data.js once — everything else on the site reads it from one place. */
 const reach = () => `
-            <h2 style="font-family:Manrope,sans-serif;font-weight:500;font-size:16px;margin-bottom:16px">Or just email us</h2>
+            <h2 class="contact-block__h">Or just email us</h2>
             <a class="footer-mail" href="mailto:${D.email}">${D.email}</a>
             <p class="footer-social"><a href="${D.linkedin}"
                target="_blank" rel="noopener">sweetslips on LinkedIn ${smallArrow}</a></p>`;

@@ -203,19 +203,20 @@ like paper.
   depends on restaurants and print, neither of which is ours to commit to in
   a web page, and the reference's "live in 1-2 weeks" would have been a number
   we invented.
-- The layout takes the reference's *concept* and not its expression, at the
-  owner's request. No boxed panel and no numbered discs: the head and the form
-  sit on the page's centre line, as the home hero already does, and the steps
-  run underneath as `01`/`02`/`03` in the accent — the numbering this site uses
-  for a sequence everywhere else. Each step carries its own hairline with the
-  number straddling it, knocked out in `--bg`; the knockout works because the
-  underlay paints no gradient behind that band, so check it again if the page
-  background ever gains one. Three ticks along a line on a wide screen, and the
-  same rule stacks on a phone with no second layout to keep in step.
-- Below 520px the pill unrolls into a stacked field. The input needs
-  `flex:none` there: in a column flex container its `flex-basis` of 0 beats
-  its height and collapses it to a 22px line box, which is what it did until
-  it was caught.
+- **The layout is plain on purpose, and arrived there the hard way.** Two
+  attempts were rejected: a two-column panel with numbered discs copied from a
+  reference, then a centred hero with the steps as ticks along a hairline. The
+  brief that landed was "very basic but neat". So: one column held to 680px,
+  centred as a block with everything inside it left-aligned — which is what
+  stops a sparse page looking stranded — a modest display size, an even
+  vertical rhythm, and a hairline between sections. No feature object, no
+  centred type, nothing to look at but the thing you came to do. Three
+  concepts offered at that point (the form drawn as a slip, an inline
+  fill-in-the-blank sentence, a wall of slips beside the field) were all turned
+  down. **Do not reach for a device here.**
+- Both section headings go through `.contact-block__h`. `reach()` in `build.js`
+  used to carry its own inline font rule, which left the two headings on the
+  page in different sizes and cases.
 - The old multi-field form is gone, and `.form`/`.field` went with it. What a
   brand wants on the slip is now asked on the call rather than in the form.
 
