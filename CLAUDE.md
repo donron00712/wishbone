@@ -269,7 +269,7 @@ nothing references and that no longer matches the product; safe to delete.
    `sweetslips.co`. DMARC is still GoDaddy's default, sending reports to
    `dmarc_rua@onsecureserver.net`, and wants replacing with our own address.
 2. ~~`FORM_ENDPOINT` is empty~~ — **resolved.** The contact form posts to
-   Formspree (`/f/mnpaeebb`, free tier, 50 submissions a month). The mailto
+   Formspree (`/f/xzedkjdg`, free tier, 50 submissions a month). The mailto
    fallback is still in the file and still runs if the constant is ever
    emptied, and a failed POST shows the failure panel with the address rather
    than a false success — the form must never validate, congratulate and drop
