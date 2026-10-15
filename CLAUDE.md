@@ -210,6 +210,19 @@ like paper.
   plain single column; and three concepts (the form drawn as a slip, an inline
   fill-in-the-blank sentence, a wall of slips beside the field). **This is the
   settled design — do not redesign it without being asked.**
+- **`.page-hero p` overrides anything set on a bare class inside it.** It is
+  `.page-hero p` — a class plus an element, so it beats `.step__b` and sets
+  16px with a 24px top margin whatever the component rule says. That is why
+  the steps card read loose and broken for several passes while the stylesheet
+  appeared to say 15px and 6px. Component rules inside the page hero need the
+  card in the selector; `.steps-card .step__b` is the fix. **Check computed
+  styles, not the stylesheet, for anything inside `.page-hero`.**
+- The markers are joined by a fading rule, which turns three loose rows into
+  one sequence and puts the gutter under each marker to work — that empty
+  column running down the card was most of what made it look unresolved. The
+  marker is nudged up 4px to meet the title rather than the title's leading
+  being stretched to meet it: centring by line-height holds only while every
+  title is one line. Checked against a forced two-line title.
 - Below 1024px the card drops under the form. The reach block is last in the
   source so a phone reads form, then steps, then "or just email us"; the grid
   puts it back under the form on a wide screen.
