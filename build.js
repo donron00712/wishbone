@@ -255,17 +255,20 @@ const reach = () => `
             <p class="footer-social"><a href="${D.linkedin}"
                target="_blank" rel="noopener">sweetslips on LinkedIn ${smallArrow}</a></p>`;
 
-/* "What happens next" — the three steps beside the contact form. Numbered in
-   markup rather than by an <ol> counter because each number sits in its own
-   disc beside the step, and a list marker cannot be placed there. */
+/* "What happens next" — the three steps under the contact form.
+
+   Numbered 01/02/03 rather than 1/2/3 in a disc, because that is how this site
+   already numbers a sequence (see the reasons and out-of-home cards) and a
+   contact page is a poor place to introduce a second counting style. Each step
+   carries its own top rule and the number straddles it, so three of them in a
+   row read as ticks along one line and the same rule stacks correctly on a
+   phone without a second layout. */
 const nextSteps = () => D.nextSteps.map((s, i) => `
-              <li class="step">
-                <span class="step__n" aria-hidden="true">${i + 1}</span>
-                <div>
-                  <h3 class="step__t">${s.title}</h3>
-                  <p class="step__b">${s.body}</p>
-                </div>
-              </li>`).join('');
+            <li class="step">
+              <span class="step__n">${String(i + 1).padStart(2, '0')}</span>
+              <h3 class="step__t">${s.title}</h3>
+              <p class="step__b">${s.body}</p>
+            </li>`).join('');
 
 const blocks = (page) => ({
   header: header(page),

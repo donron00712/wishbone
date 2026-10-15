@@ -203,6 +203,15 @@ like paper.
   depends on restaurants and print, neither of which is ours to commit to in
   a web page, and the reference's "live in 1-2 weeks" would have been a number
   we invented.
+- The layout takes the reference's *concept* and not its expression, at the
+  owner's request. No boxed panel and no numbered discs: the head and the form
+  sit on the page's centre line, as the home hero already does, and the steps
+  run underneath as `01`/`02`/`03` in the accent — the numbering this site uses
+  for a sequence everywhere else. Each step carries its own hairline with the
+  number straddling it, knocked out in `--bg`; the knockout works because the
+  underlay paints no gradient behind that band, so check it again if the page
+  background ever gains one. Three ticks along a line on a wide screen, and the
+  same rule stacks on a phone with no second layout to keep in step.
 - Below 520px the pill unrolls into a stacked field. The input needs
   `flex:none` there: in a column flex container its `flex-basis` of 0 beats
   its height and collapses it to a 22px line box, which is what it did until
@@ -215,33 +224,32 @@ like paper.
 Left over from the move to `sweetslips.co` on 9 Oct 2026. The site itself is
 done and live; everything here is account work outside the repo.
 
-**1. Mail — parked, and the address is a known placeholder.**
-`hello@sweetslips.co` **does not exist and bounces.** It is kept in `data.js`
-as a placeholder at the owner's decision, which means it is printed on all five
-pages, sits in the Organization schema, and is the contact form's mailto
-fallback. Anyone who emails it gets nothing back. Enquiries through the form
-still arrive, because Formspree does not send as the domain.
+**1. Mail — live.** `hello@sweetslips.co` receives, as of 15 Oct 2026. It is
+printed on all five pages, sits in the Organization schema and is the contact
+form's mailto fallback, and all of those now reach a real mailbox. Verified in
+DNS: MX `smtp.google.com`, a 2048-bit DKIM key at `google._domainkey`, and SPF
+that resolves through GoDaddy's flattening record
+(`include:dc-bdaca08905._spfm.sweetslips.co`) to `include:_spf.google.com`.
 
-When it is picked up, none of the old domain's setup carries over — the whole
-chain is built fresh on `sweetslips.co`:
+One piece is still GoDaddy's default rather than ours:
 
-- add `sweetslips.co` to Google Workspace and verify it (Account → Domains)
-- MX: `smtp.google.com`, priority 1
-- SPF: `TXT @` → `v=spf1 include:_spf.google.com ~all`
-- DKIM: generate 2048-bit in Admin → Apps → Gmail → Authenticate email, add
-  the `google._domainkey` TXT, then click Start authentication
-- DMARC last, once DKIM passes: `TXT _dmarc` →
-  `v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:hello@sweetslips.co`
-- then test from the new mailbox to mail-tester.com
+- **DMARC** is `v=DMARC1; p=quarantine; adkim=r; aspf=r;` with reports going to
+  `dmarc_rua@onsecureserver.net` — GoDaddy's address, not one we can read.
+  Replace the `rua` with `mailto:hello@sweetslips.co` so the reports arrive
+  somewhere we see them.
+- Worth one send to mail-tester.com from the new mailbox to confirm the chain
+  passes in the wild rather than only in DNS.
 
 **2. Search Console.** `sweetslips.co` is a new property: verify it (Domain
 method, TXT at GoDaddy), submit `sitemap.xml`, and request indexing on the five
 URLs. The old property keeps reporting until the 301s are recrawled, which is
 what carries the existing indexing across.
 
-**3. Formspree.** The form still works — the endpoint is independent of the
-domain — but its notification still goes to the old mailbox. Change it in the
-Formspree dashboard once the new one exists.
+**3. Formspree.** The form works — the endpoint is independent of the domain —
+but its notification still goes to the **old** mailbox. Now that
+`hello@sweetslips.co` receives, point it there in the Formspree dashboard.
+This is the one that silently loses enquiries if it is left: the form will keep
+reporting success to the visitor either way.
 
 **4. LinkedIn.** The page is still at `/company/kismat-cookies`, which is what
 `data.js` points at. Rename it there, then update `linkedin` in `data.js`.
@@ -256,15 +264,10 @@ nothing references and that no longer matches the product; safe to delete.
 
 
 
-1. **`hello@sweetslips.co` does not exist yet.** The mailbox, MX, SPF, DKIM and
-   DMARC were all set up on the old domain and none of it carries over — the
-   whole chain has to be redone on `sweetslips.co`. Until it is, the address
-   printed on all five pages and in the structured data bounces. The old
-   `hello@kismatcookies.com` was MX (`smtp.google.com`), SPF
-   (`include:_spf.google.com`) and a 2048-bit DKIM key at `google._domainkey`
-   are all published and verified. DMARC is still GoDaddy's default
-   (`p=quarantine`, reports going to `dmarc_rua@onsecureserver.net`) and wants
-   replacing with our own once DKIM is confirmed passing in the wild.
+1. ~~`hello@sweetslips.co` does not exist~~ — **resolved 15 Oct 2026.** The
+   mailbox receives; MX, SPF and DKIM are published and verified on
+   `sweetslips.co`. DMARC is still GoDaddy's default, sending reports to
+   `dmarc_rua@onsecureserver.net`, and wants replacing with our own address.
 2. ~~`FORM_ENDPOINT` is empty~~ — **resolved.** The contact form posts to
    Formspree (`/f/mnpaeebb`, free tier, 50 submissions a month). The mailto
    fallback is still in the file and still runs if the constant is ever
