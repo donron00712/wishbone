@@ -185,6 +185,45 @@ Two things learned there that are easy to get wrong:
   still be *found*. **No logo in the middle of the code**, whatever a designer
   asks for.
 
+## Analytics
+
+Two separate things, and neither puts a tag in the `<head>`.
+
+**Scan counting** is server-side, in `api/go.js`, through the GA4 Measurement
+Protocol. No cookie, no script in the scanner's browser, no consent question.
+See "The trial-run QR".
+
+**Microsoft Clarity** (project `yystzxlgga`) records sessions on the site
+itself — clicks, scrolls, and a replay of the page as the visitor saw it.
+Microsoft's install guide says to paste the snippet into `<head>`. **Do not.**
+This site shows a consent bar whose modal says "Choose which cookies this site
+is allowed to set" with **Analytics switched off by default**; a tag in the
+head records before anyone has answered and makes that sentence false on every
+page.
+
+It is loaded from `site.js` instead, inside the consent block:
+
+- never before a choice has been made;
+- the instant a choice that includes analytics is made, so someone who clicks
+  Accept is recorded from that click rather than from their next page;
+- on later visits, straight from the remembered choice;
+- once only — `analyticsStarted` guards a double load.
+
+The stored value at `wb-cookie-consent` is `all`, `none`, or one character per
+switch **in the modal's own order — Required, Analytics, Marketing**. Index 1
+is the one that matters, so `allowsAnalytics` tests `v[1] === '1'`. If a
+switch is ever added above Analytics, that index moves and the gate silently
+starts reading the wrong one.
+
+Verified by DOM presence (`script[src*="clarity.ms"]` and `typeof
+window.clarity`), not by intercepting script insertion — an `insertBefore`
+override did not catch the snippet's own insertion and gave a false negative.
+
+**This is the first thing on the site that the consent choice actually
+gates.** Before it, nothing read the stored value, so the bar was honest only
+because there was nothing to consent to. Anything client-side added from here
+goes through `allowsAnalytics` too.
+
 ## The contact page
 
 **One field, taking either an email address or a mobile number.** That is the

@@ -82,6 +82,37 @@
   const recall = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
 
   if (cookie && !recall()) setTimeout(() => cookie.classList.add('is-visible'), 900);
+
+  /* ---------- analytics, gated on that choice ----------
+
+     Microsoft Clarity records sessions: clicks, scrolls, and a replay of the
+     page as the visitor saw it. Its install guide says to paste the snippet
+     into <head>, which would start recording before anyone has answered the
+     bar — and this site's own modal says "Choose which cookies this site is
+     allowed to set" with Analytics switched OFF by default. Pasting it in the
+     head would make that sentence false on every page.
+
+     So it loads from here instead: never before a choice, and the moment a
+     choice that includes analytics is made, so someone who clicks Accept is
+     recorded from that click rather than from their next page.
+
+     The stored value is 'all', 'none', or one character per switch in the
+     modal's own order — Required, Analytics, Marketing. Index 1 is the one
+     that matters. */
+  const CLARITY_ID = 'yystzxlgga';
+  const allowsAnalytics = v => v === 'all' || (typeof v === 'string' && v[1] === '1');
+  let analyticsStarted = false;
+  const startAnalytics = () => {
+    if (analyticsStarted || !CLARITY_ID) return;
+    analyticsStarted = true;
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CLARITY_ID);
+  };
+  if (allowsAnalytics(recall())) startAnalytics();
+
   const settle = value => {
     /* Answer the bar first and persist second. Someone who cannot be
        remembered still gets their choice honoured for this page view. */
@@ -89,6 +120,7 @@
     modal.classList.remove('is-open');
     onScroll();                 // the bottom is free again
     remember(value);
+    if (allowsAnalytics(value)) startAnalytics();
   };
   document.addEventListener('click', e => {
     const action = e.target.closest('[data-cookie]');
