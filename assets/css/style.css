@@ -574,7 +574,10 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .form-success{border:1px solid var(--line);border-radius:24px;padding:28px;display:none}
 .form-success.is-visible{display:block}
 .form-success--error{border-color:#F2A6A6}
-.form-success--error h3{color:#F2A6A6}
+/* :is() rather than a bare h2 — this heading was an h3 until the contact
+   page's heading levels were fixed, and the rule silently stopped matching,
+   leaving a failed submission looking exactly like a successful one. */
+.form-success--error :is(h2,h3){color:#F2A6A6}
 .form-success h3{font-size:26px;margin-bottom:8px}
 .form-success p{color:var(--muted)}
 
