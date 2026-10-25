@@ -7,7 +7,7 @@
 <meta name="description" content="sweetslips puts your brand on the printed slip that reaches the customer with the restaurant check — your line, your code and the lucky numbers, set to your brief.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'><path d='M3.4 4.2C6.6 4.6 8.6 7.6 9.8 11.6 10.6 14.2 11.4 16.4 12 18.6 12.6 16.4 13.4 14.2 14.2 11.6 15.4 7.6 17.4 4.6 20.6 4.2' stroke='%23E8663A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/><circle cx='3.2' cy='4.1' r='1.9' fill='%23E8663A'/><circle cx='20.8' cy='4.1' r='1.9' fill='%23E8663A'/></svg>">
 <!--#social-->
@@ -64,14 +64,39 @@
        one scroll cue instead of the two the old hero offered. -->
   <section class="n1-open">
     <div class="container">
-      <p class="n1-eyebrow reveal">Out-of-home, at the smallest scale there is</p>
-      <h1 class="n1-title reveal">Eleven words that reach a table.</h1>
-      <p class="n1-lede reveal">Your line, your code and six lucky numbers — printed on the slip
-        that arrives with the check, one to every person sitting there.</p>
-      <div class="n1-cta reveal">
-        <a class="btn btn--lg btn--gold" href="contact.html">Get in touch
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+
+      <!-- Hairline, eyebrow, hairline â the frame all three references put
+           around the headline block. Costs nothing and needs no artwork. -->
+      <div class="n1-rule"></div>
+
+      <div class="n1-head">
+        <div>
+          <p class="n1-eyebrow reveal">Out-of-home, at the smallest scale there is</p>
+          <!-- Weight contrast rather than italic: the loaded family has no
+               italic axis, a synthesised one looks wrong at this size, and the
+               serif italic is reserved for the slip's own voice. -->
+          <h1 class="n1-title reveal"><span class="n1-title__a">Eleven words</span><br>that reach <span class="n1-title__b">a table.</span></h1>
+        </div>
+
+        <!-- The side column the references set small and wide-tracked. These
+             are facts about the medium, not claims about results. -->
+        <aside class="n1-meta reveal" aria-label="Where the slip lands">
+          <span>At the table</span>
+          <span>With the check</span>
+          <span>One per person</span>
+        </aside>
+      </div>
+
+      <div class="n1-rule"></div>
+
+      <div class="n1-below">
+        <p class="n1-lede reveal">Your line, your code and six lucky numbers — printed on the slip
+          that arrives with the check, one to every person sitting there.</p>
+        <div class="n1-cta reveal">
+          <a class="btn btn--lg btn--gold" href="contact.html">Get in touch
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
 
       <figure class="n1-slip reveal">

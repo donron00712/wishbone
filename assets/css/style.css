@@ -736,16 +736,41 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 .n1-sec{padding:var(--pad) 0}
 .n1-sec + .n1-sec{border-top:1px solid var(--line-soft)}
 
-/* ---- opening ---- */
-.n1-open{padding:calc(var(--nav-h) + clamp(56px,8vw,112px)) 0 var(--pad)}
+/* ---- opening ----
+   Taken from three references the owner supplied, as a direction rather than
+   a layout: enormous display type carrying the whole page, hairline rules
+   framing it, a small wide-tracked column of facts beside it, and one
+   saturated accent. What was NOT taken: all three lean on photography, which
+   this site does not have, and two of them lean on invented head figures
+   ("10K", "950+"), which it is not allowed to have. */
+.n1-open{padding:calc(var(--nav-h) + clamp(40px,6vw,88px)) 0 var(--pad)}
+.n1-rule{height:1px;background:var(--line-soft)}
+.n1-head{display:grid;gap:28px;padding:clamp(28px,4vw,52px) 0}
+@media (min-width:900px){
+  .n1-head{grid-template-columns:1fr auto;align-items:start;gap:56px}
+}
 .n1-eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--gold);text-indent:.16em}
 .n1-title{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;
-  font-size:clamp(40px,8.2vw,104px);line-height:.98;letter-spacing:-.035em;
-  margin-top:20px;max-width:14ch;text-wrap:balance}
-.n1-lede{margin-top:28px;max-width:54ch;color:var(--muted);
+  font-size:clamp(44px,9.4vw,128px);line-height:.92;letter-spacing:-.045em;
+  margin-top:22px;text-wrap:balance}
+/* The weight contrast the first reference builds its headline on. */
+.n1-title__a{font-weight:200;letter-spacing:-.03em}
+.n1-title__b{color:var(--gold)}
+
+/* The side column: small, wide-tracked, stacked. Facts about the medium. */
+.n1-meta{display:flex;flex-direction:column;gap:14px;padding-top:6px}
+@media (min-width:900px){.n1-meta{text-align:right;padding-top:14px}}
+.n1-meta span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);text-indent:.2em}
+
+.n1-below{display:grid;gap:28px;padding-top:clamp(28px,4vw,48px)}
+@media (min-width:900px){
+  .n1-below{grid-template-columns:1fr auto;align-items:end;gap:56px}
+}
+.n1-lede{max-width:48ch;color:var(--muted);
   font-size:clamp(17px,1.7vw,21px);line-height:1.55}
-.n1-cta{margin-top:36px}
+.n1-cta{margin-top:0}
 .btn--gold{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
 .btn--gold:hover{background:var(--amber);color:var(--on-gold);border-color:var(--amber)}
 
@@ -769,10 +794,14 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 /* ---- the figures, promoted to second ---- */
 .n1-figs{display:grid;gap:clamp(32px,5vw,64px)}
 @media (min-width:768px){.n1-figs{grid-template-columns:repeat(3,1fr)}}
+/* Each figure sits under its own hairline, the way the references set a
+   statistic: rule, number, small label. */
+.n1-figs > div{border-top:1px solid var(--line-soft);padding-top:24px}
 .n1-fig__n{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;
-  font-size:clamp(64px,11vw,132px);line-height:.85;letter-spacing:-.05em;
+  font-size:clamp(78px,13vw,168px);line-height:.82;letter-spacing:-.055em;
   color:var(--gold)}
-.n1-fig__l{margin-top:18px;color:var(--muted);font-size:16px;line-height:1.55;max-width:30ch}
+.n1-fig__l{margin-top:20px;color:var(--muted);font-size:15px;line-height:1.55;
+  max-width:28ch;letter-spacing:.01em}
 
 /* ---- section heads ---- */
 .n1-h{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;
