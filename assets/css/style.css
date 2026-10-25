@@ -16,6 +16,14 @@
   --line-soft:#45301A;
   --accent:#D9B687;
   --accent-soft:#6F481E;
+  /* New 1 — dark roast, gold and amber. Both measured on the ground before
+     they were committed: gold 8.32:1, amber 7.25:1, and #1B1004 reads AAA on
+     either as a fill. Amber is not a new invention — it is the brand bar
+     already on the share card in assets/media/og.svg. */
+  --deep:#1B1004;
+  --gold:#E3B341;
+  --amber:#F7971E;
+  --on-gold:#1B1004;
   --ink:#211407;
   --gradient:linear-gradient(36.97deg,#F5EAD6 10.09%,#D9B687 82%,#906938 140%);
   --nav-h:84px;
@@ -705,3 +713,78 @@ body.menu-open .mobile-menu li:nth-child(5) a{transition-delay:.38s}
 }
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 
+
+
+/* ======================================================================
+   NEW 1 — homepage only, on the new-1 branch.
+
+   A structural rethink, not a restyle. What changed and why:
+
+   - The old hero pinned itself, drew two frames, ran a marquee, dealt a wall
+     of tiles and offered TWO separate scroll cues ("Scroll Down" and "Keep
+     scrolling"). All of it needed 228 lines of home.js. This version needs
+     none: the opening is type and one object, and site.js already handles
+     reveal, nav and consent. The homepage now loads no page-specific script.
+   - The 11 / 6 / 0 figures were the fourth thing on the page. They are the
+     most arresting content on it, so they are now the second.
+   - The reasons and formats were horizontal carousels, which hide most of
+     their content behind a gesture nobody is told about. Both are lists here.
+   - Gold and amber carry the accents; the ground stays dark roast.
+   ====================================================================== */
+
+.n1 { --pad: clamp(72px, 9vw, 140px); }
+.n1-sec{padding:var(--pad) 0}
+.n1-sec + .n1-sec{border-top:1px solid var(--line-soft)}
+
+/* ---- opening ---- */
+.n1-open{padding:calc(var(--nav-h) + clamp(56px,8vw,112px)) 0 var(--pad)}
+.n1-eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);text-indent:.16em}
+.n1-title{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;
+  font-size:clamp(40px,8.2vw,104px);line-height:.98;letter-spacing:-.035em;
+  margin-top:20px;max-width:14ch;text-wrap:balance}
+.n1-lede{margin-top:28px;max-width:54ch;color:var(--muted);
+  font-size:clamp(17px,1.7vw,21px);line-height:1.55}
+.n1-cta{margin-top:36px}
+.btn--gold{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
+.btn--gold:hover{background:var(--amber);color:var(--on-gold);border-color:var(--amber)}
+
+/* ---- the slip, the only object on the page ----
+   Two papers, mirroring assets/media/og.svg: the fortune, then the brand's
+   amber surface under it. Nothing is drawn — this is type on two rectangles. */
+.n1-slip{margin:clamp(48px,7vw,96px) 0 0;max-width:560px}
+.n1-slip__paper{background:var(--gradient);color:var(--on-gradient);
+  border-radius:14px 14px 0 0;padding:clamp(28px,4vw,44px) clamp(22px,3vw,36px);
+  box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.n1-slip__line{font-family:Georgia,"Times New Roman",serif;font-style:italic;
+  font-size:clamp(20px,2.6vw,30px);line-height:1.3}
+.n1-slip__nums{display:block;margin-top:16px;font-size:12px;letter-spacing:.18em;
+  color:rgba(var(--on-gradient-rgb),.62)}
+.n1-slip__bar{background:var(--amber);color:var(--on-gold);border-radius:0 0 14px 14px;
+  padding:16px clamp(22px,3vw,36px);display:flex;align-items:center;
+  justify-content:space-between;gap:16px;font-size:clamp(13px,1.4vw,15px)}
+.n1-slip__bar strong{font-weight:700}
+.n1-note{margin-top:14px;font-size:13px;color:var(--muted);max-width:560px}
+
+/* ---- the figures, promoted to second ---- */
+.n1-figs{display:grid;gap:clamp(32px,5vw,64px)}
+@media (min-width:768px){.n1-figs{grid-template-columns:repeat(3,1fr)}}
+.n1-fig__n{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;
+  font-size:clamp(64px,11vw,132px);line-height:.85;letter-spacing:-.05em;
+  color:var(--gold)}
+.n1-fig__l{margin-top:18px;color:var(--muted);font-size:16px;line-height:1.55;max-width:30ch}
+
+/* ---- section heads ---- */
+.n1-h{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;
+  font-size:clamp(28px,4.4vw,52px);line-height:1.08;letter-spacing:-.03em;
+  max-width:18ch;text-wrap:balance}
+.n1-sub{margin-top:18px;max-width:56ch;color:var(--muted);font-size:17px;line-height:1.6}
+
+/* ---- reasons and formats as lists, not carousels ---- */
+.n1-list{list-style:none;margin:clamp(40px,5vw,64px) 0 0;padding:0;display:grid;gap:0}
+.n1-item{display:grid;gap:8px 28px;padding:28px 0;border-top:1px solid var(--line-soft)}
+@media (min-width:768px){.n1-item{grid-template-columns:64px 1fr 1fr;align-items:baseline}}
+.n1-item__n{color:var(--amber);font-size:13px;letter-spacing:.14em}
+.n1-item__t{font-family:"Plus Jakarta Sans",sans-serif;font-weight:700;
+  font-size:clamp(19px,2vw,24px);line-height:1.22;letter-spacing:-.02em}
+.n1-item__b{color:var(--muted);font-size:16px;line-height:1.6}

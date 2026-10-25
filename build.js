@@ -260,10 +260,25 @@ const reach = () => `
             <p class="footer-social"><a href="${D.linkedin}"
                target="_blank" rel="noopener">sweetslips on LinkedIn ${smallArrow}</a></p>`;
 
+/* New 1 renders reasons and formats as lists rather than carousels, so it
+   needs its own shape for the same data. Same copy, different structure —
+   that is the whole point of the branch. */
+const n1Rows = (list, get) => list.map((x, i) => {
+  const { t, b } = get(x);
+  return `
+            <li class="n1-item reveal">
+              <span class="n1-item__n">${String(i + 1).padStart(2, '0')}</span>
+              <h3 class="n1-item__t">${t}</h3>
+              <p class="n1-item__b">${b}</p>
+            </li>`;
+}).join('');
+
 const blocks = (page) => ({
   header: header(page),
   footer: footer(page),
   reach: reach(),
+  n1reasons: n1Rows(D.reasons, r => ({ t: r.title, b: r.body })),
+  n1formats: n1Rows(D.formats, f => ({ t: f.title, b: f.body })),
   ooh: reasonCards(D.oohPoints),
   reasons: reasonCards(D.reasons),
   formats: formatCards(page === 'home'),
